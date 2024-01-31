@@ -1,0 +1,48 @@
+symbols: 
+  - BTC/USD
+  - LINK/BTC
+  - UNI/US
+  - BCH/USD
+  - AAPL
+  - DELL
+data_preference: longer_period # 'yf' - yfinance, 'alpaca' - tahaj z alpacy, 'longer_period' - tahaj odkial je dlhsia perioda
+rolling_split_params: 
+  n_periods: 10
+  period_length: 720 # vyriesit ako % ako je prilis kratka
+strategy_params:
+  fees: 0.001
+  slippage: 0.0001
+  stop_loss: 0.1
+  param_ranges:
+    window_entry: [1, 9]
+    hh_hl_counts: [1, 5]
+    window_exit: [1, 9]
+    lh_counts: [1, 5]
+eval_params:
+  filters: # tu bude musiet byt nejaky algoritmus, ktory zabezpeci ze vzdy dostanem final_params_nr (neskor)
+    sharpe_ratio_min: 0
+    total_returns_min: 0
+    trades_in_year_min: 12 # vypocitat z total trades nr priemerny pocet obchodov za rok
+    sharpe_ratio_std_perc: 0.2  # max percentualna std sharpe ratia
+  max_clusters: 40 # pre charty
+  clusters: 30
+  cluster_cols:
+    - Total Return [%]_mean
+    - Sharpe Ratio_mean
+    - Max Drawdown [%]_mean
+    - Total Trades_mean
+    - Total Return [%]_std_perc
+    - Sharpe Ratio_std_perc
+    - Sharpe Ratio_min
+    - Total Return [%]_min
+    - Total Trades_min
+  within_clusters_filter:
+    trades_in_year_mean: 20 # minimalny priemer poctu obchodov za rok
+    sharpe_ratio_mean: 0.6 # problem bude pri roznych periodach, lebo vacsie SR koreluje s dlhsou periodou (daj ako % z max SR)   
+final_params:
+  final_params_nr: 5
+  force: false # ak true, tak v pripade ked "filters" bude mat 0 vystup, bude postupne uvolnovat filtre aby as dosiahol dostatocny pocet na clustering
+  force_filter_out: 500 # minimalny pocet ako vystup "filters" tj vstup do clusteringu
+  force_skip_clustering: false # ak true, tak cely clustering sa odignoruje, postupne sa budu uvolnovat filter aby sa dosiahol min pocet final_params, predosly param je ignorovany
+
+

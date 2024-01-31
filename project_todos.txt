@@ -1,0 +1,69 @@
+
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX STRATEGIE
+
+# MA crossover strategy
+
+#   podmienky EXIT:
+#      ked cena crossne MA
+#      alebo ked v MA nastane reversal a zacne zrychlovat
+#   podmienky ENTRY:
+#      nejaku periodu bol MA v raste
+#      nejaku dobu potom bol MA viac menej flat
+#      cena ho viac krat crossla ked bol flat?
+#      potom MA zacal klesat a tento pokles sa zryhluje
+#      rozdiel medzi cenou a MA sa zvacsuje
+#      ak v teraz nastal cross, kup/predaj
+
+# strategy 2
+
+#   ak cena robi N dni po sebe lower lows / higher highs via ako P percent, ENTRY
+#
+#      na celej BTC periode walk-forward optimalizacia (range split vs. rolling split) + evaluacia
+#      ake parametre chcem vlastne najst?
+#         - v in sample periodach sa drzia na vrchnych alebo aj priemernych poziciach
+#         - tieto pozicie su konzistentne, tj maju nizku std
+#         - maju akceptovatelne metriky ako sharpe, drawdown a pod
+#         - to iste na out of sample
+#         - tieto metriky su porovnatelne na in sample aj na out of sample periodach tj su medzi nimi male rozdiely
+#      model ktory bude predikovat napr. sharpe ratio a vstupy budu hodnoty parametrov - na identifikaciu najvplyvnejsich parametrov
+#      strategiu hodit do numpy namiesto pandas, pripadne @njit - check o kolko to bude rychlejsie
+#      zbehnut to na vsetkych kryptomenach a vsetkych equities
+#      vylepsit strategiu nejakym MA (odfiltrovanie zlych entries), stop loss, ...
+#      higher highs/lows ako min percento
+
+# strategy 3
+
+#   ak cena poslednych P percent dni za poslednych N dni rastie
+
+# strategy 4
+
+#  ak je open price vyrazne ina ako predosly den close, kup/predaj, a na konci dna zavri
+#  mozno len niektore dni, ako napr po vikende
+
+# strategy 5
+
+#   supporta a resistance identifikacia a nakup/predaj pri ich breaknuti
+
+# strategy 6
+
+#   ak cena prvu hodinu po otvoreni vyrazne vzrastie kup, predaj na konci dna
+
+# strategy 7
+
+# data od fin. analytikov - predikcia short term buy - voting viacerych zdrojov
+
+# strategy 8
+
+# kup ak open je vyssia ako predosly den close
+
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DALSIE STEPY
+
+# zmen parameter strategie
+# spravit zakladny refactoring - strategia v separete .py subore + script co spusti nb z configu a eval
+# najst 2, 3 akcie/cryptomeny, ktorych cena s btc nekoreluje, resp. ma co najviac negativnu korelaciu, kedze tato stategia je len long
+#   cekni ake vsetky cryptomeny a stocks su  na alpace k dispozicii
+#   porovnat time periodu (aby bola cca rovnaka ako btc, tj od 2014-09-17)
+#   natiahni a porovnaj korelacie, ak perioda nie je dostatocna, natiahni z inych zdrojov, napr. yfinance
+# najst pre ne top 5 parametrov, tj ten isty postup ako pri btc, ale na konci pri selekcii top 5 param pozeraj aj na korelaciu daily return s btc
+# nakod v alpace, vahy budu equal na zaciatok
+# nakod a backtestuj dalsiu strategiu a cele zopakuj

@@ -1,7 +1,7 @@
 from alpaca.data.live import CryptoDataStream, StockDataStream
 
-paper_key = 'PK03QP4W74VY401Y2OEF'
-paper_secret = 'HDcvk9sAJ6ftJGN9BNg8dHYg4d3Yb01PvIROmGhM'
+paper_key = ''
+paper_secret = ''
 
 stock_stream = CryptoDataStream(paper_key, paper_secret )
 # async handler

@@ -6,6 +6,16 @@ from utils import HigherHighStrategy, data_load
 from datetime import datetime
 from time import ctime
 import pdb
+import logging
+import logging.config
+import json
+
+with open('../logging_config.json', 'r') as config_file:
+    config_dict = json.load(config_file)
+
+logging.config.dictConfig(config_dict)
+logger = logging.getLogger(__name__)
+logger.info("Logging is set up.")
 
 @click.command() 
 @click.option("-c", "--path_config", help="Path to config yml to use")
@@ -20,8 +30,7 @@ def main(path_config):
                        config['data_preference'],
                        datetime(2000, 1, 1), 
                        datetime(2024, 1, 25))
-    # git
-    # logging
+
     # data stats (grafy csv s grafmi a statistikami)
     #   close price plot + volume
     #   daily returns stats

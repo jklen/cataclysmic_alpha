@@ -10,6 +10,9 @@ from alpaca.data.requests import CryptoBarsRequest, StockBarsRequest
 import yaml
 from time import ctime
 import pdb
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Define the strategy logic in a function
 def hh_hl_strategy_logic(close, window_entry, hh_hl_counts, 
@@ -82,41 +85,41 @@ def get_yf_data(symbol, start, end):
 
 def data_load(symbol, data_preference, start, end):
     if data_preference == 'yf':
-        try:
-            print(f"{ctime()} - downloading data from yfinance")
-            df = get_yf_data(symbol, start, end)
-        except Exception as e:
-            print(f"{ctime()} - problem downloading data from yfinance")
+        logger.info(f"{symbol} - downloading data from yfinance")
+        df = get_yf_data(symbol, start, end)
+        if len(df) == 0:
+            return None
+        return df
     elif data_preference == 'alpaca':
         try:
-            print(f"{ctime()} - downloading data from alpaca - stock client")
+            logger.info(f"{symbol} - downloading data from alpaca - stock client")
             df = get_alpaca_stock_data(symbol, start, end)
+            return df
         except:
             try:
-                print(f"{ctime()} - downloading data from alpaca - crypto client")
+                logger.info(f"{symbol} - downloading data from alpaca - crypto client")
                 df = get_alpaca_crypto_data(symbol, start, end)
+                return df
             except Exception as e:
-                print(f"{ctime()} - problem downloading data from alpaca via crypto or stock client")
+                logger.warning(f"{symbol} - problem downloading data from alpaca via crypto or stock client")
+                return None
     elif data_preference == 'longer_period':
-        try:
-            print(f"{ctime()} - downloading data from yfinance")
-            df_yf =  get_yf_data(symbol, start, end)
-        except Exception as e:
-            print(f"{ctime()} - problem downloading data from yfinance")
-            df_yf = pd.DataFrame()
+        logger.info(f"{symbol} - downloading data from yfinance")
+        df_yf =  get_yf_data(symbol, start, end)
             
         try:
-            print(f"{ctime()} - downloading data from alpaca - stock client")
+            logger.info(f"{symbol} - downloading data from alpaca - stock client")
             df_alpaca = get_alpaca_stock_data(symbol, start, end)
         except:
             try:
+                logger.info(f"{symbol} - downloading data from alpaca - crypto client")
                 df_alpaca = get_alpaca_crypto_data(symbol, start, end)
             except Exception as e:
-                print(f"{ctime()} - problem downloading data from alpaca via crypto or stock client")
+                logger.warning(f"{symbol} - problem downloading data from alpaca via crypto or stock client")
                 df_alpaca = pd.DataFrame()
                 
         if len(df_yf) == 0 and len(df_alpaca) == 0:
             return None
         
         df = df_yf if len(df_yf) > len(df_alpaca) else df_alpaca
-    return df
+        return df

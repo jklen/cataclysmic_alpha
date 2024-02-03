@@ -2,7 +2,7 @@ import click
 import subprocess
 import yaml
 import sys
-from utils import HigherHighStrategy, data_load
+from utils import HigherHighStrategy, data_load, data_stats
 from datetime import datetime
 from time import ctime
 import pdb
@@ -30,6 +30,8 @@ def main(path_config):
                        config['data_preference'],
                        datetime(2000, 1, 1), 
                        datetime(2024, 1, 25))
+        if df is not None:
+            data_stats(df, symbol)
 
     # data stats (grafy csv s grafmi a statistikami)
     #   close price plot + volume

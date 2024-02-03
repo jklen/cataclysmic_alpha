@@ -11,6 +11,9 @@ import yaml
 from time import ctime
 import pdb
 import logging
+import matplotlib.pyplot as plt
+import os
+from matplotlib.dates import date2num
 
 logger = logging.getLogger(__name__)
 
@@ -123,3 +126,55 @@ def data_load(symbol, data_preference, start, end):
         
         df = df_yf if len(df_yf) > len(df_alpaca) else df_alpaca
         return df
+    
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.dates import date2num
+
+def data_stats(df, symbol):
+    # Ensure 'timestamp' is datetime type for operations
+    #df['timestamp'] = pd.to_datetime(df['timestamp'])
+    path = f"../outputs/{symbol.replace('/', '-')}"
+    if not os.path.exists(path):
+        os.makedirs(path)
+    
+    fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(10, 12))
+    
+    # Close Price Plot
+    df['close'].plot(ax=axes[0], title=f'Close Price - {symbol}', color='blue')
+    axes[0].set_ylabel('Close Price')
+    axes[0].set_xlabel('Timestamp')
+    
+    # Annotations for Close Price
+    close_stats = df['close'].describe()
+    close_stats['std%'] = (close_stats['std'] / close_stats['mean'])
+    close_stats = close_stats.round(2)
+    close_stats = close_stats
+    close_info = close_stats.to_string(header=False)
+    min_date, max_date = df.index.min(), df.index.max()
+    num_days = (max_date - min_date).days
+    close_info_date = f"\nMin Date: {min_date.date()}\nMax Date: {max_date.date()}\nDate range: {num_days}"
+    axes[0].annotate(close_info, xy=(0.05, 0.95), xycoords='axes fraction', verticalalignment='top')
+    axes[0].annotate(close_info_date, xy=(0.8, 0.95), xycoords='axes fraction', verticalalignment='top')
+    
+    # Volume Plot
+    df['volume'].plot(ax=axes[1], title='Volume', color='green')
+    axes[1].set_ylabel('Volume')
+    axes[1].set_xlabel('Timestamp')
+    
+    # Daily Returns Calculation & Plot
+    df['daily_returns'] = df['close'].pct_change()
+    df['daily_returns'].plot(ax=axes[2], kind='hist', bins=50, alpha=0.6, color='orange', title='Daily Returns Histogram')
+    axes[2].set_xlabel('Daily Returns (%)')
+    
+    # Annotations for Daily Returns
+    returns_stats = df['daily_returns'].describe()
+    returns_stats = returns_stats.round(2)
+    returns_stats = returns_stats
+    returns_info = returns_stats.to_string(header = False)
+    axes[2].annotate(returns_info, xy=(0.05, 0.95), xycoords='axes fraction', verticalalignment='top')
+    
+    plt.tight_layout()
+    plt.savefig(f"{path}/data_statistics.png")
+    plt.close()

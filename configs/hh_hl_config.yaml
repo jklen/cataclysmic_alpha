@@ -7,8 +7,9 @@ symbols:
   - DELL
 data_preference: yf # 'yf' - yfinance, 'alpaca' - tahaj z alpacy, 'longer_period' - tahaj odkial je dlhsia perioda
 rolling_split_params: 
-  n_periods: 10
-  period_length: 720 # vyriesit ako % ako je prilis kratka
+  n_periods: 15
+  period_ratio: 0.35
+  period_years_max: 3
 strategy_params:
   fees: 0.001
   slippage: 0.0001

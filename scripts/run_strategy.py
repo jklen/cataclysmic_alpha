@@ -2,7 +2,7 @@ import click
 import subprocess
 import yaml
 import sys
-from utils import HigherHighStrategy, data_load, data_stats
+from utils import HigherHighStrategy, data_load, data_stats, data_split
 from datetime import datetime
 from time import ctime
 import pdb
@@ -32,11 +32,8 @@ def main(path_config):
                        datetime(2024, 1, 25))
         if df is not None:
             data_stats(df, symbol)
-
-    # data stats (grafy csv s grafmi a statistikami)
-    #   close price plot + volume
-    #   daily returns stats
-    #   nr of days in period, min max
+            open_price, _, close_price, _ = data_split(df, symbol, config['rolling_split_params'])
+            print(open_price.shape, close_price.shape)
     # data rolling split
     # portfolio stats
     # eval

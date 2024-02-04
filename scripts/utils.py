@@ -126,13 +126,9 @@ def data_load(symbol, data_preference, start, end):
         
         df = df_yf if len(df_yf) > len(df_alpaca) else df_alpaca
         return df
-    
-import os
-import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.dates import date2num
 
 def data_stats(df, symbol):
+    logger.info(f"{symbol} - making symbol stats & plots")
     # Ensure 'timestamp' is datetime type for operations
     #df['timestamp'] = pd.to_datetime(df['timestamp'])
     path = f"../outputs/{symbol.replace('/', '-')}"
@@ -178,3 +174,33 @@ def data_stats(df, symbol):
     plt.tight_layout()
     plt.savefig(f"{path}/data_statistics.png")
     plt.close()
+
+def data_split(df, symbol, split_params):
+    logger.info(f"{symbol} - splitting data via rolling split")
+    path = f"../outputs/{symbol.replace('/', '-')}"
+    
+    window_len = int(split_params['period_ratio'] * len(df))
+    window_len = min(window_len, split_params['period_years_max'] * 360)
+    
+    split_params = dict(n = split_params['n_periods'],
+                            window_len = window_len,
+                            left_to_right = True)
+    
+    figure = df['close'].vbt.rolling_split(**split_params,
+                                           plot = True)
+    figure.update_layout(width = 800, height = 400, title = f"rolling split - {symbol}")
+    
+    figure.add_annotation(
+        text=f"Window Length: {window_len}<br>Total Length: {len(df)}",
+        xref="paper", yref="paper",
+        x=1, y=1, xanchor="right", yanchor="top",
+        showarrow=False,
+        font=dict(size=12)
+        )
+    
+    figure.write_image(f"{path}/rolling_split.png")
+    
+    (price_open, indexes_open) = df['open'].shift(-1).vbt.rolling_split(**split_params)
+    (price_close, indexes_close) = df['close'].vbt.rolling_split(**split_params)
+    
+    return price_open, indexes_open, price_close, indexes_close

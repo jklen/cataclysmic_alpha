@@ -204,3 +204,40 @@ def data_split(df, symbol, split_params):
     (price_close, indexes_close) = df['close'].vbt.rolling_split(**split_params)
     
     return price_open, indexes_open, price_close, indexes_close
+
+def strategy_stats(open_price, close_price, strategy, strategy_params):
+    logger.info("calculating portfolio stats")    
+    param_ranges = strategy_params['param_ranges']
+    param_ranges = {key: np.arange(value[0], value[1] + 1) for key, value in param_ranges.items()}
+        
+    if strategy == 'hhhl':
+        Strategy = HigherHighStrategy
+        
+    indicator = Strategy.run(close_price, **param_ranges, param_product = True)
+    entries = indicator.entry_signal
+    exits = indicator.exit_signal
+
+    pf = vbt.Portfolio.from_signals(close_price, 
+                                    entries, 
+                                    exits,
+                                    price = open_price,
+                                    fees=strategy_params['fees'], 
+                                    slippage=strategy_params['slippage'], 
+                                    freq='1D')
+    df_stats = pf.stats(agg_func=None)
+    
+    return df_stats
+
+def strategy_grouped_stats(df_stats, symbol):
+    logger.info(f"{symbol} - calculating grouped stats of the strategy")
+    path = f"../outputs/{symbol.replace('/', '-')}"
+    columns_to_describe = ['Total Return [%]', 'Max Drawdown [%]', 
+                           'Max Drawdown Duration', 'Total Trades', 
+                           'Win Rate [%]', 'Sharpe Ratio']
+
+    df_stats = df_stats.droplevel('split_idx')
+    df_grouped_stats = df_stats.groupby(level=df_stats.index.names)[columns_to_describe].describe()
+    df_grouped_stats.columns = df_grouped_stats.columns.map('_'.join)
+    df_grouped_stats.reset_index(inplace=True)
+    
+    df_grouped_stats.to_csv(f"{path}/wf_grouped_stats.csv", header = True, index = False)

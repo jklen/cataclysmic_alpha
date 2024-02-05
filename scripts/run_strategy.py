@@ -2,7 +2,8 @@ import click
 import subprocess
 import yaml
 import sys
-from utils import HigherHighStrategy, data_load, data_stats, data_split
+from utils import HigherHighStrategy, data_load, data_stats, data_split, strategy_stats,\
+    strategy_grouped_stats
 from datetime import datetime
 from time import ctime
 import pdb
@@ -32,16 +33,20 @@ def main(path_config):
                        datetime(2024, 1, 25))
         if df is not None:
             data_stats(df, symbol)
-            open_price, _, close_price, _ = data_split(df, symbol, config['rolling_split_params'])
+            open_price, _, close_price, _ = data_split(df, symbol, 
+                                                       config['rolling_split_params'])
             print(open_price.shape, close_price.shape)
-    # data rolling split
+            df_stats = strategy_stats(open_price, 
+                                       close_price, 
+                                       config['strategy'], 
+                                       config['strategy_params'])
+            print(df_stats.shape)
+            strategy_grouped_stats(df_stats, symbol)
     # portfolio stats
     # eval
     #   read & filter stats df
     #   clustering eval
-    #   final clustering
-    
-    
+    #   final clustering    
     
 if __name__ == '__main__':
     main()

@@ -206,7 +206,7 @@ def data_split(df, symbol, split_params):
     return price_open, indexes_open, price_close, indexes_close
 
 def strategy_stats(open_price, close_price, strategy, strategy_params):
-    logger.info("calculating portfolio stats")    
+    logger.info("calculating strategy stats")    
     param_ranges = strategy_params['param_ranges']
     param_ranges = {key: np.arange(value[0], value[1] + 1) for key, value in param_ranges.items()}
         
@@ -228,16 +228,25 @@ def strategy_stats(open_price, close_price, strategy, strategy_params):
     
     return df_stats
 
-def strategy_grouped_stats(df_stats, symbol):
-    logger.info(f"{symbol} - calculating grouped stats of the strategy")
+def strategy_grouped_stats(df_stats, period_length, symbol, strategy):
+    logger.info(f"{symbol} - {strategy} - calculating grouped stats of the strategy")
     path = f"../outputs/{symbol.replace('/', '-')}"
     columns_to_describe = ['Total Return [%]', 'Max Drawdown [%]', 
-                           'Max Drawdown Duration', 'Total Trades', 
+                           'Max Drawdown Duration', 'Total Trades', 'Total Trades per year',
                            'Win Rate [%]', 'Sharpe Ratio']
+    df_stats['Max Drawdown Duration'] = df_stats['Max Drawdown Duration'].dt.days
+    df_stats['Total Trades per year'] = df_stats['Total Trades']*360/period_length
 
     df_stats = df_stats.droplevel('split_idx')
     df_grouped_stats = df_stats.groupby(level=df_stats.index.names)[columns_to_describe].describe()
     df_grouped_stats.columns = df_grouped_stats.columns.map('_'.join)
+    df_grouped_stats['Total Return [%]_std_perc'] = df_grouped_stats['Total Return [%]_std']/df_grouped_stats['Total Return [%]_mean']
+    df_grouped_stats['Max Drawdown [%]_std_perc'] = df_grouped_stats['Max Drawdown [%]_std']/df_grouped_stats['Max Drawdown [%]_mean']
+    df_grouped_stats['Total Trades_std_perc'] = df_grouped_stats['Total Trades_std']/df_grouped_stats['Total Trades_mean']
+    df_grouped_stats['Sharpe Ratio_std_perc'] = df_grouped_stats['Sharpe Ratio_std']/df_grouped_stats['Sharpe Ratio_mean']
+    
     df_grouped_stats.reset_index(inplace=True)
     
-    df_grouped_stats.to_csv(f"{path}/wf_grouped_stats.csv", header = True, index = False)
+    df_grouped_stats.to_csv(f"{path}/{strategy}_grouped_stats.csv", header = True, index = False)
+        
+    return df_grouped_stats

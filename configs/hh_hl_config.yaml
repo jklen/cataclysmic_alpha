@@ -10,16 +10,18 @@ rolling_split_params:
   n_periods: 15
   period_ratio: 0.35
   period_years_max: 3
-strategy: hhhl  
+strategies: 
+  - hhhl  
 strategy_params:
-  fees: 0.001
-  slippage: 0.0001
-  stop_loss: 0.1
-  param_ranges:
-    window_entry: [1, 9]
-    hh_hl_counts: [1, 5]
-    window_exit: [1, 9]
-    lh_counts: [1, 5]
+  hhhl:
+    fees: 0.001
+    slippage: 0.0001
+    stop_loss: 0.1
+    param_ranges:
+      window_entry: [1, 9]
+      hh_hl_counts: [1, 5]
+      window_exit: [1, 9]
+      lh_counts: [1, 5]
 eval_params:
   filters: # tu bude musiet byt nejaky algoritmus, ktory zabezpeci ze vzdy dostanem final_params_nr (neskor)
     sharpe_ratio_min: 0

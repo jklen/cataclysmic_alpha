@@ -36,13 +36,15 @@ def main(path_config):
             open_price, _, close_price, _ = data_split(df, symbol, 
                                                        config['rolling_split_params'])
             print(open_price.shape, close_price.shape)
-            df_stats = strategy_stats(open_price, 
-                                       close_price, 
-                                       config['strategy'], 
-                                       config['strategy_params'])
-            print(df_stats.shape)
-            strategy_grouped_stats(df_stats, symbol)
-    # portfolio stats
+            for strategy in config['strategies']:
+                df_stats = strategy_stats(open_price, 
+                                        close_price, 
+                                        strategy, 
+                                        config['strategy_params'][strategy])
+                
+                df_grouped_stats = strategy_grouped_stats(df_stats, len(open_price), symbol, strategy)
+                print(df_grouped_stats.shape)
+    # strategy params mozu byt nelogicke - count nesmie byt vacsie ako window
     # eval
     #   read & filter stats df
     #   clustering eval

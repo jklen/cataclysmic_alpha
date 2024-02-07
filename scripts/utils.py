@@ -20,9 +20,14 @@ logger = logging.getLogger(__name__)
 # Define the strategy logic in a function
 def hh_hl_strategy_logic(close, window_entry, hh_hl_counts, 
                    window_exit, lh_counts):
-    #close = pd.Series(close.flatten())
+    
     if isinstance(close, np.ndarray):
         close = pd.DataFrame(close)
+        
+    if (hh_hl_counts > window_entry) or (lh_counts > window_exit):
+        df_empty = pd.DataFrame(np.nan, index=close.index, columns=close.columns)
+        return df_empty, df_empty
+    
     higher_highs = close > close.rolling(window=window_entry, min_periods=1).max().shift(1)
     higher_lows = close > close.rolling(window=window_entry, min_periods=1).min().shift(1)
 

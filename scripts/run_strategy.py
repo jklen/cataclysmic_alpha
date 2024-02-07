@@ -44,7 +44,6 @@ def main(path_config):
                 
                 df_grouped_stats = strategy_grouped_stats(df_stats, len(open_price), symbol, strategy)
                 print(df_grouped_stats.shape)
-    # strategy params mozu byt nelogicke - count nesmie byt vacsie ako window
     # eval
     #   read & filter stats df
     #   clustering eval

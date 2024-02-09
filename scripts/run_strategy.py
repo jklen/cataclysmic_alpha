@@ -3,7 +3,7 @@ import subprocess
 import yaml
 import sys
 from utils import HigherHighStrategy, data_load, data_stats, data_split, strategy_stats,\
-    strategy_grouped_stats
+    strategy_grouped_stats, get_best_params
 from datetime import datetime
 from time import ctime
 import pdb
@@ -43,11 +43,16 @@ def main(path_config):
                                         config['strategy_params'][strategy])
                 
                 df_grouped_stats = strategy_grouped_stats(df_stats, len(open_price), symbol, strategy)
-                print(df_grouped_stats.shape)
+                print(f"param combinations - {df_grouped_stats.shape}")
+                get_best_params(df_grouped_stats, symbol, config['eval_params'])
     # eval
     #   read & filter stats df
     #   clustering eval
-    #   final clustering    
+    #   clustering filter
+    #   daily returns of result
+    #   correlation of daily returns
+    #   hierarchical clustering or pca
+    #   final 5 params
     
 if __name__ == '__main__':
     main()

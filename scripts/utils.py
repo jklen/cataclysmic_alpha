@@ -255,3 +255,23 @@ def strategy_grouped_stats(df_stats, period_length, symbol, strategy):
     df_grouped_stats.to_csv(f"{path}/{strategy}_grouped_stats.csv", header = True, index = False)
         
     return df_grouped_stats
+
+def get_best_params(df_stats, symbol, eval_params):
+    logger.info(f"{symbol} - getting top params")
+    #pdb.set_trace()
+    df_stats_f = df_stats.loc[(df_stats['Sharpe Ratio_min'] > eval_params['filters']['sharpe_ratio_min']) &
+                            (df_stats['Total Return [%]_min'] > eval_params['filters']['total_returns_min']) &
+                            (df_stats['Total Trades per year_min'] > eval_params['filters']['trades_in_year_min']),:]
+    if len(df_stats_f) == 0:
+        pass # postupne uvolnovat filtre aby dosiahlo final_params_nr, tj 5
+    if len(df_stats) <= eval_params['final_params']['final_params_nr']:
+        return df_stats_f
+
+    print(df_stats.shape)
+    #   read & filter stats df
+    #   clustering eval
+    #   clustering filter
+    #   daily returns of result
+    #   correlation of daily returns
+    #   hierarchical clustering or pca
+    #   final 5 params

@@ -26,27 +26,88 @@ eval_params:
   filters: # tu bude musiet byt nejaky algoritmus, ktory zabezpeci ze vzdy dostanem final_params_nr (neskor)
     sharpe_ratio_min: 0
     total_returns_min: 0
-    trades_in_year_min: 12 # vypocitat z total trades nr priemerny pocet obchodov za rok
-    sharpe_ratio_std_perc: 0.2  # max percentualna std sharpe ratia
-  max_clusters: 40 # pre charty
-  clusters: 30
-  cluster_cols:
-    - Total Return [%]_mean
-    - Sharpe Ratio_mean
-    - Max Drawdown [%]_mean
-    - Total Trades_mean
-    - Total Return [%]_std_perc
-    - Sharpe Ratio_std_perc
-    - Sharpe Ratio_min
-    - Total Return [%]_min
-    - Total Trades_min
-  within_clusters_filter:
-    trades_in_year_mean: 20 # minimalny priemer poctu obchodov za rok
-    sharpe_ratio_mean: 0.6 # problem bude pri roznych periodach, lebo vacsie SR koreluje s dlhsou periodou (daj ako % z max SR)   
-final_params:
-  final_params_nr: 5
-  force: false # ak true, tak v pripade ked "filters" bude mat 0 vystup, bude postupne uvolnovat filtre aby as dosiahol dostatocny pocet na clustering
-  force_filter_out: 500 # minimalny pocet ako vystup "filters" tj vstup do clusteringu
-  force_skip_clustering: false # ak true, tak cely clustering sa odignoruje, postupne sa budu uvolnovat filter aby sa dosiahol min pocet final_params, predosly param je ignorovany
+    trades_in_year_min: 6
+  clustering:
+    max_clusters: 40 # pre charty
+    dataset_size_for_max_clusters: 700
+    scaling_factor: 20
+    min_items_to_cluster: 100
+    cluster_cols:
+      - Total Return [%]_mean
+      - Sharpe Ratio_mean
+      - Max Drawdown [%]_mean
+      - Total Trades_mean
+      - Total Return [%]_std_perc
+      - Sharpe Ratio_std_perc
+      - Sharpe Ratio_min
+      - Total Return [%]_min
+      - Total Trades_min
+    within_clusters_filter:
+      trades_in_year_mean: 20 # minimalny priemer poctu obchodov za rok
+      sharpe_ratio_mean: 0.6 # problem bude pri roznych periodach, lebo vacsie SR koreluje s dlhsou periodou (daj ako % z max SR)   
+      items_from_cluster_nr: 5 # kolko vyberem z kazdeho clustra
+  final_params:
+    final_params_nr: 5
+    force: false # ak true, tak v pripade ked "filters" bude mat menej ako 5 - uvolni filter aby ich bolo aspon 5. Ak 5 - min_items_to_cluster, tak uvolni filtre.
+    # ked teda dosiahnem 100, tak oklastruj, ale ked filter po klusteringu bude mat < 5, tak uvolni cluster filtre aby ich bolo aspon 5, potom sortni podla stdev a zober top 5
+
+pseudocode:
+
+do_filters
+if force == False:
+  if len(params_after_filtering) is between 0 - final_params_nr:
+    return params_after_filtering
+  elif len(params_after_filtering) is between final_params_nr - min_items_to_cluster:
+    do_within_cluster_filters
+    if len(params_after_cluster_filtering) is between 0 - final_params_nr:
+      return params_after_cluster_filtering
+    elif len(params_after_cluster_filtering) is > final_params_nr:
+      do_calculate_daily_returns
+      do_calcualte_correlations_of_daily_returns
+      do_hierarchical_clustering_or/and_pca
+      return final_params
+  elif len(params_after_filtering) is > min_items_to_cluster:
+    do_clustering
+    do_within_cluster_filters
+    do_top_params_from_each_cluster
+    if len(params_after_top_params_from_each_cluster) is between 0 - final_params_nr:
+      return params_after_top_params_from_each_cluster
+    elif len(params_after_top_params_from_each_cluster) is > final_params_nr:
+      do_calculate_daily_returns
+      do_calcualte_correlations_of_daily_returns
+      do_hierarchical_clustering_or/and_pca
+      return final_params
+elif force == True:
+  if len(params_after_filtering) is between 0 - final_params_nr:
+    do_realase_filter_constraits - aby ich bolo aspon 5
+    do_sort_by_std_and_take_top_params
+    return final_params
+  elif len(params_after_filtering) is between - final_params_nr - min_items_to_cluster:
+    do_release_filter_constraints - aby ich bolo aspon min_items_to_cluster
+    do_clustering
+    do_within_cluster_filters
+    do_top_params_from_each_cluster
+    if len(params_after_top_params_from_each_cluster) is between 0 -final_params_nr:
+      do_release_clustering_constraints - aby ich bolo aspon 5 - aj vratane top_params_from each_cluster
+      do_top_params_from_each_cluster
+      do_sort_by_std_and_take_top_params
+    elif len(params_after_top_params_from_each_cluster) is > final_params_nr:
+      do_calculate_daily_returns
+      do_calcualte_correlations_of_daily_returns
+      do_hierarchical_clustering_or/and_pca
+      return final_params
+  elif len(params_after_filtering) is > min_items_to_cluster:
+    do_clustering
+    do_within_cluster_filters
+    do_top_params_from_each_cluster
+    if len(params_after_top_params_from_each_cluster) is between 0 -final_params_nr:
+      do_release_clustering_constraints - aby ich bolo aspon 5 - aj vratane top_params_from each_cluster
+      do_top_params_from_each_cluster
+      do_sort_by_std_and_take_top_params
+    elif len(params_after_top_params_from_each_cluster) is > final_params_nr:
+      do_calculate_daily_returns
+      do_calcualte_correlations_of_daily_returns
+      do_hierarchical_clustering_or/and_pca
+      return final_params
 
 

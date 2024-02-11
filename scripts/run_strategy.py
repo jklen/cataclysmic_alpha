@@ -42,9 +42,18 @@ def main(path_config):
                                         strategy, 
                                         config['strategy_params'][strategy])
                 
-                df_grouped_stats = strategy_grouped_stats(df_stats, len(open_price), symbol, strategy)
+                df_grouped_stats = strategy_grouped_stats(df_stats, 
+                                                          len(open_price), 
+                                                          symbol, 
+                                                          strategy)
                 print(f"param combinations - {df_grouped_stats.shape}")
-                get_best_params(df_grouped_stats, symbol, config['eval_params'])
+                get_best_params(df_grouped_stats, 
+                                symbol, 
+                                config['eval_params'], 
+                                strategy, 
+                                config['strategy_params'][strategy],
+                                close_price, 
+                                open_price)
     # eval
     #   read & filter stats df
     #   clustering eval

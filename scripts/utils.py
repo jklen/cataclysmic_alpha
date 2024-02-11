@@ -205,7 +205,7 @@ def data_split(df, symbol, split_params):
     
     figure.write_image(f"{path}/rolling_split.png")
     
-    (price_open, indexes_open) = df['open'].shift(-1).vbt.rolling_split(**split_params)
+    (price_open, indexes_open) = df['open'].shift(-1).vbt.rolling_split(**split_params) # execution at next day open
     (price_close, indexes_close) = df['close'].vbt.rolling_split(**split_params)
     
     return price_open, indexes_open, price_close, indexes_close
@@ -228,6 +228,7 @@ def strategy_stats(open_price, close_price, strategy, strategy_params):
                                     price = open_price,
                                     fees=strategy_params['fees'], 
                                     slippage=strategy_params['slippage'], 
+                                    sl_stop = strategy_params['stop_loss'], 
                                     freq='1D')
     df_stats = pf.stats(agg_func=None)
     
@@ -249,29 +250,135 @@ def strategy_grouped_stats(df_stats, period_length, symbol, strategy):
     df_grouped_stats['Max Drawdown [%]_std_perc'] = df_grouped_stats['Max Drawdown [%]_std']/df_grouped_stats['Max Drawdown [%]_mean']
     df_grouped_stats['Total Trades_std_perc'] = df_grouped_stats['Total Trades_std']/df_grouped_stats['Total Trades_mean']
     df_grouped_stats['Sharpe Ratio_std_perc'] = df_grouped_stats['Sharpe Ratio_std']/df_grouped_stats['Sharpe Ratio_mean']
-    
-    df_grouped_stats.reset_index(inplace=True)
-    
-    df_grouped_stats.to_csv(f"{path}/{strategy}_grouped_stats.csv", header = True, index = False)
+        
+    df_grouped_stats.to_csv(f"{path}/{strategy}_grouped_stats.csv", header = True, index = True)
         
     return df_grouped_stats
 
-def get_best_params(df_stats, symbol, eval_params):
-    logger.info(f"{symbol} - getting top params")
-    #pdb.set_trace()
-    df_stats_f = df_stats.loc[(df_stats['Sharpe Ratio_min'] > eval_params['filters']['sharpe_ratio_min']) &
-                            (df_stats['Total Return [%]_min'] > eval_params['filters']['total_returns_min']) &
-                            (df_stats['Total Trades per year_min'] > eval_params['filters']['trades_in_year_min']),:]
-    if len(df_stats_f) == 0:
-        pass # postupne uvolnovat filtre aby dosiahlo final_params_nr, tj 5
-    if len(df_stats) <= eval_params['final_params']['final_params_nr']:
-        return df_stats_f
+def calculate_returns(df_stats, symbol, strategy, strategy_params, price_close, price_open):
+    logger.info(f"{symbol} - calculating returns of final params")
+    path = f"../outputs/{symbol.replace('/', '-')}"
+    params = df_stats.index.apply(list, axis = 'columns').tolist()
+    params_dict = {'window_entry': [item[0] for item in params], 
+          'hh_hl_counts': [item[1] for item in params],
+          'window_exit': [item[2] for item in params], 
+          'lh_counts': [item[3] for item in params]}
+    
+    if strategy == 'hhhl':
+        Strategy = HigherHighStrategy
+        
+    indicator = Strategy.run(price_close, **params_dict)
+    entries = indicator.entry_signal
+    exits = indicator.exit_signal
 
+    pf = vbt.Portfolio.from_signals(price_close, 
+                                    entries, 
+                                    exits,
+                                    price = price_open,
+                                    fees=strategy_params['fees'], 
+                                    slippage=strategy_params['slippage'],
+                                    sl_stop = strategy_params['stop_loss'],
+                                    freq='1D')
+    df_stats = pf.stats(agg_func=None)
+    daily_ret = pf.daily_returns()
+    
+    daily_ret.to_csv(f"{path}/{strategy}_top_params_returns.csv", header = True, index = True)
+    
+    return daily_ret
+
+def calculate_best_params_pca(df_stats):
+    pass
+
+def calculate_best_params_hc(df_stats):
+    pass
+
+def params_clustering(df_stats, clustering_params):
+    pass
+
+def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, price_close, price_open):
+    logger.info(f"{symbol} - getting top params")
+    pdb.set_trace()
+    
+    filters = eval_params['filters']
+    clustering = eval_params['clustering']
+    final_params = eval_params['final_params']
+        
+    df_stats_f = df_stats.loc[(df_stats['Sharpe Ratio_min'] > filters['sharpe_ratio_min']) &
+                            (df_stats['Total Return [%]_min'] > filters['total_returns_min']) &
+                            (df_stats['Total Trades per year_min'] > filters['trades_in_year_min']),:]
+    
+    if final_params['force'] == False:
+        if 0 < len(df_stats_f) <= final_params['final_params_nr']:
+            df_returns = calculate_returns(df_stats_f, symbol, strategy, strategy_params, price_close, price_open)
+            return df_stats_f.index
+        elif final_params['final_params_nr'] < len(df_stats_f) < clustering['min_items_to_cluster']:
+            df_stats_f_c = df_stats_f.loc[(df_stats_f['Total Trades per year_mean'] >= clustering['filters']['trades_in_year_mean']) &
+                                          (df_stats_f['Sharpe Ratio_mean'] >= clustering['filters']['sharpe_ratio_mean']),:]
+            if 0 < len(df_stats_f_c) <= final_params['final_params_nr']:
+                df_returns = calculate_returns(df_stats_f_c, symbol, strategy, strategy_params, price_close, price_open)
+                return df_returns.index
+            elif final_params['final_params_nr'] < len(df_stats_f_c):
+                df_returns = calculate_returns(df_stats_f_c, symbol, strategy, strategy_params, price_close, price_open)
+                best_params_pca = calculate_best_params_pca(df_returns)
+                best_params_hc = calculate_best_params_hc(df_returns)
+                return best_params_pca, best_params_hc
+            else:
+                return None
+        elif len(df_stats_f) >= clustering['min_items_to_cluster']:
+            df_clustered = params_clustering(df_stats_f, clustering)
+            df_clustered_f = df_clustered.loc[(df_clustered['Total Trades per year_mean'] >= clustering['filters']['trades_in_year_mean']) &
+                                          (df_clustered['Sharpe Ratio_mean'] >= clustering['filters']['sharpe_ratio_mean']),:]
+            df_cluster_f_s = df_clustered_f.groupby('cluster').apply(lambda df: df.sort_values(by = 'Sharpe Ratio_std') \
+                .head(clustering['filters']['items_from_cluster_nr']))            
+            if 0 < len(df_cluster_f_s) <= final_params['final_params_nr']:
+                df_returns = calculate_returns(df_cluster_f_s, symbol, strategy, strategy_params, price_close, price_open)
+                return df_cluster_f_s.index
+            elif final_params['final_params_nr'] < len(df_cluster_f_s):
+                df_returns = calculate_returns(df_cluster_f_s, symbol, strategy, strategy_params, price_close, price_open)
+                best_params_pca = calculate_best_params_pca(df_returns)
+                best_params_hc = calculate_best_params_hc(df_returns)
+                return best_params_pca, best_params_hc
+            else:
+                return None
+        else:
+            return None
+            
+                
     print(df_stats.shape)
-    #   read & filter stats df
-    #   clustering eval
-    #   clustering filter
-    #   daily returns of result
-    #   correlation of daily returns
-    #   hierarchical clustering or pca
-    #   final 5 params
+    
+#     pseudocode:
+
+# elif force == True:
+#   if len(params_after_filtering) is between 0 - final_params_nr:
+#     do_realase_filter_constraits - aby ich bolo aspon 5
+#     do_sort_by_std_and_take_top_params
+#     return final_params
+#   elif len(params_after_filtering) is between - final_params_nr - min_items_to_cluster:
+#     do_release_filter_constraints - aby ich bolo aspon min_items_to_cluster # tu moze byt alternative, chod rovno na returns calc
+#     do_clustering
+#     do_within_cluster_filters
+#     do_top_params_from_each_cluster
+#     if len(params_after_top_params_from_each_cluster) is between 0 -final_params_nr:
+#       do_release_clustering_constraints - aby ich bolo aspon 5 - aj vratane top_params_from each_cluster
+#       do_top_params_from_each_cluster
+#       do_sort_by_std_and_take_top_params
+#     elif len(params_after_top_params_from_each_cluster) is > final_params_nr:
+#       do_calculate_daily_returns
+#       do_calcualte_correlations_of_daily_returns
+#       do_hierarchical_clustering_or/and_pca
+#       return final_params
+#   elif len(params_after_filtering) is > min_items_to_cluster:
+#     do_clustering
+#     do_within_cluster_filters
+#     do_top_params_from_each_cluster
+#     if len(params_after_top_params_from_each_cluster) is between 0 -final_params_nr:
+#       do_release_clustering_constraints - aby ich bolo aspon 5 - aj vratane top_params_from each_cluster
+#       do_top_params_from_each_cluster
+#       do_sort_by_std_and_take_top_params
+#     elif len(params_after_top_params_from_each_cluster) is > final_params_nr:
+#       do_calculate_daily_returns
+#       do_calcualte_correlations_of_daily_returns
+#       do_hierarchical_clustering_or/and_pca
+#       return final_params
+
+

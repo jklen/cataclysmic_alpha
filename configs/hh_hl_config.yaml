@@ -28,9 +28,10 @@ eval_params:
     total_returns_min: 0
     trades_in_year_min: 6
   clustering:
-    max_clusters: 40 # pre charty
+    explore: true
+    max_clusters: 40
     dataset_size_for_max_clusters: 700
-    scaling_factor: 20
+    scaling_factor: 20 # 1 cluster pre kazdych 20 parameter kombinacii
     min_items_to_cluster: 100
     cluster_cols:
       - Total Return [%]_mean

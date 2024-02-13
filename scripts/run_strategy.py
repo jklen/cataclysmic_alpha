@@ -47,21 +47,21 @@ def main(path_config):
                                                           symbol, 
                                                           strategy)
                 print(f"param combinations - {df_grouped_stats.shape}")
-                get_best_params(df_grouped_stats, 
+                best_params = get_best_params(df_grouped_stats, 
                                 symbol, 
                                 config['eval_params'], 
                                 strategy, 
                                 config['strategy_params'][strategy],
-                                close_price, 
-                                open_price)
-    # eval
-    #   read & filter stats df
-    #   clustering eval
-    #   clustering filter
-    #   daily returns of result
-    #   correlation of daily returns
-    #   hierarchical clustering or pca
-    #   final 5 params
+                                df['close'], 
+                                df['open'].shift(-1))
+                logger.info(f"{symbol} - best params - {best_params}")
+                
+    # grafy pre top params (trades, cumulative returns, ...) z pf
+    # korelacna matica pre top params (nie len ked sa robi hierarchicky klustering)
+    # ked sa robi pca aj hc, tak final params bude to kde je mensia priemerna korelacia
+    # strategia do osobitneho foldra
+    # cluster eval cast s parametrami aby bola nezavisla od strategie
+    # symboly do separe fajlu (asi bude separe script na ich vygenerovanie)
     
 if __name__ == '__main__':
     main()

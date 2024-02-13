@@ -14,6 +14,16 @@ import logging
 import matplotlib.pyplot as plt
 import os
 from matplotlib.dates import date2num
+import seaborn as sns
+from scipy.cluster.hierarchy import linkage, fcluster
+from scipy.spatial.distance import squareform
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.metrics import davies_bouldin_score
+from sklearn.cluster import KMeans
+from yellowbrick.cluster import KElbowVisualizer
+from scipy.spatial.distance import pdist, squareform
+import pickle
 
 logger = logging.getLogger(__name__)
 
@@ -256,9 +266,10 @@ def strategy_grouped_stats(df_stats, period_length, symbol, strategy):
     return df_grouped_stats
 
 def calculate_returns(df_stats, symbol, strategy, strategy_params, price_close, price_open):
+    #pdb.set_trace()
     logger.info(f"{symbol} - calculating returns of final params")
     path = f"../outputs/{symbol.replace('/', '-')}"
-    params = df_stats.index.apply(list, axis = 'columns').tolist()
+    params = df_stats.index.to_frame().apply(list, axis = 'columns').tolist()
     params_dict = {'window_entry': [item[0] for item in params], 
           'hh_hl_counts': [item[1] for item in params],
           'window_exit': [item[2] for item in params], 
@@ -279,25 +290,206 @@ def calculate_returns(df_stats, symbol, strategy, strategy_params, price_close, 
                                     slippage=strategy_params['slippage'],
                                     sl_stop = strategy_params['stop_loss'],
                                     freq='1D')
-    df_stats = pf.stats(agg_func=None)
+    df_top_params_stats = pf.stats(agg_func=None)
     daily_ret = pf.daily_returns()
     
     daily_ret.to_csv(f"{path}/{strategy}_top_params_returns.csv", header = True, index = True)
+    df_top_params_stats.to_csv(f"{path}/{strategy}_top_params_stats.csv", header = True, index = True)
     
     return daily_ret
 
-def calculate_best_params_pca(df_stats):
-    pass
+def calculate_best_params_pca(df_returns, symbol, strategy, final_params_nr):
+    logger.info(f"{symbol} - getting best params via PCA")
+    path = f"../outputs/{symbol.replace('/', '-')}"
+    # Standardize the data
+    scaler = StandardScaler()
+    scaled_df = scaler.fit_transform(df_returns)
 
-def calculate_best_params_hc(df_stats):
-    pass
+    # Apply PCA
+    pca = PCA(n_components=final_params_nr)
+    pca.fit(scaled_df)
 
-def params_clustering(df_stats, clustering_params):
-    pass
+    # Get indices of the most important variable for each component, ensuring uniqueness
+    most_important_indices = set()
+    for component in pca.components_:
+        for importance in np.argsort(np.abs(component))[::-1]:
+            if importance not in most_important_indices:
+                most_important_indices.add(importance)
+                break
+
+    # Get the names of these variables
+    final_params = [df_returns.columns[idx] for idx in most_important_indices]
+    
+    df_corr_final = df_returns[final_params].corr()
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(df_corr_final, cmap='coolwarm', linewidths=.5)
+    plt.title(f"{symbol} - daily returns - final params PCA - correlations")
+    plt.savefig(f"{path}/{strategy}_daily_returns_correlations_final_params_pca.jpg")
+
+    return final_params
+
+def calculate_best_params_hc(df_returns, symbol, strategy, final_params_nr):
+    logger.info(f"{symbol} - getting best params via hierarchical clustering")
+    path = f"../outputs/{symbol.replace('/', '-')}"
+    
+    df_corr = df_returns.corr()
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(df_corr, cmap='coolwarm', linewidths=.5)
+    plt.title(f"{symbol} - daily returns - correlations")
+    plt.savefig(f"{path}/{strategy}_daily_returns_correlations.jpg")
+    
+    #pdb.set_trace()
+    dist_matrix = squareform(1 - df_corr)
+    Z = linkage(dist_matrix, 'ward')
+    num_clusters = final_params_nr
+
+    cluster_labels = fcluster(Z, num_clusters, criterion='maxclust')
+
+    final_params = []
+    for i in range(1, num_clusters+1):
+        cluster_vars = df_returns.columns[cluster_labels == i]
+        final_params.append(cluster_vars[0])  # Choosing the first variable as an example
+
+    df_corr_final = df_returns[final_params].corr()
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(df_corr_final, cmap='coolwarm', linewidths=.5)
+    plt.title(f"{symbol} - daily returns - final params HC - correlations")
+    plt.savefig(f"{path}/{strategy}_daily_returns_correlations_final_params_hc.jpg")
+    
+    return final_params
+
+def average_intra_cluster_similarity(group):
+    pairwise_distances = pdist(group, metric='euclidean')
+    return pairwise_distances.mean() if len(pairwise_distances) > 0 else 0
+
+def flatten_dict(d, parent_key='', sep='_'):
+    items = []
+    for k, v in d.items():
+        new_key = f"{parent_key}{sep}{k}" if parent_key else k
+        if isinstance(v, dict):
+            items.extend(flatten_dict(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
+    
+def params_clustering(df_stats, symbol, strategy, clustering_params):
+    logger.info(f"{symbol} - clustering params")
+    path = f"../outputs/{symbol.replace('/', '-')}"
+    
+    # data to clustering
+    
+    df_to_cluster = df_stats[clustering_params['cluster_cols']]
+    x_minmax = MinMaxScaler().fit_transform(df_to_cluster)
+    
+    #pdb.set_trace()
+    
+    # eploring clusters
+    
+    if clustering_params['explore']:
+        max_clusters = clustering_params['max_clusters']
+        n_init = 100
+        
+        plt.figure()
+        model = KMeans(n_init = n_init)
+        visualizer = KElbowVisualizer(
+            model, k=(2,max_clusters), metric='calinski_harabasz', timings=False
+        )
+        visualizer.fit(x_minmax)    
+        plt.savefig(f"{path}/{strategy}_cluster_calinski_harabasz.png")
+        
+        plt.figure()
+        visualizer = KElbowVisualizer(
+            model, k=(2,max_clusters), metric='silhouette', timings=False
+        )
+        visualizer.fit(x_minmax)    
+        plt.savefig(f"{path}/{strategy}_cluster_silhuette_index.png")
+        
+        plt.figure()
+        visualizer = KElbowVisualizer(
+            model, k=(2,max_clusters), metric='distortion', timings=False
+        )
+        visualizer.fit(x_minmax)    
+        plt.savefig(f"{path}/{strategy}_cluster_distortion.png")
+        
+        plt.figure()
+        db = []
+        for i in range(2, max_clusters + 1):
+            kmeans = KMeans(n_init = n_init, n_clusters = i)
+            clusters = kmeans.fit_predict(x_minmax)
+            db.append(davies_bouldin_score(x_minmax, clusters)) # lower values better clustering
+        s_db = pd.Series(db)
+        s_db.plot()
+        plt.savefig(f"{path}/{strategy}_cluster_davies_bouldin.png")
+        
+    # final clustering
+    
+    dynamic_clusters = min(clustering_params['max_clusters'], max(1, x_minmax.shape[0] // clustering_params['scaling_factor']))
+
+    km_final = KMeans(n_init = n_init, n_clusters = dynamic_clusters)
+    km_final.fit(x_minmax)
+    predicted_clusters = km_final.predict(x_minmax)
+    
+    # clustering eval
+    
+    df_cluster_x_minmax = pd.DataFrame(x_minmax)
+    df_cluster_x_minmax['cluster'] = predicted_clusters
+    avg_similarity = df_cluster_x_minmax.groupby('cluster').apply(average_intra_cluster_similarity)
+    #pdb.set_trace()
+    df_cluster_stats = df_stats
+    df_cluster_stats['cluster'] = predicted_clusters
+    df_cluster_stats.reset_index(inplace = True)
+    # Group by the 'cluster' column
+    cluster_groups = df_cluster_stats.groupby('cluster')
+
+    # Initialize a dictionary to hold your statistics
+    cluster_stats = {}
+
+    # Loop through each group to calculate statistics
+    for cluster, group in cluster_groups:
+        stats = {
+            'nr_of_rows': len(group),
+            'avg': group[['Total Return [%]_mean', 'Sharpe Ratio_mean', 'Max Drawdown [%]_mean', 
+                                    'Total Trades_mean', 'Total Return [%]_std_perc', 'Sharpe Ratio_std_perc']].mean().to_dict(),
+            'min': group[['Sharpe Ratio_min', 'Total Return [%]_min', 'Total Trades_min']].min().to_dict(),
+            'max': group[['Max Drawdown [%]_max', 'Sharpe Ratio_std_perc', 'Total Return [%]_std_perc']].max().to_dict(),
+            'unique_cnt': group[['custom_window_entry', 'custom_hh_hl_counts','custom_window_exit', 'custom_lh_counts']].nunique().to_dict(),
+            'value_counts': group[['custom_window_entry', 'custom_hh_hl_counts','custom_window_exit', 'custom_lh_counts']].apply(pd.Series.value_counts).to_dict()
+        }
+        cluster_stats[cluster] = stats
+        
+    df_cluster_stats_result = pd.DataFrame()
+    for key in cluster_stats.keys():
+        # Flattening the nested dictionary
+        flat_data = flatten_dict(cluster_stats[key])
+
+        # Remove the separator at the beginning of the keys in the top level
+        flat_data = {k.lstrip('_'): v for k, v in flat_data.items()}
+
+        # Converting to Pandas Series
+        series = pd.Series(flat_data)
+        
+        df_cluster_stats_result[f'cluster_{key}'] = series
+    
+    df_similarity = pd.Series(avg_similarity).to_frame().T
+    df_similarity.columns = df_cluster_stats_result.columns
+    df_similarity.index = pd.Index(['avg_similarity'])
+
+    df_cluster_stats_result  = pd.concat([df_similarity, df_cluster_stats_result])
+
+    df_cluster_stats_result.to_csv(f"{path}/{strategy}_clustering_profiles.csv", index = True, header = True)
+    df_cluster_stats.to_csv(f"{path}/{strategy}_clustering_params_with_clusters.csv", index = False, header = True)
+
+    # changing param names to original
+    #pdb.set_trace()
+    df_cluster_stats.rename(columns = {'custom_window_entry':'window_entry',
+                                       'custom_hh_hl_counts':'hh_hl_counts',
+                                       'custom_window_exit':'window_exit', 
+                                       'custom_lh_counts':'lh_counts'}, inplace = True)
+    df_cluster_stats.set_index(['window_entry', 'hh_hl_counts','window_exit', 'lh_counts'], inplace = True)
+    return df_cluster_stats
 
 def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, price_close, price_open):
     logger.info(f"{symbol} - getting top params")
-    pdb.set_trace()
     
     filters = eval_params['filters']
     clustering = eval_params['clustering']
@@ -310,33 +502,33 @@ def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, pr
     if final_params['force'] == False:
         if 0 < len(df_stats_f) <= final_params['final_params_nr']:
             df_returns = calculate_returns(df_stats_f, symbol, strategy, strategy_params, price_close, price_open)
-            return df_stats_f.index
+            return df_stats_f.index.to_frame().apply(list, axis = 'columns').tolist()
         elif final_params['final_params_nr'] < len(df_stats_f) < clustering['min_items_to_cluster']:
             df_stats_f_c = df_stats_f.loc[(df_stats_f['Total Trades per year_mean'] >= clustering['filters']['trades_in_year_mean']) &
                                           (df_stats_f['Sharpe Ratio_mean'] >= clustering['filters']['sharpe_ratio_mean']),:]
             if 0 < len(df_stats_f_c) <= final_params['final_params_nr']:
                 df_returns = calculate_returns(df_stats_f_c, symbol, strategy, strategy_params, price_close, price_open)
-                return df_returns.index
+                return df_stats_f_c.index
             elif final_params['final_params_nr'] < len(df_stats_f_c):
                 df_returns = calculate_returns(df_stats_f_c, symbol, strategy, strategy_params, price_close, price_open)
-                best_params_pca = calculate_best_params_pca(df_returns)
-                best_params_hc = calculate_best_params_hc(df_returns)
+                best_params_pca = calculate_best_params_pca(df_returns, symbol, strategy, final_params['final_params_nr'])
+                best_params_hc = calculate_best_params_hc(df_returns, symbol, strategy, final_params['final_params_nr'])
                 return best_params_pca, best_params_hc
             else:
                 return None
         elif len(df_stats_f) >= clustering['min_items_to_cluster']:
-            df_clustered = params_clustering(df_stats_f, clustering)
+            df_clustered = params_clustering(df_stats_f, symbol, strategy, clustering)
             df_clustered_f = df_clustered.loc[(df_clustered['Total Trades per year_mean'] >= clustering['filters']['trades_in_year_mean']) &
                                           (df_clustered['Sharpe Ratio_mean'] >= clustering['filters']['sharpe_ratio_mean']),:]
             df_cluster_f_s = df_clustered_f.groupby('cluster').apply(lambda df: df.sort_values(by = 'Sharpe Ratio_std') \
-                .head(clustering['filters']['items_from_cluster_nr']))            
+                .head(clustering['filters']['items_from_cluster_nr'])).droplevel(0)       
             if 0 < len(df_cluster_f_s) <= final_params['final_params_nr']:
                 df_returns = calculate_returns(df_cluster_f_s, symbol, strategy, strategy_params, price_close, price_open)
-                return df_cluster_f_s.index
+                return df_cluster_f_s.index.to_frame().apply(list, axis = 'columns').tolist()
             elif final_params['final_params_nr'] < len(df_cluster_f_s):
                 df_returns = calculate_returns(df_cluster_f_s, symbol, strategy, strategy_params, price_close, price_open)
-                best_params_pca = calculate_best_params_pca(df_returns)
-                best_params_hc = calculate_best_params_hc(df_returns)
+                best_params_pca = calculate_best_params_pca(df_returns, symbol, strategy, final_params['final_params_nr'])
+                best_params_hc = calculate_best_params_hc(df_returns, symbol, strategy, final_params['final_params_nr'])
                 return best_params_pca, best_params_hc
             else:
                 return None

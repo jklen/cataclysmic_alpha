@@ -3,7 +3,7 @@ import subprocess
 import yaml
 import sys
 from utils import HigherHighStrategy, data_load, data_stats, data_split, strategy_stats,\
-    strategy_grouped_stats, get_best_params
+    strategy_grouped_stats, get_best_params, create_path
 from datetime import datetime
 from time import ctime
 import pdb
@@ -32,11 +32,13 @@ def main(path_config):
                        datetime(2000, 1, 1), 
                        datetime(2024, 1, 25))
         if df is not None:
+            create_path(symbol.replace('/', '-'))
             data_stats(df, symbol)
             open_price, _, close_price, _ = data_split(df, symbol, 
                                                        config['rolling_split_params'])
             print(open_price.shape, close_price.shape)
             for strategy in config['strategies']:
+                create_path(symbol.replace('/', '-'), strategy)
                 df_stats = strategy_stats(open_price, 
                                         close_price, 
                                         strategy, 
@@ -57,9 +59,9 @@ def main(path_config):
                 logger.info(f"{symbol} - best params - {best_params}")
                 
     # grafy pre top params (trades, cumulative returns, ...) z pf
+    # statistiky pre final params - drawdown ako cislo, trades per year - ako funkcia
     # korelacna matica pre top params (nie len ked sa robi hierarchicky klustering)
     # ked sa robi pca aj hc, tak final params bude to kde je mensia priemerna korelacia
-    # strategia do osobitneho foldra
     # cluster eval cast s parametrami aby bola nezavisla od strategie
     # symboly do separe fajlu (asi bude separe script na ich vygenerovanie)
     

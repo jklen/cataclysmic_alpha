@@ -141,14 +141,36 @@ def data_load(symbol, data_preference, start, end):
         
         df = df_yf if len(df_yf) > len(df_alpaca) else df_alpaca
         return df
+    
+import os
+
+def create_path(symbol, strategy=None):
+    """
+    Create folders for the given symbol and strategy.
+    
+    Parameters:
+        symbol (str): Symbol name for the folder.
+        strategy (str, optional): Strategy name for the subfolder. Default is None.
+    """
+    #pdb.set_trace()
+    # Define the main folder path based on the symbol
+    main_folder = os.path.join("../outputs", symbol)
+    
+    # Create the main folder if it doesn't exist
+    if not os.path.exists(main_folder):
+        os.makedirs(main_folder)
+        print(f"Folder created: {main_folder}")
+    
+    # Create the subfolder if strategy is not None
+    if strategy is not None:
+        subfolder = os.path.join(main_folder, strategy)
+        if not os.path.exists(subfolder):
+            os.makedirs(subfolder)
+            print(f"Subfolder created: {subfolder}")
 
 def data_stats(df, symbol):
     logger.info(f"{symbol} - making symbol stats & plots")
-    # Ensure 'timestamp' is datetime type for operations
-    #df['timestamp'] = pd.to_datetime(df['timestamp'])
     path = f"../outputs/{symbol.replace('/', '-')}"
-    if not os.path.exists(path):
-        os.makedirs(path)
     
     fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(10, 12))
     
@@ -261,7 +283,7 @@ def strategy_grouped_stats(df_stats, period_length, symbol, strategy):
     df_grouped_stats['Total Trades_std_perc'] = df_grouped_stats['Total Trades_std']/df_grouped_stats['Total Trades_mean']
     df_grouped_stats['Sharpe Ratio_std_perc'] = df_grouped_stats['Sharpe Ratio_std']/df_grouped_stats['Sharpe Ratio_mean']
         
-    df_grouped_stats.to_csv(f"{path}/{strategy}_grouped_stats.csv", header = True, index = True)
+    df_grouped_stats.to_csv(f"{path}/{strategy}/{strategy}_params_grouped_stats.csv", header = True, index = True)
         
     return df_grouped_stats
 
@@ -293,8 +315,8 @@ def calculate_returns(df_stats, symbol, strategy, strategy_params, price_close, 
     df_top_params_stats = pf.stats(agg_func=None)
     daily_ret = pf.daily_returns()
     
-    daily_ret.to_csv(f"{path}/{strategy}_top_params_returns.csv", header = True, index = True)
-    df_top_params_stats.to_csv(f"{path}/{strategy}_top_params_stats.csv", header = True, index = True)
+    daily_ret.to_csv(f"{path}/{strategy}/{strategy}_final_params_returns.csv", header = True, index = True)
+    df_top_params_stats.to_csv(f"{path}/{strategy}/{strategy}_final_params_stats.csv", header = True, index = True)
     
     return daily_ret
 
@@ -324,7 +346,7 @@ def calculate_best_params_pca(df_returns, symbol, strategy, final_params_nr):
     plt.figure(figsize=(8, 6))
     sns.heatmap(df_corr_final, cmap='coolwarm', linewidths=.5)
     plt.title(f"{symbol} - daily returns - final params PCA - correlations")
-    plt.savefig(f"{path}/{strategy}_daily_returns_correlations_final_params_pca.jpg")
+    plt.savefig(f"{path}/{strategy}/{strategy}_final_params_PCA_daily_returns_corr.jpg")
 
     return final_params
 
@@ -336,7 +358,7 @@ def calculate_best_params_hc(df_returns, symbol, strategy, final_params_nr):
     plt.figure(figsize=(8, 6))
     sns.heatmap(df_corr, cmap='coolwarm', linewidths=.5)
     plt.title(f"{symbol} - daily returns - correlations")
-    plt.savefig(f"{path}/{strategy}_daily_returns_correlations.jpg")
+    plt.savefig(f"{path}/{strategy}/{strategy}_best_params_daily_returns_correlations.jpg")
     
     #pdb.set_trace()
     dist_matrix = squareform(1 - df_corr)
@@ -354,7 +376,7 @@ def calculate_best_params_hc(df_returns, symbol, strategy, final_params_nr):
     plt.figure(figsize=(8, 6))
     sns.heatmap(df_corr_final, cmap='coolwarm', linewidths=.5)
     plt.title(f"{symbol} - daily returns - final params HC - correlations")
-    plt.savefig(f"{path}/{strategy}_daily_returns_correlations_final_params_hc.jpg")
+    plt.savefig(f"{path}/{strategy}/{strategy}_final_params_HC_daily_returns_corr.jpg")
     
     return final_params
 
@@ -395,21 +417,21 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
             model, k=(2,max_clusters), metric='calinski_harabasz', timings=False
         )
         visualizer.fit(x_minmax)    
-        plt.savefig(f"{path}/{strategy}_cluster_calinski_harabasz.png")
+        plt.savefig(f"{path}/{strategy}/{strategy}_cluster_calinski_harabasz.png")
         
         plt.figure()
         visualizer = KElbowVisualizer(
             model, k=(2,max_clusters), metric='silhouette', timings=False
         )
         visualizer.fit(x_minmax)    
-        plt.savefig(f"{path}/{strategy}_cluster_silhuette_index.png")
+        plt.savefig(f"{path}/{strategy}/{strategy}_cluster_silhuette_index.png")
         
         plt.figure()
         visualizer = KElbowVisualizer(
             model, k=(2,max_clusters), metric='distortion', timings=False
         )
         visualizer.fit(x_minmax)    
-        plt.savefig(f"{path}/{strategy}_cluster_distortion.png")
+        plt.savefig(f"{path}/{strategy}/{strategy}_cluster_distortion.png")
         
         plt.figure()
         db = []
@@ -419,7 +441,7 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
             db.append(davies_bouldin_score(x_minmax, clusters)) # lower values better clustering
         s_db = pd.Series(db)
         s_db.plot()
-        plt.savefig(f"{path}/{strategy}_cluster_davies_bouldin.png")
+        plt.savefig(f"{path}/{strategy}/{strategy}_cluster_davies_bouldin.png")
         
     # final clustering
     
@@ -476,8 +498,8 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
 
     df_cluster_stats_result  = pd.concat([df_similarity, df_cluster_stats_result])
 
-    df_cluster_stats_result.to_csv(f"{path}/{strategy}_clustering_profiles.csv", index = True, header = True)
-    df_cluster_stats.to_csv(f"{path}/{strategy}_clustering_params_with_clusters.csv", index = False, header = True)
+    df_cluster_stats_result.to_csv(f"{path}/{strategy}/{strategy}_clustering_profiles.csv", index = True, header = True)
+    df_cluster_stats.to_csv(f"{path}/{strategy}/{strategy}_clustering_params_with_clusters.csv", index = False, header = True)
 
     # changing param names to original
     #pdb.set_trace()

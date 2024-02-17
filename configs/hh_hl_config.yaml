@@ -23,12 +23,12 @@ strategy_params:
       window_exit: [1, 9]
       lh_counts: [1, 5]
 eval_params:
-  filters: # tu bude musiet byt nejaky algoritmus, ktory zabezpeci ze vzdy dostanem final_params_nr (neskor)
+  filters:
     sharpe_ratio_min: 0
     total_returns_min: 0
     trades_in_year_min: 6
   clustering:
-    explore: true
+    explore: false
     max_clusters: 40
     dataset_size_for_max_clusters: 700
     scaling_factor: 20 # 1 cluster pre kazdych 20 parameter kombinacii

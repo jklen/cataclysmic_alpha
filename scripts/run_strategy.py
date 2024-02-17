@@ -58,10 +58,12 @@ def main(path_config):
                                 df['open'].shift(-1))
                 logger.info(f"{symbol} - final params - {final_params}")
                 
-    # statistiky pre final params - drawdown ako cislo, trades per year - ako funkcia
-    # cluster eval cast s parametrami aby bola nezavisla od strategie
+    # statistiky pre final a intermediate params stats - drawdown duration ako cislo, period ako cislo trades per year
+    # prefix p_ alebo param_ v nazvoch stlpcov?
     # symboly do separe fajlu (asi bude separe script na ich vygenerovanie)
     # daj filter na max drawdown %
+    # zmen similarity na distance nazov
+    # report distribucii SR, returns, drawdown a pod z param kombinacii df_stats
     
 if __name__ == '__main__':
     main()

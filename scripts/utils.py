@@ -422,6 +422,8 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
     
     # data to clustering
     
+    df_stats.index.names = [param[7:] if 'custom_' in param else param for param in df_stats.index.names]
+
     df_to_cluster = df_stats[clustering_params['cluster_cols']]
     x_minmax = MinMaxScaler().fit_transform(df_to_cluster)
     n_init = 100
@@ -480,13 +482,14 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
     #pdb.set_trace()
     df_cluster_stats = df_stats
     df_cluster_stats['cluster'] = predicted_clusters
+    params = df_cluster_stats.index.names
     df_cluster_stats.reset_index(inplace = True)
     # Group by the 'cluster' column
     cluster_groups = df_cluster_stats.groupby('cluster')
 
     # Initialize a dictionary to hold your statistics
     cluster_stats = {}
-
+    #pdb.set_trace()
     # Loop through each group to calculate statistics
     for cluster, group in cluster_groups:
         stats = {
@@ -495,8 +498,8 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
                                     'Total Trades_mean', 'Total Return [%]_std_perc', 'Sharpe Ratio_std_perc']].mean().to_dict(),
             'min': group[['Sharpe Ratio_min', 'Total Return [%]_min', 'Total Trades_min']].min().to_dict(),
             'max': group[['Max Drawdown [%]_max', 'Sharpe Ratio_std_perc', 'Total Return [%]_std_perc']].max().to_dict(),
-            'unique_cnt': group[['custom_window_entry', 'custom_hh_hl_counts','custom_window_exit', 'custom_lh_counts']].nunique().to_dict(),
-            'value_counts': group[['custom_window_entry', 'custom_hh_hl_counts','custom_window_exit', 'custom_lh_counts']].apply(pd.Series.value_counts).to_dict()
+            'unique_cnt': group[params].nunique().to_dict(),
+            'value_counts': group[params].apply(pd.Series.value_counts).to_dict()
         }
         cluster_stats[cluster] = stats
         
@@ -519,16 +522,11 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
 
     df_cluster_stats_result  = pd.concat([df_similarity, df_cluster_stats_result])
 
-    df_cluster_stats_result.to_csv(f"{path}/{strategy}/{strategy}_cluster_profiles.csv", index = True, header = True)
-    df_cluster_stats.to_csv(f"{path}/{strategy}/{strategy}_cluster_params_with_clusters.csv", index = False, header = True)
+    df_cluster_stats.set_index(params, inplace = True)
 
-    # changing param names to original
-    #pdb.set_trace()
-    df_cluster_stats.rename(columns = {'custom_window_entry':'window_entry',
-                                       'custom_hh_hl_counts':'hh_hl_counts',
-                                       'custom_window_exit':'window_exit', 
-                                       'custom_lh_counts':'lh_counts'}, inplace = True)
-    df_cluster_stats.set_index(['window_entry', 'hh_hl_counts','window_exit', 'lh_counts'], inplace = True)
+    df_cluster_stats_result.to_csv(f"{path}/{strategy}/{strategy}_cluster_profiles.csv", index = True, header = True)
+    df_cluster_stats.to_csv(f"{path}/{strategy}/{strategy}_cluster_params_with_clusters.csv", index = True, header = True)
+
     return df_cluster_stats
 
 def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, price_close, price_open):

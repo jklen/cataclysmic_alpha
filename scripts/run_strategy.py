@@ -49,21 +49,19 @@ def main(path_config):
                                                           symbol, 
                                                           strategy)
                 print(f"param combinations - {df_grouped_stats.shape}")
-                best_params = get_best_params(df_grouped_stats, 
+                final_params = get_best_params(df_grouped_stats, 
                                 symbol, 
                                 config['eval_params'], 
                                 strategy, 
                                 config['strategy_params'][strategy],
                                 df['close'], 
                                 df['open'].shift(-1))
-                logger.info(f"{symbol} - best params - {best_params}")
+                logger.info(f"{symbol} - final params - {final_params}")
                 
-    # grafy pre top params (trades, cumulative returns, ...) z pf
     # statistiky pre final params - drawdown ako cislo, trades per year - ako funkcia
-    # korelacna matica pre top params (nie len ked sa robi hierarchicky klustering)
-    # ked sa robi pca aj hc, tak final params bude to kde je mensia priemerna korelacia
     # cluster eval cast s parametrami aby bola nezavisla od strategie
     # symboly do separe fajlu (asi bude separe script na ich vygenerovanie)
+    # daj filter na max drawdown %
     
 if __name__ == '__main__':
     main()

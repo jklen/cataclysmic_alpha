@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 # Define the strategy logic in a function
 def hh_hl_strategy_logic(close, window_entry, hh_hl_counts, 
                    window_exit, lh_counts):
-    
+    #pdb.set_trace()
     if isinstance(close, np.ndarray):
         close = pd.DataFrame(close)
         
@@ -39,11 +39,11 @@ def hh_hl_strategy_logic(close, window_entry, hh_hl_counts,
         df_empty = pd.DataFrame(np.nan, index=close.index, columns=close.columns)
         return df_empty, df_empty
     
-    higher_highs = close > close.rolling(window=window_entry, min_periods=1).max().shift(1)
-    higher_lows = close > close.rolling(window=window_entry, min_periods=1).min().shift(1)
+    higher_highs = close > close.rolling(window=window_entry, min_periods=window_entry).max().shift(1)
+    higher_lows = close > close.rolling(window=window_entry, min_periods=window_entry).min().shift(1)
 
-    hh_count = higher_highs.rolling(window=window_entry).sum()
-    hl_count = higher_lows.rolling(window=window_entry).sum()
+    hh_count = higher_highs.rolling(window=window_entry).sum() # asi -1, lebo prenasa True z higher_highs z predosleho okna
+    hl_count = higher_lows.rolling(window=window_entry).sum() # asi -1, lebo prenasa True z higher_lows z predosleho okna
 
     entry_signal = (hl_count.shift(1) >= hh_hl_counts) & (hh_count.shift(1) >= hh_hl_counts) & higher_lows
 
@@ -243,7 +243,7 @@ def data_split(df, symbol, split_params):
     
     return price_open, indexes_open, price_close, indexes_close
 
-def strategy_stats(open_price, close_price, strategy, strategy_params):
+def strategy_stats(open_price, close_price, strategy, strategy_params, symbol):
     logger.info("calculating strategy stats")    
     param_ranges = strategy_params['param_ranges']
     param_ranges = {key: np.arange(value[0], value[1] + 1) for key, value in param_ranges.items()}
@@ -254,6 +254,9 @@ def strategy_stats(open_price, close_price, strategy, strategy_params):
     indicator = Strategy.run(close_price, **param_ranges, param_product = True)
     entries = indicator.entry_signal
     exits = indicator.exit_signal
+    
+    entries.columns.names = [param[7:] if 'custom_' in param else param for param in entries.columns.names]
+    exits.columns.names = [param[7:] if 'custom_' in param else param for param in exits.columns.names]
 
     pf = vbt.Portfolio.from_signals(close_price, 
                                     entries, 
@@ -264,8 +267,34 @@ def strategy_stats(open_price, close_price, strategy, strategy_params):
                                     sl_stop = strategy_params['stop_loss'], 
                                     freq='1D')
     df_stats = pf.stats(agg_func=None)
+    df_stats['Max Drawdown Duration'] = df_stats['Max Drawdown Duration'].dt.days
+    df_stats['Total Trades per year'] = df_stats['Total Trades']*360/len(open_price)
+    
+    plot_params_histograms(df_stats, symbol, strategy)
     
     return df_stats
+
+def plot_params_histograms(df_stats, symbol, strategy):
+    logger.info(f"{symbol} - {strategy} - making histograms fo raw params stats")
+    path = f"../outputs/{symbol.replace('/', '-')}"
+    df_stats = df_stats.loc[df_stats['Total Return [%]'] > 0,:]
+    cols_to_hist = ['Total Return [%]', 'Max Drawdown [%]', 'Max Drawdown Duration', 'Total Trades', 'Total Trades per year',
+                    'Sharpe Ratio', 'Calmar Ratio', 'Omega Ratio', 'Sortino Ratio']
+
+    fig, axes = plt.subplots(3, 3, figsize=(15, 15))
+    axes = axes.flatten()
+    #pdb.set_trace()
+    for i, (col, ax) in enumerate(zip(cols_to_hist, axes)):
+        values_to_plot = df_stats[col][np.isfinite(df_stats[col])]
+        values_to_plot.plot(kind='hist', title = col, bins=100, color='skyblue', edgecolor='black', ax=ax)
+        ax.set_title(col)
+        ax.set_xlabel('Value')
+        ax.set_ylabel('Frequency')
+
+    plt.tight_layout()
+
+    # Save the plot to disk
+    plt.savefig(f"{path}/{strategy}/{strategy}_raw_params_histograms.jpg")
 
 def strategy_grouped_stats(df_stats, period_length, symbol, strategy):
     logger.info(f"{symbol} - {strategy} - calculating grouped stats of the strategy")
@@ -273,8 +302,6 @@ def strategy_grouped_stats(df_stats, period_length, symbol, strategy):
     columns_to_describe = ['Total Return [%]', 'Max Drawdown [%]', 
                            'Max Drawdown Duration', 'Total Trades', 'Total Trades per year',
                            'Win Rate [%]', 'Sharpe Ratio']
-    df_stats['Max Drawdown Duration'] = df_stats['Max Drawdown Duration'].dt.days
-    df_stats['Total Trades per year'] = df_stats['Total Trades']*360/period_length
 
     df_stats = df_stats.droplevel('split_idx')
     df_grouped_stats = df_stats.groupby(level=df_stats.index.names)[columns_to_describe].describe()
@@ -314,18 +341,30 @@ def calculate_returns(df_stats, symbol, strategy, strategy_params, price_close, 
     #pdb.set_trace()
     logger.info(f"{symbol} - calculating returns of final params")
     path = f"../outputs/{symbol.replace('/', '-')}"
-    params = df_stats.index.to_frame().apply(list, axis = 'columns').tolist()
-    params_dict = {'window_entry': [item[0] for item in params], 
-          'hh_hl_counts': [item[1] for item in params],
-          'window_exit': [item[2] for item in params], 
-          'lh_counts': [item[3] for item in params]}
+    params_names = df_stats.index.names
     
+    params_dict = {}
+    for level_num, level_name in enumerate(df_stats.index.names):
+        level_values = df_stats.index.get_level_values(level_num).tolist()
+        params_dict[level_name] = level_values
+        
     if strategy == 'hhhl':
         Strategy = HigherHighStrategy
         
     indicator = Strategy.run(price_close, **params_dict)
     entries = indicator.entry_signal
     exits = indicator.exit_signal
+    #pdb.set_trace()
+    
+    if isinstance(entries, pd.DataFrame):
+        entries.columns.names = params_names
+        exits.columns.names = params_names
+    else:
+        entries = entries.to_frame()
+        exits = exits.to_frame()
+        entries.columns = df_stats.index
+        exits.columns = df_stats.index
+    #pdb.set_trace()
 
     pf = vbt.Portfolio.from_signals(price_close, 
                                     entries, 
@@ -336,6 +375,10 @@ def calculate_returns(df_stats, symbol, strategy, strategy_params, price_close, 
                                     sl_stop = strategy_params['stop_loss'],
                                     freq='1D')
     df_top_params_stats = pf.stats(agg_func=None)
+    df_top_params_stats['Max Drawdown Duration'] = df_top_params_stats['Max Drawdown Duration'].dt.days
+    df_top_params_stats['Total Trades per year'] = df_top_params_stats['Total Trades']*360/len(price_close)
+    df_top_params_stats['Period'] = df_top_params_stats['Period'].dt.days
+    
     daily_ret = pf.daily_returns()
     
     daily_ret.to_csv(f"{path}/{strategy}/{strategy}_intermediate_params_returns.csv", header = True, index = True)
@@ -402,7 +445,7 @@ def calculate_best_params_hc(df_returns, symbol, strategy, final_params_nr):
     
     return final_params
 
-def average_intra_cluster_similarity(group):
+def average_intra_cluster_distance(group):
     pairwise_distances = pdist(group, metric='euclidean')
     return pairwise_distances.mean() if len(pairwise_distances) > 0 else 0
 
@@ -421,8 +464,6 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
     path = f"../outputs/{symbol.replace('/', '-')}"
     
     # data to clustering
-    
-    df_stats.index.names = [param[7:] if 'custom_' in param else param for param in df_stats.index.names]
 
     df_to_cluster = df_stats[clustering_params['cluster_cols']]
     x_minmax = MinMaxScaler().fit_transform(df_to_cluster)
@@ -478,7 +519,7 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
     
     df_cluster_x_minmax = pd.DataFrame(x_minmax)
     df_cluster_x_minmax['cluster'] = predicted_clusters
-    avg_similarity = df_cluster_x_minmax.groupby('cluster').apply(average_intra_cluster_similarity)
+    avg_distance = df_cluster_x_minmax.groupby('cluster').apply(average_intra_cluster_distance)
     #pdb.set_trace()
     df_cluster_stats = df_stats
     df_cluster_stats['cluster'] = predicted_clusters
@@ -516,11 +557,11 @@ def params_clustering(df_stats, symbol, strategy, clustering_params):
         
         df_cluster_stats_result[f'cluster_{key}'] = series
     
-    df_similarity = pd.Series(avg_similarity).to_frame().T
-    df_similarity.columns = df_cluster_stats_result.columns
-    df_similarity.index = pd.Index(['avg_similarity'])
+    df_distance = pd.Series(avg_distance).to_frame().T
+    df_distance.columns = df_cluster_stats_result.columns
+    df_distance.index = pd.Index(['avg_distance'])
 
-    df_cluster_stats_result  = pd.concat([df_similarity, df_cluster_stats_result])
+    df_cluster_stats_result  = pd.concat([df_distance, df_cluster_stats_result])
 
     df_cluster_stats.set_index(params, inplace = True)
 

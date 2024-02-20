@@ -39,10 +39,12 @@ def main(path_config):
             print(open_price.shape, close_price.shape)
             for strategy in config['strategies']:
                 create_path(symbol.replace('/', '-'), strategy)
+                #pdb.set_trace()
                 df_stats = strategy_stats(open_price, 
                                         close_price, 
                                         strategy, 
-                                        config['strategy_params'][strategy])
+                                        config['strategy_params'][strategy],
+                                        symbol)
                 
                 df_grouped_stats = strategy_grouped_stats(df_stats, 
                                                           len(open_price), 
@@ -58,12 +60,10 @@ def main(path_config):
                                 df['open'].shift(-1))
                 logger.info(f"{symbol} - final params - {final_params}")
                 
-    # statistiky pre final a intermediate params stats - drawdown duration ako cislo, period ako cislo trades per year
     # prefix p_ alebo param_ v nazvoch stlpcov?
     # symboly do separe fajlu (asi bude separe script na ich vygenerovanie)
     # daj filter na max drawdown %
-    # zmen similarity na distance nazov
-    # report distribucii SR, returns, drawdown a pod z param kombinacii df_stats
+    # upravit strategiu
     
 if __name__ == '__main__':
     main()

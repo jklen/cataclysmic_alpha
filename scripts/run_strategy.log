@@ -1,54 +1,59 @@
-2024-02-17 20:47:59,069 - __main__ - INFO - Logging is set up.
-2024-02-17 20:47:59,074 - utils - INFO - BTC/USD - downloading data from yfinance
-2024-02-17 20:47:59,526 - utils - INFO - BTC/USD - making symbol stats & plots
-2024-02-17 20:48:00,415 - utils - INFO - BTC/USD - splitting data via rolling split
-2024-02-17 20:48:01,218 - utils - INFO - calculating strategy stats
-2024-02-17 20:48:33,017 - utils - INFO - BTC/USD - hhhl - calculating grouped stats of the strategy
-2024-02-17 20:48:52,178 - utils - INFO - BTC/USD - getting top params
-2024-02-17 20:48:52,179 - utils - INFO - BTC/USD - clustering params
-2024-02-17 20:48:52,774 - utils - INFO - BTC/USD - calculating returns of final params
-2024-02-17 20:48:58,145 - utils - INFO - BTC/USD - getting best params via PCA
-2024-02-17 20:48:58,472 - utils - INFO - BTC/USD - getting best params via hierarchical clustering
-2024-02-17 20:48:58,709 - utils - INFO - BTC/USD - plotting stats for final params
-2024-02-17 20:49:03,553 - __main__ - INFO - BTC/USD - final params - [(3, 2, 3, 2), (1, 1, 2, 2), (2, 2, 2, 2), (2, 1, 7, 3), (1, 1, 8, 1)]
-2024-02-17 20:49:03,553 - utils - INFO - LINK/BTC - downloading data from yfinance
-2024-02-17 20:49:03,786 - utils - INFO - LINK/BTC - making symbol stats & plots
-2024-02-17 20:49:04,847 - utils - INFO - LINK/BTC - splitting data via rolling split
-2024-02-17 20:49:05,074 - utils - INFO - calculating strategy stats
-2024-02-17 20:49:24,435 - utils - INFO - LINK/BTC - hhhl - calculating grouped stats of the strategy
-2024-02-17 20:49:43,272 - utils - INFO - LINK/BTC - getting top params
-2024-02-17 20:49:43,273 - utils - INFO - LINK/BTC - calculating returns of final params
-2024-02-17 20:49:43,375 - utils - INFO - LINK/BTC - plotting stats for final params
-2024-02-17 20:49:46,848 - __main__ - INFO - LINK/BTC - final params - [[6, 1, 1, 1], [6, 1, 2, 1], [7, 2, 6, 5], [9, 2, 2, 2], [9, 2, 6, 5]]
-2024-02-17 20:49:46,848 - utils - INFO - UNI/US - downloading data from yfinance
-2024-02-17 20:49:48,118 - yfinance - ERROR - 
+2024-02-20 14:02:08,603 - __main__ - INFO - Logging is set up.
+2024-02-20 14:02:08,609 - utils - INFO - BTC/USD - downloading data from yfinance
+2024-02-20 14:02:09,302 - utils - INFO - BTC/USD - making symbol stats & plots
+2024-02-20 14:02:10,144 - utils - INFO - BTC/USD - splitting data via rolling split
+2024-02-20 14:02:10,925 - utils - INFO - calculating strategy stats
+2024-02-20 14:02:39,403 - utils - INFO - BTC/USD - hhhl - making histograms fo raw params stats
+2024-02-20 14:02:41,282 - utils - INFO - BTC/USD - hhhl - calculating grouped stats of the strategy
+2024-02-20 14:02:55,112 - utils - INFO - BTC/USD - getting top params
+2024-02-20 14:02:55,114 - utils - INFO - BTC/USD - clustering params
+2024-02-20 14:03:59,178 - utils - INFO - BTC/USD - calculating returns of final params
+2024-02-20 14:04:04,544 - utils - INFO - BTC/USD - getting best params via PCA
+2024-02-20 14:04:04,876 - utils - INFO - BTC/USD - getting best params via hierarchical clustering
+2024-02-20 14:04:05,102 - utils - INFO - BTC/USD - plotting stats for final params
+2024-02-20 14:04:10,187 - __main__ - INFO - BTC/USD - final params - [(2, 1, 8, 4), (3, 2, 3, 2), (2, 2, 3, 2), (4, 1, 3, 1), (2, 1, 7, 5)]
+2024-02-20 14:04:10,187 - utils - INFO - LINK/BTC - downloading data from yfinance
+2024-02-20 14:04:10,564 - utils - INFO - LINK/BTC - making symbol stats & plots
+2024-02-20 14:04:11,849 - utils - INFO - LINK/BTC - splitting data via rolling split
+2024-02-20 14:04:12,076 - utils - INFO - calculating strategy stats
+2024-02-20 14:04:28,980 - utils - INFO - LINK/BTC - hhhl - making histograms fo raw params stats
+2024-02-20 14:04:30,882 - utils - INFO - LINK/BTC - hhhl - calculating grouped stats of the strategy
+2024-02-20 14:04:44,526 - utils - INFO - LINK/BTC - getting top params
+2024-02-20 14:04:44,528 - utils - INFO - LINK/BTC - calculating returns of final params
+2024-02-20 14:04:49,084 - utils - INFO - LINK/BTC - plotting stats for final params
+2024-02-20 14:04:49,973 - __main__ - INFO - LINK/BTC - final params - [[8, 2, 2, 2]]
+2024-02-20 14:04:49,973 - utils - INFO - UNI/US - downloading data from yfinance
+2024-02-20 14:04:51,497 - yfinance - ERROR - 
 1 Failed download:
-2024-02-17 20:49:48,119 - yfinance - ERROR - ['UNI-US']: Exception('%ticker%: No timezone found, symbol may be delisted')
-2024-02-17 20:49:48,120 - utils - INFO - BCH/USD - downloading data from yfinance
-2024-02-17 20:49:48,290 - utils - INFO - BCH/USD - making symbol stats & plots
-2024-02-17 20:49:48,920 - utils - INFO - BCH/USD - splitting data via rolling split
-2024-02-17 20:49:49,124 - utils - INFO - calculating strategy stats
-2024-02-17 20:50:08,687 - utils - INFO - BCH/USD - hhhl - calculating grouped stats of the strategy
-2024-02-17 20:50:27,731 - utils - INFO - BCH/USD - getting top params
-2024-02-17 20:50:27,732 - __main__ - INFO - BCH/USD - final params - None
-2024-02-17 20:50:27,732 - utils - INFO - AAPL - downloading data from yfinance
-2024-02-17 20:50:28,135 - utils - INFO - AAPL - making symbol stats & plots
-2024-02-17 20:50:28,750 - utils - INFO - AAPL - splitting data via rolling split
-2024-02-17 20:50:29,149 - utils - INFO - calculating strategy stats
-2024-02-17 20:50:53,726 - utils - INFO - AAPL - hhhl - calculating grouped stats of the strategy
-2024-02-17 20:51:12,857 - utils - INFO - AAPL - getting top params
-2024-02-17 20:51:12,859 - utils - INFO - AAPL - clustering params
-2024-02-17 20:51:13,118 - utils - INFO - AAPL - calculating returns of final params
-2024-02-17 20:51:13,580 - utils - INFO - AAPL - getting best params via PCA
-2024-02-17 20:51:13,938 - utils - INFO - AAPL - getting best params via hierarchical clustering
-2024-02-17 20:51:14,171 - utils - INFO - AAPL - plotting stats for final params
-2024-02-17 20:51:21,527 - __main__ - INFO - AAPL - final params - [(3, 1, 6, 4), (1, 1, 4, 4), (3, 2, 2, 2), (2, 2, 3, 3), (1, 1, 3, 3)]
-2024-02-17 20:51:21,528 - utils - INFO - DELL - downloading data from yfinance
-2024-02-17 20:51:21,718 - utils - INFO - DELL - making symbol stats & plots
-2024-02-17 20:51:22,533 - utils - INFO - DELL - splitting data via rolling split
-2024-02-17 20:51:22,776 - utils - INFO - calculating strategy stats
-2024-02-17 20:51:40,602 - utils - INFO - DELL - hhhl - calculating grouped stats of the strategy
-2024-02-17 20:51:59,506 - utils - INFO - DELL - getting top params
-2024-02-17 20:51:59,507 - utils - INFO - DELL - calculating returns of final params
-2024-02-17 20:51:59,593 - utils - INFO - DELL - plotting stats for final params
-2024-02-17 20:52:01,281 - __main__ - INFO - DELL - final params - [[1, 1, 2, 2], [2, 1, 4, 4]]
+2024-02-20 14:04:51,498 - yfinance - ERROR - ['UNI-US']: Exception('%ticker%: No timezone found, symbol may be delisted')
+2024-02-20 14:04:51,501 - utils - INFO - BCH/USD - downloading data from yfinance
+2024-02-20 14:04:51,800 - utils - INFO - BCH/USD - making symbol stats & plots
+2024-02-20 14:04:52,787 - utils - INFO - BCH/USD - splitting data via rolling split
+2024-02-20 14:04:52,998 - utils - INFO - calculating strategy stats
+2024-02-20 14:05:10,068 - utils - INFO - BCH/USD - hhhl - making histograms fo raw params stats
+2024-02-20 14:05:12,039 - utils - INFO - BCH/USD - hhhl - calculating grouped stats of the strategy
+2024-02-20 14:05:25,624 - utils - INFO - BCH/USD - getting top params
+2024-02-20 14:05:25,625 - __main__ - INFO - BCH/USD - final params - None
+2024-02-20 14:05:25,626 - utils - INFO - AAPL - downloading data from yfinance
+2024-02-20 14:05:26,111 - utils - INFO - AAPL - making symbol stats & plots
+2024-02-20 14:05:27,062 - utils - INFO - AAPL - splitting data via rolling split
+2024-02-20 14:05:27,434 - utils - INFO - calculating strategy stats
+2024-02-20 14:05:49,510 - utils - INFO - AAPL - hhhl - making histograms fo raw params stats
+2024-02-20 14:05:51,181 - utils - INFO - AAPL - hhhl - calculating grouped stats of the strategy
+2024-02-20 14:06:05,231 - utils - INFO - AAPL - getting top params
+2024-02-20 14:06:05,233 - utils - INFO - AAPL - clustering params
+2024-02-20 14:07:00,814 - utils - INFO - AAPL - calculating returns of final params
+2024-02-20 14:07:01,242 - utils - INFO - AAPL - getting best params via PCA
+2024-02-20 14:07:01,587 - utils - INFO - AAPL - getting best params via hierarchical clustering
+2024-02-20 14:07:01,839 - utils - INFO - AAPL - plotting stats for final params
+2024-02-20 14:07:09,246 - __main__ - INFO - AAPL - final params - [(3, 1, 4, 4), (3, 1, 5, 4), (3, 2, 2, 2), (2, 2, 3, 3), (3, 1, 4, 2)]
+2024-02-20 14:07:09,246 - utils - INFO - DELL - downloading data from yfinance
+2024-02-20 14:07:09,509 - utils - INFO - DELL - making symbol stats & plots
+2024-02-20 14:07:10,822 - utils - INFO - DELL - splitting data via rolling split
+2024-02-20 14:07:11,059 - utils - INFO - calculating strategy stats
+2024-02-20 14:07:26,620 - utils - INFO - DELL - hhhl - making histograms fo raw params stats
+2024-02-20 14:07:28,291 - utils - INFO - DELL - hhhl - calculating grouped stats of the strategy
+2024-02-20 14:07:41,946 - utils - INFO - DELL - getting top params
+2024-02-20 14:07:41,947 - utils - INFO - DELL - calculating returns of final params
+2024-02-20 14:07:42,039 - utils - INFO - DELL - plotting stats for final params
+2024-02-20 14:07:42,961 - __main__ - INFO - DELL - final params - [[2, 1, 4, 4]]

@@ -50,7 +50,35 @@
 
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DALSIE STEPY
 
-# vyber symbolov z alpacy
-# jeden sumarny subor pre vsetky symboly a ich strategie
-# nakod v alpace, vahy budu equal na zaciatok
+# vyber symbolov z alpacy (select_symbols.py)
+# jeden sumarny subor pre vsetky symboly a ich strategie, korelacie (separe fajl), performance a pod
+#   - intermediate params vystup so stlpcami:
+#      - strategy
+#      - strategy_params (ako dict)
+#      - symbol
+#      - is_final
+#      - strategy stats
+# zadefinovane portfolia
+#    - vsetky final params, vahy budu equal na zaciatok
+#    - manualne vyber niekolko, vahy equal
+#    - random
+#    - vsetky final params, vahy podla (1. podobnost rozdelenia trades/returns s historickym, 2. quartalny % returns, 3. win/loss ratio, 4. std)
+#    - manualne so vsetkym co hore
+#    - vsetky final params, ale vahy podla performance strategiii a symbolov
+#    - tj parametre portfolia:
+#      - symbol
+#      - strategia
+#      - parametre strategie
+#      - vahy
+#      - position size/portfolio size (tj 100 USD napr)
+#      - rebalance true false
+#      - id
+#    - script construct_portfolio.py ktory vytvori json, yaml alebo df, kde budu tieto portfolia zadefinovane
+# portfolio constructor (neskor):
+#    - chcem vidiet historicky vyvoj portfolia
+#    - moznosti optimalizacie vah
+#    - moznosti - manualny vyber symbolov, ich strategii a params, random, ...
+#    - vazenie, postion sizing, rebalancing
 # nakod a backtestuj dalsiu strategiu a cele zopakuj
+# db - ???
+#   symboly a data o nich

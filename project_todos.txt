@@ -49,15 +49,13 @@
 # kup ak open je vyssia ako predosly den close
 
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DALSIE STEPY
-
-# vyber symbolov z alpacy (select_symbols.py)
-# jeden sumarny subor pre vsetky symboly a ich strategie, korelacie (separe fajl), performance a pod
-#   - intermediate params vystup so stlpcami:
-#      - strategy
-#      - strategy_params (ako dict)
-#      - symbol
-#      - is_final
-#      - strategy stats
+# nahodenie portfolii do alpacy
+#   1. spustim script, ktory natiahne najnovsie data z alpacy alebo yf, pre kazdy symbol
+#   2. pre kazdu strategiu a kazdu parameter kombinaciu chekni ci je dnes entry alebo exit signal
+#   3. vyhodnot vahy (bude ako 1. po prvej iteracii)
+#   4. ak entry signal, daj order. Ked bude order filled, id pozicie prirad ku konkretnemu portfoliu
+#   5. ak exit signal, closni poziciu pre dany symbol, strategiu a param kombinaciu pod danym postion id
+#   
 # zadefinovane portfolia
 #    - vsetky final params, vahy budu equal na zaciatok
 #    - manualne vyber niekolko, vahy equal

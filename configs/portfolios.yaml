@@ -1,29 +1,29 @@
-p1_all_final_params:
+p1:
   symbols:
     AAPL:
       hhhl:
-        window_entry: [3,2,2,3,3]
-        hh_hl_counts: [1,2,2,1,1]
-        window_exit: [4,2,3,4,5]
-        lh_counts: [4,2,3,2,4]
+        window_entry: 3
+        hh_hl_counts: 1
+        window_exit: 4
+        lh_counts: 4
     BTC/USD:
       hhhl:
-        window_entry: [2,4,3,2,3]
-        hh_hl_counts: [2,1,1,1,2]
-        window_exit: [3,2,7,4,2]
-        lh_counts: [2,1,4,1,2]
+        window_entry: 3
+        hh_hl_counts: 1
+        window_exit: 7
+        lh_counts: 4
     LINK/BTC:
       hhhl:
-        window_entry: [8]
-        hh_hl_counts: [2]
-        window_exit: [2]
-        lh_counts: [2]
+        window_entry: 8
+        hh_hl_counts: 2
+        window_exit: 2
+        lh_counts: 2
     DELL:
       hhhl:
-        window_entry: [2]
-        hh_hl_counts: [1]
-        window_exit: [4]
-        lh_counts: [4]
+        window_entry: 2
+        hh_hl_counts: 1
+        window_exit: 4
+        lh_counts: 4
   weights: 
     initial: equal
     running: equal
@@ -31,26 +31,26 @@ p1_all_final_params:
       allow_zero: false
   portfolio_size: 1000
   data_preference: alpaca
-p2_manual:
+p2:
   symbols:
-    AAPL:
+    NVDA:
       hhhl:
-        window_entry: [3,3]
-        hh_hl_counts: [1,1]
-        window_exit: [5,4]
-        lh_counts: [4,2]
-    BTC/USD:
+        window_entry: 3
+        hh_hl_counts: 1
+        window_exit: 5
+        lh_counts: 4
+    MSFT:
       hhhl:
-        window_entry: [2,2]
-        hh_hl_counts: [1,2]
-        window_exit: [8,3]
-        lh_counts: [5,2]
-    LINK/BTC:
+        window_entry: 2
+        hh_hl_counts: 1
+        window_exit: 8
+        lh_counts: 5
+    AMZN:
       hhhl:
-        window_entry: [8]
-        hh_hl_counts: [2]
-        window_exit: [2]
-        lh_counts: [2]
+        window_entry: 8
+        hh_hl_counts: 2
+        window_exit: 2
+        lh_counts: 2
   weights: 
     initial: equal
     running: win_rate

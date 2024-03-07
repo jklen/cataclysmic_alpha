@@ -82,7 +82,7 @@ def get_alpaca_stock_data(symbol, start, end):
     client = StockHistoricalDataClient(api_key=keys['paper_key'],
                                         secret_key=keys['paper_secret'])
     request_params = StockBarsRequest(
-                            symbol_or_symbols=symbol,
+                            symbol_or_symbols=[symbol],
                             timeframe=TimeFrame.Day,
                             start=start,
                             end=end

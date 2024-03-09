@@ -23,7 +23,7 @@ def main(path_config):
     config = yaml.safe_load(open(path_config, 'r'))
     
     for portfolio in config.keys():
-        weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights']) #TODO ordre do alpacy - p0 - prazdne, p1 - daj ordre aj obchody
+        weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         for symbol in config[portfolio]['symbols']:
             #review_positions(symbol) # ci bol trigernuty stoploss
             df_symbol = data_load(symbol, 
@@ -36,7 +36,10 @@ def main(path_config):
             strategy_params = config[portfolio]['symbols'][symbol][strategy]
             strategy_direction = strategies_directions[strategy]
             
-            if df_symbol.tail(1).index.get_level_values(1)[0].date() == datetime.today().date() - timedelta(days=1):
+            last_day = df_symbol.tail(1).index.get_level_values(1)[0].date()
+            todays_date = datetime.today().date() - timedelta(days=1)
+            
+            if last_day == todays_date:
                 entries, exits = run_strategy(df_symbol, 
                                             symbol, 
                                             strategy, 
@@ -47,7 +50,8 @@ def main(path_config):
                                 symbol, 
                                 today_entry,
                                 today_exit,
-                                strategy_direction)
+                                strategy_direction,
+                                config[portfolio]['portfolio_size'])
             
     
 if __name__ == '__main__':

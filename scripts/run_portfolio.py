@@ -57,4 +57,14 @@ def main(path_config):
 if __name__ == '__main__':
     main()
     
-# ak market order + stop order - trigernutie stop loss sa moze bit s vectorbt signalmi kvoli close priceyg
+# trigernutie stop loss v alpace sa moze bit s 
+#   vectorbt signalmi kvoli close price - ak toto nastane, cakaj na najblizsi exit signal,
+#   a az potom pri dalsom signale otvor dalsiu poziciu
+# tento script bude zbiehat len pred market open a bude davat riadne order open/close
+# separe script bude bezat pocas market open, ktory kazdu pol hodinu checkne symboly,
+#   ci bol trigernuty stop loss, ak ano, poziciu zavrie
+# entry a exit signaly bude treba este upravit aby presne ako trade entry v vectorbt, asi:
+#   - prvy moze byt len entry signal
+#   - ak je otvoreny obchod, nasledovne entry signaly su ignorovane, caka sa len na exit signal
+#   - ak nie je otvoreny ziadny obchod, caka sa len na entry signal, exit signaly su ignorovane
+#   - ak nastane stav True/True, co potom? - podla vectorbt

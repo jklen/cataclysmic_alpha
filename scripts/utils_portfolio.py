@@ -56,7 +56,34 @@ def running_weights(symbols, weights_params):
             return False
   
 def calculate_win_rates(symbols):
-    pass #TODO
+    trading_client = create_trading_client()
+    win_rates = {}
+    for symbol in symbols:
+        request_params = GetOrdersRequest(
+            status='closed',
+            symbols=[symbol]
+        )
+
+        # long only strategies
+        orders = trading_client.get_orders(filter=request_params)
+        orders_dicts = map(dict, orders)
+        keys_to_keep = ['symbol', 'filled_at', 'filled_qty', 'filled_avg_price', 'side']
+        filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
+        df_orders = pd.DataFrame(filtered_orders)
+        df_orders['side'] = df_orders['side'].apply(str)
+        df_orders.sort_values(by = 'filled_at', inplace = True)
+        df_orders[['filled_qty_lag', 'side_lag', 'filled_avg_price_lag']] = df_orders[['filled_qty', 'side', 'filled_avg_price']].shift(1)
+        
+        df_trades = df_orders.loc[(df_orders['side'] == 'OrderSide.SELL') &
+                                (df_orders['side_lag'] == 'OrderSide.BUY') &
+                                (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
+        df_trades['pl'] = (df_trades['filled_qty'] * df_trades['filled_avg_price']) - (df_trades['filled_qty'] * df_trades['filled_avg_price_lag'])
+        wins_cnt = (df_trades['pl'] > 0).sum()
+        losses_cnt = (df_trades['pl'] < 0).sum()
+        win_rates[symbol] = wins_cnt/(wins_cnt + losses_cnt)
+    
+    return pd.Series(win_rates)
+    
 
 def check_weights(symbols, weights_params):
     

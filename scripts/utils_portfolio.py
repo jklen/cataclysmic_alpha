@@ -42,7 +42,7 @@ def closed_trades_cnt(symbols):
                                 (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
         closed_trades[symbol] = len(df_trades)
         
-    return pd.Series(closed_trades)
+    return pd.Series(closed_trades, name = 'closed_trades_cnt')
 
 def running_weights(symbols, weights_params):
     
@@ -82,8 +82,21 @@ def calculate_win_rates(symbols):
         losses_cnt = (df_trades['pl'] < 0).sum()
         win_rates[symbol] = wins_cnt/(wins_cnt + losses_cnt)
     
-    return pd.Series(win_rates)
-    
+    return pd.Series(win_rates, name = 'win_rate')
+
+def calculate_weights(series_metric, running_params):
+
+    if series_metric.name == 'win_rate':
+        closed_trades = closed_trades_cnt(series_metric.index.tolist())
+        df = series_metric.to_frame()
+        df = df.join(closed_trades.to_frame())
+        mask_symbols_to_weight = df['closed_trades_cnt'] >= running_params['min_trades']
+        symbols_with_min_weight_cnt = len(df) - mask_symbols_to_weight.sum()
+        df['weight'] = running_params['min_weight']
+        df.loc[mask_symbols_to_weight, 'weight'] = df.loc[mask_symbols_to_weight, 'win_rate']/df.loc[mask_symbols_to_weight, 'win_rate'].sum()
+        df.loc[mask_symbols_to_weight, 'weight'] = (1-symbols_with_min_weight_cnt*running_params['min_weight']) * df.loc[mask_symbols_to_weight, 'weight']
+        
+        return df['weight'].to_dict()
 
 def check_weights(symbols, weights_params):
     
@@ -93,8 +106,9 @@ def check_weights(symbols, weights_params):
     else:
         if running_weights(symbols, weights_params):
             if weights_params['running'] == 'win_rate':
-                win_rates = calculate_win_rates(symbols)
-                # calculate & return weights #TODO
+                series_metric = calculate_win_rates(symbols)
+            weights = calculate_weights(series_metric, weights_params['running_params'])
+            return weights
         else: # initial
             if weights_params['initial'] == 'equal':
                 one_symbol_weight = 1./len(symbols)

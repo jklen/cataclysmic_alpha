@@ -25,7 +25,6 @@ def main(path_config):
     for portfolio in config.keys():
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         for symbol in config[portfolio]['symbols']:
-            #review_positions(symbol) # ci bol trigernuty stoploss
             df_symbol = data_load(symbol, 
                                   config[portfolio]['data_preference'],
                                   datetime(2000, 1, 1), 
@@ -46,7 +45,7 @@ def main(path_config):
                                             strategy_params)
                 pdb.set_trace()
                 today_entry, today_exit = entries.iloc[-1], exits.iloc[-1]
-                orders_or_close(weights[symbol], 
+                orders_or_close(weights, 
                                 symbol, 
                                 today_entry,
                                 today_exit,

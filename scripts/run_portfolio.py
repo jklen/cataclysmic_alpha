@@ -8,7 +8,7 @@ import yaml
 from datetime import datetime, timedelta
 from utils_strategy import data_load
 from utils_portfolio import check_weights, run_strategy, \
-    orders_or_close, review_positions, strategies_directions
+    orders_or_close, review_positions, strategies_directions, correct_date
     
 with open('../portfolio_logging_config.json', 'r') as config_file:
     config_dict = json.load(config_file)
@@ -35,10 +35,10 @@ def main(path_config):
             strategy_params = config[portfolio]['symbols'][symbol][strategy]
             strategy_direction = strategies_directions[strategy]
             
-            last_day = df_symbol.tail(1).index.get_level_values(1)[0].date()
-            todays_date = datetime.today().date() - timedelta(days=1)
+            last_day = df_symbol.tail(1).index.get_level_values('timestamp')[0].date()
+            print(portfolio, symbol, weights)
             
-            if last_day == todays_date:
+            if correct_date(last_day):
                 entries, exits = run_strategy(df_symbol, 
                                             symbol, 
                                             strategy, 

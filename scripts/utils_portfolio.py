@@ -89,17 +89,22 @@ def calculate_win_rates(symbols):
     return pd.Series(win_rates, name = 'win_rate')
 
 def calculate_weights(series_metric, running_params):
-    #TODO symbol ktory splni podmienku a ma nulovy win rate, ma vahu 0 - musi byt min 0.05
-
+    
     if series_metric.name == 'win_rate':
         closed_trades = closed_trades_cnt(series_metric.index.tolist())
         df = series_metric.to_frame()
         df = df.join(closed_trades.to_frame())
+        
         mask_symbols_to_weight = df['closed_trades_cnt'] >= running_params['min_trades']
         symbols_with_min_weight_cnt = len(df) - mask_symbols_to_weight.sum()
         df['weight'] = running_params['min_weight']
         df.loc[mask_symbols_to_weight, 'weight'] = df.loc[mask_symbols_to_weight, 'win_rate']/df.loc[mask_symbols_to_weight, 'win_rate'].sum()
         df.loc[mask_symbols_to_weight, 'weight'] = (1-symbols_with_min_weight_cnt*running_params['min_weight']) * df.loc[mask_symbols_to_weight, 'weight']
+        
+        to_min_weight_mask = df['weight'] < running_params['min_weight']
+        df.loc[to_min_weight_mask, 'weight'] = running_params['min_weight']
+        calc = (1 - (df['weight'] == running_params['min_weight']).sum() * running_params['min_weight'])/(df.loc[df['weight'] > running_params['min_weight'], 'weight']).sum()
+        df.loc[df['weight'] > running_params['min_weight'], 'weight'] = df.loc[df['weight'] > running_params['min_weight'], 'weight'] * calc
         
         return df['weight'].to_dict()
 
@@ -132,6 +137,8 @@ def run_strategy(df_symbol, symbol, strategy, strategy_params):
     return entries, exits
 
 def is_trading_day(day):
+    # https://www.investopedia.com/ask/answers/06/stockexchangeclosed.asp
+    
     us_stock_market_holidays = [datetime(2025, 1,1), datetime(2025, 1, 15), datetime(2025, 2, 19),
                             datetime(2024, 3, 29), datetime(2024, 5, 27), datetime(2024, 6, 19),
                             datetime(2024, 7, 4), datetime(2024, 9, 2), datetime(2024, 11, 28),
@@ -145,7 +152,7 @@ def is_trading_day(day):
         return False   
 
 def correct_date(symbol, last_day):
-    cryptos = ['BTC/USD']
+    cryptos = ['BTC/USD', 'LINK/BTC']
     todays_date = datetime.today().date()
     
     if symbol in cryptos:
@@ -183,5 +190,8 @@ def correct_date(symbol, last_day):
         else:
             return False # when script is run on non-trading days nothing happens - for regular stocks. Cryptos are 24/7
         
-def orders_or_close():
+def make_orders(weights, symbol, today_entry, today_exit, strategy_direction, portfolio_size):
+    # pozri ci sa da priamo z vectorbrt zobrat trade entry/exit, resp. logiku entries/exits
+    # otestu alpacu na order podla available cash, alebo aj margin
+    # chekni logiku na margin requiriment a pod, tj za kolko mozem otvorit nejaku poziciu ak ine otvorene su v strate/zisku
     pass

@@ -47,7 +47,7 @@ def closed_trades_cnt(symbols):
         
     return pd.Series(closed_trades, name = 'closed_trades_cnt')
 
-def running_weights(symbols, weights_params):
+def if_running_weights(symbols, weights_params):
     
     if weights_params['running'] == 'win_rate':
         s_closed_trades_cnt = closed_trades_cnt(symbols)
@@ -114,7 +114,7 @@ def check_weights(symbols, weights_params):
         one_symbol_weight = 1./len(symbols)
         return {symbol:one_symbol_weight for symbol in symbols}
     else:
-        if running_weights(symbols, weights_params):
+        if if_running_weights(symbols, weights_params):
             if weights_params['running'] == 'win_rate':
                 series_metric = calculate_win_rates(symbols)
                 print(series_metric)
@@ -189,9 +189,29 @@ def correct_date(symbol, last_day):
                     return False
         else:
             return False # when script is run on non-trading days nothing happens - for regular stocks. Cryptos are 24/7
-        
-def make_orders(weights, symbol, today_entry, today_exit, strategy_direction, portfolio_size):
-    # pozri ci sa da priamo z vectorbrt zobrat trade entry/exit, resp. logiku entries/exits
-    # otestu alpacu na order podla available cash, alebo aj margin
-    # chekni logiku na margin requiriment a pod, tj za kolko mozem otvorit nejaku poziciu ak ine otvorene su v strate/zisku
+
+def eval_position(symbol, entries, exits, strategy, strategy_params):
+    # vbt.portfolio.from_signals()
+    if strategy_direction == 'long':
+        pass
+    elif strategy_direction == 'short':
+        pass
+    elif strategy_direction == 'long_and_short':
+        pass
+    pass
+
+def close_positions(trades):
+    # da ordre na zavretie pozicii v danom portfoliu
+    pass
+    
+def position_sizes(trades, weights):
+    # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
+    #
+    # vyratat stav portfolia:
+    #   - pozicie ktore idem zavret brat ako stale otvorene (pre ucel available cash)
+    #   - available cash vyratam ako initial_size + (suma PL uzavretych tradov pre kazdy symbol) - (suma cost_basis otvorenych pozicii - vratane tych, ktore idem zavret)
+    pass
+
+def open_positions(sizes):
+
     pass

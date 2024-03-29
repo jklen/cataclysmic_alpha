@@ -7,6 +7,7 @@ from alpaca.data.requests import CryptoBarsRequest, StockBarsRequest, StockLates
 from alpaca.trading.enums import OrderSide, TimeInForce
 import pdb
 from datetime import datetime, timedelta
+import vectorbt as vbt
 keys = yaml.safe_load(open('../keys.yaml', 'r'))
 
 
@@ -190,10 +191,26 @@ def correct_date(symbol, last_day):
         else:
             return False # when script is run on non-trading days nothing happens - for regular stocks. Cryptos are 24/7
 
-def eval_position(symbol, entries, exits, strategy, strategy_params):
-    # vbt.portfolio.from_signals()
+def eval_position(close_price, entries, exits, strategy_direction, stoploss, take_profit):
+
     if strategy_direction == 'long':
-        pass
+        pf = vbt.Portfolio.from_signals(close_price, 
+                                    entries, 
+                                    exits,
+                                    sl_stop = stoploss, 
+                                    tp_stop = take_profit,
+                                    direction='longonly',
+                                    freq='1D')
+        df_trades = pf.trades.records_readable
+        last_date = close_price.tail(1).index[0].date()
+        
+        if last_date in list(df_trades['Entry Timestamp'].apply(lambda x:x.date())):
+            return 'open'
+        elif last_date in (df_trades['Exit Timestamp'].apply(lambda x:x.date())):
+            return 'close'
+        else:
+            return 'no_change'
+            
     elif strategy_direction == 'short':
         pass
     elif strategy_direction == 'long_and_short':
@@ -204,12 +221,14 @@ def close_positions(trades):
     # da ordre na zavretie pozicii v danom portfoliu
     pass
     
-def position_sizes(trades, weights):
+def position_sizes(trades, weights, portfolio_size):
     # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
     #
     # vyratat stav portfolia:
     #   - pozicie ktore idem zavret brat ako stale otvorene (pre ucel available cash)
     #   - available cash vyratam ako initial_size + (suma PL uzavretych tradov pre kazdy symbol) - (suma cost_basis otvorenych pozicii - vratane tych, ktore idem zavret)
+    # v db budem trekovat vahy, portfolia, ordre na close, open, timestamp, portfolio size - z toho budem kalkulovat cash
+    
     pass
 
 def open_positions(sizes):

@@ -217,9 +217,10 @@ def eval_position(close_price, entries, exits, strategy_direction, stoploss, tak
         pass
     pass
 
-def close_positions(trades):
-    # da ordre na zavretie pozicii v danom portfoliu
-    pass
+def close_position(symbol):
+    # da ordre na zavretie pozice daneho symbolu
+    trading_client = create_trading_client()
+    trading_client.close_position(symbol)
     
 def position_sizes(trades, weights, portfolio_size):
     # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
@@ -233,4 +234,10 @@ def position_sizes(trades, weights, portfolio_size):
 
 def open_positions(sizes):
 
+    pass
+
+def update_portfolio_info(portfolio, config):
+    pass
+
+def update_portfolio_state(portfolio):
     pass

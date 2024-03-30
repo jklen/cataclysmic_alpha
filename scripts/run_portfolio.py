@@ -8,7 +8,8 @@ import yaml
 from datetime import datetime, timedelta
 from utils_strategy import data_load
 from utils_portfolio import check_weights, run_strategy, position_sizes, \
-    open_positions, close_positions, eval_position, strategies_directions, correct_date
+    open_positions, close_position, eval_position, strategies_directions, correct_date, \
+    update_portfolio_state, update_portfolio_info
     
 with open('../portfolio_logging_config.json', 'r') as config_file:
     config_dict = json.load(config_file)
@@ -22,6 +23,7 @@ logger.info("Logging is set up.")
 def main(path_config):
     config = yaml.safe_load(open(path_config, 'r'))
     for portfolio in config.keys():
+        update_portfolio_info(portfolio, config[portfolio])
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         trades = {}
         for symbol in config[portfolio]['symbols']:
@@ -51,10 +53,12 @@ def main(path_config):
                                                strategy_direction, 
                                                stoploss,
                                                take_profit)
-        close_positions(trades) # len tie s 'close'
+                if trades[symbol] == 'close':
+                    close_position(symbol)
     
         # check na total non_marginable_amount?
         #   pl otvorenej pozicie - market_value - cost_basis, unrealized_pl - abs profit/loss, unrealized_plpc - % profit/loss
+        update_portfolio_state(portfolio)
         sizes = position_sizes(trades, 
                                weights,
                                config[portfolio]['portfolio_size'])

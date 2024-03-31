@@ -8,6 +8,9 @@ from alpaca.trading.enums import OrderSide, TimeInForce
 import pdb
 from datetime import datetime, timedelta
 import vectorbt as vbt
+import uuid
+import sqlite3
+
 keys = yaml.safe_load(open('../keys.yaml', 'r'))
 
 
@@ -236,8 +239,34 @@ def open_positions(sizes):
 
     pass
 
-def update_portfolio_info(portfolio, config):
+def update_portfolio_info(portfolio, config, run_id, timestamp):      
+    con = sqlite3.connect('../db/calpha.db')
+    date = timestamp.date()
+    weights_initial = config['weights']['initial']
+    weights_running = config['weights']['running']
+    try:
+        running_params = str(config['weights']['runnig_params'])
+    except:
+        running_params = 'not_defined'
+    portfolio_size = config['portfolio_size']
+    data_preference = config['data_preference']
+    
+    for symbol in config['symbols'].keys():
+            strategy = config['symbols'][symbol].keys()  
+            strategy = list(strategy)[0]
+            strategy_params = str(config['symbols'][symbol][strategy]['params'])
+            stoploss = config['symbols'][symbol][strategy]['stoploss']
+            take_profit = config['symbols'][symbol][strategy]['take_profit']
+            data = (timestamp, date, run_id, portfolio, symbol, 
+                    strategy, strategy_params, stoploss, take_profit, weights_initial, weights_running, running_params,
+                    portfolio_size, data_preference)
+            con.execute("INSERT INTO portfolio_info VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data)
+            con.commit()
+
+def update_portfolio_state(portfolio, run_id, timestamp):
     pass
 
-def update_portfolio_state(portfolio):
-    pass
+def generate_id():
+    unique_id = uuid.uuid4()
+    unique_id_str = str(unique_id)
+    return unique_id_str

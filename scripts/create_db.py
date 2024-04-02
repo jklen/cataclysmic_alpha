@@ -43,5 +43,7 @@ con.execute("""CREATE TABLE portfolio_state(
     sharpe_ratio REAL, 
     calmar_ratio REAL,
     sortino_ratio REAL,
-    total_return REAL);""")
+    total_return REAL,
+    max_drawdown REAL,
+    max_drawdown_duration INT);""")
 con.commit()

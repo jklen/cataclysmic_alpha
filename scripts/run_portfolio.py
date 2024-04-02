@@ -61,10 +61,9 @@ def main(path_config):
                     close_position(symbol)
     
         # check na total non_marginable_amount?
-        #   pl otvorenej pozicie - market_value - cost_basis, unrealized_pl - abs profit/loss, unrealized_plpc - % profit/loss
+        # update_portfolio_state mozno tu - kvoli tomu ze crypto mozem zavret hned
         sizes = position_sizes(trades, 
-                               weights,
-                               config[portfolio]['portfolio_size'])
+                               weights)
         open_positions(sizes)
             
     

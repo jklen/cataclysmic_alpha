@@ -262,9 +262,93 @@ def update_portfolio_info(portfolio, config, run_id, timestamp):
                     portfolio_size, data_preference)
             con.execute("INSERT INTO portfolio_info VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data)
             con.commit()
-
-def update_portfolio_state(portfolio, run_id, timestamp):
-    pass
+    con.close()
+            
+def calculate_closed_trades_stats(symbols):
+    trading_client = create_trading_client()
+    stats = []
+    for symbol in symbols:
+        request_params = GetOrdersRequest(
+            status='closed',
+            symbols=[symbol]
+        )
+        # long only strategies
+        orders = trading_client.get_orders(filter=request_params)
+        orders_dicts = map(dict, orders)
+        keys_to_keep = ['symbol', 'filled_at', 'filled_qty', 'filled_avg_price', 'side']
+        filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
+        df_orders = pd.DataFrame(filtered_orders)
+        df_orders['side'] = df_orders['side'].apply(str)
+        df_orders.sort_values(by = 'filled_at', inplace = True)
+        df_orders[['filled_qty_lag', 'side_lag', 'filled_avg_price_lag']] = df_orders[['filled_qty', 'side', 'filled_avg_price']].shift(1)
+        
+        df_trades = df_orders.loc[(df_orders['side'] == 'OrderSide.SELL') &
+                                (df_orders['side_lag'] == 'OrderSide.BUY') &
+                                (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
+        df_trades.loc[:,['filled_qty', 'filled_avg_price', 'filled_avg_price_lag']] = df_trades.loc[:,['filled_qty', 'filled_avg_price', 'filled_avg_price_lag']].astype('Float32')
+        df_trades['pl'] = (df_trades['filled_qty'] * df_trades['filled_avg_price']) - (df_trades['filled_qty'] * df_trades['filled_avg_price_lag'])
+        stats.append({'closed_trades_pl': df_trades['pl'].sum(), 'closed_trades_cnt':len(df_trades)})
+    df_stats = pd.DataFrame(stats, index = symbols)
+    
+    closed_trades_pl = df_stats['closed_trades_pl'].sum()
+    closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
+    
+    return {'closed_trades_pl': closed_trades_pl, 
+            'closed_trades_cnt': closed_trades_cnt}
+    
+def calculate_open_trades_stats(symbols):
+    trading_client = create_trading_client()
+    positions = trading_client.get_open_position(symbols)
+    positions_dicts = map(dict, positions)
+    keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc']
+    filtered_positions = [{key: value for key, value in d.items() if key in keys_to_keep} for d in positions_dicts]
+    df_positions = pd.DataFrame(filtered_positions)
+    
+    open_trades_cost_basis = df_positions['cost_basis'].sum()
+    open_trades_cnt = len(df_positions)
+    open_trades_symbols = str(df_positions['symbol'].tolist())
+    
+    return {'open_trades_cost_basis': open_trades_cost_basis,
+            'open_trades_cnt': open_trades_cnt,
+            'open_trades_symbols': open_trades_symbols}
+        
+def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp):
+    con = sqlite3.connect('../db/calpha.db')
+    # timestamp OK
+    date = timestamp.date() # OK
+    # portfolio_script_run_id OK
+    # portfolio_name OK
+    # available_cash
+    #   portfolio_size + sum(PL of closed trades) - (cost basis of open trades)
+    
+    closed_trades_pl, closed_trades_cnt = calculate_closed_trades_stats(symbols)
+    open_trades_cost_basis, open_trades_cnt, open_trades_symbols = calculate_open_trades_stats(symbols)
+    
+    available_cash = portfolio_size + closed_trades_pl - open_trades_cost_basis
+    
+    # equity
+    #   avilable_cash + (cost basis of open trades) + (PL of open trades)
+    # open_trades_cnt
+    # open_trades_symbols
+    # open_trades_PL
+    # open_trades_cost_basis_sum
+    # closed_trades_cnt
+    # closed_trades_PL
+    # win_rate
+    # sharpe_ratio
+    # calmar_ratio
+    # sortino_ratio
+    # total_return
+    # max_drawdown
+    # max_drawdown_duration
+    
+    data = (timestamp, date, run_id, portfolio, available_cash, None, open_trades_cnt,
+            open_trades_symbols, None, open_trades_cost_basis, closed_trades_cnt,
+            closed_trades_pl, None, None, None, None, None, None, None)
+    con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+    con.commit()
+    con.close()
 
 def generate_id():
     unique_id = uuid.uuid4()

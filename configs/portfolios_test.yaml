@@ -27,7 +27,7 @@ p1:
   weights: 
     initial: equal
     running: equal
-  initial_portfolio_size: 1000
+  portfolio_size: 1000
   data_preference: alpaca
 p2:
   symbols:
@@ -62,7 +62,7 @@ p2:
         min_trades: 1
         min_weight: 0.05 # eg max 20 symbolov na portfolio
         min_symbols: 2 # kolko symbolov je mat min na kalkulaciu running weight. Ak nejaky symbol nebude mat dostatocny min trades, bude mat min vahu   
-  initial_portfolio_size: 1000
+  portfolio_size: 1000
   data_preference: yf
 
 #TODO sprav p3 kde budu manualne vahy

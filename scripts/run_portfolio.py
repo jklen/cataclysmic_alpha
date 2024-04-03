@@ -27,7 +27,7 @@ def main(path_config):
     for portfolio in config.keys():
         update_portfolio_info(portfolio, config[portfolio], script_run_id, timestamp)
         pdb.set_trace()
-        update_portfolio_state(portfolio, script_run_id, timestamp)
+        update_portfolio_state(portfolio, config[portfolio]['portfolio_size'], config[portfolio]['symbols'], script_run_id, timestamp)
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         trades = {}
         for symbol in config[portfolio]['symbols']:
@@ -61,7 +61,7 @@ def main(path_config):
                     close_position(symbol)
     
         # check na total non_marginable_amount?
-        # update_portfolio_state mozno tu - kvoli tomu ze crypto mozem zavret hned
+        # update_portfolio_state mozno tu - kvoli tomu ze crypto mozem zavret 24/7 - aj check_weights
         sizes = position_sizes(trades, 
                                weights)
         open_positions(sizes)

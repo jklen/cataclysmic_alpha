@@ -25,17 +25,25 @@ def main(path_config):
     script_run_id = generate_id()
     timestamp = datetime.now()
     for portfolio in config.keys():
-        update_portfolio_info(portfolio, config[portfolio], script_run_id, timestamp)
+        update_portfolio_info(portfolio, 
+                              config[portfolio], 
+                              script_run_id, 
+                              timestamp)
         pdb.set_trace()
-        update_portfolio_state(portfolio, config[portfolio]['portfolio_size'], config[portfolio]['symbols'], script_run_id, timestamp)
+        update_portfolio_state(portfolio, 
+                               config[portfolio]['portfolio_size'], 
+                               list(config[portfolio]['symbols'].keys()), 
+                               script_run_id, 
+                               timestamp)
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         trades = {}
-        for symbol in config[portfolio]['symbols']:
+        for symbol in config[portfolio]['symbols'].keys():
             df_symbol = data_load(symbol, 
                                   config[portfolio]['data_preference'],
                                   datetime(2000, 1, 1), 
                                   datetime.today().date())
-            df_symbol = df_symbol.droplevel(0)
+            
+            df_symbol = df_symbol.droplevel(0) # po polnoci asi do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
 
             strategy = config[portfolio]['symbols'][symbol].keys()
             strategy = list(strategy)[0]
@@ -57,8 +65,8 @@ def main(path_config):
                                                strategy_direction, 
                                                stoploss,
                                                take_profit)
-                if trades[symbol] == 'close':
-                    close_position(symbol)
+                # if trades[symbol] == 'close':
+                #     close_position(symbol)
     
         # check na total non_marginable_amount?
         # update_portfolio_state mozno tu - kvoli tomu ze crypto mozem zavret 24/7 - aj check_weights

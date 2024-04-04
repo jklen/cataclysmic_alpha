@@ -1,29 +1,41 @@
 p1:
   symbols:
-    NVDA:
-      hhhl:
-        window_entry: 3
-        hh_hl_counts: 1
-        window_exit: 4
-        lh_counts: 4
-    MSFT:
-      hhhl:
-        window_entry: 3
-        hh_hl_counts: 1
-        window_exit: 7
-        lh_counts: 4
     AAPL:
       hhhl:
-        window_entry: 8
-        hh_hl_counts: 2
-        window_exit: 2
-        lh_counts: 2
+        params:
+          window_entry: 3
+          hh_hl_counts: 1
+          window_exit: 4
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
+    BTC/USD:
+      hhhl:
+        params:
+          window_entry: 3
+          hh_hl_counts: 1
+          window_exit: 7
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
     DELL:
       hhhl:
-        window_entry: 2
-        hh_hl_counts: 1
-        window_exit: 4
-        lh_counts: 4
+        params:
+          window_entry: 8
+          hh_hl_counts: 2
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    SPOT:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 4
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
   weights: 
     initial: equal
     running: equal
@@ -33,36 +45,40 @@ p2:
   symbols:
     NVDA:
       hhhl:
-        window_entry: 3
-        hh_hl_counts: 1
-        window_exit: 5
-        lh_counts: 4
+        params:
+          window_entry: 3
+          hh_hl_counts: 1
+          window_exit: 5
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
     MSFT:
       hhhl:
-        window_entry: 2
-        hh_hl_counts: 1
-        window_exit: 8
-        lh_counts: 5
-    AAPL:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 8
+          lh_counts: 5
+        stoploss: 0.05
+        take_profit: 0.2
+    AMZN:
       hhhl:
-        window_entry: 8
-        hh_hl_counts: 2
-        window_exit: 2
-        lh_counts: 2
-    DELL:
-      hhhl:
-        window_entry: 2
-        hh_hl_counts: 1
-        window_exit: 4
-        lh_counts: 4
+        params:
+          window_entry: 8
+          hh_hl_counts: 2
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
   weights: 
     initial: equal
     running: win_rate
     running_params:
-        min_trades: 1
+        min_trades: 5
         min_weight: 0.05 # eg max 20 symbolov na portfolio
         min_symbols: 2 # kolko symbolov je mat min na kalkulaciu running weight. Ak nejaky symbol nebude mat dostatocny min trades, bude mat min vahu   
   portfolio_size: 1000
   data_preference: yf
 
 #TODO sprav p3 kde budu manualne vahy
+# stop_loss parameter do strategie

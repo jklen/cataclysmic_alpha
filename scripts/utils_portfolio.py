@@ -18,6 +18,8 @@ strategies_directions = {
     'hhhl':'long'
 }
 
+crypto_map = {'BTC/USD':'BTCUSD', 'LINK/BTC':'LINKBTC'}
+
 def review_positions():
     pass
 
@@ -77,6 +79,7 @@ def calculate_win_rates(symbols):
         keys_to_keep = ['symbol', 'filled_at', 'filled_qty', 'filled_avg_price', 'side']
         filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
         df_orders = pd.DataFrame(filtered_orders)
+        df_orders['filled_qty'] = df_orders['filled_qty'].round(3)
         df_orders['side'] = df_orders['side'].apply(str)
         df_orders.sort_values(by = 'filled_at', inplace = True)
         df_orders[['filled_qty_lag', 'side_lag', 'filled_avg_price_lag']] = df_orders[['filled_qty', 'side', 'filled_avg_price']].shift(1)
@@ -156,10 +159,9 @@ def is_trading_day(day):
         return False   
 
 def correct_date(symbol, last_day):
-    cryptos = ['BTC/USD', 'LINK/BTC']
     todays_date = datetime.today().date()
     
-    if symbol in cryptos:
+    if symbol in crypto_map.keys():
         if last_day == (todays_date - timedelta(days = 1)):
             return True
         else:
@@ -278,21 +280,25 @@ def calculate_closed_trades_stats(symbols):
         keys_to_keep = ['symbol', 'filled_at', 'filled_qty', 'filled_avg_price', 'side']
         filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
         df_orders = pd.DataFrame(filtered_orders)
-        if len(df_orders) > 0:    
+        
+        if len(df_orders) > 0:
+            df_orders['filled_qty'] = df_orders['filled_qty'].apply(float)
+            df_orders['filled_avg_price'] = df_orders['filled_avg_price'].apply(float) # converting via astype does not work
             df_orders['side'] = df_orders['side'].apply(str)
+            df_orders['filled_qty'] = df_orders['filled_qty'].round(3)
+            
             df_orders.sort_values(by = 'filled_at', inplace = True)
             df_orders[['filled_qty_lag', 'side_lag', 'filled_avg_price_lag']] = df_orders[['filled_qty', 'side', 'filled_avg_price']].shift(1)
             
             df_trades = df_orders.loc[(df_orders['side'] == 'OrderSide.SELL') &
                                     (df_orders['side_lag'] == 'OrderSide.BUY') &
                                     (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
-            df_trades.loc[:,['filled_qty', 'filled_avg_price', 'filled_avg_price_lag']] = df_trades.loc[:,['filled_qty', 'filled_avg_price', 'filled_avg_price_lag']].astype('Float32')
-            df_trades['pl'] = (df_trades['filled_qty'] * df_trades['filled_avg_price']) - (df_trades['filled_qty'] * df_trades['filled_avg_price_lag'])
+            df_trades['pl'] = (df_trades['filled_qty'] * df_trades['filled_avg_price']) - (df_trades['filled_qty_lag'] * df_trades['filled_avg_price_lag'])
             stats.append({'closed_trades_pl': df_trades['pl'].sum(), 'closed_trades_cnt':len(df_trades)})
         else:
             stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0})
     df_stats = pd.DataFrame(stats, index = symbols)
-    
+    pdb.set_trace()
     closed_trades_pl = df_stats['closed_trades_pl'].sum()
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
     
@@ -303,22 +309,23 @@ def calculate_open_trades_stats(symbols):
     trading_client = create_trading_client()
     stats = []
     for symbol in symbols:
+        if symbol in crypto_map.keys():
+            symbol = crypto_map[symbol]
         try:
             position = trading_client.get_open_position(symbol)
-            position_dict = map(dict, position)
+            position_dict = dict(position)
             keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc']
-            filtered_position = [{key: value for key, value in d.items() if key in keys_to_keep} for d in position_dict]
+            filtered_position = {key: position_dict[key] for key in keys_to_keep if key in position_dict}
             stats.append(filtered_position)
         except:
             pass
-    
     df_stats = pd.DataFrame(stats)
-    
+    df_stats.loc[:,['cost_basis', 'unrealized_pl', 'unrealized_plpc']] = df_stats.loc[:,['cost_basis', 'unrealized_pl', 'unrealized_plpc']].astype('float')
     if len(df_stats) > 0:
         df_stats.set_index('symbol', inplace = True)     
         open_trades_cost_basis = df_stats['cost_basis'].sum()
         open_trades_cnt = len(df_stats)
-        open_trades_symbols = str(df_stats['symbol'].tolist())
+        open_trades_symbols = str(df_stats.index.tolist())
         
         return {'cost_basis': open_trades_cost_basis,
             'trades_cnt': open_trades_cnt,
@@ -336,10 +343,8 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     # portfolio_name OK
     # available_cash
     #   portfolio_size + sum(PL of closed trades) - (cost basis of open trades)
-    
     result_closed_trades = calculate_closed_trades_stats(symbols)
     result_open_trades = calculate_open_trades_stats(symbols)
-    pdb.set_trace()
     available_cash = portfolio_size + result_closed_trades['pl'] - \
         result_open_trades['cost_basis']
     
@@ -354,7 +359,7 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
             result_open_trades['symbols'], 
             None, 
             result_open_trades['cost_basis'], 
-            result_closed_trades['trades_cnt'], 
+            int(result_closed_trades['trades_cnt']), 
             result_closed_trades['pl'], 
             None, None, None, None, None, None, None)
     con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 

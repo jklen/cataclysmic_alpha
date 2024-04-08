@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import vectorbt as vbt
 import uuid
 import sqlite3
+import ast
 
 keys = yaml.safe_load(open('../keys.yaml', 'r'))
 
@@ -227,15 +228,35 @@ def close_position(symbol):
     trading_client = create_trading_client()
     trading_client.close_position(symbol)
     
-def position_sizes(trades, weights, portfolio_size):
+def position_sizes(portfolio, min_avail_cash, weights, run_id):
     # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
-    #
-    # vyratat stav portfolia:
-    #   - pozicie ktore idem zavret brat ako stale otvorene (pre ucel available cash)
-    #   - available cash vyratam ako initial_size + (suma PL uzavretych tradov pre kazdy symbol) - (suma cost_basis otvorenych pozicii - vratane tych, ktore idem zavret)
-    # v db budem trekovat vahy, portfolia, ordre na close, open, timestamp, portfolio size - z toho budem kalkulovat cash
     
-    pass
+    con = sqlite3.connect('../db/calpha.db')
+    df_portfolio = pd.read_sql(f"SELECT * FROM portfolio_stats WHERE run_id = '{run_id}' AND
+                     portfolio_name = '{portfolio}'")
+    
+    open_symbols = ast.literal_eval(df_portfolio['open_trades_symbols'])
+    available_cash = max(df_portfolio['available_cash'], min_avail_cash)
+    if df_portfolio['available_cash'] < min_avail_cash:
+        portfolio_size = df_portfolio['portfolio_size'] + min_avail_cash - df_portfolio['available_cash']
+        
+    
+    df = pd.DataFrame(weights, columns = ['weight']) # symbol as index
+    df['is_open'] = 'N'
+    df.loc[open_symbols, 'is_open'] = 'Y'
+    df['base'] = portfolio_size + df_portfolio['closed_trades_PL']
+    df['available_cash'] = available_cash
+    df['position'] = df['weight'] * df['base']
+    
+    if df.loc[df['is_open'] == 'N', 'position'].sum() > available_cash:
+        coef = available_cash/df.loc[df['is_open'] == 'N', 'position'].sum()
+        df.loc[df['is_open'] == 'N', 'position'] = df.loc[df['is_open'] == 'N', 'position'] * coef
+    
+    #TODO df to db
+    
+    con.close()
+    
+    return df['position']
 
 def open_positions(sizes):
 

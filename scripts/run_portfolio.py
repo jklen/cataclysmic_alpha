@@ -29,7 +29,6 @@ def main(path_config):
                               config[portfolio], 
                               script_run_id, 
                               timestamp)
-        pdb.set_trace()
         update_portfolio_state(portfolio, 
                                config[portfolio]['portfolio_size'], 
                                list(config[portfolio]['symbols'].keys()), 
@@ -42,9 +41,8 @@ def main(path_config):
                                   config[portfolio]['data_preference'],
                                   datetime(2000, 1, 1), 
                                   datetime.today().date())
-            
-            df_symbol = df_symbol.droplevel(0) # po polnoci asi do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
-            pdb.set_trace()
+
+            # po polnoci asi do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
             strategy = config[portfolio]['symbols'][symbol].keys()
             strategy = list(strategy)[0]
             strategy_params = config[portfolio]['symbols'][symbol][strategy]['params']
@@ -74,7 +72,10 @@ def main(path_config):
                                config[portfolio]['min_available_cash'],
                                weights,
                                script_run_id)
-        open_positions(sizes, trades)
+        
+        pdb.set_trace()
+        print('done')
+        #open_positions(sizes, trades)
             
     
 if __name__ == '__main__':

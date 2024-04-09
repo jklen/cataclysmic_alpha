@@ -232,19 +232,19 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id):
     # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
     
     con = sqlite3.connect('../db/calpha.db')
-    df_portfolio = pd.read_sql(f"SELECT * FROM portfolio_stats WHERE run_id = '{run_id}' AND
-                     portfolio_name = '{portfolio}'")
+    df_portfolio = pd.read_sql(f"""SELECT * FROM portfolio_state WHERE portfolio_script_run_id = '{run_id}' AND
+                     portfolio_name = '{portfolio}'""", con)
+    open_symbols = ast.literal_eval(df_portfolio['open_trades_symbols'][0])
     
-    open_symbols = ast.literal_eval(df_portfolio['open_trades_symbols'])
-    available_cash = max(df_portfolio['available_cash'], min_avail_cash)
-    if df_portfolio['available_cash'] < min_avail_cash:
-        portfolio_size = df_portfolio['portfolio_size'] + min_avail_cash - df_portfolio['available_cash']
+    available_cash = max(df_portfolio['available_cash'][0], min_avail_cash)
+    if df_portfolio['available_cash'][0] < min_avail_cash:
+        portfolio_size = df_portfolio['portfolio_size'][0] + min_avail_cash - df_portfolio['available_cash'][0]
         
-    
-    df = pd.DataFrame(weights, columns = ['weight']) # symbol as index
+    df = pd.Series(weights, name = 'weight').to_frame() # symbol as index
+    df.index = df.index.map(lambda x: crypto_map[x] if x in crypto_map else x)
     df['is_open'] = 'N'
     df.loc[open_symbols, 'is_open'] = 'Y'
-    df['base'] = portfolio_size + df_portfolio['closed_trades_PL']
+    df['base'] = portfolio_size + df_portfolio['closed_trades_PL'][0]
     df['available_cash'] = available_cash
     df['position'] = df['weight'] * df['base']
     
@@ -255,7 +255,7 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id):
     #TODO df to db
     
     con.close()
-    
+    pdb.set_trace()
     return df['position']
 
 def open_positions(sizes):
@@ -319,7 +319,6 @@ def calculate_closed_trades_stats(symbols):
         else:
             stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0})
     df_stats = pd.DataFrame(stats, index = symbols)
-    pdb.set_trace()
     closed_trades_pl = df_stats['closed_trades_pl'].sum()
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
     

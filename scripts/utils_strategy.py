@@ -66,7 +66,7 @@ def get_alpaca_crypto_data(symbol, start, end):
 
     # Creating request object
     request_params = CryptoBarsRequest(
-                            symbol_or_symbols=symbol,
+                            symbol_or_symbols=[symbol],
                             timeframe=TimeFrame.Day,
                             start=start,
                             end=end
@@ -74,6 +74,7 @@ def get_alpaca_crypto_data(symbol, start, end):
     bars = client.get_crypto_bars(request_params)
     df = bars.df
     df = df[['open', 'high', 'low', 'close', 'volume']]
+    df = df.droplevel('symbol')
     
     return df
 
@@ -90,6 +91,7 @@ def get_alpaca_stock_data(symbol, start, end):
     bars = client.get_stock_bars(request_params)
     df = bars.df
     df = df[['open', 'high', 'low', 'close', 'volume']]
+    df = df.droplevel('symbol')
     
     return df
 

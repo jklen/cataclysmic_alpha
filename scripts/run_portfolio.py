@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 from utils_strategy import data_load
 from utils_portfolio import check_weights, run_strategy, position_sizes, \
     open_positions, close_position, eval_position, strategies_directions, correct_date, \
-    update_portfolio_state, update_portfolio_info, generate_id
+    update_portfolio_state, update_portfolio_info, generate_id, crypto_map
     
 with open('../portfolio_logging_config.json', 'r') as config_file:
     config_dict = json.load(config_file)
@@ -68,14 +68,15 @@ def main(path_config):
     
         # check na total non_marginable_amount?
         # update_portfolio_state mozno tu - kvoli tomu ze crypto mozem zavret 24/7 - aj check_weights
-        sizes = position_sizes(portfolio, 
+        
+        trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
+
+        sizes = position_sizes(portfolio,   
                                config[portfolio]['min_available_cash'],
                                weights,
                                script_run_id)
-        
         pdb.set_trace()
-        print('done')
-        #open_positions(sizes, trades)
+        open_positions(sizes, trades)
             
     
 if __name__ == '__main__':

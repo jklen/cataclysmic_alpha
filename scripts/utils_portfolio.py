@@ -42,15 +42,19 @@ def closed_trades_cnt(symbols):
         orders_dicts = map(dict, orders)
         keys_to_keep = ['symbol', 'filled_at', 'filled_qty', 'side']
         filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
-        df_orders = pd.DataFrame(filtered_orders)
-        df_orders['side'] = df_orders['side'].apply(str)
-        df_orders.sort_values(by = 'filled_at', inplace = True)
-        df_orders[['filled_qty_lag', 'side_lag']] = df_orders[['filled_qty', 'side']].shift(1)
         
-        df_trades = df_orders.loc[(df_orders['side'] == 'OrderSide.SELL') &
-                                (df_orders['side_lag'] == 'OrderSide.BUY') &
-                                (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
-        closed_trades[symbol] = len(df_trades)
+        if len(filtered_orders) >= 2:
+            df_orders = pd.DataFrame(filtered_orders)
+            df_orders['side'] = df_orders['side'].apply(str)
+            df_orders.sort_values(by = 'filled_at', inplace = True)
+            df_orders[['filled_qty_lag', 'side_lag']] = df_orders[['filled_qty', 'side']].shift(1)
+            
+            df_trades = df_orders.loc[(df_orders['side'] == 'OrderSide.SELL') &
+                                    (df_orders['side_lag'] == 'OrderSide.BUY') &
+                                    (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
+            closed_trades[symbol] = len(df_trades)
+        else:
+            closed_trades[symbol] = 0
         
     return pd.Series(closed_trades, name = 'closed_trades_cnt')
 
@@ -239,6 +243,8 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id):
     available_cash = max(df_portfolio['available_cash'][0], min_avail_cash)
     if df_portfolio['available_cash'][0] < min_avail_cash:
         portfolio_size = df_portfolio['portfolio_size'][0] + min_avail_cash - df_portfolio['available_cash'][0]
+    else:
+        portfolio_size = df_portfolio['portfolio_size'][0]
         
     df = pd.Series(weights, name = 'weight').to_frame() # symbol as index
     df.index = df.index.map(lambda x: crypto_map[x] if x in crypto_map else x)
@@ -255,10 +261,10 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id):
     #TODO df to db
     
     con.close()
-    pdb.set_trace()
+
     return df['position']
 
-def open_positions(sizes):
+def open_positions(sizes, trades):
 
     pass
 
@@ -339,9 +345,9 @@ def calculate_open_trades_stats(symbols):
             stats.append(filtered_position)
         except:
             pass
-    df_stats = pd.DataFrame(stats)
-    df_stats.loc[:,['cost_basis', 'unrealized_pl', 'unrealized_plpc']] = df_stats.loc[:,['cost_basis', 'unrealized_pl', 'unrealized_plpc']].astype('float')
-    if len(df_stats) > 0:
+    if len(stats) > 0:
+        df_stats = pd.DataFrame(stats)
+        df_stats.loc[:,['cost_basis', 'unrealized_pl', 'unrealized_plpc']] = df_stats.loc[:,['cost_basis', 'unrealized_pl', 'unrealized_plpc']].astype('float')
         df_stats.set_index('symbol', inplace = True)     
         open_trades_cost_basis = df_stats['cost_basis'].sum()
         open_trades_cnt = len(df_stats)
@@ -354,7 +360,7 @@ def calculate_open_trades_stats(symbols):
     else:
         return {'cost_basis': 0,
                 'trades_cnt': 0,
-                'symbols': None}
+                'symbols': str([])}
         
 def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp):
     con = sqlite3.connect('../db/calpha.db')
@@ -373,14 +379,14 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
             run_id, 
             portfolio,
             portfolio_size, 
-            available_cash, 
+            float(available_cash), 
             None, 
             result_open_trades['trades_cnt'],
             result_open_trades['symbols'], 
             None, 
             result_open_trades['cost_basis'], 
             int(result_closed_trades['trades_cnt']), 
-            result_closed_trades['pl'], 
+            float(result_closed_trades['pl']), 
             None, None, None, None, None, None, None)
     con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
                 ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)

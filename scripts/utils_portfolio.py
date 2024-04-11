@@ -232,7 +232,7 @@ def close_position(symbol):
     trading_client = create_trading_client()
     trading_client.close_position(symbol)
     
-def position_sizes(portfolio, min_avail_cash, weights, run_id):
+def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
     # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
     
     con = sqlite3.connect('../db/calpha.db')
@@ -258,8 +258,20 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id):
         coef = available_cash/df.loc[df['is_open'] == 'N', 'position'].sum()
         df.loc[df['is_open'] == 'N', 'position'] = df.loc[df['is_open'] == 'N', 'position'] * coef
     
-    #TODO df to db
-    
+    # df to db
+
+    df['portfolio_name'] = portfolio
+    df['portfolio_script_run_id'] = run_id
+    df['min_available_cash'] = min_avail_cash
+    df['portfolio_size'] = portfolio_size
+    df['timestamp'] = timestamp
+    df['date'] = timestamp.date()
+    df.reset_index(inplace=True)
+    df.rename(columns = {'index':'symbol'}, inplace = True)
+    df = df[['timestamp', 'date', 'portfolio_script_run_id', 'portfolio_name', 'symbol', 'is_open', 'weight', 'position', 
+             'portfolio_size', 'base', 'available_cash', 'min_available_cash']]
+    df.to_sql('positions', con, if_exists = 'append', index = False)
+       
     con.close()
 
     return df['position']

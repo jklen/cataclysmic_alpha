@@ -74,7 +74,8 @@ def main(path_config):
         sizes = position_sizes(portfolio,   
                                config[portfolio]['min_available_cash'],
                                weights,
-                               script_run_id)
+                               script_run_id,
+                               timestamp)
         pdb.set_trace()
         open_positions(sizes, trades)
             

@@ -46,4 +46,22 @@ con.execute("""CREATE TABLE portfolio_state(
     total_return REAL,
     max_drawdown REAL,
     max_drawdown_duration INT);""")
+
+# create positions table
+
+con.execute("DROP TABLE IF EXISTS positions;")
+con.execute("""CREATE TABLE positions(
+    timestamp DATETIME, 
+    date DATE, 
+    portfolio_script_run_id TEXT, 
+    portfolio_name TEXT, 
+    symbol TEXT, 
+    is_open TEXT, 
+    weight REAL, 
+    position REAL, 
+    portfolio_size REAL, 
+    base REAL, 
+    available_cash REAL, 
+    min_available_cash REAL);""")
 con.commit()
+con.close()

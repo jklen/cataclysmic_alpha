@@ -274,11 +274,21 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
        
     con.close()
 
-    return df['position']
+    return df[['symbol', 'position']].set_index('symbol')
 
 def open_positions(sizes, trades):
+    trading_client = create_trading_client()
+    for symbol in trades.keys():
+        if trades[symbol] == 'open':
+            params = OrderRequest(symbol = symbol,
+                notional = sizes[symbol],
+                side = 'buy',
+                time_in_force = 'day',
+                type = 'market',
+                order_class = 'simple')
 
-    pass
+            trading_client.submit_order(params)
+    
 
 def update_portfolio_info(portfolio, config, run_id, timestamp):      
     con = sqlite3.connect('../db/calpha.db')

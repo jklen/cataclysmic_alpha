@@ -63,8 +63,8 @@ def main(path_config):
                                                strategy_direction, 
                                                stoploss,
                                                take_profit)
-                # if trades[symbol] == 'close':
-                #     close_position(symbol)
+                if trades[symbol] == 'close':
+                    close_position(symbol)
     
         # check na total non_marginable_amount?
         # update_portfolio_state mozno tu - kvoli tomu ze crypto mozem zavret 24/7 - aj check_weights
@@ -91,6 +91,3 @@ if __name__ == '__main__':
 #   ci bol trigernuty stop loss, ak ano, poziciu zavrie
 # separe script ktory checkne po market open, ci moje ordre boli exekuovane
 
-#TODO otestuj ci v v den ked zatvaram trade mozem zaroven aj otvorit novy
-#ako vyriesit portfolio size? - casom bud manualna zmena alebo kalkulacia vah portfolii - db
-# ako vyriesti pridanie/odobranie symbolu z portfolia - toto by malo fungovat aj teraz

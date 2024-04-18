@@ -589,8 +589,8 @@ def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, pr
             df_returns, df_returns_stats, pf = calculate_returns(df_stats_f, symbol, strategy, strategy_params, price_close, price_open)
             plot_returns(pf, df_returns.columns.tolist(), symbol, strategy)
             plot_returns_corr(df_returns, symbol, strategy, 'final_params')
-            df_returns_stats.to_csv(f"{path}/{strategy}_final_params_stats.csv", index = True, header = True)
-            df_returns.to_csv(f"{path}/{strategy}_final_params_returns.csv", index = True, header = True)
+            df_returns_stats.to_csv(f"{path}/{strategy}_final_params_stats_1st_filters.csv", index = True, header = True)
+            df_returns.to_csv(f"{path}/{strategy}_final_params_returns_1st_filters.csv", index = True, header = True)
             result_params = df_stats_f.index.to_frame().apply(list, axis = 'columns').tolist()
             return result_params, \
                 process_df_stats(df_returns_stats, result_params, symbol, strategy)
@@ -601,9 +601,10 @@ def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, pr
                 df_returns, df_returns_stats, pf = calculate_returns(df_stats_f_c, symbol, strategy, strategy_params, price_close, price_open)
                 plot_returns(pf, df_returns.columns.tolist(), symbol, strategy)
                 plot_returns_corr(df_returns, symbol, strategy, 'final_params')
-                df_returns_stats.to_csv(f"{path}/{strategy}_final_params_stats.csv", index = True, header = True)
-                df_returns.to_csv(f"{path}/{strategy}_final_params_returns.csv", index = True, header = True)
-                return df_stats_f_c.index, \
+                df_returns_stats.to_csv(f"{path}/{strategy}_final_params_stats_2nd_filters.csv", index = True, header = True)
+                df_returns.to_csv(f"{path}/{strategy}_final_params_returns_2nd_filters.csv", index = True, header = True)
+                result_params = df_stats_f_c.index.to_frame().apply(list, axis = 'columns').tolist()
+                return result_params, \
                     process_df_stats(df_returns_stats, result_params, symbol, strategy)
             elif final_params['final_params_nr'] < len(df_stats_f_c):
                 df_returns, df_returns_stats, pf = calculate_returns(df_stats_f_c, symbol, strategy, strategy_params, price_close, price_open)
@@ -613,8 +614,8 @@ def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, pr
                 result_params = pca_or_hc_params(best_params_pca, best_params_hc, df_returns)
                 plot_returns(pf, result_params, symbol, strategy)
                 plot_returns_corr(df_returns[result_params], symbol, strategy, 'final_params')
-                df_returns_stats.loc[result_params,:].to_csv(f"{path}/{strategy}_final_params_stats.csv", index = True, header = True)
-                df_returns[result_params].to_csv(f"{path}/{strategy}_final_params_returns.csv", index = True, header = True)
+                df_returns_stats.loc[result_params,:].to_csv(f"{path}/{strategy}_final_params_stats_2nd_filters_pca_hc.csv", index = True, header = True)
+                df_returns[result_params].to_csv(f"{path}/{strategy}_final_params_returns_2nd_filters_pca_hc.csv", index = True, header = True)
                 return result_params, \
                     process_df_stats(df_returns_stats, result_params, symbol, strategy)
             else:
@@ -623,14 +624,30 @@ def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, pr
             df_clustered = params_clustering(df_stats_f, symbol, strategy, clustering)
             df_clustered_f = df_clustered.loc[(df_clustered['Total Trades per year_mean'] >= clustering['filters']['trades_in_year_mean']) &
                                           (df_clustered['Sharpe Ratio_mean'] >= clustering['filters']['sharpe_ratio_mean']),:]
-            df_cluster_f_s = df_clustered_f.groupby('cluster').apply(lambda df: df.sort_values(by = 'Sharpe Ratio_std') \
-                .head(clustering['filters']['items_from_cluster_nr'])).droplevel(0)       
+
+            if len(df_clustered_f) == 0:
+                df_returns, df_returns_stats, pf = calculate_returns(df_stats_f, symbol, strategy, strategy_params, price_close, price_open)
+                plot_returns_corr(df_returns, symbol, strategy, 'intermediate_params')
+                best_params_pca = calculate_best_params_pca(df_returns, symbol, strategy, final_params['final_params_nr'])
+                best_params_hc = calculate_best_params_hc(df_returns, symbol, strategy, final_params['final_params_nr'])
+                result_params = pca_or_hc_params(best_params_pca, best_params_hc, df_returns)
+                plot_returns(pf, result_params, symbol, strategy)
+                plot_returns_corr(df_returns[result_params], symbol, strategy, 'final_params')
+                df_returns_stats.loc[result_params,:].to_csv(f"{path}/{strategy}_final_params_stats_1st_filters_pca_hc.csv", index = True, header = True)
+                df_returns[result_params].to_csv(f"{path}/{strategy}_final_params_returns_1st_filters_pca_hc.csv", index = True, header = True)
+                
+                return result_params, \
+                    process_df_stats(df_returns_stats, result_params, symbol, strategy)
+            else:
+                df_cluster_f_s = df_clustered_f.groupby('cluster').apply(lambda df: df.sort_values(by = 'Sharpe Ratio_std') \
+                    .head(clustering['filters']['items_from_cluster_nr'])).droplevel(0)       
+                
             if 0 < len(df_cluster_f_s) <= final_params['final_params_nr']:
                 df_returns, df_returns_stats, pf = calculate_returns(df_cluster_f_s, symbol, strategy, strategy_params, price_close, price_open)
                 plot_returns(pf, df_returns.columns.tolist(), symbol, strategy)
                 plot_returns_corr(df_returns, symbol, strategy, 'final_params')
-                df_returns_stats.to_csv(f"{path}/{strategy}_final_params_stats.csv", index = True, header = True)
-                df_returns.to_csv(f"{path}/{strategy}_final_params_returns.csv", index = True, header = True)
+                df_returns_stats.to_csv(f"{path}/{strategy}_final_params_stats_2nd_filters.csv", index = True, header = True)
+                df_returns.to_csv(f"{path}/{strategy}_final_params_returns_2nd_filters.csv", index = True, header = True)
                 result_params = df_cluster_f_s.index.to_frame().apply(list, axis = 'columns').tolist()
                 return result_params, \
                     process_df_stats(df_returns_stats, result_params, symbol, strategy)
@@ -642,8 +659,8 @@ def get_best_params(df_stats, symbol, eval_params, strategy, strategy_params, pr
                 result_params = pca_or_hc_params(best_params_pca, best_params_hc, df_returns)
                 plot_returns(pf, result_params, symbol, strategy)
                 plot_returns_corr(df_returns[result_params], symbol, strategy, 'final_params')
-                df_returns_stats.loc[result_params,:].to_csv(f"{path}/{strategy}_final_params_stats.csv", index = True, header = True)
-                df_returns[result_params].to_csv(f"{path}/{strategy}_final_params_returns.csv", index = True, header = True)
+                df_returns_stats.loc[result_params,:].to_csv(f"{path}/{strategy}_final_params_stats_after_clust.csv", index = True, header = True)
+                df_returns[result_params].to_csv(f"{path}/{strategy}_final_params_returns_after_clust.csv", index = True, header = True)
                 return result_params, \
                     process_df_stats(df_returns_stats, result_params, symbol, strategy)
             else:

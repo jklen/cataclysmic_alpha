@@ -11,6 +11,7 @@ import logging
 import logging.config
 import json
 import pandas as pd
+import pickle
 
 with open('../strategy_logging_config.json', 'r') as config_file:
     config_dict = json.load(config_file)
@@ -24,16 +25,22 @@ logger.info("Logging is set up.")
 def main(path_config):
     config = yaml.safe_load(open(path_config, 'r'))
     processed_stats_dfs_list = []
-    for symbol in config['symbols']:
+    if isinstance(config['symbols'], list):
+        symbols = config['symbols']
+    else:
+        with open(config['symbols'], 'rb') as file:
+            symbols = pickle.load(file)
+
+    for symbol in symbols:
         
         # data load
         
         print(f"{ctime()} - {symbol}")
         df = data_load(symbol,
-                       config['data_preference'],
-                       datetime(2000, 1, 1), 
-                       datetime(2024, 1, 25))
-        if df is not None:
+                       config['data']['data_preference'],
+                       config['data']['start_date'], 
+                       config['data']['end_date'])
+        if len(df) >= config['data']['min_days']:
             create_path(symbol.replace('/', '-'))
             data_stats(df, symbol)
             open_price, _, close_price, _ = data_split(df, symbol, 
@@ -63,8 +70,14 @@ def main(path_config):
                 if df_processed_stats is not None:
                     processed_stats_dfs_list.append(df_processed_stats)
                 logger.info(f"{symbol} - final params - {final_params}")
-    df_stats_final = pd.concat(processed_stats_dfs_list, ignore_index = True)
-    df_stats_final.to_csv(f"../outputs/all_intermediate_params.csv", index = False, header = True)
+        else:
+            logger.warning(f"{symbol} - not enough data - just {len(df)} days")
+    try:
+        df_stats_final = pd.concat(processed_stats_dfs_list, ignore_index = True)
+        df_stats_final.to_csv(f"../outputs/all_intermediate_params.csv", index = False, header = True)
+    except:
+        logger.info(f"{symbol} - some problem with concat of all symbols params df")
+    logger.info(f"XXXXXXXXXXXXXXXXXXXXX ---- DONE ---- XXXXXXXXXXXXXXXXXXXXX")
     # prefix p_ alebo param_ v nazvoch stlpcov?
     # symboly do separe fajlu (asi bude separe script na ich vygenerovanie)
     # daj filter na max drawdown %

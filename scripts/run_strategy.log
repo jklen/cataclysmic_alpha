@@ -1,59 +1,524 @@
-2024-02-25 22:48:13,605 - __main__ - INFO - Logging is set up.
-2024-02-25 22:48:13,610 - utils_strategy - INFO - BTC/USD - downloading data from yfinance
-2024-02-25 22:48:14,278 - utils_strategy - INFO - BTC/USD - making symbol stats & plots
-2024-02-25 22:48:15,174 - utils_strategy - INFO - BTC/USD - splitting data via rolling split
-2024-02-25 22:48:16,036 - utils_strategy - INFO - calculating strategy stats
-2024-02-25 22:48:45,455 - utils_strategy - INFO - BTC/USD - hhhl - making histograms fo raw params stats
-2024-02-25 22:48:47,358 - utils_strategy - INFO - BTC/USD - hhhl - calculating grouped stats of the strategy
-2024-02-25 22:49:01,606 - utils_strategy - INFO - BTC/USD - getting top params
-2024-02-25 22:49:01,607 - utils_strategy - INFO - BTC/USD - clustering params
-2024-02-25 22:50:08,236 - utils_strategy - INFO - BTC/USD - calculating returns of final params
-2024-02-25 22:50:13,664 - utils_strategy - INFO - BTC/USD - getting best params via PCA
-2024-02-25 22:50:14,016 - utils_strategy - INFO - BTC/USD - getting best params via hierarchical clustering
-2024-02-25 22:50:14,259 - utils_strategy - INFO - BTC/USD - plotting stats for final params
-2024-02-25 22:50:19,342 - __main__ - INFO - BTC/USD - final params - [(3, 1, 7, 4), (2, 1, 4, 1), (4, 1, 2, 1), (3, 2, 2, 2), (2, 2, 3, 2)]
-2024-02-25 22:50:19,342 - utils_strategy - INFO - LINK/BTC - downloading data from yfinance
-2024-02-25 22:50:19,704 - utils_strategy - INFO - LINK/BTC - making symbol stats & plots
-2024-02-25 22:50:21,389 - utils_strategy - INFO - LINK/BTC - splitting data via rolling split
-2024-02-25 22:50:21,631 - utils_strategy - INFO - calculating strategy stats
-2024-02-25 22:50:38,793 - utils_strategy - INFO - LINK/BTC - hhhl - making histograms fo raw params stats
-2024-02-25 22:50:40,731 - utils_strategy - INFO - LINK/BTC - hhhl - calculating grouped stats of the strategy
-2024-02-25 22:50:54,649 - utils_strategy - INFO - LINK/BTC - getting top params
-2024-02-25 22:50:54,650 - utils_strategy - INFO - LINK/BTC - calculating returns of final params
-2024-02-25 22:50:59,344 - utils_strategy - INFO - LINK/BTC - plotting stats for final params
-2024-02-25 22:51:00,273 - __main__ - INFO - LINK/BTC - final params - [[8, 2, 2, 2]]
-2024-02-25 22:51:00,273 - utils_strategy - INFO - UNI/US - downloading data from yfinance
-2024-02-25 22:51:01,867 - yfinance - ERROR - 
-1 Failed download:
-2024-02-25 22:51:01,868 - yfinance - ERROR - ['UNI-US']: Exception('%ticker%: No timezone found, symbol may be delisted')
-2024-02-25 22:51:01,871 - utils_strategy - INFO - BCH/USD - downloading data from yfinance
-2024-02-25 22:51:02,165 - utils_strategy - INFO - BCH/USD - making symbol stats & plots
-2024-02-25 22:51:03,495 - utils_strategy - INFO - BCH/USD - splitting data via rolling split
-2024-02-25 22:51:03,710 - utils_strategy - INFO - calculating strategy stats
-2024-02-25 22:51:20,978 - utils_strategy - INFO - BCH/USD - hhhl - making histograms fo raw params stats
-2024-02-25 22:51:22,988 - utils_strategy - INFO - BCH/USD - hhhl - calculating grouped stats of the strategy
-2024-02-25 22:51:36,906 - utils_strategy - INFO - BCH/USD - getting top params
-2024-02-25 22:51:36,907 - __main__ - INFO - BCH/USD - final params - None
-2024-02-25 22:51:36,908 - utils_strategy - INFO - AAPL - downloading data from yfinance
-2024-02-25 22:51:37,444 - utils_strategy - INFO - AAPL - making symbol stats & plots
-2024-02-25 22:51:38,418 - utils_strategy - INFO - AAPL - splitting data via rolling split
-2024-02-25 22:51:38,804 - utils_strategy - INFO - calculating strategy stats
-2024-02-25 22:52:01,438 - utils_strategy - INFO - AAPL - hhhl - making histograms fo raw params stats
-2024-02-25 22:52:03,141 - utils_strategy - INFO - AAPL - hhhl - calculating grouped stats of the strategy
-2024-02-25 22:52:17,406 - utils_strategy - INFO - AAPL - getting top params
-2024-02-25 22:52:17,408 - utils_strategy - INFO - AAPL - clustering params
-2024-02-25 22:53:16,128 - utils_strategy - INFO - AAPL - calculating returns of final params
-2024-02-25 22:53:16,585 - utils_strategy - INFO - AAPL - getting best params via PCA
-2024-02-25 22:53:16,905 - utils_strategy - INFO - AAPL - getting best params via hierarchical clustering
-2024-02-25 22:53:17,155 - utils_strategy - INFO - AAPL - plotting stats for final params
-2024-02-25 22:53:24,726 - __main__ - INFO - AAPL - final params - [(3, 1, 4, 4), (3, 2, 2, 2), (2, 2, 3, 3), (3, 1, 4, 2), (3, 1, 5, 4)]
-2024-02-25 22:53:24,726 - utils_strategy - INFO - DELL - downloading data from yfinance
-2024-02-25 22:53:25,125 - utils_strategy - INFO - DELL - making symbol stats & plots
-2024-02-25 22:53:26,430 - utils_strategy - INFO - DELL - splitting data via rolling split
-2024-02-25 22:53:26,657 - utils_strategy - INFO - calculating strategy stats
-2024-02-25 22:53:42,868 - utils_strategy - INFO - DELL - hhhl - making histograms fo raw params stats
-2024-02-25 22:53:44,612 - utils_strategy - INFO - DELL - hhhl - calculating grouped stats of the strategy
-2024-02-25 22:53:59,684 - utils_strategy - INFO - DELL - getting top params
-2024-02-25 22:53:59,685 - utils_strategy - INFO - DELL - calculating returns of final params
-2024-02-25 22:53:59,774 - utils_strategy - INFO - DELL - plotting stats for final params
-2024-02-25 22:54:00,745 - __main__ - INFO - DELL - final params - [[2, 1, 4, 4]]
+2024-04-18 23:02:57,797 - __main__ - INFO - Logging is set up.
+2024-04-18 23:02:57,804 - utils_strategy - INFO - TSLA - downloading data from yfinance
+2024-04-18 23:02:58,244 - utils_strategy - INFO - TSLA - making symbol stats & plots
+2024-04-18 23:02:59,103 - utils_strategy - INFO - TSLA - splitting data via rolling split
+2024-04-18 23:03:00,212 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:03:36,416 - utils_strategy - INFO - TSLA - hhhl - making histograms fo raw params stats
+2024-04-18 23:03:38,434 - utils_strategy - INFO - TSLA - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:03:56,414 - utils_strategy - INFO - TSLA - getting top params
+2024-04-18 23:03:56,416 - utils_strategy - INFO - TSLA - clustering params
+2024-04-18 23:03:57,038 - utils_strategy - INFO - TSLA - calculating returns of final params
+2024-04-18 23:04:02,697 - utils_strategy - INFO - TSLA - getting best params via PCA
+2024-04-18 23:04:03,061 - utils_strategy - INFO - TSLA - getting best params via hierarchical clustering
+2024-04-18 23:04:03,309 - utils_strategy - INFO - TSLA - plotting stats for final params
+2024-04-18 23:04:08,257 - __main__ - INFO - TSLA - final params - [(4, 1, 6, 2), (2, 1, 3, 1), (2, 1, 3, 2), (2, 1, 9, 1), (6, 1, 2, 1)]
+2024-04-18 23:04:08,257 - utils_strategy - INFO - NVDA - downloading data from yfinance
+2024-04-18 23:04:08,583 - utils_strategy - INFO - NVDA - making symbol stats & plots
+2024-04-18 23:04:09,792 - utils_strategy - INFO - NVDA - splitting data via rolling split
+2024-04-18 23:04:10,171 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:04:37,522 - utils_strategy - INFO - NVDA - hhhl - making histograms fo raw params stats
+2024-04-18 23:04:39,493 - utils_strategy - INFO - NVDA - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:04:56,865 - utils_strategy - INFO - NVDA - getting top params
+2024-04-18 23:04:56,866 - utils_strategy - INFO - NVDA - clustering params
+2024-04-18 23:04:57,348 - utils_strategy - INFO - NVDA - calculating returns of final params
+2024-04-18 23:04:58,594 - utils_strategy - INFO - NVDA - getting best params via PCA
+2024-04-18 23:04:58,962 - utils_strategy - INFO - NVDA - getting best params via hierarchical clustering
+2024-04-18 23:04:59,218 - utils_strategy - INFO - NVDA - plotting stats for final params
+2024-04-18 23:05:06,008 - __main__ - INFO - NVDA - final params - [(4, 2, 2, 2), (3, 2, 4, 4), (4, 1, 7, 1), (3, 1, 8, 5), (2, 1, 2, 2)]
+2024-04-18 23:05:06,008 - utils_strategy - INFO - AAPL - downloading data from yfinance
+2024-04-18 23:05:06,363 - utils_strategy - INFO - AAPL - making symbol stats & plots
+2024-04-18 23:05:07,598 - utils_strategy - INFO - AAPL - splitting data via rolling split
+2024-04-18 23:05:07,967 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:05:35,955 - utils_strategy - INFO - AAPL - hhhl - making histograms fo raw params stats
+2024-04-18 23:05:37,687 - utils_strategy - INFO - AAPL - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:05:55,808 - utils_strategy - INFO - AAPL - getting top params
+2024-04-18 23:05:55,809 - utils_strategy - INFO - AAPL - clustering params
+2024-04-18 23:05:56,478 - utils_strategy - INFO - AAPL - calculating returns of final params
+2024-04-18 23:05:57,414 - utils_strategy - INFO - AAPL - getting best params via PCA
+2024-04-18 23:05:57,744 - utils_strategy - INFO - AAPL - getting best params via hierarchical clustering
+2024-04-18 23:05:58,008 - utils_strategy - INFO - AAPL - plotting stats for final params
+2024-04-18 23:06:05,272 - __main__ - INFO - AAPL - final params - [(2, 2, 2, 2), (2, 1, 8, 1), (3, 1, 5, 1), (3, 1, 4, 2), (3, 2, 3, 2)]
+2024-04-18 23:06:05,272 - utils_strategy - INFO - SPY - downloading data from yfinance
+2024-04-18 23:06:05,544 - utils_strategy - INFO - SPY - making symbol stats & plots
+2024-04-18 23:06:06,726 - utils_strategy - INFO - SPY - splitting data via rolling split
+2024-04-18 23:06:07,120 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:06:34,863 - utils_strategy - INFO - SPY - hhhl - making histograms fo raw params stats
+2024-04-18 23:06:36,573 - utils_strategy - INFO - SPY - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:06:55,667 - utils_strategy - INFO - SPY - getting top params
+2024-04-18 23:06:55,669 - __main__ - INFO - SPY - final params - None
+2024-04-18 23:06:55,669 - utils_strategy - INFO - SOXL - downloading data from yfinance
+2024-04-18 23:06:55,934 - utils_strategy - INFO - SOXL - making symbol stats & plots
+2024-04-18 23:06:57,129 - utils_strategy - INFO - SOXL - splitting data via rolling split
+2024-04-18 23:06:57,432 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:07:27,141 - utils_strategy - INFO - SOXL - hhhl - making histograms fo raw params stats
+2024-04-18 23:07:29,383 - utils_strategy - INFO - SOXL - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:07:47,049 - utils_strategy - INFO - SOXL - getting top params
+2024-04-18 23:07:47,050 - utils_strategy - INFO - SOXL - clustering params
+2024-04-18 23:07:47,347 - utils_strategy - INFO - SOXL - calculating returns of final params
+2024-04-18 23:07:47,443 - utils_strategy - INFO - SOXL - plotting stats for final params
+2024-04-18 23:07:49,752 - __main__ - INFO - SOXL - final params - [[3, 2, 5, 4], [6, 1, 3, 3]]
+2024-04-18 23:07:49,752 - utils_strategy - INFO - AMD - downloading data from yfinance
+2024-04-18 23:07:49,985 - utils_strategy - INFO - AMD - making symbol stats & plots
+2024-04-18 23:07:51,110 - utils_strategy - INFO - AMD - splitting data via rolling split
+2024-04-18 23:07:51,519 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:08:22,126 - utils_strategy - INFO - AMD - hhhl - making histograms fo raw params stats
+2024-04-18 23:08:23,958 - utils_strategy - INFO - AMD - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:08:42,554 - utils_strategy - INFO - AMD - getting top params
+2024-04-18 23:08:42,556 - utils_strategy - INFO - AMD - calculating returns of final params
+2024-04-18 23:08:43,452 - utils_strategy - INFO - AMD - getting best params via PCA
+2024-04-18 23:08:43,834 - utils_strategy - INFO - AMD - getting best params via hierarchical clustering
+2024-04-18 23:08:44,109 - utils_strategy - INFO - AMD - plotting stats for final params
+2024-04-18 23:08:51,766 - __main__ - INFO - AMD - final params - [(2, 1, 9, 1), (2, 1, 6, 3), (3, 1, 2, 2), (3, 1, 7, 1), (3, 1, 2, 1)]
+2024-04-18 23:08:51,767 - utils_strategy - INFO - QQQ - downloading data from yfinance
+2024-04-18 23:08:52,078 - utils_strategy - INFO - QQQ - making symbol stats & plots
+2024-04-18 23:08:53,414 - utils_strategy - INFO - QQQ - splitting data via rolling split
+2024-04-18 23:08:53,807 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:09:24,432 - utils_strategy - INFO - QQQ - hhhl - making histograms fo raw params stats
+2024-04-18 23:09:26,315 - utils_strategy - INFO - QQQ - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:09:44,031 - utils_strategy - INFO - QQQ - getting top params
+2024-04-18 23:09:44,033 - utils_strategy - INFO - QQQ - clustering params
+2024-04-18 23:09:44,250 - utils_strategy - INFO - QQQ - calculating returns of final params
+2024-04-18 23:09:47,638 - utils_strategy - INFO - QQQ - getting best params via PCA
+2024-04-18 23:09:48,019 - utils_strategy - INFO - QQQ - getting best params via hierarchical clustering
+2024-04-18 23:09:48,754 - utils_strategy - INFO - QQQ - plotting stats for final params
+2024-04-18 23:09:56,188 - __main__ - INFO - QQQ - final params - [(5, 3, 4, 4), (7, 2, 2, 1), (3, 1, 9, 4), (9, 1, 2, 1), (7, 1, 2, 1)]
+2024-04-18 23:09:56,188 - utils_strategy - INFO - AMZN - downloading data from yfinance
+2024-04-18 23:09:56,457 - utils_strategy - INFO - AMZN - making symbol stats & plots
+2024-04-18 23:09:57,807 - utils_strategy - INFO - AMZN - splitting data via rolling split
+2024-04-18 23:09:58,211 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:10:29,398 - utils_strategy - INFO - AMZN - hhhl - making histograms fo raw params stats
+2024-04-18 23:10:31,837 - utils_strategy - INFO - AMZN - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:10:50,024 - utils_strategy - INFO - AMZN - getting top params
+2024-04-18 23:10:50,025 - utils_strategy - INFO - AMZN - clustering params
+2024-04-18 23:10:50,572 - utils_strategy - INFO - AMZN - calculating returns of final params
+2024-04-18 23:10:51,449 - utils_strategy - INFO - AMZN - getting best params via PCA
+2024-04-18 23:10:51,812 - utils_strategy - INFO - AMZN - getting best params via hierarchical clustering
+2024-04-18 23:10:52,064 - utils_strategy - INFO - AMZN - plotting stats for final params
+2024-04-18 23:11:00,206 - __main__ - INFO - AMZN - final params - [(2, 1, 4, 1), (2, 1, 6, 4), (2, 2, 3, 2), (3, 1, 2, 1), (2, 1, 5, 4)]
+2024-04-18 23:11:00,206 - utils_strategy - INFO - TQQQ - downloading data from yfinance
+2024-04-18 23:11:00,480 - utils_strategy - INFO - TQQQ - making symbol stats & plots
+2024-04-18 23:11:01,859 - utils_strategy - INFO - TQQQ - splitting data via rolling split
+2024-04-18 23:11:02,190 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:11:33,687 - utils_strategy - INFO - TQQQ - hhhl - making histograms fo raw params stats
+2024-04-18 23:11:35,585 - utils_strategy - INFO - TQQQ - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:11:53,657 - utils_strategy - INFO - TQQQ - getting top params
+2024-04-18 23:11:53,658 - utils_strategy - INFO - TQQQ - clustering params
+2024-04-18 23:11:54,561 - utils_strategy - INFO - TQQQ - calculating returns of final params
+2024-04-18 23:11:56,328 - utils_strategy - INFO - TQQQ - getting best params via PCA
+2024-04-18 23:11:56,699 - utils_strategy - INFO - TQQQ - getting best params via hierarchical clustering
+2024-04-18 23:11:56,949 - utils_strategy - INFO - TQQQ - plotting stats for final params
+2024-04-18 23:12:02,479 - __main__ - INFO - TQQQ - final params - [(6, 1, 2, 2), (2, 2, 5, 1), (4, 2, 2, 1), (2, 1, 9, 1), (3, 1, 10, 4)]
+2024-04-18 23:12:02,480 - utils_strategy - INFO - INTC - downloading data from yfinance
+2024-04-18 23:12:02,824 - utils_strategy - INFO - INTC - making symbol stats & plots
+2024-04-18 23:12:04,218 - utils_strategy - INFO - INTC - splitting data via rolling split
+2024-04-18 23:12:04,624 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:12:34,968 - utils_strategy - INFO - INTC - hhhl - making histograms fo raw params stats
+2024-04-18 23:12:36,850 - utils_strategy - INFO - INTC - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:12:56,200 - utils_strategy - INFO - INTC - getting top params
+2024-04-18 23:12:56,202 - __main__ - INFO - INTC - final params - None
+2024-04-18 23:12:56,202 - utils_strategy - INFO - MSFT - downloading data from yfinance
+2024-04-18 23:12:56,575 - utils_strategy - INFO - MSFT - making symbol stats & plots
+2024-04-18 23:12:57,680 - utils_strategy - INFO - MSFT - splitting data via rolling split
+2024-04-18 23:12:58,123 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:13:28,902 - utils_strategy - INFO - MSFT - hhhl - making histograms fo raw params stats
+2024-04-18 23:13:30,761 - utils_strategy - INFO - MSFT - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:13:50,009 - utils_strategy - INFO - MSFT - getting top params
+2024-04-18 23:13:50,011 - __main__ - INFO - MSFT - final params - None
+2024-04-18 23:13:50,011 - utils_strategy - INFO - GOOGL - downloading data from yfinance
+2024-04-18 23:13:50,261 - utils_strategy - INFO - GOOGL - making symbol stats & plots
+2024-04-18 23:13:51,366 - utils_strategy - INFO - GOOGL - splitting data via rolling split
+2024-04-18 23:13:51,767 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:14:22,435 - utils_strategy - INFO - GOOGL - hhhl - making histograms fo raw params stats
+2024-04-18 23:14:24,400 - utils_strategy - INFO - GOOGL - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:14:43,700 - utils_strategy - INFO - GOOGL - getting top params
+2024-04-18 23:14:43,701 - utils_strategy - INFO - GOOGL - calculating returns of final params
+2024-04-18 23:14:44,209 - utils_strategy - INFO - GOOGL - getting best params via PCA
+2024-04-18 23:14:44,601 - utils_strategy - INFO - GOOGL - getting best params via hierarchical clustering
+2024-04-18 23:14:44,865 - utils_strategy - INFO - GOOGL - plotting stats for final params
+2024-04-18 23:14:51,116 - __main__ - INFO - GOOGL - final params - [(3, 1, 5, 5), (4, 1, 3, 3), (4, 1, 4, 4), (4, 1, 6, 4), (6, 1, 2, 1)]
+2024-04-18 23:14:51,117 - utils_strategy - INFO - IWM - downloading data from yfinance
+2024-04-18 23:14:51,389 - utils_strategy - INFO - IWM - making symbol stats & plots
+2024-04-18 23:14:52,682 - utils_strategy - INFO - IWM - splitting data via rolling split
+2024-04-18 23:14:53,091 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:15:24,281 - utils_strategy - INFO - IWM - hhhl - making histograms fo raw params stats
+2024-04-18 23:15:26,147 - utils_strategy - INFO - IWM - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:15:45,545 - utils_strategy - INFO - IWM - getting top params
+2024-04-18 23:15:45,547 - __main__ - INFO - IWM - final params - None
+2024-04-18 23:15:45,547 - utils_strategy - INFO - GOOG - downloading data from yfinance
+2024-04-18 23:15:45,766 - utils_strategy - INFO - GOOG - making symbol stats & plots
+2024-04-18 23:15:46,962 - utils_strategy - INFO - GOOG - splitting data via rolling split
+2024-04-18 23:15:47,349 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:16:18,523 - utils_strategy - INFO - GOOG - hhhl - making histograms fo raw params stats
+2024-04-18 23:16:20,424 - utils_strategy - INFO - GOOG - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:16:39,883 - utils_strategy - INFO - GOOG - getting top params
+2024-04-18 23:16:39,885 - utils_strategy - INFO - GOOG - calculating returns of final params
+2024-04-18 23:16:40,428 - utils_strategy - INFO - GOOG - getting best params via PCA
+2024-04-18 23:16:40,825 - utils_strategy - INFO - GOOG - getting best params via hierarchical clustering
+2024-04-18 23:16:41,077 - utils_strategy - INFO - GOOG - plotting stats for final params
+2024-04-18 23:16:47,398 - __main__ - INFO - GOOG - final params - [(2, 1, 8, 5), (3, 1, 5, 4), (4, 1, 5, 4), (4, 1, 5, 5), (5, 1, 2, 1)]
+2024-04-18 23:16:47,398 - utils_strategy - INFO - MU - downloading data from yfinance
+2024-04-18 23:16:47,731 - utils_strategy - INFO - MU - making symbol stats & plots
+2024-04-18 23:16:49,122 - utils_strategy - INFO - MU - splitting data via rolling split
+2024-04-18 23:16:49,530 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:17:20,736 - utils_strategy - INFO - MU - hhhl - making histograms fo raw params stats
+2024-04-18 23:17:22,648 - utils_strategy - INFO - MU - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:17:41,699 - utils_strategy - INFO - MU - getting top params
+2024-04-18 23:17:41,701 - utils_strategy - INFO - MU - calculating returns of final params
+2024-04-18 23:17:41,818 - utils_strategy - INFO - MU - plotting stats for final params
+2024-04-18 23:17:46,400 - __main__ - INFO - MU - final params - [[8, 1, 3, 2], [9, 1, 3, 1]]
+2024-04-18 23:17:46,401 - utils_strategy - INFO - META - downloading data from yfinance
+2024-04-18 23:17:46,604 - utils_strategy - INFO - META - making symbol stats & plots
+2024-04-18 23:17:47,728 - utils_strategy - INFO - META - splitting data via rolling split
+2024-04-18 23:17:48,039 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:18:18,176 - utils_strategy - INFO - META - hhhl - making histograms fo raw params stats
+2024-04-18 23:18:20,081 - utils_strategy - INFO - META - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:18:38,210 - utils_strategy - INFO - META - getting top params
+2024-04-18 23:18:38,213 - utils_strategy - INFO - META - calculating returns of final params
+2024-04-18 23:18:38,597 - utils_strategy - INFO - META - getting best params via PCA
+2024-04-18 23:18:38,920 - utils_strategy - INFO - META - getting best params via hierarchical clustering
+2024-04-18 23:18:39,162 - utils_strategy - INFO - META - plotting stats for final params
+2024-04-18 23:18:44,142 - __main__ - INFO - META - final params - [(2, 1, 3, 3), (3, 1, 3, 3), (3, 1, 4, 4), (3, 1, 5, 5), (4, 1, 4, 4)]
+2024-04-18 23:18:44,142 - utils_strategy - INFO - TSM - downloading data from yfinance
+2024-04-18 23:18:44,440 - utils_strategy - INFO - TSM - making symbol stats & plots
+2024-04-18 23:18:45,794 - utils_strategy - INFO - TSM - splitting data via rolling split
+2024-04-18 23:18:46,211 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:19:18,838 - utils_strategy - INFO - TSM - hhhl - making histograms fo raw params stats
+2024-04-18 23:19:20,788 - utils_strategy - INFO - TSM - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:19:39,133 - utils_strategy - INFO - TSM - getting top params
+2024-04-18 23:19:39,135 - __main__ - INFO - TSM - final params - None
+2024-04-18 23:19:39,135 - utils_strategy - INFO - MARA - downloading data from yfinance
+2024-04-18 23:19:39,336 - utils_strategy - INFO - MARA - making symbol stats & plots
+2024-04-18 23:19:40,433 - utils_strategy - INFO - MARA - splitting data via rolling split
+2024-04-18 23:19:40,781 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:20:15,300 - utils_strategy - INFO - MARA - hhhl - making histograms fo raw params stats
+2024-04-18 23:20:18,659 - utils_strategy - INFO - MARA - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:20:37,057 - utils_strategy - INFO - MARA - getting top params
+2024-04-18 23:20:37,059 - __main__ - INFO - MARA - final params - None
+2024-04-18 23:20:37,059 - utils_strategy - INFO - AUUD - downloading data from yfinance
+2024-04-18 23:20:37,206 - utils_strategy - INFO - AUUD - making symbol stats & plots
+2024-04-18 23:20:38,353 - utils_strategy - INFO - AUUD - splitting data via rolling split
+2024-04-18 23:20:38,549 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:20:55,364 - utils_strategy - INFO - AUUD - hhhl - making histograms fo raw params stats
+2024-04-18 23:20:57,324 - utils_strategy - INFO - AUUD - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:21:16,027 - utils_strategy - INFO - AUUD - getting top params
+2024-04-18 23:21:16,029 - __main__ - INFO - AUUD - final params - None
+2024-04-18 23:21:16,029 - utils_strategy - INFO - JPM - downloading data from yfinance
+2024-04-18 23:21:16,361 - utils_strategy - INFO - JPM - making symbol stats & plots
+2024-04-18 23:21:17,471 - utils_strategy - INFO - JPM - splitting data via rolling split
+2024-04-18 23:21:17,921 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:21:51,233 - utils_strategy - INFO - JPM - hhhl - making histograms fo raw params stats
+2024-04-18 23:21:53,197 - utils_strategy - INFO - JPM - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:22:12,825 - utils_strategy - INFO - JPM - getting top params
+2024-04-18 23:22:12,827 - __main__ - INFO - JPM - final params - None
+2024-04-18 23:22:12,827 - utils_strategy - INFO - XOM - downloading data from yfinance
+2024-04-18 23:22:13,206 - utils_strategy - INFO - XOM - making symbol stats & plots
+2024-04-18 23:22:14,345 - utils_strategy - INFO - XOM - splitting data via rolling split
+2024-04-18 23:22:14,734 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:22:46,344 - utils_strategy - INFO - XOM - hhhl - making histograms fo raw params stats
+2024-04-18 23:22:50,100 - utils_strategy - INFO - XOM - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:23:08,537 - utils_strategy - INFO - XOM - getting top params
+2024-04-18 23:23:08,539 - utils_strategy - INFO - XOM - calculating returns of final params
+2024-04-18 23:23:08,671 - utils_strategy - INFO - XOM - plotting stats for final params
+2024-04-18 23:23:13,623 - __main__ - INFO - XOM - final params - [[7, 1, 4, 1], [7, 1, 4, 2], [7, 2, 2, 2]]
+2024-04-18 23:23:13,623 - utils_strategy - INFO - TLT - downloading data from yfinance
+2024-04-18 23:23:13,924 - utils_strategy - INFO - TLT - making symbol stats & plots
+2024-04-18 23:23:15,059 - utils_strategy - INFO - TLT - splitting data via rolling split
+2024-04-18 23:23:15,478 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:23:46,857 - utils_strategy - INFO - TLT - hhhl - making histograms fo raw params stats
+2024-04-18 23:23:48,818 - utils_strategy - INFO - TLT - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:24:07,760 - utils_strategy - INFO - TLT - getting top params
+2024-04-18 23:24:07,771 - __main__ - INFO - TLT - final params - None
+2024-04-18 23:24:07,771 - utils_strategy - INFO - BAC - downloading data from yfinance
+2024-04-18 23:24:08,135 - utils_strategy - INFO - BAC - making symbol stats & plots
+2024-04-18 23:24:09,222 - utils_strategy - INFO - BAC - splitting data via rolling split
+2024-04-18 23:24:09,649 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:24:42,603 - utils_strategy - INFO - BAC - hhhl - making histograms fo raw params stats
+2024-04-18 23:24:44,483 - utils_strategy - INFO - BAC - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:25:02,701 - utils_strategy - INFO - BAC - getting top params
+2024-04-18 23:25:02,703 - __main__ - INFO - BAC - final params - None
+2024-04-18 23:25:02,703 - utils_strategy - INFO - VOO - downloading data from yfinance
+2024-04-18 23:25:02,936 - utils_strategy - INFO - VOO - making symbol stats & plots
+2024-04-18 23:25:04,006 - utils_strategy - INFO - VOO - splitting data via rolling split
+2024-04-18 23:25:04,313 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:25:35,217 - utils_strategy - INFO - VOO - hhhl - making histograms fo raw params stats
+2024-04-18 23:25:37,347 - utils_strategy - INFO - VOO - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:25:55,870 - utils_strategy - INFO - VOO - getting top params
+2024-04-18 23:25:55,871 - utils_strategy - INFO - VOO - clustering params
+2024-04-18 23:25:56,485 - utils_strategy - INFO - VOO - calculating returns of final params
+2024-04-18 23:25:56,599 - utils_strategy - INFO - VOO - plotting stats for final params
+2024-04-18 23:26:02,091 - __main__ - INFO - VOO - final params - [[6, 1, 2, 2], [6, 1, 2, 1], [4, 1, 3, 3]]
+2024-04-18 23:26:02,091 - utils_strategy - INFO - XLE - downloading data from yfinance
+2024-04-18 23:26:02,389 - utils_strategy - INFO - XLE - making symbol stats & plots
+2024-04-18 23:26:03,556 - utils_strategy - INFO - XLE - splitting data via rolling split
+2024-04-18 23:26:03,956 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:26:35,125 - utils_strategy - INFO - XLE - hhhl - making histograms fo raw params stats
+2024-04-18 23:26:37,057 - utils_strategy - INFO - XLE - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:26:55,617 - utils_strategy - INFO - XLE - getting top params
+2024-04-18 23:26:55,619 - __main__ - INFO - XLE - final params - None
+2024-04-18 23:26:55,619 - utils_strategy - INFO - PFE - downloading data from yfinance
+2024-04-18 23:26:55,995 - utils_strategy - INFO - PFE - making symbol stats & plots
+2024-04-18 23:26:57,111 - utils_strategy - INFO - PFE - splitting data via rolling split
+2024-04-18 23:26:57,533 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:27:28,598 - utils_strategy - INFO - PFE - hhhl - making histograms fo raw params stats
+2024-04-18 23:27:30,752 - utils_strategy - INFO - PFE - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:27:51,643 - utils_strategy - INFO - PFE - getting top params
+2024-04-18 23:27:51,644 - utils_strategy - INFO - PFE - calculating returns of final params
+2024-04-18 23:27:51,781 - utils_strategy - INFO - PFE - plotting stats for final params
+2024-04-18 23:27:57,459 - __main__ - INFO - PFE - final params - [[8, 1, 5, 1], [8, 1, 5, 2], [8, 1, 5, 4], [9, 1, 5, 3]]
+2024-04-18 23:27:57,459 - utils_strategy - INFO - RIVN - downloading data from yfinance
+2024-04-18 23:27:57,587 - utils_strategy - INFO - RIVN - making symbol stats & plots
+2024-04-18 23:27:58,857 - utils_strategy - INFO - RIVN - splitting data via rolling split
+2024-04-18 23:27:59,079 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:28:15,382 - utils_strategy - INFO - RIVN - hhhl - making histograms fo raw params stats
+2024-04-18 23:28:17,368 - utils_strategy - INFO - RIVN - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:28:36,789 - utils_strategy - INFO - RIVN - getting top params
+2024-04-18 23:28:36,791 - __main__ - INFO - RIVN - final params - None
+2024-04-18 23:28:36,791 - utils_strategy - INFO - IBIT - downloading data from yfinance
+2024-04-18 23:28:36,884 - __main__ - WARNING - IBIT - not enough data - just 66 days
+2024-04-18 23:28:36,885 - utils_strategy - INFO - SQQQ - downloading data from yfinance
+2024-04-18 23:28:37,189 - utils_strategy - INFO - SQQQ - making symbol stats & plots
+2024-04-18 23:28:38,285 - utils_strategy - INFO - SQQQ - splitting data via rolling split
+2024-04-18 23:28:38,652 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:29:09,468 - utils_strategy - INFO - SQQQ - hhhl - making histograms fo raw params stats
+2024-04-18 23:29:13,060 - utils_strategy - INFO - SQQQ - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:29:31,640 - utils_strategy - INFO - SQQQ - getting top params
+2024-04-18 23:29:31,641 - __main__ - INFO - SQQQ - final params - None
+2024-04-18 23:29:31,641 - utils_strategy - INFO - GDX - downloading data from yfinance
+2024-04-18 23:29:31,963 - utils_strategy - INFO - GDX - making symbol stats & plots
+2024-04-18 23:29:33,113 - utils_strategy - INFO - GDX - splitting data via rolling split
+2024-04-18 23:29:33,476 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:30:04,257 - utils_strategy - INFO - GDX - hhhl - making histograms fo raw params stats
+2024-04-18 23:30:06,172 - utils_strategy - INFO - GDX - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:30:24,474 - utils_strategy - INFO - GDX - getting top params
+2024-04-18 23:30:24,476 - __main__ - INFO - GDX - final params - None
+2024-04-18 23:30:24,476 - utils_strategy - INFO - UBER - downloading data from yfinance
+2024-04-18 23:30:24,689 - utils_strategy - INFO - UBER - making symbol stats & plots
+2024-04-18 23:30:25,801 - utils_strategy - INFO - UBER - splitting data via rolling split
+2024-04-18 23:30:26,084 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:30:46,946 - utils_strategy - INFO - UBER - hhhl - making histograms fo raw params stats
+2024-04-18 23:30:49,050 - utils_strategy - INFO - UBER - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:31:10,198 - utils_strategy - INFO - UBER - getting top params
+2024-04-18 23:31:10,199 - __main__ - INFO - UBER - final params - None
+2024-04-18 23:31:10,200 - utils_strategy - INFO - COIN - downloading data from yfinance
+2024-04-18 23:31:10,414 - utils_strategy - INFO - COIN - making symbol stats & plots
+2024-04-18 23:31:11,579 - utils_strategy - INFO - COIN - splitting data via rolling split
+2024-04-18 23:31:11,975 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:31:28,853 - utils_strategy - INFO - COIN - hhhl - making histograms fo raw params stats
+2024-04-18 23:31:30,827 - utils_strategy - INFO - COIN - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:31:49,291 - utils_strategy - INFO - COIN - getting top params
+2024-04-18 23:31:49,292 - __main__ - INFO - COIN - final params - None
+2024-04-18 23:31:49,292 - utils_strategy - INFO - MRVL - downloading data from yfinance
+2024-04-18 23:31:49,692 - utils_strategy - INFO - MRVL - making symbol stats & plots
+2024-04-18 23:31:50,797 - utils_strategy - INFO - MRVL - splitting data via rolling split
+2024-04-18 23:31:51,200 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:32:22,227 - utils_strategy - INFO - MRVL - hhhl - making histograms fo raw params stats
+2024-04-18 23:32:24,089 - utils_strategy - INFO - MRVL - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:32:44,635 - utils_strategy - INFO - MRVL - getting top params
+2024-04-18 23:32:44,637 - utils_strategy - INFO - MRVL - clustering params
+2024-04-18 23:32:44,905 - utils_strategy - INFO - MRVL - calculating returns of final params
+2024-04-18 23:32:45,051 - utils_strategy - INFO - MRVL - plotting stats for final params
+2024-04-18 23:32:53,090 - __main__ - INFO - MRVL - final params - [[5, 1, 2, 2], [2, 1, 4, 4], [5, 1, 3, 3], [3, 1, 5, 5], [4, 1, 5, 5]]
+2024-04-18 23:32:53,090 - utils_strategy - INFO - PLTR - downloading data from yfinance
+2024-04-18 23:32:53,293 - utils_strategy - INFO - PLTR - making symbol stats & plots
+2024-04-18 23:32:54,476 - utils_strategy - INFO - PLTR - splitting data via rolling split
+2024-04-18 23:32:54,676 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:33:11,952 - utils_strategy - INFO - PLTR - hhhl - making histograms fo raw params stats
+2024-04-18 23:33:13,861 - utils_strategy - INFO - PLTR - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:33:32,139 - utils_strategy - INFO - PLTR - getting top params
+2024-04-18 23:33:32,141 - utils_strategy - INFO - PLTR - calculating returns of final params
+2024-04-18 23:33:32,243 - utils_strategy - INFO - PLTR - plotting stats for final params
+2024-04-18 23:33:34,037 - __main__ - INFO - PLTR - final params - [[6, 2, 5, 4], [9, 1, 2, 2], [10, 1, 2, 2]]
+2024-04-18 23:33:34,038 - utils_strategy - INFO - GLD - downloading data from yfinance
+2024-04-18 23:33:34,355 - utils_strategy - INFO - GLD - making symbol stats & plots
+2024-04-18 23:33:35,479 - utils_strategy - INFO - GLD - splitting data via rolling split
+2024-04-18 23:33:35,854 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:34:06,667 - utils_strategy - INFO - GLD - hhhl - making histograms fo raw params stats
+2024-04-18 23:34:08,603 - utils_strategy - INFO - GLD - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:34:26,764 - utils_strategy - INFO - GLD - getting top params
+2024-04-18 23:34:26,765 - utils_strategy - INFO - GLD - clustering params
+2024-04-18 23:34:27,076 - utils_strategy - INFO - GLD - calculating returns of final params
+2024-04-18 23:34:32,847 - utils_strategy - INFO - GLD - getting best params via PCA
+2024-04-18 23:34:33,284 - utils_strategy - INFO - GLD - getting best params via hierarchical clustering
+2024-04-18 23:34:34,247 - utils_strategy - INFO - GLD - plotting stats for final params
+2024-04-18 23:34:40,742 - __main__ - INFO - GLD - final params - [(3, 1, 9, 1), (7, 1, 6, 3), (4, 2, 4, 1), (6, 2, 6, 1), (6, 1, 6, 1)]
+2024-04-18 23:34:40,742 - utils_strategy - INFO - GL - downloading data from yfinance
+2024-04-18 23:34:41,217 - utils_strategy - INFO - GL - making symbol stats & plots
+2024-04-18 23:34:42,731 - utils_strategy - INFO - GL - splitting data via rolling split
+2024-04-18 23:34:43,131 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:35:13,884 - utils_strategy - INFO - GL - hhhl - making histograms fo raw params stats
+2024-04-18 23:35:15,788 - utils_strategy - INFO - GL - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:35:34,074 - utils_strategy - INFO - GL - getting top params
+2024-04-18 23:35:34,075 - utils_strategy - INFO - GL - calculating returns of final params
+2024-04-18 23:35:39,534 - utils_strategy - INFO - GL - plotting stats for final params
+2024-04-18 23:35:41,166 - __main__ - INFO - GL - final params - [[10, 1, 6, 5]]
+2024-04-18 23:35:41,167 - utils_strategy - INFO - WFC - downloading data from yfinance
+2024-04-18 23:35:41,644 - utils_strategy - INFO - WFC - making symbol stats & plots
+2024-04-18 23:35:42,774 - utils_strategy - INFO - WFC - splitting data via rolling split
+2024-04-18 23:35:43,186 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:36:14,100 - utils_strategy - INFO - WFC - hhhl - making histograms fo raw params stats
+2024-04-18 23:36:18,835 - utils_strategy - INFO - WFC - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:36:37,072 - utils_strategy - INFO - WFC - getting top params
+2024-04-18 23:36:37,073 - __main__ - INFO - WFC - final params - None
+2024-04-18 23:36:37,074 - utils_strategy - INFO - C - downloading data from yfinance
+2024-04-18 23:36:37,511 - utils_strategy - INFO - C - making symbol stats & plots
+2024-04-18 23:36:38,631 - utils_strategy - INFO - C - splitting data via rolling split
+2024-04-18 23:36:39,073 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:37:10,281 - utils_strategy - INFO - C - hhhl - making histograms fo raw params stats
+2024-04-18 23:37:12,156 - utils_strategy - INFO - C - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:37:30,532 - utils_strategy - INFO - C - getting top params
+2024-04-18 23:37:30,543 - __main__ - INFO - C - final params - None
+2024-04-18 23:37:30,544 - utils_strategy - INFO - RENT - downloading data from yfinance
+2024-04-18 23:37:30,724 - utils_strategy - INFO - RENT - making symbol stats & plots
+2024-04-18 23:37:31,858 - utils_strategy - INFO - RENT - splitting data via rolling split
+2024-04-18 23:37:32,045 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:37:48,768 - utils_strategy - INFO - RENT - hhhl - making histograms fo raw params stats
+2024-04-18 23:37:50,707 - utils_strategy - INFO - RENT - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:38:09,726 - utils_strategy - INFO - RENT - getting top params
+2024-04-18 23:38:09,727 - __main__ - INFO - RENT - final params - None
+2024-04-18 23:38:09,727 - utils_strategy - INFO - BABA - downloading data from yfinance
+2024-04-18 23:38:09,952 - utils_strategy - INFO - BABA - making symbol stats & plots
+2024-04-18 23:38:11,125 - utils_strategy - INFO - BABA - splitting data via rolling split
+2024-04-18 23:38:11,401 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:38:41,258 - utils_strategy - INFO - BABA - hhhl - making histograms fo raw params stats
+2024-04-18 23:38:43,124 - utils_strategy - INFO - BABA - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:39:01,166 - utils_strategy - INFO - BABA - getting top params
+2024-04-18 23:39:01,167 - utils_strategy - INFO - BABA - clustering params
+2024-04-18 23:39:01,354 - utils_strategy - INFO - BABA - calculating returns of final params
+2024-04-18 23:39:01,447 - utils_strategy - INFO - BABA - plotting stats for final params
+2024-04-18 23:39:02,639 - __main__ - INFO - BABA - final params - [[6, 1, 2, 2]]
+2024-04-18 23:39:02,640 - utils_strategy - INFO - SMCI - downloading data from yfinance
+2024-04-18 23:39:02,939 - utils_strategy - INFO - SMCI - making symbol stats & plots
+2024-04-18 23:39:04,152 - utils_strategy - INFO - SMCI - splitting data via rolling split
+2024-04-18 23:39:04,506 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:39:35,341 - utils_strategy - INFO - SMCI - hhhl - making histograms fo raw params stats
+2024-04-18 23:39:37,307 - utils_strategy - INFO - SMCI - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:39:55,551 - utils_strategy - INFO - SMCI - getting top params
+2024-04-18 23:39:55,553 - utils_strategy - INFO - SMCI - calculating returns of final params
+2024-04-18 23:39:56,080 - utils_strategy - INFO - SMCI - getting best params via PCA
+2024-04-18 23:39:56,463 - utils_strategy - INFO - SMCI - getting best params via hierarchical clustering
+2024-04-18 23:39:56,721 - utils_strategy - INFO - SMCI - plotting stats for final params
+2024-04-18 23:40:03,007 - __main__ - INFO - SMCI - final params - [(2, 1, 2, 1), (2, 1, 5, 1), (2, 1, 8, 1), (2, 1, 6, 1), (2, 1, 9, 1)]
+2024-04-18 23:40:03,008 - utils_strategy - INFO - MS - downloading data from yfinance
+2024-04-18 23:40:03,432 - utils_strategy - INFO - MS - making symbol stats & plots
+2024-04-18 23:40:04,762 - utils_strategy - INFO - MS - splitting data via rolling split
+2024-04-18 23:40:05,184 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:40:38,987 - utils_strategy - INFO - MS - hhhl - making histograms fo raw params stats
+2024-04-18 23:40:41,468 - utils_strategy - INFO - MS - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:41:11,105 - utils_strategy - INFO - MS - getting top params
+2024-04-18 23:41:11,107 - __main__ - INFO - MS - final params - None
+2024-04-18 23:41:11,107 - utils_strategy - INFO - FCX - downloading data from yfinance
+2024-04-18 23:41:11,636 - utils_strategy - INFO - FCX - making symbol stats & plots
+2024-04-18 23:41:12,958 - utils_strategy - INFO - FCX - splitting data via rolling split
+2024-04-18 23:41:13,996 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:41:45,786 - utils_strategy - INFO - FCX - hhhl - making histograms fo raw params stats
+2024-04-18 23:41:47,734 - utils_strategy - INFO - FCX - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:42:06,028 - utils_strategy - INFO - FCX - getting top params
+2024-04-18 23:42:06,030 - utils_strategy - INFO - FCX - clustering params
+2024-04-18 23:42:06,301 - utils_strategy - INFO - FCX - calculating returns of final params
+2024-04-18 23:42:06,427 - utils_strategy - INFO - FCX - plotting stats for final params
+2024-04-18 23:42:11,884 - __main__ - INFO - FCX - final params - [[6, 1, 2, 1], [5, 1, 2, 1], [6, 1, 2, 2]]
+2024-04-18 23:42:11,884 - utils_strategy - INFO - DAL - downloading data from yfinance
+2024-04-18 23:42:12,225 - utils_strategy - INFO - DAL - making symbol stats & plots
+2024-04-18 23:42:13,400 - utils_strategy - INFO - DAL - splitting data via rolling split
+2024-04-18 23:42:13,748 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:42:45,298 - utils_strategy - INFO - DAL - hhhl - making histograms fo raw params stats
+2024-04-18 23:42:47,251 - utils_strategy - INFO - DAL - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:43:05,776 - utils_strategy - INFO - DAL - getting top params
+2024-04-18 23:43:05,777 - utils_strategy - INFO - DAL - clustering params
+2024-04-18 23:43:06,177 - utils_strategy - INFO - DAL - calculating returns of final params
+2024-04-18 23:43:06,785 - utils_strategy - INFO - DAL - getting best params via PCA
+2024-04-18 23:43:07,159 - utils_strategy - INFO - DAL - getting best params via hierarchical clustering
+2024-04-18 23:43:07,418 - utils_strategy - INFO - DAL - plotting stats for final params
+2024-04-18 23:43:13,870 - __main__ - INFO - DAL - final params - [(3, 1, 8, 5), (2, 1, 4, 3), (2, 2, 3, 2), (3, 2, 4, 3), (4, 1, 5, 2)]
+2024-04-18 23:43:13,870 - utils_strategy - INFO - XBI - downloading data from yfinance
+2024-04-18 23:43:14,240 - utils_strategy - INFO - XBI - making symbol stats & plots
+2024-04-18 23:43:15,676 - utils_strategy - INFO - XBI - splitting data via rolling split
+2024-04-18 23:43:16,067 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:43:50,992 - utils_strategy - INFO - XBI - hhhl - making histograms fo raw params stats
+2024-04-18 23:43:52,899 - utils_strategy - INFO - XBI - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:44:11,144 - utils_strategy - INFO - XBI - getting top params
+2024-04-18 23:44:11,146 - utils_strategy - INFO - XBI - clustering params
+2024-04-18 23:44:11,485 - utils_strategy - INFO - XBI - calculating returns of final params
+2024-04-18 23:44:11,589 - utils_strategy - INFO - XBI - plotting stats for final params
+2024-04-18 23:44:13,284 - __main__ - INFO - XBI - final params - [[5, 1, 3, 3]]
+2024-04-18 23:44:13,284 - utils_strategy - INFO - KO - downloading data from yfinance
+2024-04-18 23:44:13,840 - utils_strategy - INFO - KO - making symbol stats & plots
+2024-04-18 23:44:15,046 - utils_strategy - INFO - KO - splitting data via rolling split
+2024-04-18 23:44:15,459 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:44:47,729 - utils_strategy - INFO - KO - hhhl - making histograms fo raw params stats
+2024-04-18 23:44:49,658 - utils_strategy - INFO - KO - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:45:07,887 - utils_strategy - INFO - KO - getting top params
+2024-04-18 23:45:07,888 - utils_strategy - INFO - KO - calculating returns of final params
+2024-04-18 23:45:08,034 - utils_strategy - INFO - KO - plotting stats for final params
+2024-04-18 23:45:15,812 - __main__ - INFO - KO - final params - [[2, 1, 5, 5], [3, 1, 5, 4], [3, 1, 5, 5], [6, 1, 4, 4], [10, 1, 5, 4]]
+2024-04-18 23:45:15,812 - utils_strategy - INFO - LASE - downloading data from yfinance
+2024-04-18 23:45:15,971 - utils_strategy - INFO - LASE - making symbol stats & plots
+2024-04-18 23:45:17,368 - utils_strategy - INFO - LASE - splitting data via rolling split
+2024-04-18 23:45:17,566 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:45:34,365 - utils_strategy - INFO - LASE - hhhl - making histograms fo raw params stats
+2024-04-18 23:45:36,465 - utils_strategy - INFO - LASE - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:45:55,882 - utils_strategy - INFO - LASE - getting top params
+2024-04-18 23:45:55,884 - __main__ - INFO - LASE - final params - None
+2024-04-18 23:45:55,884 - utils_strategy - INFO - CMCSA - downloading data from yfinance
+2024-04-18 23:45:56,462 - utils_strategy - INFO - CMCSA - making symbol stats & plots
+2024-04-18 23:45:57,649 - utils_strategy - INFO - CMCSA - splitting data via rolling split
+2024-04-18 23:45:58,135 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:46:38,238 - utils_strategy - INFO - CMCSA - hhhl - making histograms fo raw params stats
+2024-04-18 23:46:40,187 - utils_strategy - INFO - CMCSA - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:46:58,585 - utils_strategy - INFO - CMCSA - getting top params
+2024-04-18 23:46:58,586 - __main__ - INFO - CMCSA - final params - None
+2024-04-18 23:46:58,587 - utils_strategy - INFO - CLSK - downloading data from yfinance
+2024-04-18 23:46:58,837 - utils_strategy - INFO - CLSK - making symbol stats & plots
+2024-04-18 23:46:59,958 - utils_strategy - INFO - CLSK - splitting data via rolling split
+2024-04-18 23:47:00,202 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:47:22,918 - utils_strategy - INFO - CLSK - hhhl - making histograms fo raw params stats
+2024-04-18 23:47:24,886 - utils_strategy - INFO - CLSK - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:47:43,362 - utils_strategy - INFO - CLSK - getting top params
+2024-04-18 23:47:43,364 - __main__ - INFO - CLSK - final params - None
+2024-04-18 23:47:43,364 - utils_strategy - INFO - CSCO - downloading data from yfinance
+2024-04-18 23:47:43,802 - utils_strategy - INFO - CSCO - making symbol stats & plots
+2024-04-18 23:47:44,986 - utils_strategy - INFO - CSCO - splitting data via rolling split
+2024-04-18 23:47:45,418 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:48:17,868 - utils_strategy - INFO - CSCO - hhhl - making histograms fo raw params stats
+2024-04-18 23:48:20,298 - utils_strategy - INFO - CSCO - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:48:39,078 - utils_strategy - INFO - CSCO - getting top params
+2024-04-18 23:48:39,080 - utils_strategy - INFO - CSCO - calculating returns of final params
+2024-04-18 23:48:39,206 - utils_strategy - INFO - CSCO - plotting stats for final params
+2024-04-18 23:48:41,856 - __main__ - INFO - CSCO - final params - [[7, 1, 5, 4]]
+2024-04-18 23:48:41,857 - utils_strategy - INFO - NEM - downloading data from yfinance
+2024-04-18 23:48:42,331 - utils_strategy - INFO - NEM - making symbol stats & plots
+2024-04-18 23:48:43,663 - utils_strategy - INFO - NEM - splitting data via rolling split
+2024-04-18 23:48:44,124 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:49:24,453 - utils_strategy - INFO - NEM - hhhl - making histograms fo raw params stats
+2024-04-18 23:49:26,375 - utils_strategy - INFO - NEM - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:49:45,682 - utils_strategy - INFO - NEM - getting top params
+2024-04-18 23:49:45,684 - utils_strategy - INFO - NEM - calculating returns of final params
+2024-04-18 23:49:45,823 - utils_strategy - INFO - NEM - plotting stats for final params
+2024-04-18 23:49:53,391 - __main__ - INFO - NEM - final params - [[7, 1, 4, 1], [7, 1, 4, 2], [7, 1, 4, 3], [8, 1, 6, 4], [8, 2, 4, 3]]
+2024-04-18 23:49:53,391 - utils_strategy - INFO - ADIL - downloading data from yfinance
+2024-04-18 23:49:53,607 - utils_strategy - INFO - ADIL - making symbol stats & plots
+2024-04-18 23:49:54,630 - utils_strategy - INFO - ADIL - splitting data via rolling split
+2024-04-18 23:49:54,842 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:50:14,428 - utils_strategy - INFO - ADIL - hhhl - making histograms fo raw params stats
+2024-04-18 23:50:16,266 - utils_strategy - INFO - ADIL - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:50:34,714 - utils_strategy - INFO - ADIL - getting top params
+2024-04-18 23:50:34,716 - __main__ - INFO - ADIL - final params - None
+2024-04-18 23:50:34,716 - utils_strategy - INFO - SBUX - downloading data from yfinance
+2024-04-18 23:50:35,119 - utils_strategy - INFO - SBUX - making symbol stats & plots
+2024-04-18 23:50:36,271 - utils_strategy - INFO - SBUX - splitting data via rolling split
+2024-04-18 23:50:36,702 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:51:08,638 - utils_strategy - INFO - SBUX - hhhl - making histograms fo raw params stats
+2024-04-18 23:51:11,136 - utils_strategy - INFO - SBUX - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:51:29,460 - utils_strategy - INFO - SBUX - getting top params
+2024-04-18 23:51:29,462 - __main__ - INFO - SBUX - final params - None
+2024-04-18 23:51:29,463 - utils_strategy - INFO - BA - downloading data from yfinance
+2024-04-18 23:51:30,040 - utils_strategy - INFO - BA - making symbol stats & plots
+2024-04-18 23:51:31,200 - utils_strategy - INFO - BA - splitting data via rolling split
+2024-04-18 23:51:31,808 - utils_strategy - INFO - calculating strategy stats
+2024-04-18 23:52:15,968 - utils_strategy - INFO - BA - hhhl - making histograms fo raw params stats
+2024-04-18 23:52:18,062 - utils_strategy - INFO - BA - hhhl - calculating grouped stats of the strategy
+2024-04-18 23:52:36,029 - utils_strategy - INFO - BA - getting top params
+2024-04-18 23:52:36,031 - utils_strategy - INFO - BA - clustering params
+2024-04-18 23:52:36,395 - utils_strategy - INFO - BA - calculating returns of final params
+2024-04-18 23:52:36,837 - utils_strategy - INFO - BA - getting best params via PCA
+2024-04-18 23:52:37,134 - utils_strategy - INFO - BA - getting best params via hierarchical clustering

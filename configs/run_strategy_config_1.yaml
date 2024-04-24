@@ -1,4 +1,5 @@
 symbols: '../data/top500_symbols.pickle'
+rewrite_existing_symbols: true
 data:
   data_preference: yf # 'yf' - yfinance, 'alpaca' - tahaj z alpacy, 'longer_period' - tahaj odkial je dlhsia perioda
   start_date: 2000-01-01
@@ -22,7 +23,7 @@ strategy_params:
       lh_counts: [1, 5]
 eval_params:
   filters:
-    sharpe_ratio_min: -0.5 # pri -1 a 0 to hadze 2 rozne errory
+    sharpe_ratio_min: -0.5
     total_returns_min: -50
     trades_in_year_min: 10
   clustering:

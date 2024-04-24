@@ -25,6 +25,7 @@ from yellowbrick.cluster import KElbowVisualizer
 from scipy.spatial.distance import pdist, squareform
 import pickle
 import ast
+import gc
 
 logger = logging.getLogger(__name__)
 
@@ -109,7 +110,8 @@ def data_load(symbol, data_preference, start, end):
         logger.info(f"{symbol} - downloading data from yfinance")
         df = get_yf_data(symbol, start, end)
         if len(df) == 0:
-            return None
+            logger.warning(f"{symbol} - No data available from yfinance")
+            return pd.DataFrame()
         return df
     elif data_preference == 'alpaca':
         try:
@@ -123,7 +125,7 @@ def data_load(symbol, data_preference, start, end):
                 return df
             except Exception as e:
                 logger.warning(f"{symbol} - problem downloading data from alpaca via crypto or stock client")
-                return None
+                return pd.DataFrame()
     elif data_preference == 'longer_period':
         logger.info(f"{symbol} - downloading data from yfinance")
         df_yf =  get_yf_data(symbol, start, end)
@@ -140,7 +142,8 @@ def data_load(symbol, data_preference, start, end):
                 df_alpaca = pd.DataFrame()
                 
         if len(df_yf) == 0 and len(df_alpaca) == 0:
-            return None
+            logger.warning(f"{symbol} - no data available from yfinance or alpaca")
+            return pd.DataFrame()
         
         df = df_yf if len(df_yf) > len(df_alpaca) else df_alpaca
         return df
@@ -272,6 +275,9 @@ def strategy_stats(open_price, close_price, strategy, strategy_params, symbol):
     df_stats['Max Drawdown Duration'] = df_stats['Max Drawdown Duration'].dt.days
     df_stats['Total Trades per year'] = df_stats['Total Trades']*360/len(open_price)
     
+    del(pf)
+    gc.collect()
+    
     plot_params_histograms(df_stats, symbol, strategy)
     
     return df_stats
@@ -385,7 +391,7 @@ def calculate_returns(df_stats, symbol, strategy, strategy_params, price_close, 
     
     daily_ret.to_csv(f"{path}/{strategy}/{strategy}_intermediate_params_returns.csv", header = True, index = True)
     df_top_params_stats.to_csv(f"{path}/{strategy}/{strategy}_intermediate_params_stats.csv", header = True, index = True)
-        
+    
     return daily_ret, df_top_params_stats, pf
 
 def calculate_best_params_pca(df_returns, symbol, strategy, final_params_nr):
@@ -440,7 +446,10 @@ def calculate_best_params_hc(df_returns, symbol, strategy, final_params_nr):
     final_params = []
     for i in range(1, num_clusters+1):
         cluster_vars = df_returns.columns[cluster_labels == i]
-        final_params.append(cluster_vars[0])  # Choosing the first variable as an example
+        try:
+            final_params.append(cluster_vars[0])  # Choosing the first variable as an example, cluster_vars might be empty (less clusters than in config setting)
+        except:
+            pass
 
     df_corr_final = df_returns[final_params].corr()
     plot_returns_corr(df_returns[final_params], symbol, strategy, 'final_params_HC')

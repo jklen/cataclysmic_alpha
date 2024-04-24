@@ -2,6 +2,8 @@ import click
 import subprocess
 import yaml
 import sys
+import shutil
+import os
 from utils_strategy import HigherHighStrategy, data_load, data_stats, data_split, strategy_stats,\
     strategy_grouped_stats, get_best_params, create_path, process_df_stats
 from datetime import datetime
@@ -30,58 +32,66 @@ def main(path_config):
     else:
         with open(config['symbols'], 'rb') as file:
             symbols = pickle.load(file)
+    
+    if config['rewrite_existing_symbols']: 
+        shutil.rmtree('../outputs')
+        os.mkdir('../outputs')
+        
+    backtested_symbols = [f.name for f in os.scandir('../outputs') if f.is_dir()]
 
     for symbol in symbols:
         
-        # data load
-        
-        print(f"{ctime()} - {symbol}")
-        df = data_load(symbol,
-                       config['data']['data_preference'],
-                       config['data']['start_date'], 
-                       config['data']['end_date'])
-        if len(df) >= config['data']['min_days']:
-            create_path(symbol.replace('/', '-'))
-            data_stats(df, symbol)
-            open_price, _, close_price, _ = data_split(df, symbol, 
-                                                       config['rolling_split_params'])
-            print(open_price.shape, close_price.shape)
-            for strategy in config['strategies']:
-                create_path(symbol.replace('/', '-'), strategy)
-                #pdb.set_trace()
-                df_stats = strategy_stats(open_price, 
-                                        close_price, 
-                                        strategy, 
-                                        config['strategy_params'][strategy],
-                                        symbol)
-                
-                df_grouped_stats = strategy_grouped_stats(df_stats, 
-                                                          len(open_price), 
-                                                          symbol, 
-                                                          strategy)
-                print(f"param combinations - {df_grouped_stats.shape}")
-                final_params, df_processed_stats = get_best_params(df_grouped_stats, 
-                                symbol, 
-                                config['eval_params'], 
-                                strategy, 
-                                config['strategy_params'][strategy],
-                                df['close'], 
-                                df['open'].shift(-1))
-                if df_processed_stats is not None:
-                    processed_stats_dfs_list.append(df_processed_stats)
-                logger.info(f"{symbol} - final params - {final_params}")
-        else:
-            logger.warning(f"{symbol} - not enough data - just {len(df)} days")
+        if symbol not in backtested_symbols:
+            
+            # data load
+            
+            print(f"{ctime()} - {symbol}")
+            df = data_load(symbol,
+                        config['data']['data_preference'],
+                        config['data']['start_date'], 
+                        config['data']['end_date'])
+            if len(df) >= config['data']['min_days']:
+                create_path(symbol.replace('/', '-'))
+                data_stats(df, symbol)
+                open_price, _, close_price, _ = data_split(df, symbol, 
+                                                        config['rolling_split_params'])
+                print(open_price.shape, close_price.shape)
+                for strategy in config['strategies']:
+                    create_path(symbol.replace('/', '-'), strategy)
+                    #pdb.set_trace()
+                    df_stats = strategy_stats(open_price, 
+                                            close_price, 
+                                            strategy, 
+                                            config['strategy_params'][strategy],
+                                            symbol)
+                    
+                    df_grouped_stats = strategy_grouped_stats(df_stats, 
+                                                            len(open_price), 
+                                                            symbol, 
+                                                            strategy)
+                    print(f"param combinations - {df_grouped_stats.shape}")
+                    final_params, df_processed_stats = get_best_params(df_grouped_stats, 
+                                    symbol, 
+                                    config['eval_params'], 
+                                    strategy, 
+                                    config['strategy_params'][strategy],
+                                    df['close'], 
+                                    df['open'].shift(-1))
+                    if df_processed_stats is not None:
+                        processed_stats_dfs_list.append(df_processed_stats)
+                    logger.info(f"{symbol} - final params - {final_params}")
+            else:
+                logger.warning(f"{symbol} - not enough data - just {len(df)} days")
     try:
         df_stats_final = pd.concat(processed_stats_dfs_list, ignore_index = True)
-        df_stats_final.to_csv(f"../outputs/all_intermediate_params.csv", index = False, header = True)
+        current_time = datetime.now().strftime('%Y-%m-%d_%H-%M')
+        df_stats_final.to_csv(f"../outputs/all_intermediate_params_{current_time}.csv", index = False, header = True)
     except:
         logger.info(f"{symbol} - some problem with concat of all symbols params df")
     logger.info(f"XXXXXXXXXXXXXXXXXXXXX ---- DONE ---- XXXXXXXXXXXXXXXXXXXXX")
-    # prefix p_ alebo param_ v nazvoch stlpcov?
-    # symboly do separe fajlu (asi bude separe script na ich vygenerovanie)
-    # daj filter na max drawdown %
-    # upravit strategiu
-    
+
+        # daj filter na max drawdown %
+        # upravit strategiu
+        
 if __name__ == '__main__':
     main()

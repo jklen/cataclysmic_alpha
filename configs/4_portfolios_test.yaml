@@ -1,0 +1,486 @@
+p1: # XXXXXXXXXXXXXXXXx best symbols XXXXXXXXXXXXXXXXXXXXXXXX
+  symbols:
+    PLTR:
+      hhhl:
+        params:
+          window_entry: 9
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    BTC/USD:
+      hhhl:
+        params:
+          window_entry: 3
+          hh_hl_counts: 1
+          window_exit: 7
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
+    AAL:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 2
+          window_exit: 3
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+    VRT:
+      hhhl:
+        params:
+          window_entry: 4
+          hh_hl_counts: 1
+          window_exit: 6
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    GBTC:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 8
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    DELL:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 3
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+    GM:
+      hhhl:
+        params:
+          window_entry: 8
+          hh_hl_counts: 1
+          window_exit: 8
+          lh_counts: 1  
+        stoploss: 0.05
+        take_profit: 0.2
+    IYR:
+      hhhl:
+        params:
+          window_entry: 10
+          hh_hl_counts: 2
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    DKNG:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 4
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    EBAY:
+      hhhl:
+        params:
+          window_entry: 3
+          hh_hl_counts: 2
+          window_exit: 4
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
+    CRWD:
+      hhhl:
+        params:
+          window_entry: 10
+          hh_hl_counts: 2
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+  weights: 
+    initial: equal
+    running: equal
+  portfolio_size: 5000
+  data_preference: alpaca
+  min_available_cash: 100
+p2: # XXXXXXXXXXXXXXXXXXXXXXXXX 2nd best symbols XXXXXXXXXXXXXXXXXXXXX
+  symbols:
+    AAPL:
+      hhhl:
+        params:
+          window_entry: 3
+          hh_hl_counts: 1
+          window_exit: 6
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
+    GOOGL:
+      hhhl:
+        params:
+          window_entry: 6
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1  
+        stoploss: 0.05
+        take_profit: 0.2
+    META:
+      hhhl:
+        params:
+          window_entry: 3
+          hh_hl_counts: 1
+          window_exit: 4
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
+    MRVL:
+      hhhl:
+        params:
+          window_entry: 5
+          hh_hl_counts: 1
+          window_exit: 3
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+    MSTR:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 2
+          window_exit: 9
+          lh_counts: 4  
+        stoploss: 0.05
+        take_profit: 0.2
+    SCHD:
+      hhhl:
+        params:
+          window_entry: 6
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    BITO:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 3
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    AVGO:
+      hhhl:
+        params:
+          window_entry: 6
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2  
+        stoploss: 0.05
+        take_profit: 0.2
+    SOUN:
+      hhhl:
+        params:
+          window_entry: 3
+          hh_hl_counts: 2
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+  weights: 
+    initial: equal
+    running: win_rate
+    running_params:
+        min_trades: 5
+        min_weight: 0.05 # eg max 20 symbolov na portfolio
+        min_symbols: 7 # kolko symbolov je mat min na kalkulaciu running weight. Ak nejaky symbol nebude mat dostatocny min trades, bude mat min vahu   
+  portfolio_size: 5000
+  data_preference: yf
+  min_available_cash: 100
+p3: # XXXXXXXXXXXXXXXX portfolio 3 XXXXXXXXXXXXXXX
+  symbols:
+    TSLA:
+      hhhl:
+        params:
+          window_entry: 4
+          hh_hl_counts: 1
+          window_exit: 6
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    NVDA:
+      hhhl:
+        params:
+          window_entry: 4
+          hh_hl_counts: 1
+          window_exit: 3
+          lh_counts: 3  
+        stoploss: 0.05
+        take_profit: 0.2
+    AMD:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 6
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+    QQQ:
+      hhhl:
+        params:
+          window_entry: 9
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    AMZN:
+      hhhl:
+        params:
+          window_entry: 6
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    TQQQ:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 8
+          lh_counts: 5
+        stoploss: 0.05
+        take_profit: 0.2
+    VOO:
+      hhhl:
+        params:
+          window_entry: 6
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    BABA:
+      hhhl:
+        params:
+          window_entry: 6
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2  
+        stoploss: 0.05
+        take_profit: 0.2
+    BA:
+      hhhl:
+        params:
+          window_entry: 7
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    XLI:
+      hhhl:
+        params:
+          window_entry: 4
+          hh_hl_counts: 1
+          window_exit: 6
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+  weights: 
+    initial: equal
+    running: equal
+  portfolio_size: 5000
+  data_preference: yf
+  min_available_cash: 100
+p4: # XXXXXXXXXXXXXXXXXXX portfolio 4 - weak symbols XXXXXXXXXXXXXXXXXXX
+  symbols:
+    RIOT:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    NEE:
+      hhhl:
+        params:
+          window_entry: 4
+          hh_hl_counts: 1
+          window_exit: 4
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
+    SLV:
+      hhhl:
+        params:
+          window_entry: 7
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    SHOP:
+      hhhl:
+        params:
+          window_entry: 7
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    FAST:
+      hhhl:
+        params:
+          window_entry: 7
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    SPXL:
+      hhhl:
+        params:
+          window_entry: 5
+          hh_hl_counts: 1
+          window_exit: 3
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    VALE:
+      hhhl:
+        params:
+          window_entry: 10
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    SNAP:
+      hhhl:
+        params:
+          window_entry: 4
+          hh_hl_counts: 3
+          window_exit: 3
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+    WDC:
+      hhhl:
+        params:
+          window_entry: 3
+          hh_hl_counts: 1
+          window_exit: 5
+          lh_counts: 5
+        stoploss: 0.05
+        take_profit: 0.2
+    MO:
+      hhhl:
+        params:
+          window_entry: 6
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    PM:
+      hhhl:
+        params:
+          window_entry: 7
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    SQ:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 6
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+    PDD:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    ABBV:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 5
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+    "ON":
+      hhhl:
+        params:
+          window_entry: 6
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    UPRO:
+      hhhl:
+        params:
+          window_entry: 7
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 1
+        stoploss: 0.05
+        take_profit: 0.2
+    TSLL:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 2
+          window_exit: 4
+          lh_counts: 4
+        stoploss: 0.05
+        take_profit: 0.2
+    PBR:
+      hhhl:
+        params:
+          window_entry: 4
+          hh_hl_counts: 1
+          window_exit: 3
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+    MP:
+      hhhl:
+        params:
+          window_entry: 7
+          hh_hl_counts: 1
+          window_exit: 2
+          lh_counts: 2
+        stoploss: 0.05
+        take_profit: 0.2
+    U:
+      hhhl:
+        params:
+          window_entry: 2
+          hh_hl_counts: 1
+          window_exit: 6
+          lh_counts: 3
+        stoploss: 0.05
+        take_profit: 0.2
+  weights: 
+    initial: equal
+    running: equal
+  portfolio_size: 5000
+  data_preference: yf
+  min_available_cash: 100

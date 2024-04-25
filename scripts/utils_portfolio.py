@@ -273,8 +273,7 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
     df.to_sql('positions', con, if_exists = 'append', index = False)
        
     con.close()
-
-    return df[['symbol', 'position']].set_index('symbol')
+    return df.set_index('symbol')['position'].round(2) #df[['symbol', 'position']].set_index('symbol')
 
 def open_positions(sizes, trades):
     trading_client = create_trading_client()

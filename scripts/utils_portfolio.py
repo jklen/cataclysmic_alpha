@@ -330,6 +330,7 @@ def calculate_closed_trades_stats(symbols):
         df_orders = pd.DataFrame(filtered_orders)
         
         if len(df_orders) > 0:
+            df_orders = df_orders.loc[~df_orders['filled_at'].isna(),:]
             df_orders['filled_qty'] = df_orders['filled_qty'].apply(float)
             df_orders['filled_avg_price'] = df_orders['filled_avg_price'].apply(float) # converting via astype does not work
             df_orders['side'] = df_orders['side'].apply(str)

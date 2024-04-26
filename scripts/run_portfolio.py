@@ -76,7 +76,6 @@ def main(path_config):
                                weights,
                                script_run_id,
                                timestamp)
-        pdb.set_trace()
         open_positions(sizes, trades)
             
     

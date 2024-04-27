@@ -1,6 +1,6 @@
 import pdb
 import logging
-import logging.config
+from logging.handlers import TimedRotatingFileHandler
 import json
 import pandas as pd
 import click
@@ -11,12 +11,27 @@ from utils_portfolio import check_weights, run_strategy, position_sizes, \
     open_positions, close_position, eval_position, strategies_directions, correct_date, \
     update_portfolio_state, update_portfolio_info, generate_id, crypto_map
     
-with open('../portfolio_logging_config.json', 'r') as config_file:
-    config_dict = json.load(config_file)
+# Create logger
+logger = logging.getLogger('')
+logger.setLevel(logging.DEBUG)
 
-logging.config.dictConfig(config_dict)
-logger = logging.getLogger(__name__)
-logger.info("Logging is set up.")
+# Create formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# Create console handler and set level to INFO
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
+
+# Create file handler
+logger_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+file_handler = TimedRotatingFileHandler(f'../logs/portfolio_{logger_timestamp}.log', when="h", interval=1, backupCount=0)
+file_handler.setLevel(logging.INFO)
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
+logger.info('Logger is setup')
 
 @click.command() 
 @click.option("-c", "--path_config", help="Path to config yml to use")

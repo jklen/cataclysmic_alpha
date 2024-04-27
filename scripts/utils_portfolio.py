@@ -11,9 +11,11 @@ import vectorbt as vbt
 import uuid
 import sqlite3
 import ast
+import logging
+
+logger = logging.getLogger(__name__)
 
 keys = yaml.safe_load(open('../keys.yaml', 'r'))
-
 
 strategies_directions = {
     'hhhl':'long'
@@ -289,7 +291,9 @@ def open_positions(sizes, trades):
             trading_client.submit_order(params)
     
 
-def update_portfolio_info(portfolio, config, run_id, timestamp):      
+def update_portfolio_info(portfolio, config, run_id, timestamp):
+    logger.info(f"Updating info of portfolio - {portfolio}")
+    
     con = sqlite3.connect('../db/calpha.db')
     date = timestamp.date()
     weights_initial = config['weights']['initial']

@@ -57,7 +57,7 @@ def main(path_config):
                                   datetime(2000, 1, 1), 
                                   datetime.today().date())
 
-            # po polnoci asi do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
+            # po polnoci do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
             strategy = config[portfolio]['symbols'][symbol].keys()
             strategy = list(strategy)[0]
             strategy_params = config[portfolio]['symbols'][symbol][strategy]['params']

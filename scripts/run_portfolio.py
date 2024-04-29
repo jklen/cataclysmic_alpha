@@ -50,6 +50,7 @@ def main(path_config):
                                script_run_id, 
                                timestamp)
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
+        logger.info(f"Portfolio {portfolio} symbols weights - {str(weights)}")
         trades = {}
         for symbol in config[portfolio]['symbols'].keys():
             df_symbol = data_load(symbol, 
@@ -66,7 +67,6 @@ def main(path_config):
             take_profit = config[portfolio]['symbols'][symbol][strategy]['take_profit']
             
             last_day = df_symbol.tail(1).index.get_level_values('timestamp')[0].date()
-            print(portfolio, symbol, weights)
             if correct_date(symbol, last_day):
                 entries, exits = run_strategy(df_symbol, 
                                             symbol, 
@@ -79,18 +79,18 @@ def main(path_config):
                                                stoploss,
                                                take_profit)
                 if trades[symbol] == 'close':
-                    close_position(symbol)
+                    close_position(symbol) # spravit ako open_positions, mozno
     
         # check na total non_marginable_amount?
-        # update_portfolio_state mozno tu - kvoli tomu ze crypto mozem zavret 24/7 - aj check_weights
         
         trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
-
+        logger.info(f"Portfolio {portfolio} symbols actions - {str(trades)}")
         sizes = position_sizes(portfolio,   
                                config[portfolio]['min_available_cash'],
                                weights,
                                script_run_id,
                                timestamp)
+        logger.info(f"Portfolio {portfolio} position sizes - {str(sizes)}")
         open_positions(sizes, trades)
             
     

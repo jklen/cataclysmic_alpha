@@ -31,6 +31,7 @@ def create_trading_client():
     return trading_client
 
 def closed_trades_cnt(symbols):
+    logger.info(f"Calculating closed trades count")
     trading_client = create_trading_client()
     closed_trades = {}
     for symbol in symbols:
@@ -72,6 +73,7 @@ def if_running_weights(symbols, weights_params):
             return False
   
 def calculate_win_rates(symbols):
+    logger.info(f"Calculating win rates")
     trading_client = create_trading_client()
     win_rates = {}
     for symbol in symbols:
@@ -123,6 +125,7 @@ def calculate_weights(series_metric, running_params):
         return df['weight'].to_dict()
 
 def check_weights(symbols, weights_params):
+    logger.info(f"Calculating symbols weights")
     
     if (weights_params['initial'] == 'equal') & (weights_params['running'] == 'equal'):
         one_symbol_weight = 1./len(symbols)
@@ -140,6 +143,7 @@ def check_weights(symbols, weights_params):
                 return {symbol:one_symbol_weight for symbol in symbols}
 
 def run_strategy(df_symbol, symbol, strategy, strategy_params):
+    logger.info(f"{symbol} - running symbols strategy to get entries and exits")
     if strategy == 'hhhl':
         Strategy = HigherHighStrategy
     
@@ -152,6 +156,7 @@ def run_strategy(df_symbol, symbol, strategy, strategy_params):
 
 def is_trading_day(day):
     # https://www.investopedia.com/ask/answers/06/stockexchangeclosed.asp
+    # mozno podla alpacy - ma metodu na calendar
     
     us_stock_market_holidays = [datetime(2025, 1,1), datetime(2025, 1, 15), datetime(2025, 2, 19),
                             datetime(2024, 3, 29), datetime(2024, 5, 27), datetime(2024, 6, 19),
@@ -166,6 +171,7 @@ def is_trading_day(day):
         return False   
 
 def correct_date(symbol, last_day):
+    logger.info(f"Checking if we have correct date")
     todays_date = datetime.today().date()
     
     if symbol in crypto_map.keys():
@@ -204,7 +210,7 @@ def correct_date(symbol, last_day):
             return False # when script is run on non-trading days nothing happens - for regular stocks. Cryptos are 24/7
 
 def eval_position(close_price, entries, exits, strategy_direction, stoploss, take_profit):
-
+    logger.info(f"Evaluating symbol if to open, close, or no change")
     if strategy_direction == 'long':
         pf = vbt.Portfolio.from_signals(close_price, 
                                     entries, 
@@ -218,7 +224,7 @@ def eval_position(close_price, entries, exits, strategy_direction, stoploss, tak
         
         if last_date in list(df_trades['Entry Timestamp'].apply(lambda x:x.date())):
             return 'open'
-        elif last_date in (df_trades['Exit Timestamp'].apply(lambda x:x.date())):
+        elif last_date in list(df_trades['Exit Timestamp'].apply(lambda x:x.date())):
             return 'close'
         else:
             return 'no_change'
@@ -230,12 +236,14 @@ def eval_position(close_price, entries, exits, strategy_direction, stoploss, tak
     pass
 
 def close_position(symbol):
+    logger.info(f"{symbol} - submitting order to close existing position")
     # da ordre na zavretie pozice daneho symbolu
     trading_client = create_trading_client()
     trading_client.close_position(symbol)
     
 def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
     # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
+    logger.info(f"Portfolio {portfolio} - calculating position sizes")
     
     con = sqlite3.connect('../db/calpha.db')
     df_portfolio = pd.read_sql(f"""SELECT * FROM portfolio_state WHERE portfolio_script_run_id = '{run_id}' AND
@@ -278,6 +286,7 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
     return df.set_index('symbol')['position'].round(2) #df[['symbol', 'position']].set_index('symbol')
 
 def open_positions(sizes, trades):
+    logger.info(f"Submitting orders to open positions")
     trading_client = create_trading_client()
     for symbol in trades.keys():
         if trades[symbol] == 'open':
@@ -319,6 +328,7 @@ def update_portfolio_info(portfolio, config, run_id, timestamp):
     con.close()
             
 def calculate_closed_trades_stats(symbols):
+    logger.info(f"Calculating closed trades stats")
     trading_client = create_trading_client()
     stats = []
     for symbol in symbols:
@@ -358,6 +368,7 @@ def calculate_closed_trades_stats(symbols):
             'trades_cnt': closed_trades_cnt}
     
 def calculate_open_trades_stats(symbols):
+    logger.info(f"Calculating open trades stats")
     trading_client = create_trading_client()
     stats = []
     for symbol in symbols:
@@ -389,6 +400,7 @@ def calculate_open_trades_stats(symbols):
                 'symbols': str([])}
         
 def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp):
+    logger.info(f"Updating state of portfolio - {portfolio}")
     con = sqlite3.connect('../db/calpha.db')
     date = timestamp.date() # OK
     # portfolio_script_run_id OK

@@ -239,7 +239,10 @@ def close_position(symbol):
     logger.info(f"{symbol} - submitting order to close existing position")
     # da ordre na zavretie pozice daneho symbolu
     trading_client = create_trading_client()
-    trading_client.close_position(symbol)
+    try:
+        trading_client.close_position(symbol)
+    except:
+        logger.warning(f"{symbol} - trying to close non-existing position")
     
 def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
     # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
@@ -357,15 +360,19 @@ def calculate_closed_trades_stats(symbols):
                                     (df_orders['side_lag'] == 'OrderSide.BUY') &
                                     (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
             df_trades['pl'] = (df_trades['filled_qty'] * df_trades['filled_avg_price']) - (df_trades['filled_qty_lag'] * df_trades['filled_avg_price_lag'])
-            stats.append({'closed_trades_pl': df_trades['pl'].sum(), 'closed_trades_cnt':len(df_trades)})
+            stats.append({'closed_trades_pl': df_trades['pl'].sum(), 
+                          'closed_trades_cnt':len(df_trades),
+                          'closed_winning_trades_cnt': len(df_trades.loc[df_trades['pl'] > 0, :])})
         else:
-            stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0})
+            stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0, 'closed_winning_trades_cnt': 0})
     df_stats = pd.DataFrame(stats, index = symbols)
     closed_trades_pl = df_stats['closed_trades_pl'].sum()
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
+    win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
     
     return {'pl': closed_trades_pl, 
-            'trades_cnt': closed_trades_cnt}
+            'trades_cnt': closed_trades_cnt,
+            'win_rate': win_rate}
     
 def calculate_open_trades_stats(symbols):
     logger.info(f"Calculating open trades stats")
@@ -389,10 +396,12 @@ def calculate_open_trades_stats(symbols):
         open_trades_cost_basis = df_stats['cost_basis'].sum()
         open_trades_cnt = len(df_stats)
         open_trades_symbols = str(df_stats.index.tolist())
+        open_trades_pl = df_stats['unrealized_pl'].sum()
         
         return {'cost_basis': open_trades_cost_basis,
             'trades_cnt': open_trades_cnt,
-            'symbols': open_trades_symbols}
+            'symbols': open_trades_symbols,
+            'pl': open_trades_pl}
         
     else:
         return {'cost_basis': 0,
@@ -411,6 +420,12 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     result_open_trades = calculate_open_trades_stats(symbols)
     available_cash = portfolio_size + result_closed_trades['pl'] - \
         result_open_trades['cost_basis']
+        
+    # equity
+    #   avilable_cash + (cost basis of open trades) + (PL of open trades)
+    equity = available_cash + result_open_trades['cost_basis'] + result_open_trades['pl']
+    
+    # sharpe ratio 
     
     data = (timestamp, 
             date, 
@@ -418,23 +433,20 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
             portfolio,
             portfolio_size, 
             float(available_cash), 
-            None, 
+            float(equity), 
             result_open_trades['trades_cnt'],
             result_open_trades['symbols'], 
-            None, 
+            float(result_open_trades['pl']), 
             result_open_trades['cost_basis'], 
             int(result_closed_trades['trades_cnt']), 
             float(result_closed_trades['pl']), 
-            None, None, None, None, None, None, None)
+            float(result_closed_trades['win_rate']), 
+            None, None, None, None, None, None)
     con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
                 ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
     con.commit()
     con.close()
     
-    # equity
-    #   avilable_cash + (cost basis of open trades) + (PL of open trades)
-    # open_trades_cnt
-    # open_trades_symbols
     # open_trades_PL
     # open_trades_cost_basis_sum
     # closed_trades_cnt

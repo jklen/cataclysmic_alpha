@@ -7,9 +7,9 @@ select * from positions;
 --where date = '2024-04-26';
 
 delete from portfolio_state
-where portfolio_script_run_id = '6b6f1fa3-028c-43d9-b1d3-a0010d24b214';
+where portfolio_script_run_id = '7c268f3b-475c-4292-a399-9044c3605107';
 
 delete from portfolio_info
-where portfolio_script_run_id = '6b6f1fa3-028c-43d9-b1d3-a0010d24b214';
+where portfolio_script_run_id = '7c268f3b-475c-4292-a399-9044c3605107';
 
 

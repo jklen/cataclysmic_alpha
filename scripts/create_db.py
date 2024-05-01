@@ -65,3 +65,40 @@ con.execute("""CREATE TABLE positions(
     min_available_cash REAL);""")
 con.commit()
 con.close()
+
+# create strategy table NOT YET
+
+# con.execute("DROP TABLE IF EXISTS strategy;")
+# con.execute("""CREATE TABLE strategy(
+#     timestamp DATETIME, 
+#     date DATE, 
+#     portfolio_script_run_id TEXT, 
+#     portfolio_name TEXT, 
+#     symbol TEXT, 
+#     datasource TEXT,
+#     hist_date DATETIME,
+#     close_price REAL,
+#     entries BOOL,
+#     exits BOOL
+#     );""")
+# con.commit()
+# con.close()
+
+# # create trades table NOT YET
+
+# con.execute("DROP TABLE IF EXISTS backtest_trades;")
+# con.execute("""CREATE TABLE backtest_trades(
+#     timestamp DATETIME, 
+#     date DATE, 
+#     portfolio_script_run_id TEXT, 
+#     portfolio_name TEXT, 
+#     symbol TEXT, 
+#     trade_entry_date DATETIME,
+#     trade_exit_date DATETIME
+#     avg_entry_price REAL,
+#     avg_exit_price REAL,
+#     pl REAL,
+#     return REAL
+#     );""")
+# con.commit()
+# con.close()

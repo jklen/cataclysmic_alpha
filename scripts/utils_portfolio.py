@@ -224,7 +224,8 @@ def eval_position(close_price, entries, exits, strategy_direction, stoploss, tak
         
         if last_date in list(df_trades['Entry Timestamp'].apply(lambda x:x.date())):
             return 'open'
-        elif last_date in list(df_trades['Exit Timestamp'].apply(lambda x:x.date())):
+        elif (last_date in list(df_trades['Exit Timestamp'].apply(lambda x:x.date()))) and \
+                (df_trades['Status'].iloc[-1] == 'Closed'):
             return 'close'
         else:
             return 'no_change'
@@ -235,14 +236,17 @@ def eval_position(close_price, entries, exits, strategy_direction, stoploss, tak
         pass
     pass
 
-def close_position(symbol):
-    logger.info(f"{symbol} - submitting order to close existing position")
+def close_positions(trades):
+    logger.info(f"Submitting orders to close existing positions")
     # da ordre na zavretie pozice daneho symbolu
     trading_client = create_trading_client()
-    try:
-        trading_client.close_position(symbol)
-    except:
-        logger.warning(f"{symbol} - trying to close non-existing position")
+    
+    for symbol in trades.keys():
+        if trades[symbol] == 'close':
+            try:
+                trading_client.close_position(symbol)
+            except:
+                logger.warning(f"{symbol} - trying to close non-existing position")
     
 def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
     # kalkulacia velkosti pozicii symbolov kde sa maju otvorit nove pozicie
@@ -406,7 +410,8 @@ def calculate_open_trades_stats(symbols):
     else:
         return {'cost_basis': 0,
                 'trades_cnt': 0,
-                'symbols': str([])}
+                'symbols': str([]),
+                'pl':0}
         
 def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp):
     logger.info(f"Updating state of portfolio - {portfolio}")

@@ -8,7 +8,7 @@ import yaml
 from datetime import datetime, timedelta
 from utils_strategy import data_load
 from utils_portfolio import check_weights, run_strategy, position_sizes, \
-    open_positions, close_position, eval_position, strategies_directions, correct_date, \
+    open_positions, close_positions, eval_position, strategies_directions, correct_date, \
     update_portfolio_state, update_portfolio_info, generate_id, crypto_map
     
 # Create logger
@@ -78,20 +78,19 @@ def main(path_config):
                                                strategy_direction, 
                                                stoploss,
                                                take_profit)
-                if trades[symbol] == 'close':
-                    close_position(symbol) # spravit ako open_positions, mozno
-    
+                    
         # check na total non_marginable_amount?
         
         trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
         logger.info(f"Portfolio {portfolio} symbols actions - {str(trades)}")
+        #close_positions(trades)
         sizes = position_sizes(portfolio,   
                                config[portfolio]['min_available_cash'],
                                weights,
                                script_run_id,
                                timestamp)
         logger.info(f"Portfolio {portfolio} position sizes - {str(sizes)}")
-        open_positions(sizes, trades)
+        #open_positions(sizes, trades)
             
     
 if __name__ == '__main__':

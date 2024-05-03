@@ -458,9 +458,20 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     # closed_trades_PL
     # win_rate
     # sharpe_ratio
+    # sharpe_ratio_rolling_1w
+    # sharpe_ratio_rolling_1m # dorobit
+    # sharpe_ratio_rolling_3m # dorobit
     # calmar_ratio
     # sortino_ratio
     # total_return
+    # total_return_rolling_1w # dorobit
+    # total_return_rolling_1m # dorobit
+    # total_return_rolling_3m # dorobit
+    # absolute_return # dorobit
+    # absolute_return_rolling_1w # dorobit
+    # absolute_return_rolling_1m # dorobit
+    # absolute_return_rolling_3m # dorobit
+    # daily return - #TODO dorobit stlpec v db
     # max_drawdown
     # max_drawdown_duration
     

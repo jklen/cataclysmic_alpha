@@ -51,15 +51,22 @@
 # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX DALSIE STEPY
 # 
 # dopocitat ostatne metriky v portfoliu, vratane open/closed trades pl perc
+#   sharpe ratio
+#
 # strategy backtest - foldre podla priorit
-# v strategy backtest user prompt na parameter "vymazat foldre"
+# v strategy backtest user prompt na parameter "vymazat foldre"  - pre istotu
 # validovat ci portfolio scripty funguju spravne (obchody)
-# zopakovat test portfolii na 10k 
+# zopakovat test portfolii na 5k 
 # zadefinovane portfolia
 #    - vsetky final params, vahy budu equal na zaciatok
 #    - manualne vyber niekolko, vahy equal
 #    - random
-#    - vsetky final params, vahy podla (1. podobnost rozdelenia trades/returns s historickym, 2. quartalny % returns, 3. win/loss ratio, 4. std)
+#    - vsetky final params, vahy podla 
+#           1. podobnost rozdelenia trades/returns s historickym, 
+#           2. quartalny % returns, 
+#           3. win_rate, 
+#           4. std
+#           5. trade win probability - natrenovat predtym model z backtestu, tj target 0/1 - win/loose a vstupy technicke + fund. indikatory)
 #    - manualne so vsetkym co hore
 #    - vsetky final params, ale vahy podla performance strategiii a symbolov
 #    - script construct_portfolio.py ktory vytvori json, yaml alebo df, kde budu tieto portfolia zadefinovane

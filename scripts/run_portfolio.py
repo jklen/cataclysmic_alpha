@@ -83,15 +83,16 @@ def main(path_config):
         
         trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
         logger.info(f"Portfolio {portfolio} symbols actions - {str(trades)}")
-        #close_positions(trades)
+        close_positions(trades)
         sizes = position_sizes(portfolio,   
                                config[portfolio]['min_available_cash'],
                                weights,
                                script_run_id,
                                timestamp)
         logger.info(f"Portfolio {portfolio} position sizes - {str(sizes)}")
-        #open_positions(sizes, trades)
-            
+        open_positions(sizes, trades)
+        
+        logger.info(f"XXXXXXXXXXXXXXXXXXXX --- DONE --- XXXXXXXXXXXXXXXXXXXX") 
     
 if __name__ == '__main__':
     main()

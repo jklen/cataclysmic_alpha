@@ -413,6 +413,36 @@ def calculate_open_trades_stats(symbols):
                 'symbols': str([]),
                 'pl':0}
         
+def calculate_sharpe_ratio(portfolio, todays_return, date, period, trading_period = 252):
+    logger.info(f"{portfolio} - calculating sharpe ratios")
+    con = sqlite3.connect('../db/calpha.db')
+    
+    if period == '1w':
+        period_start = date - timedelta(weeks = 1)
+    elif period == '1m':
+        period_start = date - timedelta(days = 30)
+    elif period == '3m':
+        period_start = date - timedelta(days = 90)
+    elif period == 'overall':
+        period_start = date - timedelta(weeks = 10_000)
+    
+    period_start = period_start.strftime("%Y-%m-%d")
+    df = pd.read_sql(f"select date,
+                            daily_return
+                        from portfolio_state
+                        where portfolio_name = '{portfolio}'
+                            and date >= {period_start}")
+    df.sort_values('date', inplace = True)
+    s = df.set_idex('date')['daily_return']
+    s = pd.concat([s, pd.Series(todays_return, index = [date])])
+    
+    sharpe_ratio = trading_period**(1/2)*(s.mean()/s.std())
+    
+    return sharpe_ratio
+
+def calculate_daily_return(portfolio, equity, portfolio_size):
+    pass
+        
 def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp):
     logger.info(f"Updating state of portfolio - {portfolio}")
     con = sqlite3.connect('../db/calpha.db')
@@ -430,7 +460,21 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     #   avilable_cash + (cost basis of open trades) + (PL of open trades)
     equity = available_cash + result_open_trades['cost_basis'] + result_open_trades['pl']
     
-    # sharpe ratio 
+    # sharpe ratio
+    
+    sr_overall = calculate_sharpe_ratio(portfolio, date, 'overall')
+    sr_1w = calculate_sharpe_ratio(portfolio, date, '1w')
+    sr_1m = calculate_sharpe_ratio(portfolio, date, '1m')
+    sr_3m = calculate_sharpe_ratio(portfolio, date, '3m')
+    
+    # total return
+    
+    tr_overall = calculate_total_return(portfolio, equity, portfolio_size, 'overall')
+    tr_1w = calculate_total_return(portfolio, equity, portfolio_size, '1w')
+    tr_1m = calculate_total_return(portfolio, equity, portfolio_size, '1m')
+    tr_3m = calculate_total_return(portfolio, equity, portfolio_size, '3m')
+    
+    # daily return
     
     data = (timestamp, 
             date, 

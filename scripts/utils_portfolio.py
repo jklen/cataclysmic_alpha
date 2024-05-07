@@ -455,6 +455,96 @@ def calculate_todays_return(portfolio, equity, portfolio_size):
     todays_return = ((equity - df['equity'][0])/df['equity'][0]) - ((portfolio_size - df['portfolio_size'][0])/df['equity'][0])
     
     return todays_return
+
+def calculate_total_return(portfolio, todays_return, date, period):
+    con = sqlite3.connect('../db/calpha.db')
+    
+    if period == '1w':
+        period_start = date - timedelta(weeks = 1)
+    elif period == '1m':
+        period_start = date - timedelta(days = 30)
+    elif period == '3m':
+        period_start = date - timedelta(days = 90)
+    elif period == 'overall':
+        period_start = date - timedelta(weeks = 10_000)
+    
+    period_start = period_start.strftime("%Y-%m-%d")
+        
+    df = pd.read_sql(f"""select date,
+                            daily_return
+                        from portfolio_state
+                        where portfolio_name = '{portfolio}'
+                            and date >= '{period_start}'""",
+                    con)
+    con.close()
+    
+    df.sort_values('date', inplace = True)
+    s = df.set_index('date')['daily_return']
+    s = pd.concat([s, pd.Series(todays_return, index = [date])])
+    cum_return = (s + 1).cumprod()
+    
+    total_return = cum_return[-1] - 1
+    
+    return total_return
+
+def calculate_absolute_return(portfolio, date, closed_trades_pl, open_trades_pl, period):
+    con = sqlite3.connect('../db/calpha.db')
+    
+    if period == '1w':
+        period_start = date - timedelta(weeks = 1)
+    elif period == '1m':
+        period_start = date - timedelta(days = 30)
+    elif period == '3m':
+        period_start = date - timedelta(days = 90)
+    elif period == 'overall':
+        period_start = date - timedelta(weeks = 10_000)
+    
+    period_start = period_start.strftime("%Y-%m-%d")
+        
+    df = pd.read_sql(f"""select date,
+                            closed_trades_pl
+                        from portfolio_state
+                        where portfolio_name = '{portfolio}'
+                            and date >= '{period_start}'""",
+                    con)
+    con.close()
+    
+    df.sort_values('date', inplace = True)
+    s = df.set_index('date')['closed_trades_pl']
+    s = pd.concat([s, pd.Series(closed_trades_pl, index = [date])])
+    abs_return = (s - s.shift(1)).sum() + open_trades_pl
+    
+    return abs_return
+
+def calculate_drawdown(portfolio, date, todays_return):
+    con = sqlite3.connect('../db/calpha.db')    
+        
+    df = pd.read_sql(f"""select date,
+                            daily_return
+                        from portfolio_state
+                        where portfolio_name = '{portfolio}'""",
+                    con)
+    con.close()
+    
+    df.sort_values('date', inplace = True)
+    s = df.set_index('date')['daily_return']
+    s = pd.concat([s, pd.Series(todays_return, index = [date])])
+    
+    cumulative_returns = (1 + s).cumprod()
+    max_drawdown = 0
+    max_drawdown_duration = 0
+
+    peak_index = 0
+    for i in range(1, len(cumulative_returns)):
+        if cumulative_returns[i] > cumulative_returns[peak_index]:
+            peak_index = i
+        else:
+            drawdown = cumulative_returns[peak_index] - cumulative_returns[i]
+            if drawdown > max_drawdown:
+                max_drawdown = drawdown
+                max_drawdown_duration = i - peak_index
+                
+    return max_drawdown, max_drawdown_duration 
         
 def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp):
     logger.info(f"Updating state of portfolio - {portfolio}")
@@ -478,18 +568,18 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     # sharpe ratio
     
     # sr_overall = calculate_sharpe_ratio(portfolio, todays_return, date, 'overall')
-    # sr_1w = calculate_sharpe_ratio(portfolio, date, '1w')
-    # sr_1m = calculate_sharpe_ratio(portfolio, date, '1m')
-    # sr_3m = calculate_sharpe_ratio(portfolio, date, '3m')
     
-    # # total return
+    # total return
     
-    # tr_overall = calculate_total_return(portfolio, equity, portfolio_size, 'overall')
-    # tr_1w = calculate_total_return(portfolio, equity, portfolio_size, '1w')
-    # tr_1m = calculate_total_return(portfolio, equity, portfolio_size, '1m')
-    # tr_3m = calculate_total_return(portfolio, equity, portfolio_size, '3m')
+    # tot_ret_overall = calculate_total_return(portfolio, todays_return, date, 'overall')
     
-    # daily return
+    # absolute return
+    
+    # abs_ret_overall = calculate_absolute_return(portfolio, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
+    
+    # max drawdown and duration
+    
+    # max_drawdown, max_drawdown_duration = calculate_drawdown(portfolio, date, todays_return)
     
     data = (timestamp, 
             date, 
@@ -517,19 +607,10 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     # closed_trades_PL
     # win_rate
     # sharpe_ratio
-    # sharpe_ratio_rolling_1w
-    # sharpe_ratio_rolling_1m # dorobit
-    # sharpe_ratio_rolling_3m # dorobit
     # calmar_ratio
     # sortino_ratio
     # total_return
-    # total_return_rolling_1w # dorobit
-    # total_return_rolling_1m # dorobit
-    # total_return_rolling_3m # dorobit
     # absolute_return # dorobit
-    # absolute_return_rolling_1w # dorobit
-    # absolute_return_rolling_1m # dorobit
-    # absolute_return_rolling_3m # dorobit
     # daily return - #TODO dorobit stlpec v db
     # max_drawdown
     # max_drawdown_duration

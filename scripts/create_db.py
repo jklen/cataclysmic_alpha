@@ -45,7 +45,9 @@ con.execute("""CREATE TABLE portfolio_state(
     sortino_ratio REAL,
     total_return REAL,
     max_drawdown REAL,
-    max_drawdown_duration INT);""")
+    max_drawdown_duration INT,
+    daily_return REAL,
+    absolute_return REAL);""")
 
 # create positions table
 

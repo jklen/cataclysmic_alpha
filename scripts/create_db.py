@@ -48,6 +48,7 @@ con.execute("""CREATE TABLE portfolio_state(
     max_drawdown_duration INT,
     daily_return REAL,
     absolute_return REAL);""")
+#TODO dorobit symbols_with_zero_trades_cnt, all_symbols_cnt
 
 # create positions table
 
@@ -67,6 +68,37 @@ con.execute("""CREATE TABLE positions(
     min_available_cash REAL);""")
 con.commit()
 con.close()
+
+# whole portfolio table
+
+# timestamp
+# date
+# portfolio_script_run_id
+# equity
+# last_equity
+# cash
+# long_market_value
+# short_market_value
+# non_marginable_buying_power - this and above from client.get_account
+# deposits_withdrawals - from account activities
+# subportfolios_cnt
+# subportfolios_allocation
+# open_trades_cnt INT, 
+# open_trades_symbols TEXT, 
+# open_trades_PL REAL, 
+# open_trades_cost_basis_sum REAL, 
+# closed_trades_cnt INT, 
+# closed_trades_PL REAL, 
+# win_rate REAL, 
+# sharpe_ratio REAL, 
+# calmar_ratio REAL,
+# sortino_ratio REAL,
+# total_return REAL,
+# max_drawdown REAL,
+# max_drawdown_duration INT,
+# daily_return REAL,
+# absolute_return REAL
+
 
 # create strategy table NOT YET
 

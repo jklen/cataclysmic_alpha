@@ -49,7 +49,6 @@ def main(path_config):
                                list(config[portfolio]['symbols'].keys()), 
                                script_run_id, 
                                timestamp)
-        break
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         logger.info(f"Portfolio {portfolio} symbols weights - {str(weights)}")
         trades = {}

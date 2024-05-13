@@ -529,19 +529,10 @@ def calculate_drawdown(portfolio, date, todays_return):
     s = df.set_index('date')['daily_return']
     s = pd.concat([s, pd.Series(todays_return, index = [date])])
     
-    cumulative_returns = (1 + s).cumprod()
-    max_drawdown = 0
-    max_drawdown_duration = 0
-
-    peak_index = 0
-    for i in range(1, len(cumulative_returns)):
-        if cumulative_returns[i] > cumulative_returns[peak_index]:
-            peak_index = i
-        else:
-            drawdown = cumulative_returns[peak_index] - cumulative_returns[i]
-            if drawdown > max_drawdown:
-                max_drawdown = drawdown
-                max_drawdown_duration = i - peak_index
+    max_drawdown = qs.stats.max_drawdown(s)
+    
+    cummax = (1 + s).cumprod().cummax()
+    max_drawdown_duration = cummax.value_counts().head(1).iloc[0]
                 
     return max_drawdown, max_drawdown_duration
 

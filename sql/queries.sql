@@ -17,7 +17,7 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 
 delete from portfolio_info
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    '42178984-e181-45bb-8df0-e743700847c6',
+    'd7b514b4-d106-444e-a869-0738dbd36f92',
     'd0d2ebfa-76dd-45a6-a545-0e319d2d9dc1',
     '501f1907-89c5-41cf-a674-2ed8a7f248e9',
     '204690e2-40da-490b-81c0-921764db6731',
@@ -56,7 +56,9 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 --     max_drawdown REAL,
 --     max_drawdown_duration INT,
 --     daily_return REAL,
---     absolute_return REAL);
+--     absolute_return REAL,
+--     symbols_with_zero_trades_cnt INT,
+--     all_symbols_cnt INT);
 
 -- select * from  portfolio_state_added_cols;
 
@@ -87,10 +89,14 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 --     max_drawdown REAL,
 --     max_drawdown_duration INT,
 --     daily_return REAL,
---     absolute_return REAL);
+--     absolute_return REAL,
+--     symbols_with_zero_trades_cnt INT,
+--     all_symbols_cnt INT);
 
 -- insert into portfolio_state
 -- select * from portfolio_state_added_cols;
+
+-- select * from portfolio_state;
 
 
 

@@ -260,6 +260,7 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
     
     available_cash = max(df_portfolio['available_cash'][0], min_avail_cash)
     if df_portfolio['available_cash'][0] < min_avail_cash:
+        logger.warning('Increasing of the portfolio size because not having min available cash')
         portfolio_size = df_portfolio['portfolio_size'][0] + min_avail_cash - df_portfolio['available_cash'][0]
     else:
         portfolio_size = df_portfolio['portfolio_size'][0]
@@ -316,7 +317,7 @@ def update_portfolio_info(portfolio, config, run_id, timestamp):
     weights_initial = config['weights']['initial']
     weights_running = config['weights']['running']
     try:
-        running_params = str(config['weights']['runnig_params'])
+        running_params = str(config['weights']['running_params'])
     except:
         running_params = 'not_defined'
     portfolio_size = config['portfolio_size']
@@ -374,10 +375,12 @@ def calculate_closed_trades_stats(symbols):
     closed_trades_pl = df_stats['closed_trades_pl'].sum()
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
     win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
+    zero_tr_symbols_cnt = (df_stats['closed_trades_cnt'] == 0).sum()
     
     return {'pl': closed_trades_pl, 
             'trades_cnt': closed_trades_cnt,
-            'win_rate': win_rate}
+            'win_rate': win_rate,
+            'symbols_with_zero_trades_cnt': zero_tr_symbols_cnt}
     
 def calculate_open_trades_stats(symbols):
     logger.info(f"Calculating open trades stats")
@@ -627,9 +630,11 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
             float(max_drawdown), 
             int(max_drawdown_duration),
             float(todays_return),
-            float(absolute_return))
+            float(absolute_return),
+            int(result_closed_trades['symbols_with_zero_trades_cnt']),
+            len(symbols))
     con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
     con.commit()
     con.close()
 

@@ -9,7 +9,8 @@ from datetime import datetime, timedelta
 from utils_strategy import data_load
 from utils_portfolio import check_weights, run_strategy, position_sizes, \
     open_positions, close_positions, eval_position, strategies_directions, correct_date, \
-    update_portfolio_state, update_portfolio_info, generate_id, crypto_map
+    update_portfolio_state, update_portfolio_info, generate_id, crypto_map, \
+    update_whole_portfolio_state
     
 # Create logger
 logger = logging.getLogger('')
@@ -40,6 +41,7 @@ def main(path_config):
     script_run_id = generate_id()
     timestamp = datetime.now()
     for portfolio in config.keys():
+        
         update_portfolio_info(portfolio, 
                               config[portfolio], 
                               script_run_id, 
@@ -49,6 +51,7 @@ def main(path_config):
                                list(config[portfolio]['symbols'].keys()), 
                                script_run_id, 
                                timestamp)
+        update_whole_portfolio_state(script_run_id, timestamp)
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         logger.info(f"Portfolio {portfolio} symbols weights - {str(weights)}")
         trades = {}

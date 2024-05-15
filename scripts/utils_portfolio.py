@@ -13,6 +13,7 @@ import sqlite3
 import ast
 import logging
 import quantstats as qs
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -637,6 +638,31 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
                 ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
     con.commit()
     con.close()
+    
+def update_whole_portfolio_state(run_id, timestamp):
+    trading_client = create_trading_client()
+    account_info = trading_client.get_account()
+    url = "https://paper-api.alpaca.markets/v2/account/activities/TRANS"
+
+    headers = {
+        "accept": "application/json",
+        "APCA-API-KEY-ID": keys['paper_key'],
+        "APCA-API-SECRET-KEY": keys['paper_secret']
+    }
+
+    response = requests.get(url, headers=headers)
+    transactions = response.json()
+    #TODO when real account, finish to get deposits/withdrawals
+
+    
+    equity = account_info['equity']
+    last_equity = account_info['last_equity']
+    cash = account_info['cash']
+    long_mk_value = account_info['long_market_value']
+    short_mk_value = account_info['short_market_value']
+    non_marg_buying_power = account_info['non_marginable_buying_power']
+    deposits_withdrawals = None
+    
 
 def generate_id():
     unique_id = uuid.uuid4()

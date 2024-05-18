@@ -431,12 +431,19 @@ def calculate_sharpe_ratio(portfolio, todays_return, date, period, trading_perio
         period_start = date - timedelta(weeks = 10_000)
     
     period_start = period_start.strftime("%Y-%m-%d")
-    df = pd.read_sql(f"""select date,
+    if portfolio == 'whole':
+        df = pd.read_sql(f"""select date,
                             daily_return
-                        from portfolio_state
-                        where portfolio_name = '{portfolio}'
-                            and date >= '{period_start}'""",
-                    con)
+                        from whole_portfolio_state
+                        where date >= '{period_start}'""",
+                        con)
+    else:
+        df = pd.read_sql(f"""select date,
+                                daily_return
+                            from portfolio_state
+                            where portfolio_name = '{portfolio}'
+                                and date >= '{period_start}'""",
+                        con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -474,14 +481,21 @@ def calculate_total_return(portfolio, todays_return, date, period):
         period_start = date - timedelta(weeks = 10_000)
     
     period_start = period_start.strftime("%Y-%m-%d")
-        
-    df = pd.read_sql(f"""select date,
-                            daily_return
-                        from portfolio_state
-                        where portfolio_name = '{portfolio}'
-                            and date >= '{period_start}'""",
-                    con)
-    con.close()
+    
+    if portfolio == 'whole':
+        df = pd.read_sql(f"""select date,
+                                daily_return
+                            from whole_portfolio_state
+                            where date >= '{period_start}'""",
+                            con)
+    else:
+        df = pd.read_sql(f"""select date,
+                                daily_return
+                            from portfolio_state
+                            where portfolio_name = '{portfolio}'
+                                and date >= '{period_start}'""",
+                        con)
+        con.close()
     
     df.sort_values('date', inplace = True)
     s = df.set_index('date')['daily_return']
@@ -503,13 +517,20 @@ def calculate_absolute_return(portfolio, date, closed_trades_pl, open_trades_pl,
         period_start = date - timedelta(weeks = 10_000)
     
     period_start = period_start.strftime("%Y-%m-%d")
-        
-    df = pd.read_sql(f"""select date,
-                            closed_trades_PL
-                        from portfolio_state
-                        where portfolio_name = '{portfolio}'
-                            and date >= '{period_start}'""",
-                    con)
+    
+    if portfolio == 'whole':
+        df = pd.read_sql(f"""select date,
+                                closed_trades_PL
+                            from whole_portfolio_state
+                            where date >= '{period_start}'""",
+                            con)
+    else:
+        df = pd.read_sql(f"""select date,
+                                closed_trades_PL
+                            from portfolio_state
+                            where portfolio_name = '{portfolio}'
+                                and date >= '{period_start}'""",
+                        con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -521,12 +542,19 @@ def calculate_absolute_return(portfolio, date, closed_trades_pl, open_trades_pl,
 
 def calculate_drawdown(portfolio, date, todays_return):
     con = sqlite3.connect('../db/calpha.db')    
-        
-    df = pd.read_sql(f"""select date,
-                            daily_return
-                        from portfolio_state
-                        where portfolio_name = '{portfolio}'""",
-                    con)
+    
+    if portfolio == 'whole':
+        df = pd.read_sql(f"""select date,
+                                daily_return
+                            from whole_portfolio_state
+                            """,
+                            con)
+    else:
+        df = pd.read_sql(f"""select date,
+                                daily_return
+                            from portfolio_state
+                            where portfolio_name = '{portfolio}'""",
+                        con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -542,12 +570,18 @@ def calculate_drawdown(portfolio, date, todays_return):
 
 def calculate_calmar_ratio(portfolio, date, max_drawdown, todays_return, trading_period = 252):
     con = sqlite3.connect('../db/calpha.db')    
-        
-    df = pd.read_sql(f"""select date,
-                            daily_return
-                        from portfolio_state
-                        where portfolio_name = '{portfolio}'""",
-                    con)
+    
+    if portfolio == 'whole':
+        df = pd.read_sql(f""" select date,
+                                daily_return
+                            from whole_portfolio_state""",
+                            con)
+    else:
+        df = pd.read_sql(f"""select date,
+                                daily_return
+                            from portfolio_state
+                            where portfolio_name = '{portfolio}'""",
+                        con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -567,12 +601,18 @@ def calculate_calmar_ratio(portfolio, date, max_drawdown, todays_return, trading
 
 def calculate_sortino_ratio(portfolio, date, todays_return, trading_period = 252):
     con = sqlite3.connect('../db/calpha.db')    
-        
-    df = pd.read_sql(f"""select date,
-                            daily_return
-                        from portfolio_state
-                        where portfolio_name = '{portfolio}'""",
-                    con)
+
+    if portfolio == 'whole':
+        df = pd.read_sql(f""" select date,
+                                daily_return
+                            from whole_portfolio_state""",
+                            con)
+    else:
+        df = pd.read_sql(f"""select date,
+                                daily_return
+                            from portfolio_state
+                            where portfolio_name = '{portfolio}'""",
+                        con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -639,9 +679,11 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     con.commit()
     con.close()
     
-def update_whole_portfolio_state(run_id, timestamp):
+def update_whole_portfolio_state(run_id, timestamp, config):
+    con = sqlite3.connect('../db/calpha.db')
+    date = timestamp.date()
     trading_client = create_trading_client()
-    account_info = trading_client.get_account()
+    account_info = dict(trading_client.get_account())
     url = "https://paper-api.alpaca.markets/v2/account/activities/TRANS"
 
     headers = {
@@ -652,18 +694,62 @@ def update_whole_portfolio_state(run_id, timestamp):
 
     response = requests.get(url, headers=headers)
     transactions = response.json()
-    #TODO when real account, finish to get deposits/withdrawals
-
+    #TODO when real account, finish to get deposits_withdrawals
     
-    equity = account_info['equity']
-    last_equity = account_info['last_equity']
-    cash = account_info['cash']
-    long_mk_value = account_info['long_market_value']
-    short_mk_value = account_info['short_market_value']
-    non_marg_buying_power = account_info['non_marginable_buying_power']
-    deposits_withdrawals = None
+    equity = float(account_info['equity'])
+    last_equity = float(account_info['last_equity'])
+    cash = float(account_info['cash'])
+    long_mk_value = float(account_info['long_market_value'])
+    short_mk_value = float(account_info['short_market_value'])
+    non_marg_buying_power = float(account_info['non_marginable_buying_power'])
+    deposits_withdrawals = 0
+    subportfolios_cnt = len(config.keys())
+    subportfolios_allocation = sum([config[portfolio]['portfolio_size'] for portfolio in config.keys()])
     
-
+    symbols = [config[portfolio]['symbols'].keys() for portfolio in config.keys()]
+    symbols = [item for sublist in symbols for item in sublist]
+    open_trades_stats = calculate_open_trades_stats(symbols)
+    closed_trades_stats = calculate_closed_trades_stats(symbols)
+    todays_return = ((equity - last_equity)/last_equity) - (deposits_withdrawals/last_equity)
+    sharpe_ratio = calculate_sharpe_ratio('whole', todays_return, date, 'overall')
+    total_return = calculate_total_return('whole', todays_return, date, 'overall')
+    absolute_return = calculate_absolute_return('whole', date, closed_trades_stats['pl'], open_trades_stats['pl'], 'overall')
+    max_drawdown, max_drawdown_duration = calculate_drawdown('whole', date, todays_return)
+    calmar_ratio = calculate_calmar_ratio('whole', date, max_drawdown, todays_return)
+    sortino_ratio = calculate_sortino_ratio('whole', date, todays_return)
+    
+    data = (timestamp, 
+            date, 
+            run_id, 
+            equity,
+            last_equity, 
+            cash, 
+            long_mk_value,
+            short_mk_value,
+            non_marg_buying_power,
+            deposits_withdrawals,
+            subportfolios_cnt,
+            float(subportfolios_allocation),
+            int(open_trades_stats['trades_cnt']),
+            str(open_trades_stats['symbols']), 
+            float(open_trades_stats['pl']), 
+            float(open_trades_stats['cost_basis']), 
+            float(closed_trades_stats['trades_cnt']), 
+            float(closed_trades_stats['pl']), 
+            float(closed_trades_stats['win_rate']), 
+            float(sharpe_ratio), 
+            calmar_ratio, 
+            sortino_ratio,
+            float(total_return), 
+            float(max_drawdown), 
+            int(max_drawdown_duration),
+            float(todays_return),
+            float(absolute_return))
+    con.execute("""INSERT INTO whole_portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+    con.commit()
+    con.close()
+    
 def generate_id():
     unique_id = uuid.uuid4()
     unique_id_str = str(unique_id)

@@ -40,6 +40,8 @@ def main(path_config):
     config = yaml.safe_load(open(path_config, 'r'))
     script_run_id = generate_id()
     timestamp = datetime.now()
+    update_whole_portfolio_state(script_run_id, timestamp, config)
+    
     for portfolio in config.keys():
         
         update_portfolio_info(portfolio, 
@@ -51,7 +53,7 @@ def main(path_config):
                                list(config[portfolio]['symbols'].keys()), 
                                script_run_id, 
                                timestamp)
-        update_whole_portfolio_state(script_run_id, timestamp, config)
+        
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         logger.info(f"Portfolio {portfolio} symbols weights - {str(weights)}")
         trades = {}
@@ -68,8 +70,11 @@ def main(path_config):
             strategy_direction = strategies_directions[strategy]
             stoploss = config[portfolio]['symbols'][symbol][strategy]['stoploss']
             take_profit = config[portfolio]['symbols'][symbol][strategy]['take_profit']
-            
-            last_day = df_symbol.tail(1).index.get_level_values('timestamp')[0].date()
+            try:
+                last_day = df_symbol.tail(1).index.get_level_values('timestamp')[0].date()
+            except:
+                logger.warning(f"{portfolio} - {symbol} - data is empty, skipping symbol")
+                continue
             if correct_date(symbol, last_day):
                 entries, exits = run_strategy(df_symbol, 
                                             symbol, 
@@ -86,14 +91,14 @@ def main(path_config):
         
         trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
         logger.info(f"Portfolio {portfolio} symbols actions - {str(trades)}")
-        close_positions(trades)
+        #close_positions(trades)
         sizes = position_sizes(portfolio,   
                                config[portfolio]['min_available_cash'],
                                weights,
                                script_run_id,
                                timestamp)
         logger.info(f"Portfolio {portfolio} position sizes - {str(sizes)}")
-        open_positions(sizes, trades)
+        #open_positions(sizes, trades)
         
         logger.info(f"XXXXXXXXXXXXXXXXXXXX --- DONE --- XXXXXXXXXXXXXXXXXXXX") 
     

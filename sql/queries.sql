@@ -9,30 +9,37 @@ select * from whole_portfolio_state;
 
 delete from portfolio_state
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    'f2cdcab5-86e7-4c63-b7f4-f65bfd5e3bfb',
-    'bf0ae8d0-86d6-46ee-b3a8-6b1f03715906',
-    '501f1907-89c5-41cf-a674-2ed8a7f248e9',
-    '204690e2-40da-490b-81c0-921764db6731',
+    'de2ca3dc-d0bd-4cc4-a4fe-710ba67634f7',
+    'd6ee1e3e-6c03-4927-9996-0b674533dc84',
+    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    'ae708cfb-f7c3-4265-b040-20d10b800758',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
             );
 
 delete from portfolio_info
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    'f2cdcab5-86e7-4c63-b7f4-f65bfd5e3bfb',
-    'd0d2ebfa-76dd-45a6-a545-0e319d2d9dc1',
-    '501f1907-89c5-41cf-a674-2ed8a7f248e9',
-    '204690e2-40da-490b-81c0-921764db6731',
+    'de2ca3dc-d0bd-4cc4-a4fe-710ba67634f7',
+    'd6ee1e3e-6c03-4927-9996-0b674533dc84',
+    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    'ae708cfb-f7c3-4265-b040-20d10b800758',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
             );
 
 delete from positions
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    'f2cdcab5-86e7-4c63-b7f4-f65bfd5e3bfb',
-    'd0d2ebfa-76dd-45a6-a545-0e319d2d9dc1',
-    '501f1907-89c5-41cf-a674-2ed8a7f248e9',
-    '204690e2-40da-490b-81c0-921764db6731',
+    'de2ca3dc-d0bd-4cc4-a4fe-710ba67634f7',
+    'd6ee1e3e-6c03-4927-9996-0b674533dc84',
+    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    'ae708cfb-f7c3-4265-b040-20d10b800758',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
             );
+
+delete from whole_portfolio_state
+where portfolio_script_run_id in (
+        'de2ca3dc-d0bd-4cc4-a4fe-710ba67634f7',
+    'd6ee1e3e-6c03-4927-9996-0b674533dc84',
+    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    'ae708cfb-f7c3-4265-b040-20d10b800758');
 
 -- drop table if exists portfolio_state_added_cols;
 -- create table portfolio_state_added_cols

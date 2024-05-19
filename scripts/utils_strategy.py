@@ -29,6 +29,8 @@ import gc
 
 logger = logging.getLogger(__name__)
 
+cryptos = ['BTC/USD']
+
 # Define the strategy logic in a function
 def hh_hl_strategy_logic(close, window_entry, hh_hl_counts, 
                    window_exit, lh_counts):
@@ -62,43 +64,49 @@ HigherHighStrategy = vbt.IndicatorFactory(
     output_names=['entry_signal', 'exit_signal']
 ).from_apply_func(hh_hl_strategy_logic)
 
-def get_alpaca_crypto_data(symbol, start, end):
-    client = CryptoHistoricalDataClient()
-
-    # Creating request object
-    request_params = CryptoBarsRequest(
-                            symbol_or_symbols=[symbol],
-                            timeframe=TimeFrame.Day,
-                            start=start,
-                            end=end
-                            )
-    bars = client.get_crypto_bars(request_params)
-    df = bars.df
-    df = df[['open', 'high', 'low', 'close', 'volume']]
-    df = df.droplevel('symbol')
-    
-    return df
-
-def get_alpaca_stock_data(symbol, start, end):
+def get_alpaca_data(symbol, start, end, attempts = 10):
     keys = yaml.safe_load(open('../keys.yaml', 'r'))
-    client = StockHistoricalDataClient(api_key=keys['paper_key'],
-                                        secret_key=keys['paper_secret'])
-    request_params = StockBarsRequest(
-                            symbol_or_symbols=[symbol],
-                            timeframe=TimeFrame.Day,
-                            start=start,
-                            end=end
-                            )
-    bars = client.get_stock_bars(request_params)
+    for attempt in range(1, attempts + 1):
+        try:
+            if symbol in cryptos:
+                client = CryptoHistoricalDataClient()
+                request_params = CryptoBarsRequest(
+                                        symbol_or_symbols=[symbol],
+                                        timeframe=TimeFrame.Day,
+                                        start=start,
+                                        end=end
+                                        )
+                bars = client.get_crypto_bars(request_params)
+            else:
+                client = StockHistoricalDataClient(api_key=keys['paper_key'],
+                                                secret_key=keys['paper_secret'])
+                request_params = StockBarsRequest(
+                                        symbol_or_symbols=[symbol],
+                                        timeframe=TimeFrame.Day,
+                                        start=start,
+                                        end=end
+                                        )
+                bars = client.get_stock_bars(request_params)
+            break
+        except:
+            logger.warning(f"{symbol} - attempt {attempt} to download data from alpaca, retrying")
+    
     df = bars.df
     df = df[['open', 'high', 'low', 'close', 'volume']]
     df = df.droplevel('symbol')
     
     return df
 
-def get_yf_data(symbol, start, end):
+def get_yf_data(symbol, start, end, attempts = 10):
     symbol = symbol.replace('/', '-')
-    df = yf.download(symbol, start=start, end=end)
+    
+    for attempt in range(1, attempts + 1):
+        try:
+            df = yf.download(symbol, start=start, end=end, timeout=100)
+            break
+        except:
+            logger.warning(f"{symbol} - attempt {attempt} to download data from YF faile, retrying")
+        
     df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
     df.columns = df.columns.str.lower()
     df.index.name = 'timestamp' 
@@ -114,32 +122,23 @@ def data_load(symbol, data_preference, start, end):
             return pd.DataFrame()
         return df
     elif data_preference == 'alpaca':
+        logger.info(f"{symbol} - downloading data from alpaca")
         try:
-            logger.info(f"{symbol} - downloading data from alpaca - stock client")
-            df = get_alpaca_stock_data(symbol, start, end)
+            df = get_alpaca_data(symbol, start, end)
             return df
         except:
-            try:
-                logger.info(f"{symbol} - downloading data from alpaca - crypto client")
-                df = get_alpaca_crypto_data(symbol, start, end)
-                return df
-            except Exception as e:
-                logger.warning(f"{symbol} - problem downloading data from alpaca via crypto or stock client")
-                return pd.DataFrame()
+            logger.warning(f"{symbol} - problem downloading data from alpaca")
+            return pd.DataFrame()
     elif data_preference == 'longer_period':
         logger.info(f"{symbol} - downloading data from yfinance")
         df_yf =  get_yf_data(symbol, start, end)
             
         try:
-            logger.info(f"{symbol} - downloading data from alpaca - stock client")
-            df_alpaca = get_alpaca_stock_data(symbol, start, end)
+            logger.info(f"{symbol} - downloading data from alpaca")
+            df_alpaca = get_alpaca_data(symbol, start, end)
         except:
-            try:
-                logger.info(f"{symbol} - downloading data from alpaca - crypto client")
-                df_alpaca = get_alpaca_crypto_data(symbol, start, end)
-            except Exception as e:
-                logger.warning(f"{symbol} - problem downloading data from alpaca via crypto or stock client")
-                df_alpaca = pd.DataFrame()
+            logger.warning(f"{symbol} - problem downloading data from alpaca")
+            df_alpaca = pd.DataFrame()
                 
         if len(df_yf) == 0 and len(df_alpaca) == 0:
             logger.warning(f"{symbol} - no data available from yfinance or alpaca")

@@ -680,6 +680,7 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     con.close()
     
 def update_whole_portfolio_state(run_id, timestamp, config):
+    logger.info(f"Updating whole portfolio state")
     con = sqlite3.connect('../db/calpha.db')
     date = timestamp.date()
     trading_client = create_trading_client()

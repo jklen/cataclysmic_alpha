@@ -11,30 +11,100 @@ df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapmi
 external_stylesheets = [dbc.themes.CERULEAN]
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 
+sidebar = dbc.Container([
+    dbc.Card(
+        [
+            html.H4("C alpha"),
+            html.Hr(),
+            dbc.Nav(
+                [
+                    dbc.NavLink("Prompt 1", href="#", id="prompt-1-link"),
+                    dbc.NavLink("Prompt 2", href="#", id="prompt-2-link"),
+                    dbc.NavLink("Prompt 3", href="#", id="prompt-3-link"),
+                ],
+                vertical=True,
+                pills=True,
+            )
+        ], body = True
+            )
+],
+    style={
+    "position": "fixed",
+    "top": 0,
+    "left": 0,
+    "bottom": 0,
+    "width": "18rem"
+})
+
+tabs = dbc.Container([
+    dbc.Tabs(id = 'tabs',
+                 children = [
+                     dbc.Tab(label = 'Whole portfolio', children = [
+                         dbc.Row([
+                             html.Div('daily metrics', 
+                                      id = 'tab1_daily_metrics')
+                         ]),
+                         dbc.Row([
+                             dbc.Col(children = [
+                                 dcc.Graph(figure = {},
+                                           id = 'tab1_chart1_equity')
+                             ], width = 9),
+                             dbc.Col(children = [
+                                 html.Div('selected metrics',
+                                          id = 'tab1_chart1_selected_metrics')
+                             ], width = 3)
+                         ]),
+                         dbc.Row([
+                             dbc.Col([
+                                 dcc.Graph(figure = {},
+                                           id = 'tab1_chart2_cum_metrics')
+                             ], width = 6),
+                             dbc.Col([
+                                 dcc.Graph(figure = {},
+                                           id = 'tab1_chart3_rolling_metrics')
+                             ], width = 6)
+                         ])
+                     ]),
+                     dbc.Tab(label = 'Subportfolios', children = [
+                         dbc.Row([
+                             html.Div(id = 'tab2_daily_metrics')
+                         ])
+                     ]),
+                     dbc.Tab(label = 'Strategies', children = [
+                         dbc.Row([
+                             html.Div(id = 'tab3_strategies_high_level')
+                         ])
+                     ]),
+                     dbc.Tab(label = 'Symbols', children = [
+                         dbc.Row([
+                             dbc.Col(children = [
+                                 dcc.Graph(figure = {},
+                                           id = 'tab4_chart1')
+                             ]),
+                             dbc.Col(children = [
+                                 dcc.Graph(figure = {},
+                                           id = 'tab4_chart2')
+                             ])
+                         ])
+                     ])
+                 ])
+    ])
+
 # App layout
-app.layout = dbc.Container([
-    dbc.Row([
-        html.Div('My First App with Data, Graph, and Controls', className="text-primary text-center fs-3")
-    ]),
+main_content = html.Div(children = [
+        dbc.Row([
+            dbc.Col([
+                sidebar
+            ], width = 2),
+            dbc.Col([
+                tabs
+            ], width = 10)
+        ]),
+        
 
-    dbc.Row([
-        dbc.RadioItems(options=[{"label": x, "value": x} for x in ['pop', 'lifeExp', 'gdpPercap']],
-                       value='lifeExp',
-                       inline=True,
-                       id='radio-buttons-final')
-    ]),
+    ])
 
-    dbc.Row([
-        dbc.Col([
-            dash_table.DataTable(data=df.to_dict('records'), page_size=12, style_table={'overflowX': 'auto'})
-        ], width=6),
-
-        dbc.Col([
-            dcc.Graph(figure={}, id='my-first-graph-final')
-        ], width=6),
-    ]),
-
-], fluid=True)
+app.layout = main_content
 
 # Add controls to build the interaction
 @callback(

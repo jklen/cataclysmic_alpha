@@ -49,7 +49,9 @@ con.execute("""CREATE TABLE portfolio_state(
     daily_return REAL,
     absolute_return REAL,
     symbols_with_zero_trades_cnt INT,
-    all_symbols_cnt INT);""")
+    all_symbols_cnt INT,
+    symbols_to_open_cnt INT,
+    symbols_to_close_cnt INT);""")
 
 # create positions table
 
@@ -101,6 +103,9 @@ con.execute("""create table whole_portfolio_state (
     max_drawdown_duration INT,
     daily_return REAL,
     absolute_return REAL);""")
+
+#TODO 2 nove stlpce - symbols_to_open_cnt, symbols_to_close_cnt
+
 con.commit()
 con.close()
 

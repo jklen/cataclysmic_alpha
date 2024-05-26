@@ -626,7 +626,7 @@ def calculate_sortino_ratio(portfolio, date, todays_return, trading_period = 252
     
     return sortino_ratio
         
-def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp):
+def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp, trades):
     logger.info(f"Updating state of portfolio - {portfolio}")
     con = sqlite3.connect('../db/calpha.db')
     date = timestamp.date() 
@@ -649,7 +649,9 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     max_drawdown, max_drawdown_duration = calculate_drawdown(portfolio, date, todays_return)
     calmar_ratio = calculate_calmar_ratio(portfolio, date, max_drawdown, todays_return)
     sortino_ratio = calculate_sortino_ratio(portfolio, date, todays_return)
-        
+    symbols_to_open_cnt = len([key for key, value in trades.items() if value == 'open'])
+    symbols_to_close_cnt = len([key for key, value in trades.items() if value == 'close'])
+    
     data = (timestamp, 
             date, 
             run_id, 
@@ -673,9 +675,11 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
             float(todays_return),
             float(absolute_return),
             int(result_closed_trades['symbols_with_zero_trades_cnt']),
-            len(symbols))
+            len(symbols),
+            symbols_to_open_cnt,
+            symbols_to_close_cnt)
     con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
     con.commit()
     con.close()
     

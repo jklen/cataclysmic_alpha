@@ -48,11 +48,6 @@ def main(path_config):
                               config[portfolio], 
                               script_run_id, 
                               timestamp)
-        update_portfolio_state(portfolio, 
-                               config[portfolio]['portfolio_size'], 
-                               list(config[portfolio]['symbols'].keys()), 
-                               script_run_id, 
-                               timestamp)
         
         weights = check_weights(config[portfolio]['symbols'].keys(), config[portfolio]['weights'])
         logger.info(f"Portfolio {portfolio} symbols weights - {str(weights)}")
@@ -92,6 +87,12 @@ def main(path_config):
         trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
         logger.info(f"Portfolio {portfolio} symbols actions - {str(trades)}")
         close_positions(trades)
+        update_portfolio_state(portfolio, 
+                        config[portfolio]['portfolio_size'], 
+                        list(config[portfolio]['symbols'].keys()), 
+                        script_run_id, 
+                        timestamp,
+                        trades)
         sizes = position_sizes(portfolio,   
                                config[portfolio]['min_available_cash'],
                                weights,

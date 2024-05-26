@@ -66,7 +66,9 @@ where portfolio_script_run_id in (
 --     daily_return REAL,
 --     absolute_return REAL,
 --     symbols_with_zero_trades_cnt INT,
---     all_symbols_cnt INT);
+--     all_symbols_cnt INT,
+--     symbols_to_open_cnt INT,
+--     symbols_to_close_cnt INT);
 
 -- select * from  portfolio_state_added_cols;
 
@@ -99,7 +101,9 @@ where portfolio_script_run_id in (
 --     daily_return REAL,
 --     absolute_return REAL,
 --     symbols_with_zero_trades_cnt INT,
---     all_symbols_cnt INT);
+--     all_symbols_cnt INT,
+--     symbols_to_open_cnt INT,
+--     symbols_to_close_cnt INT);
 
 -- insert into portfolio_state
 -- select * from portfolio_state_added_cols;

@@ -1,119 +1,179 @@
 # Import packages
-from dash import Dash, html, dash_table, dcc, callback, Output, Input
+from dash import Dash, html, dcc, callback, Output, Input
 import pandas as pd
 import plotly.express as px
 import dash_bootstrap_components as dbc
+import sqlite3
 
-# Incorporate data
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
 
 # Initialize the app - incorporate a Dash Bootstrap theme
 external_stylesheets = [dbc.themes.CERULEAN]
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 
-sidebar = dbc.Container([
-    dbc.Card(
-        [
-            html.H4("C alpha"),
-            html.Hr(),
-            dbc.Nav(
-                [
-                    dbc.NavLink("Prompt 1", href="#", id="prompt-1-link"),
-                    dbc.NavLink("Prompt 2", href="#", id="prompt-2-link"),
-                    dbc.NavLink("Prompt 3", href="#", id="prompt-3-link"),
-                ],
-                vertical=True,
-                pills=True,
-            )
-        ], body = True
-            )
-],
+# Sidebar layout
+sidebar = html.Div(
+    [
+        dbc.Card(
+            [
+                html.H4("C alpha"),
+                html.Hr(),
+                dbc.Nav(
+                    [
+                        dbc.NavLink("Prompt 1", href="#", id="prompt-1-link"),
+                        dbc.NavLink("Prompt 2", href="#", id="prompt-2-link"),
+                        dbc.NavLink("Prompt 3", href="#", id="prompt-3-link"),
+                    ],
+                    vertical=True,
+                    pills=True,
+                ),
+            ],
+            body=True
+        ),
+    ],
     style={
-    "position": "fixed",
-    "top": 0,
-    "left": 0,
-    "bottom": 0,
-    "width": "18rem"
-})
+        "position": "fixed",
+        "top": 0,
+        "left": 0,
+        "bottom": 0,
+        "width": "18rem",
+        "padding": "0.5rem 0.5rem",
+        "backgroundColor": "#f8f9fa",
+    },
+)
 
-tabs = dbc.Container([
-    dbc.Tabs(id = 'tabs',
-                 children = [
-                     dbc.Tab(label = 'Whole portfolio', children = [
-                         dbc.Row([
-                             html.Div('daily metrics', 
-                                      id = 'tab1_daily_metrics')
-                         ]),
-                         dbc.Row([
-                             dbc.Col(children = [
-                                 dcc.Graph(figure = {},
-                                           id = 'tab1_chart1_equity')
-                             ], width = 9),
-                             dbc.Col(children = [
-                                 html.Div('selected metrics',
-                                          id = 'tab1_chart1_selected_metrics')
-                             ], width = 3)
-                         ]),
-                         dbc.Row([
-                             dbc.Col([
-                                 dcc.Graph(figure = {},
-                                           id = 'tab1_chart2_cum_metrics')
-                             ], width = 6),
-                             dbc.Col([
-                                 dcc.Graph(figure = {},
-                                           id = 'tab1_chart3_rolling_metrics')
-                             ], width = 6)
-                         ])
-                     ]),
-                     dbc.Tab(label = 'Subportfolios', children = [
-                         dbc.Row([
-                             html.Div(id = 'tab2_daily_metrics')
-                         ])
-                     ]),
-                     dbc.Tab(label = 'Strategies', children = [
-                         dbc.Row([
-                             html.Div(id = 'tab3_strategies_high_level')
-                         ])
-                     ]),
-                     dbc.Tab(label = 'Symbols', children = [
-                         dbc.Row([
-                             dbc.Col(children = [
-                                 dcc.Graph(figure = {},
-                                           id = 'tab4_chart1')
-                             ]),
-                             dbc.Col(children = [
-                                 dcc.Graph(figure = {},
-                                           id = 'tab4_chart2')
-                             ])
-                         ])
-                     ])
-                 ])
-    ])
+# Tabs layout
+tabs = html.Div(
+    [
+        dbc.Tabs(
+            id='tabs',
+            children=[
+                dbc.Tab(
+                    label='Whole portfolio',
+                    tab_id = 'tab1',
+                    children=[
+                        dbc.Row(id='tab1_daily_metrics', style={"padding": "10px"}),
+                        dbc.Row([
+                            dbc.Col(
+                                children=[
+                                    dcc.Graph(figure={}, id='tab1_chart1_equity')
+                                ],
+                                width=9
+                            ),
+                            dbc.Col(
+                                children=[
+                                    html.Div('selected metrics', id='tab1_chart1_selected_metrics')
+                                ],
+                                width=3
+                            ),
+                        ]),
+                        dbc.Row([
+                            dbc.Col(
+                                [
+                                    dcc.Graph(figure={}, id='tab1_chart2_cum_metrics')
+                                ],
+                                width=6
+                            ),
+                            dbc.Col(
+                                [
+                                    dcc.Graph(figure={}, id='tab1_chart3_rolling_metrics')
+                                ],
+                                width=6
+                            ),
+                        ]),
+                    ]
+                ),
+                dbc.Tab(
+                    label='Subportfolios',
+                    tab_id = 'tab2',
+                    children=[
+                        dbc.Row([html.Div(id='tab2_daily_metrics')]),
+                    ]
+                ),
+                dbc.Tab(
+                    label='Strategies',
+                    tab_id = 'tab3',
+                    children=[
+                        dbc.Row([html.Div(id='tab3_strategies_high_level')]),
+                    ]
+                ),
+                dbc.Tab(
+                    label='Symbols',
+                    tab_id = 'tab4',
+                    children=[
+                        dbc.Row([
+                            dbc.Col(
+                                children=[
+                                    dcc.Graph(figure={}, id='tab4_chart1')
+                                ]
+                            ),
+                            dbc.Col(
+                                children=[
+                                    dcc.Graph(figure={}, id='tab4_chart2')
+                                ]
+                            ),
+                        ]),
+                    ]
+                ),
+            ]
+        ),
+    ],
+    style={
+        "marginLeft": "18rem",  # Ensure enough margin to prevent overlap with sidebar
+        "padding": "0.5rem 0.5rem",
+    }
+)
+
+# XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX tab 1 callbacks XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+# Callback to update metrics
+@app.callback(
+    Output('tab1_daily_metrics', 'children'),
+    Input('tabs', 'active_tab')  # You can choose an appropriate input trigger
+)
+def update_metrics(active_tab):
+    con = sqlite3.connect('../db/calpha.db')
+    query = """
+        select equity,
+                total_return,
+                absolute_return,
+                daily_return,
+                open_trades_cnt,
+                closed_trades_cnt,
+                win_rate,
+                max_drawdown,
+                max_drawdown_duration,
+                sharpe_ratio
+        from whole_portfolio_state
+        order by date desc
+        limit 1"""
+        
+    if active_tab == 'tab1':
+        s = pd.read_sql(query, con).squeeze()
+        s['equity'] = s['equity'].round(0)
+        s['total_return'] = s['total_return'].round(4)
+        s['absolute_return'] = s['absolute_return'].round(0)
+        s['daily_return'] = s['daily_return'].round(8)
+        s['max_drawdown'] = s['max_drawdown'].round(4)
+        s['sharpe_ratio'] = s['sharpe_ratio'].round(2)
+    return generate_metric_elements(s)
+
+def generate_metric_elements(series):
+    elements = []
+
+    for metric, value in series.items():
+        elements.append(
+            dbc.Col(
+                html.Div([
+                    html.H6(metric),
+                    html.P(value)
+                ]),
+                width="auto",
+                className="metric-element"
+            )
+        )
+    return elements
 
 # App layout
-main_content = html.Div(children = [
-        dbc.Row([
-            dbc.Col([
-                sidebar
-            ], width = 2),
-            dbc.Col([
-                tabs
-            ], width = 10)
-        ]),
-        
-
-    ])
-
-app.layout = main_content
-
-# Add controls to build the interaction
-@callback(
-    Output(component_id='my-first-graph-final', component_property='figure'),
-    Input(component_id='radio-buttons-final', component_property='value')
-)
-def update_graph(col_chosen):
-    fig = px.histogram(df, x='continent', y=col_chosen, histfunc='avg')
-    return fig
+app.layout = html.Div([sidebar, tabs])
 
 # Run the app
 if __name__ == '__main__':
@@ -122,7 +182,8 @@ if __name__ == '__main__':
 # taby
 #
 # 1. whole portfolio
-#   - current metrics ako singletons (equity, total_return, last daily return, SR, CR, SR...)
+#   - current metrics ako singletons (equity, total_return %, total absolute return, last daily return, open trades count,
+#           closed trades cnt, win rate, max drawdown, max drawdown duration, SR)
 #   - line chart - equity v case
 #      - ked selectnem periodu, uvidim dane metriky za danu periodu
 #   - chart - kumulativne metriky v case

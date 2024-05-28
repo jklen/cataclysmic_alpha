@@ -133,6 +133,10 @@ def update_metrics(active_tab):
     con = sqlite3.connect('../db/calpha.db')
     query = """
         select equity,
+                long_market_value,
+                short_market_value,
+                non_marginable_buying_power,
+                subportfolios_allocation,
                 total_return,
                 absolute_return,
                 daily_return,
@@ -141,20 +145,49 @@ def update_metrics(active_tab):
                 win_rate,
                 max_drawdown,
                 max_drawdown_duration,
-                sharpe_ratio
+                sharpe_ratio,
+                calmar_ratio,
+                sortino_ratio
         from whole_portfolio_state
         order by date desc
         limit 1"""
         
     if active_tab == 'tab1':
         s = pd.read_sql(query, con).squeeze()
-        s['equity'] = s['equity'].round(0)
+        s['equity'] = s['equity'].round(2)
+        s['long_market_value'] = s['long_market_value'].round(2)
+        s['short_market_value'] = s['short_market_value'].round(2)
+        s['non_marginable_buying_power'] = s['non_marginable_buying_power'].round(2)
+        s['subportfolios_allocation'] = s['subportfolios_allocation'].round(2)
         s['total_return'] = s['total_return'].round(4)
-        s['absolute_return'] = s['absolute_return'].round(0)
+        s['absolute_return'] = s['absolute_return'].round(2)
         s['daily_return'] = s['daily_return'].round(8)
+        s['win_rate'] = s['win_rate'].round(2)
         s['max_drawdown'] = s['max_drawdown'].round(4)
         s['sharpe_ratio'] = s['sharpe_ratio'].round(2)
-    return generate_metric_elements(s)
+        s['calmar_ratio'] = s['calmar_ratio'].round(2)
+        s['sortino_ratio'] = s['sortino_ratio'].round(2)
+        
+        s = s.rename(index={
+            'equity': 'Equity',
+            'long_market_value': 'Long market value',
+            'short_market_value': 'Short market value',
+            'non_marginable_buying_power': 'Buying power',
+            'subportfolios_allocation': 'Subportfolios allocation',
+            'total_return': 'Total Return',
+            'absolute_return': 'Total absolute return',
+            'daily_return': 'Last daily return',
+            'open_trades_cnt': 'Open trades count',
+            'closed_trades_cnt': 'Closed trades count',
+            'win_rate': 'Win rate',
+            'max_drawdown': 'Max drawdown',
+            'max_drawdown_duration': 'Max drawdown duration',
+            'sharpe_ratio': 'Sharpe ratio',
+            'calmar_ratio': 'Calmar ratio',
+            'sortino_ratio': 'Sortino ratio'
+        })
+                
+        return generate_metric_elements(s)
 
 def generate_metric_elements(series):
     elements = []
@@ -162,12 +195,14 @@ def generate_metric_elements(series):
     for metric, value in series.items():
         elements.append(
             dbc.Col(
-                html.Div([
-                    html.H6(metric),
-                    html.P(value)
+                dbc.Card([
+                    dbc.CardBody([
+                        html.H5(metric),
+                        html.P(value)
+                    ], style={"padding": "10px"})
                 ]),
                 width="auto",
-                className="metric-element"
+                style={"margin": "2px", "padding":"2px"}
             )
         )
     return elements

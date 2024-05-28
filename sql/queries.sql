@@ -9,8 +9,8 @@ select * from whole_portfolio_state;
 
 delete from portfolio_state
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    'de2ca3dc-d0bd-4cc4-a4fe-710ba67634f7',
-    'd6ee1e3e-6c03-4927-9996-0b674533dc84',
+    '4e580c64-d39d-439c-bba5-6abc6550af59',
+    'c6850d85-4707-47c3-bc87-c9d56415bd24',
     '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
     'ae708cfb-f7c3-4265-b040-20d10b800758',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
@@ -18,8 +18,8 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 
 delete from portfolio_info
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    'de2ca3dc-d0bd-4cc4-a4fe-710ba67634f7',
-    'd6ee1e3e-6c03-4927-9996-0b674533dc84',
+    '4e580c64-d39d-439c-bba5-6abc6550af59',
+    'c6850d85-4707-47c3-bc87-c9d56415bd24',
     '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
     'ae708cfb-f7c3-4265-b040-20d10b800758',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
@@ -27,8 +27,8 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 
 delete from positions
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    'de2ca3dc-d0bd-4cc4-a4fe-710ba67634f7',
-    'd6ee1e3e-6c03-4927-9996-0b674533dc84',
+    '4e580c64-d39d-439c-bba5-6abc6550af59',
+    'c6850d85-4707-47c3-bc87-c9d56415bd24',
     '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
     'ae708cfb-f7c3-4265-b040-20d10b800758',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
@@ -36,8 +36,8 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 
 delete from whole_portfolio_state
 where portfolio_script_run_id in (
-        'de2ca3dc-d0bd-4cc4-a4fe-710ba67634f7',
-    'd6ee1e3e-6c03-4927-9996-0b674533dc84',
+    '4e580c64-d39d-439c-bba5-6abc6550af59',
+    'c6850d85-4707-47c3-bc87-c9d56415bd24',
     '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
     'ae708cfb-f7c3-4265-b040-20d10b800758');
 

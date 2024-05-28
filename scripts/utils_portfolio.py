@@ -175,6 +175,7 @@ def is_trading_day(day):
 def correct_date(symbol, last_day):
     logger.info(f"Checking if we have correct date")
     todays_date = datetime.today().date()
+    #pdb.set_trace()
     
     if symbol in crypto_map.keys():
         if last_day == (todays_date - timedelta(days = 1)):
@@ -198,7 +199,7 @@ def correct_date(symbol, last_day):
                     return True
                 else:
                     return False
-            elif not today_1 and not today_2: # it was weekend
+            elif not today_1 and not today_2 and today_3: # it was weekend
                 if last_day == (todays_date - timedelta(days = 3)):
                     return True
                 else:

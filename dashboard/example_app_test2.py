@@ -188,8 +188,7 @@ def generate_metric_elements(series):
                 html.Div(
                     [
                         html.H4(metric),
-                        html.B(value, style = {'font-size': '25px'}),
-                        html.Br(),
+                        html.P(value),
                         html.Br()
                     ]),
                 )
@@ -197,7 +196,7 @@ def generate_metric_elements(series):
             dbc.Col(
                 html.Div([
                     html.H2(category),
-                    html.Hr(style = {"width": "70%"}),
+                    html.Hr(),
                     *card_elements
                 ]),
                 width=3

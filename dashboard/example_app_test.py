@@ -1,11 +1,8 @@
 # Import packages
-from dash import Dash, html, dcc, callback, Output, Input
+from dash import Dash, html, dcc, Input, Output
 import pandas as pd
-import plotly.express as px
 import dash_bootstrap_components as dbc
-
-# Incorporate data
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder2007.csv')
+import sqlite3
 
 # Initialize the app - incorporate a Dash Bootstrap theme
 external_stylesheets = [dbc.themes.CERULEAN]
@@ -20,9 +17,10 @@ sidebar = html.Div(
                 html.Hr(),
                 dbc.Nav(
                     [
-                        dbc.NavLink("Prompt 1", href="#", id="prompt-1-link"),
-                        dbc.NavLink("Prompt 2", href="#", id="prompt-2-link"),
-                        dbc.NavLink("Prompt 3", href="#", id="prompt-3-link"),
+                        dbc.NavLink("Whole Portfolio", href="#", id="whole-portfolio-link"),
+                        dbc.NavLink("Subportfolios", href="#", id="subportfolios-link"),
+                        dbc.NavLink("Strategies", href="#", id="strategies-link"),
+                        dbc.NavLink("Symbols", href="#", id="symbols-link"),
                     ],
                     vertical=True,
                     pills=True,
@@ -37,7 +35,7 @@ sidebar = html.Div(
         "left": 0,
         "bottom": 0,
         "width": "18rem",
-        "padding": "2rem 1rem",
+        "padding": "0.5rem 0.5rem",
         "backgroundColor": "#f8f9fa",
     },
 )
@@ -48,91 +46,101 @@ tabs = html.Div(
         dbc.Tabs(
             id='tabs',
             children=[
-                dbc.Tab(
-                    label='Whole portfolio',
-                    children=[
-                        dbc.Row([html.Div('daily metrics', id='tab1_daily_metrics')]),
-                        dbc.Row([
-                            dbc.Col(
-                                children=[
-                                    dcc.Graph(figure={}, id='tab1_chart1_equity')
-                                ],
-                                width=9
-                            ),
-                            dbc.Col(
-                                children=[
-                                    html.Div('selected metrics', id='tab1_chart1_selected_metrics')
-                                ],
-                                width=3
-                            ),
-                        ]),
-                        dbc.Row([
-                            dbc.Col(
-                                [
-                                    dcc.Graph(figure={}, id='tab1_chart2_cum_metrics')
-                                ],
-                                width=6
-                            ),
-                            dbc.Col(
-                                [
-                                    dcc.Graph(figure={}, id='tab1_chart3_rolling_metrics')
-                                ],
-                                width=6
-                            ),
-                        ]),
-                    ]
-                ),
-                dbc.Tab(
-                    label='Subportfolios',
-                    children=[
-                        dbc.Row([html.Div(id='tab2_daily_metrics')]),
-                    ]
-                ),
-                dbc.Tab(
-                    label='Strategies',
-                    children=[
-                        dbc.Row([html.Div(id='tab3_strategies_high_level')]),
-                    ]
-                ),
-                dbc.Tab(
-                    label='Symbols',
-                    children=[
-                        dbc.Row([
-                            dbc.Col(
-                                children=[
-                                    dcc.Graph(figure={}, id='tab4_chart1')
-                                ]
-                            ),
-                            dbc.Col(
-                                children=[
-                                    dcc.Graph(figure={}, id='tab4_chart2')
-                                ]
-                            ),
-                        ]),
-                    ]
-                ),
-            ]
+                dbc.Tab(label='Whole portfolio', tab_id='tab1'),
+                dbc.Tab(label='Subportfolios', tab_id='tab2'),
+                dbc.Tab(label='Strategies', tab_id='tab3'),
+                dbc.Tab(label='Symbols', tab_id='tab4'),
+            ],
         ),
     ],
     style={
-        "marginLeft": "20rem",  # Ensure enough margin to prevent overlap with sidebar
-        "padding": "2rem 1rem",
+        "marginLeft": "18rem",
+        "padding": "0.5rem 0.5rem",
     }
 )
 
-# App layout
-app.layout = html.Div([sidebar, tabs])
+# Define the categories and their corresponding metrics
+categories = {
+    "Equity": ["equity", "long_market_value", "short_market_value", "non_marginable_buying_power", "subportfolios_allocation", "max_drawdown", "max_drawdown_duration"],
+    "Returns": ["total_return", "absolute_return", "daily_return"],
+    "Trades": ["open_trades_cnt", "closed_trades_cnt", "win_rate"],
+    "Ratios": ["sharpe_ratio", "calmar_ratio", "sortino_ratio"]
+}
 
-# Add controls to build the interaction
-@callback(
-    Output(component_id='tab1_chart1_equity', component_property='figure'),
-    Input(component_id='prompt-1-link', component_property='n_clicks')
+# Callback to update metrics
+@app.callback(
+    Output('tab-content', 'children'),
+    Input('tabs', 'active_tab')
 )
-def update_graph(n_clicks):
-    if n_clicks is None:
-        raise dash.exceptions.PreventUpdate
-    fig = px.histogram(df, x='continent', y='pop', histfunc='avg')
-    return fig
+def update_metrics(active_tab):
+    con = sqlite3.connect('../db/calpha.db')
+    query = """
+        select equity,
+               long_market_value,
+               short_market_value,
+               non_marginable_buying_power,
+               subportfolios_allocation,
+               max_drawdown,
+               max_drawdown_duration,
+               total_return,
+               absolute_return,
+               daily_return,
+               open_trades_cnt,
+               closed_trades_cnt,
+               win_rate,
+               sharpe_ratio,
+               calmar_ratio,
+               sortino_ratio
+        from whole_portfolio_state
+        order by date desc
+        limit 1"""
+    
+    if active_tab == 'tab1':
+        s = pd.read_sql(query, con).squeeze()
+        s['equity'] = s['equity'].round(0)
+        s['total_return'] = s['total_return'].round(4)
+        s['absolute_return'] = s['absolute_return'].round(0)
+        s['daily_return'] = s['daily_return'].round(8)
+        s['max_drawdown'] = s['max_drawdown'].round(4)
+        s['sharpe_ratio'] = s['sharpe_ratio'].round(2)
+        s['calmar_ratio'] = s['calmar_ratio'].round(2)
+        s['sortino_ratio'] = s['sortino_ratio'].round(2)
+        s['win_rate'] = s['win_rate'].round(4)
+        con.close()
+        return generate_category_elements(s)
+    else:
+        return html.Div()
+
+def generate_category_elements(series):
+    category_elements = []
+
+    for category, metrics in categories.items():
+        card_elements = []
+        for metric in metrics:
+            value = series.get(metric, 'N/A')
+            card_elements.append(
+                dbc.Card(
+                    dbc.CardBody([
+                        html.H5(metric),
+                        html.P(value)
+                    ]),
+                    className="mb-4"
+                )
+            )
+        category_elements.append(
+            dbc.Col(
+                html.Div([
+                    html.H3(category),
+                    *card_elements
+                ]),
+                width=3
+            )
+        )
+
+    return dbc.Row(category_elements, className="g-3")
+
+# App layout
+app.layout = html.Div([sidebar, tabs, html.Div(id='tab-content', style={"marginLeft": "18rem", "padding": "20px"})])
 
 # Run the app
 if __name__ == '__main__':

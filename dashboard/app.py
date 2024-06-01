@@ -4,6 +4,8 @@ import dash_bootstrap_components as dbc
 import dash
 import sqlite3
 import pandas as pd
+import pdb
+import plotly.express as px
 
 # Initialize the app - incorporate a Dash Bootstrap theme
 external_stylesheets = [dbc.themes.CERULEAN]
@@ -50,7 +52,13 @@ def main_content_layout(button_id):
                          children=[
                              dbc.Tab(label='Overview', tab_id='whole_portfolio_tab1_overview',
                                      children = []),
-                             dbc.Tab(label='Returns', tab_id='whole_portfolio_tab2_returns',
+                             dbc.Tab(label='Equity', tab_id='whole_portfolio_tab2_equity',
+                                     children = []),
+                             dbc.Tab(label='Returns', tab_id='whole_portfolio_tab3_returns',
+                                     children = []),
+                             dbc.Tab(label='Trades', tab_id='whole_portfolio_tab4_trades',
+                                     children = []),
+                             dbc.Tab(label='Ratios', tab_id='whole_portfolio_tab5_ratios',
                                      children = [])
                          ]
                 ),
@@ -105,46 +113,48 @@ def page_content_children(n1, n2, n3, n4):
     Output('tabs_content', 'children'),
     [Input('tabs_whole_portfolio', 'active_tab')]
 )
-def whole_portfolio_tab1_overview_children(active_tab):
+def tabs_content__children(active_tab):
     print('update')
     print(active_tab)
-    if active_tab == 'whole_portfolio_tab1_overview':
-        con = sqlite3.connect('../db/calpha.db')
-        query = """
-            SELECT equity,
-                   long_market_value,
-                   short_market_value,
-                   non_marginable_buying_power,
-                   subportfolios_allocation,
-                   total_return,
-                   absolute_return,
-                   daily_return,
-                   open_trades_cnt,
-                   closed_trades_cnt,
-                   win_rate,
-                   max_drawdown,
-                   max_drawdown_duration,
-                   sharpe_ratio,
-                   calmar_ratio,
-                   sortino_ratio
-            FROM whole_portfolio_state
-            ORDER BY date DESC
-            LIMIT 1"""
-        
-        s = pd.read_sql(query, con).squeeze()
-        s['equity'] = s['equity'].round(2)
-        s['long_market_value'] = s['long_market_value'].round(2)
-        s['short_market_value'] = s['short_market_value'].round(2)
-        s['non_marginable_buying_power'] = s['non_marginable_buying_power'].round(2)
-        s['subportfolios_allocation'] = s['subportfolios_allocation'].round(2)
-        s['total_return'] = s['total_return'].round(4)
-        s['absolute_return'] = s['absolute_return'].round(2)
-        s['daily_return'] = s['daily_return'].round(8)
-        s['win_rate'] = s['win_rate'].round(2)
-        s['max_drawdown'] = s['max_drawdown'].round(4)
-        s['sharpe_ratio'] = s['sharpe_ratio'].round(2)
-        s['calmar_ratio'] = s['calmar_ratio'].round(2)
-        s['sortino_ratio'] = s['sortino_ratio'].round(2)
+    con = sqlite3.connect('../db/calpha.db')
+    query = """
+        SELECT date,
+                equity,
+                long_market_value,
+                short_market_value,
+                non_marginable_buying_power,
+                subportfolios_allocation,
+                total_return,
+                absolute_return,
+                daily_return,
+                open_trades_cnt,
+                closed_trades_cnt,
+                win_rate,
+                max_drawdown,
+                max_drawdown_duration,
+                sharpe_ratio,
+                calmar_ratio,
+                sortino_ratio
+        FROM whole_portfolio_state
+        ORDER BY date ASC
+        """
+    df = pd.read_sql(query, con)
+    df['equity'] = df['equity'].round(2)
+    df['long_market_value'] = df['long_market_value'].round(2)
+    df['short_market_value'] = df['short_market_value'].round(2)
+    df['non_marginable_buying_power'] = df['non_marginable_buying_power'].round(2)
+    df['subportfolios_allocation'] = df['subportfolios_allocation'].round(2)
+    df['total_return'] = df['total_return'].round(4)
+    df['absolute_return'] = df['absolute_return'].round(2)
+    df['daily_return'] = df['daily_return'].round(8)
+    df['win_rate'] = df['win_rate'].round(2)
+    df['max_drawdown'] = df['max_drawdown'].round(4)
+    df['sharpe_ratio'] = df['sharpe_ratio'].round(2)
+    df['calmar_ratio'] = df['calmar_ratio'].round(2)
+    df['sortino_ratio'] = df['sortino_ratio'].round(2)
+    
+    if active_tab == 'whole_portfolio_tab1_overview':        
+        s = df.tail(1).squeeze()
         
         s = s.rename(index={
             'equity': 'Equity',
@@ -166,6 +176,33 @@ def whole_portfolio_tab1_overview_children(active_tab):
         })
                 
         return generate_metric_elements(s)
+    elif active_tab == 'whole_portfolio_tab2_equity':
+        plot1 = px.line(df, x = 'date', y = 'equity', title = 'Equity')
+        plot2 = px.line(df, x = 'date', y = 'non_marginable_buying_power', title = 'Buying power')
+        plot3 = px.line(df, x = 'date', y = 'long_market_value', title = 'Long market value')
+        plot4 = px.line(df, x = 'date', y = 'short_market_value', title = 'Short market value')
+        plot5 = px.line(df, x = 'date', y = 'subportfolios_allocation', title = 'Subportfolios allocation')
+        plot6 = px.line(df, x = 'date', y = 'max_drawdown', title = 'Max drawdown')
+        
+        for plot in [plot1, plot2, plot3, plot4, plot5, plot6]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab2_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab2_plot4', figure = plot4), width = 6)])
+        row3 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot5', figure = plot5), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab2_plot6', figure = plot6), width = 6)])
+        
+        return [row1, row2, row3]
     else:
         return html.Div()
     

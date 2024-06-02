@@ -203,6 +203,73 @@ def tabs_content__children(active_tab):
                         dbc.Col(dcc.Graph(id = 'tab2_plot6', figure = plot6), width = 6)])
         
         return [row1, row2, row3]
+    elif active_tab == 'whole_portfolio_tab3_returns':
+        plot1 = px.line(df, x = 'date', y = 'total_return', title = 'Total return')
+        plot2 = px.line(df, x = 'date', y = 'absolute_return', title = 'Total absolute return')
+        plot3 = px.line(df, x = 'date', y = 'daily_return', title = 'Daily returns')
+        plot4 = px.histogram(df, x = 'daily_return', title = 'Daily returns histogram')
+        
+        for plot in [plot1, plot2, plot3, plot4]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab3_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab3_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab3_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab3_plot4', figure = plot4), width = 6)])
+        
+        return [row1, row2]
+    
+    elif active_tab == 'whole_portfolio_tab4_trades':
+        plot1 = px.line(df, x = 'date', y = 'open_trades_cnt', title = 'Open trades count')
+        plot2 = px.line(df, x = 'date', y = 'closed_trades_cnt', title = 'Closed trades count')
+        plot3 = px.line(df, x = 'date', y = 'win_rate', title = 'Win rate')
+        
+        for plot in [plot1, plot2, plot3]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab4_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab4_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab4_plot3', figure = plot3), width = 6)])
+        
+        return [row1, row2]
+    
+    elif active_tab == 'whole_portfolio_tab5_ratios':
+        plot1 = px.line(df, x = 'date', y = 'sharpe_ratio', title = 'Sharpe ratio')
+        plot2 = px.line(df, x = 'date', y = 'calmar_ratio', title = 'Calmar ratio')
+        plot3 = px.line(df, x = 'date', y = 'sortino_ratio', title = 'Sortino ratio')
+        
+        for plot in [plot1, plot2, plot3]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab5_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab5_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab5_plot3', figure = plot3), width = 6)])
+        
+        return [row1, row2]
     else:
         return html.Div()
     

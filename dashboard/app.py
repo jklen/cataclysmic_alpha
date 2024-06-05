@@ -24,6 +24,7 @@ sidebar = html.Div(
                         dbc.NavLink("Subportfolios", href="/subportfolios", id="subportfolios_link", active="exact"),
                         dbc.NavLink("Strategies", href="/strategies", id="strategies_link", active="exact"),
                         dbc.NavLink("Symbols", href="/symbols", id="symbols_link", active="exact"),
+                        dbc.NavLink("Market", href="/market", id="market_link", active="exact")
                     ],
                     vertical=True,
                     pills=True,
@@ -62,7 +63,7 @@ def main_content_layout(button_id):
                                      children = [])
                          ]
                 ),
-                html.Div(id = 'tabs_content')
+                html.Div(id = 'tabs_content_whole_portfolio')
             ],
             style={
                 "marginLeft": "17rem",
@@ -76,11 +77,17 @@ def main_content_layout(button_id):
                          children=[
                              dbc.Tab(label='Overview', tab_id='subportfolios_tab1_overview',
                                      children = []),
-                             dbc.Tab(label='Returns', tab_id='subportfolios_tab2_returns',
+                             dbc.Tab(label='Equity', tab_id='subportfolios_tab2_equity',
+                                     children = []),
+                             dbc.Tab(label='Returns', tab_id='subportfolios_tab3_returns',
+                                     children = []),
+                             dbc.Tab(label='Trades', tab_id='subportfolios_tab4_trades',
+                                     children = []),
+                             dbc.Tab(label='Ratios', tab_id='subportfolios_tab5_ratios',
                                      children = [])
                          ]
                 ),
-                html.Div(id = 'tabs_content')
+                html.Div(id = 'tabs_content_subportfolios')
             ],
             style={
                 "marginLeft": "17rem",
@@ -110,31 +117,15 @@ def page_content_children(n1, n2, n3, n4):
 
 # Callback to update the content of the tabs
 @app.callback(
-    Output('tabs_content', 'children'),
+    Output('tabs_content_whole_portfolio', 'children'),
     [Input('tabs_whole_portfolio', 'active_tab')]
 )
-def tabs_content__children(active_tab):
+def tabs_content__children_wp(active_tab):
     print('update')
     print(active_tab)
     con = sqlite3.connect('../db/calpha.db')
     query = """
-        SELECT date,
-                equity,
-                long_market_value,
-                short_market_value,
-                non_marginable_buying_power,
-                subportfolios_allocation,
-                total_return,
-                absolute_return,
-                daily_return,
-                open_trades_cnt,
-                closed_trades_cnt,
-                win_rate,
-                max_drawdown,
-                max_drawdown_duration,
-                sharpe_ratio,
-                calmar_ratio,
-                sortino_ratio
+        SELECT *
         FROM whole_portfolio_state
         ORDER BY date ASC
         """
@@ -175,7 +166,7 @@ def tabs_content__children(active_tab):
             'sortino_ratio': 'Sortino ratio'
         })
                 
-        return generate_metric_elements(s)
+        return generate_metric_elements_wp(s)
     elif active_tab == 'whole_portfolio_tab2_equity':
         plot1 = px.line(df, x = 'date', y = 'equity', title = 'Equity')
         plot2 = px.line(df, x = 'date', y = 'non_marginable_buying_power', title = 'Buying power')
@@ -273,7 +264,7 @@ def tabs_content__children(active_tab):
     else:
         return html.Div()
     
-categories = {
+categories_wp = {
     "Equity": ["Equity", "Long market value", "Short market value", "Buying power", "Subportfolios allocation", 
                "Max drawdown", "Max drawdown duration"],
     "Returns": ["Total return", "Total absolute return", "Last daily return"],
@@ -281,10 +272,10 @@ categories = {
     "Ratios": ["Sharpe ratio", "Calmar ratio", "Sortino ratio"]
 }
 
-def generate_metric_elements(series):
+def generate_metric_elements_wp(series):
     category_elements = []
 
-    for category, metrics in categories.items():
+    for category, metrics in categories_wp.items():
         card_elements = []
         for metric in metrics:
             value = series.get(metric, 'N/A')
@@ -295,6 +286,105 @@ def generate_metric_elements(series):
                         html.B(value, style = {'font-size': '25px'}),
                         html.Br(),
                         html.Br()
+                    ]),
+                )
+        category_elements.append(
+            dbc.Col(
+                html.Div([
+                    html.H2(category),
+                    html.Hr(style = {"width": "70%"}),
+                    *card_elements
+                ]),
+                width=3
+            )
+        )
+
+    return dbc.Row(category_elements, className="g-3", style = {'marginTop':'0.2rem'})
+
+@app.callback(
+    Output('tabs_content_subportfolios', 'children'),
+    [Input('tabs_subportfolios', 'active_tab')]
+)
+def tabs_content__children_subp(active_tab):
+    con = sqlite3.connect('../db/calpha.db')
+    query = """
+        SELECT *
+        FROM portfolio_state
+        ORDER BY date ASC
+        """
+    df = pd.read_sql(query, con)
+    
+    df['equity'] = df['equity'].round(2)
+    df['available_cash'] = df['available_cash'].round(2)
+    df['total_return'] = df['total_return'].round(4)
+    df['absolute_return'] = df['absolute_return'].round(2)
+    df['daily_return'] = df['daily_return'].round(8)
+    df['open_trades_PL'] = df['open_trades_PL'].round(2)
+    df['closed_trades_PL'] = df['closed_trades_PL'].round(2)
+    df['win_rate'] = df['win_rate'].round(2)
+    df['max_drawdown'] = df['max_drawdown'].round(4)
+    df['sharpe_ratio'] = df['sharpe_ratio'].round(2)
+    df['calmar_ratio'] = df['calmar_ratio'].round(2)
+    df['sortino_ratio'] = df['sortino_ratio'].round(2)
+    
+    if active_tab == 'subportfolios_tab1_overview':
+        df_tab = df.loc[df['date'] == df['date'].max(), :]
+        df_tab.rename(columns = {
+            'equity':'Equity',
+            'available_cash':'Available cash',
+            'max_drawdown':'Max drawdown',
+            'max_drawdown_duration':'Max drawdown duration',
+            'total_return':'Total return',
+            'absolute_return':'Total absolute return',
+            'daily_return':'Last daily return',
+            'open_trades_cnt':'Open trades count',
+            'open_trades_PL':'Open trades PL',
+            'closed_trades_cnt':'Closed trades count',
+            'closed_trades_PL':'Closed trades PL',
+            'win_rate':'Win rate',
+            'symbols_with_zero_trades_cnt':'Symbols with 0 trades count',
+            'symbols_to_open_cnt':'Symbols to open count',
+            'symbols_to_close_cnt':'Symbols to close count',
+            'sharpe_ratio':'Sharpe ratio',
+            'calmar_ratio':'Calmar ratio',
+            'sortino_ratio':'Sortino ratio',
+            'portfolio_name':'Portfolio'
+        }, inplace = True)
+        return generate_metric_elements_subp(df_tab)
+    
+categories_subp = {
+    "Equity": [("Equity", "Available cash"), 
+               ("Max drawdown", "Max drawdown duration")],
+    "Returns": [("Total return", "Total absolute return"), ("Last daily return",)],
+    "Trades": [("Open trades count", "Open trades PL"), ("Closed trades count", "Closed trades PL"), 
+               ("Win rate", "Symbols with 0 trades count"), ("Symbols to open count", 
+               "Symbols to close count")],
+    "Ratios": [("Sharpe ratio", "Calmar ratio"), ("Sortino ratio", )]
+}
+
+def generate_metric_elements_subp(df):
+    category_elements = []
+
+    for category, metrics in categories_subp.items():
+        card_elements = []
+        for metric in metrics:
+            try:
+                metric[1]
+                df_f = df[['Portfolio', metric[0], metric[1]]]
+            except:
+                df_f = df[['Portfolio', metric[0]]]
+            card_elements.append(
+                html.Div(
+                    [
+                        #html.H4(metric),
+                        dbc.Card(
+                            dbc.Table.from_dataframe(df_f,
+                                                    striped = True,
+                                                    header = True,
+                                                    style = {'marginBottom':'15px',
+                                                             'marginTop':'10px'}),
+                            style = {'marginTop':'15px'}
+                        )
                     ]),
                 )
         category_elements.append(

@@ -6,6 +6,9 @@ import sqlite3
 import pandas as pd
 import pdb
 import plotly.express as px
+import plotly.io as pio
+import plotly.figure_factory as ff
+import numpy as np
 
 # Initialize the app - incorporate a Dash Bootstrap theme
 external_stylesheets = [dbc.themes.CERULEAN]
@@ -115,7 +118,6 @@ def page_content_children(n1, n2, n3, n4):
         button_id = ctx.triggered[0]['prop_id'].split('.')[0]
         return main_content_layout(button_id)
 
-# Callback to update the content of the tabs
 @app.callback(
     Output('tabs_content_whole_portfolio', 'children'),
     [Input('tabs_whole_portfolio', 'active_tab')]
@@ -351,6 +353,103 @@ def tabs_content__children_subp(active_tab):
             'portfolio_name':'Portfolio'
         }, inplace = True)
         return generate_metric_elements_subp(df_tab)
+    elif active_tab == 'subportfolios_tab2_equity':
+        plot1 = px.line(df, x = 'date', y = 'equity', color = 'portfolio_name', title = 'Equity')
+        plot2 = px.line(df, x = 'date', y = 'available_cash', color = 'portfolio_name', title = 'Available cash')
+        plot3 = px.line(df, x = 'date', y = 'max_drawdown', color = 'portfolio_name', title = 'Max drawdown')
+        plot4 = px.line(df, x = 'date', y = 'max_drawdown_duration', color = 'portfolio_name', title = 'Max drawdown duration')
+        
+        for plot in [plot1, plot2, plot3, plot4]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab2_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab2_plot4', figure = plot4), width = 6)])
+        
+        return [row1, row2]
+    elif active_tab == 'subportfolios_tab3_returns':
+        plot1 = px.line(df, x = 'date', y = 'total_return', color = 'portfolio_name', title = 'Total return')
+        plot2 = px.line(df, x = 'date', y = 'absolute_return', color = 'portfolio_name', title = 'Total absolute return')
+        plot3 = px.line(df, x = 'date', y = 'daily_return', color = 'portfolio_name', title = 'Daily returns')
+        
+        df_daily_ret = df.pivot_table(index=df.index, columns='portfolio_name', values='daily_return')
+        daily_ret = [df_daily_ret[column].dropna().tolist() for column in df_daily_ret.columns]
+        plot4 = ff.create_distplot(daily_ret, group_labels = df_daily_ret.columns.tolist(),
+                                   show_hist = False)
+        plot4.update_layout(title_text='Daily returns distplot')
+        
+        for plot in [plot1, plot2, plot3, plot4]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab3_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab3_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab3_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab3_plot4', figure = plot4), width = 6)])
+        
+        return [row1, row2]
+    
+    elif active_tab == 'whole_portfolio_tab4_trades':
+        plot1 = px.line(df, x = 'date', y = 'open_trades_cnt', title = 'Open trades count')
+        plot2 = px.line(df, x = 'date', y = 'closed_trades_cnt', title = 'Closed trades count')
+        plot3 = px.line(df, x = 'date', y = 'win_rate', title = 'Win rate')
+        
+        for plot in [plot1, plot2, plot3]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab4_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab4_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab4_plot3', figure = plot3), width = 6)])
+        
+        return [row1, row2]
+    
+    elif active_tab == 'whole_portfolio_tab5_ratios':
+        plot1 = px.line(df, x = 'date', y = 'sharpe_ratio', title = 'Sharpe ratio')
+        plot2 = px.line(df, x = 'date', y = 'calmar_ratio', title = 'Calmar ratio')
+        plot3 = px.line(df, x = 'date', y = 'sortino_ratio', title = 'Sortino ratio')
+        
+        for plot in [plot1, plot2, plot3]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab5_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'tab5_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab5_plot3', figure = plot3), width = 6)])
+        
+        return [row1, row2]
+    else:
+        return html.Div()
     
 categories_subp = {
     "Equity": [("Equity", "Available cash"), 

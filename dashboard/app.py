@@ -188,12 +188,12 @@ def tabs_content__children_wp(active_tab):
                 }
             )
         
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot1', figure = plot1), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab2_plot2', figure = plot2), width = 6)])
-        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot3', figure = plot3), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab2_plot4', figure = plot4), width = 6)])
-        row3 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot5', figure = plot5), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab2_plot6', figure = plot6), width = 6)])
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab2_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'wp_tab2_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab2_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'wp_tab2_plot4', figure = plot4), width = 6)])
+        row3 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab2_plot5', figure = plot5), width = 6),
+                        dbc.Col(dcc.Graph(id = 'wp_tab2_plot6', figure = plot6), width = 6)])
         
         return [row1, row2, row3]
     elif active_tab == 'whole_portfolio_tab3_returns':
@@ -213,10 +213,10 @@ def tabs_content__children_wp(active_tab):
                 }
             )
         
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab3_plot1', figure = plot1), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab3_plot2', figure = plot2), width = 6)])
-        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab3_plot3', figure = plot3), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab3_plot4', figure = plot4), width = 6)])
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab3_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'wp_tab3_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab3_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'wp_tab3_plot4', figure = plot4), width = 6)])
         
         return [row1, row2]
     
@@ -236,9 +236,9 @@ def tabs_content__children_wp(active_tab):
                 }
             )
         
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab4_plot1', figure = plot1), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab4_plot2', figure = plot2), width = 6)])
-        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab4_plot3', figure = plot3), width = 6)])
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab4_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'wp_tab4_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab4_plot3', figure = plot3), width = 6)])
         
         return [row1, row2]
     
@@ -258,9 +258,9 @@ def tabs_content__children_wp(active_tab):
                 }
             )
         
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab5_plot1', figure = plot1), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab5_plot2', figure = plot2), width = 6)])
-        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab5_plot3', figure = plot3), width = 6)])
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab5_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'wp_tab5_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'wp_tab5_plot3', figure = plot3), width = 6)])
         
         return [row1, row2]
     else:
@@ -370,10 +370,10 @@ def tabs_content__children_subp(active_tab):
                 }
             )
         
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot1', figure = plot1), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab2_plot2', figure = plot2), width = 6)])
-        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab2_plot3', figure = plot3), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab2_plot4', figure = plot4), width = 6)])
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab2_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab2_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab2_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab2_plot4', figure = plot4), width = 6)])
         
         return [row1, row2]
     elif active_tab == 'subportfolios_tab3_returns':
@@ -398,17 +398,47 @@ def tabs_content__children_subp(active_tab):
                 }
             )
         
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab3_plot1', figure = plot1), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab3_plot2', figure = plot2), width = 6)])
-        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab3_plot3', figure = plot3), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab3_plot4', figure = plot4), width = 6)])
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab3_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab3_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab3_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab3_plot4', figure = plot4), width = 6)])
         
         return [row1, row2]
     
-    elif active_tab == 'whole_portfolio_tab4_trades':
-        plot1 = px.line(df, x = 'date', y = 'open_trades_cnt', title = 'Open trades count')
-        plot2 = px.line(df, x = 'date', y = 'closed_trades_cnt', title = 'Closed trades count')
-        plot3 = px.line(df, x = 'date', y = 'win_rate', title = 'Win rate')
+    elif active_tab == 'subportfolios_tab4_trades':
+        plot1 = px.line(df, x = 'date', y = 'open_trades_cnt', color = 'portfolio_name', title = 'Open trades count')
+        plot2 = px.line(df, x = 'date', y = 'open_trades_PL', color = 'portfolio_name', title = 'Open trades PL')
+        plot3 = px.line(df, x = 'date', y = 'closed_trades_cnt', color = 'portfolio_name', title = 'Closed trades count')
+        plot4 = px.line(df, x = 'date', y = 'closed_trades_PL', color = 'portfolio_name', title = 'Closed trades PL')
+        plot5 = px.line(df, x = 'date', y = 'win_rate', color = 'portfolio_name', title = 'Win rate')
+        plot6 = px.line(df, x = 'date', y = 'symbols_to_open_cnt', color = 'portfolio_name', title = 'Symblos to open count')
+        plot7 = px.line(df, x = 'date', y = 'symbols_to_close_cnt', color = 'portfolio_name', title = 'Symblos to close count')
+        
+        for plot in [plot1, plot2, plot3, plot4, plot5, plot6, plot7]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab4_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab4_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab4_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab4_plot4', figure = plot4), width = 6)])
+        row3 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab4_plot5', figure = plot5), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab4_plot6', figure = plot6), width = 6)])
+        row4 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab4_plot7', figure = plot7), width = 6)])
+        
+        return [row1, row2, row3, row4]
+    
+    elif active_tab == 'subportfolios_tab5_ratios':
+        plot1 = px.line(df, x = 'date', y = 'sharpe_ratio', color = 'portfolio_name', title = 'Sharpe ratio')
+        plot2 = px.line(df, x = 'date', y = 'calmar_ratio', color = 'portfolio_name', title = 'Calmar ratio')
+        plot3 = px.line(df, x = 'date', y = 'sortino_ratio', color = 'portfolio_name', title = 'Sortino ratio')
         
         for plot in [plot1, plot2, plot3]:
             plot.update_layout(
@@ -421,31 +451,9 @@ def tabs_content__children_subp(active_tab):
                 }
             )
         
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab4_plot1', figure = plot1), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab4_plot2', figure = plot2), width = 6)])
-        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab4_plot3', figure = plot3), width = 6)])
-        
-        return [row1, row2]
-    
-    elif active_tab == 'whole_portfolio_tab5_ratios':
-        plot1 = px.line(df, x = 'date', y = 'sharpe_ratio', title = 'Sharpe ratio')
-        plot2 = px.line(df, x = 'date', y = 'calmar_ratio', title = 'Calmar ratio')
-        plot3 = px.line(df, x = 'date', y = 'sortino_ratio', title = 'Sortino ratio')
-        
-        for plot in [plot1, plot2, plot3]:
-            plot.update_layout(
-                title={
-                    'y': 0.9,
-                    'x': 0.5,
-                    'xanchor': 'center',
-                    'yanchor': 'top',
-                    'font': {'size': 26}
-                }
-            )
-        
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab5_plot1', figure = plot1), width = 6),
-                        dbc.Col(dcc.Graph(id = 'tab5_plot2', figure = plot2), width = 6)])
-        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'tab5_plot3', figure = plot3), width = 6)])
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab5_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab5_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab5_plot3', figure = plot3), width = 6)])
         
         return [row1, row2]
     else:

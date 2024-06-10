@@ -756,6 +756,61 @@ def update_whole_portfolio_state(run_id, timestamp, config):
     con.commit()
     con.close()
     
+def update_strategy_state(run_id, timestamp, config, trades_all):
+    logger.info(f"Updating state of strategies")
+    con = sqlite3.connect('../db/calpha.db')
+    date = timestamp.date()
+    
+    symbol_strategy_pairs = pd.Series({symbol: list(config[portfolio]['symbols'][symbol].keys())[0]
+                        for portfolio in config.keys()
+                        for symbol in config[portfolio]['symbols'].keys()})
+    unique_strategies = symbol_strategy_pairs.unique()
+    for strategy in unique_strategies:
+        symbols = symbol_strategy_pairs[symbol_strategy_pairs == strategy].index.tolist()
+        result_closed_trades = calculate_closed_trades_stats(symbols)
+        result_open_trades = calculate_open_trades_stats(symbols)
+    
+    todays_return = calculate_todays_return(portfolio, equity, portfolio_size)
+    sharpe_ratio = calculate_sharpe_ratio(portfolio, todays_return, date, 'overall')
+    total_return = calculate_total_return(portfolio, todays_return, date, 'overall')
+    absolute_return = calculate_absolute_return(portfolio, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
+    max_drawdown, max_drawdown_duration = calculate_drawdown(portfolio, date, todays_return)
+    calmar_ratio = calculate_calmar_ratio(portfolio, date, max_drawdown, todays_return)
+    sortino_ratio = calculate_sortino_ratio(portfolio, date, todays_return)
+    symbols_to_open_cnt = len([key for key, value in trades.items() if value == 'open'])
+    symbols_to_close_cnt = len([key for key, value in trades.items() if value == 'close'])
+    
+    data = (timestamp, 
+            date, 
+            run_id, 
+            portfolio,
+            portfolio_size, 
+            float(available_cash), 
+            float(equity), 
+            result_open_trades['trades_cnt'],
+            result_open_trades['symbols'], 
+            float(result_open_trades['pl']), 
+            result_open_trades['cost_basis'], 
+            int(result_closed_trades['trades_cnt']), 
+            float(result_closed_trades['pl']), 
+            float(result_closed_trades['win_rate']), 
+            float(sharpe_ratio), 
+            calmar_ratio, 
+            sortino_ratio,
+            float(total_return), 
+            float(max_drawdown), 
+            int(max_drawdown_duration),
+            float(todays_return),
+            float(absolute_return),
+            int(result_closed_trades['symbols_with_zero_trades_cnt']),
+            len(symbols),
+            symbols_to_open_cnt,
+            symbols_to_close_cnt)
+    con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+    con.commit()
+    con.close()
+    
 def generate_id():
     unique_id = uuid.uuid4()
     unique_id_str = str(unique_id)

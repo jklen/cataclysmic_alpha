@@ -139,6 +139,29 @@ where portfolio_script_run_id in (
 --     daily_return REAL,
 --     absolute_return REAL);
 
-
-
+-- DROP TABLE IF EXISTS strategy_state;
+-- CREATE TABLE strategy_state(
+--     timestamp DATETIME, 
+--     date DATE, 
+--     portfolio_script_run_id TEXT, 
+--     open_trades_cnt INT, 
+--     open_trades_symbols TEXT, 
+--     open_trades_PL REAL, 
+--     open_trades_cost_basis_sum REAL, 
+--     closed_trades_cnt INT, 
+--     closed_trades_PL REAL, 
+--     win_rate REAL, 
+--     sharpe_ratio REAL, 
+--     calmar_ratio REAL,
+--     sortino_ratio REAL,
+--     total_return REAL,
+--     max_drawdown REAL,
+--     max_drawdown_duration INT,
+--     daily_return REAL,
+--     absolute_return REAL,
+--     symbols_with_zero_trades_cnt INT,
+--     all_symbols_cnt INT,
+--     symbols_to_open_cnt INT,
+--     symbols_to_close_cnt INT
+--         );
 

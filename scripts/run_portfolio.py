@@ -10,7 +10,7 @@ from utils_strategy import data_load
 from utils_portfolio import check_weights, run_strategy, position_sizes, \
     open_positions, close_positions, eval_position, strategies_directions, correct_date, \
     update_portfolio_state, update_portfolio_info, generate_id, crypto_map, \
-    update_whole_portfolio_state
+    update_whole_portfolio_state, update_strategy_state
     
 # Create logger
 logger = logging.getLogger('')
@@ -41,6 +41,7 @@ def main(path_config):
     script_run_id = generate_id()
     timestamp = datetime.now()
     update_whole_portfolio_state(script_run_id, timestamp, config)
+    trades_all = []
     
     for portfolio in config.keys():
         
@@ -85,6 +86,7 @@ def main(path_config):
         # check na total non_marginable_amount?
         
         trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
+        trades_all.append(trades)
         logger.info(f"Portfolio {portfolio} symbols actions - {str(trades)}")
         close_positions(trades)
         update_portfolio_state(portfolio, 
@@ -101,7 +103,10 @@ def main(path_config):
         logger.info(f"Portfolio {portfolio} position sizes - {str(sizes)}")
         open_positions(sizes, trades)
         
-        logger.info(f"XXXXXXXXXXXXXXXXXXXX --- DONE --- XXXXXXXXXXXXXXXXXXXX") 
+        logger.info(f"XXXXXXXXXXXXXXXXXXXX --- DONE --- XXXXXXXXXXXXXXXXXXXX")
+    
+    update_strategy_state(script_run_id, timestamp, config, trades_all)
+    #TODO update_symbol_state
     
 if __name__ == '__main__':
     main()
@@ -113,4 +118,5 @@ if __name__ == '__main__':
 # separe script bude bezat pocas market open, ktory kazdu pol hodinu checkne symboly,
 #   ci bol trigernuty stop loss, ak ano, poziciu zavrie
 # separe script ktory checkne po market open, ci moje ordre boli exekuovane
+# ked nastane stock split - checknut alpaca a yf data ci to reflektuju historicky
 

@@ -3,6 +3,8 @@ select * from portfolio_state;
 select * from portfolio_info;
 select * from positions;
 select * from whole_portfolio_state;
+select * from strategy_state;
+select * from symbol_state;
 
 --delete from portfolio_info
 --where date = '2024-04-26';
@@ -165,3 +167,31 @@ where portfolio_script_run_id in (
 --     symbols_to_close_cnt INT
 --         );
 
+CREATE TABLE symbol_state (
+    timestamp DATETIME, 
+    date DATE, 
+    portfolio_script_run_id TEXT, 
+    symbol TEXT,
+    is_open TEXT,
+    open_trade_PL REAL, 
+    open_trade_total_return REAL,
+    cost_basis REAL, 
+    daily_return REAL,
+    last_day_close REAL,
+    current_price REAL,
+    market_value REAL,
+    quantity REAL,
+    trade_opened DATE,
+    days_opened INT,        
+    closed_trades_cnt INT, 
+    closed_trades_PL REAL, 
+    days_since_last_closed_trade INT,
+    win_rate REAL, 
+    sharpe_ratio REAL, 
+    calmar_ratio REAL,
+    sortino_ratio REAL,
+    total_return REAL,
+    max_drawdown REAL,
+    max_drawdown_duration INT,
+    absolute_return REAL
+    );

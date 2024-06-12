@@ -105,7 +105,8 @@ def main(path_config):
         
         logger.info(f"XXXXXXXXXXXXXXXXXXXX --- DONE --- XXXXXXXXXXXXXXXXXXXX")
     
-    update_strategy_state(script_run_id, timestamp, config, trades_all)
+    #update_symbol_state()
+    #update_strategy_state(script_run_id, timestamp, config, trades_all)
     #TODO update_symbol_state
     
 if __name__ == '__main__':

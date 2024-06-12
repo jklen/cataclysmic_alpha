@@ -394,30 +394,45 @@ def calculate_open_trades_stats(symbols):
         try:
             position = trading_client.get_open_position(symbol)
             position_dict = dict(position)
-            keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc']
+            keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
+                            'current_price', 'last_day_price']
             filtered_position = {key: position_dict[key] for key in keys_to_keep if key in position_dict}
             stats.append(filtered_position)
         except:
             pass
     if len(stats) > 0:
         df_stats = pd.DataFrame(stats)
-        df_stats.loc[:,['cost_basis', 'unrealized_pl', 'unrealized_plpc']] = df_stats.loc[:,['cost_basis', 'unrealized_pl', 'unrealized_plpc']].astype('float')
+        cols = ['cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
+                'current_price', 'last_day_price']
+        df_stats.loc[:,cols] = df_stats.loc[:,cols].astype('float')
         df_stats.set_index('symbol', inplace = True)     
         open_trades_cost_basis = df_stats['cost_basis'].sum()
         open_trades_cnt = len(df_stats)
-        open_trades_symbols = str(df_stats.index.tolist())
+        open_trades_symbols = df_stats.index.tolist()
         open_trades_pl = df_stats['unrealized_pl'].sum()
+        open_trades_market_value = df_stats['market_value'].sum()
+        daily_return = df_stats['change_today'].tolist()
+        current_price = df_stats['current_price'].tolist()
+        last_day_price = df_stats['last_day_price'].tolist()
         
         return {'cost_basis': open_trades_cost_basis,
             'trades_cnt': open_trades_cnt,
             'symbols': open_trades_symbols,
-            'pl': open_trades_pl}
+            'pl': open_trades_pl,
+            'market_value':open_trades_market_value,
+            'daily_return_per_symbol':daily_return,
+            'current_price_per_symbol':current_price,
+            'last_day_close_price_per_symbol':last_day_price}
         
     else:
         return {'cost_basis': 0,
                 'trades_cnt': 0,
-                'symbols': str([]),
-                'pl':0}
+                'symbols': [],
+                'pl':0,
+                'market_value':0,
+                'daily_return_per_symbol':[],
+                'current_price_per_symbol':[],
+                'last_day_close_price_per_symbol':[]}
         
 def calculate_sharpe_ratio(portfolio, todays_return, date, period, trading_period = 252):
     con = sqlite3.connect('../db/calpha.db')
@@ -661,7 +676,7 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
             float(available_cash), 
             float(equity), 
             result_open_trades['trades_cnt'],
-            result_open_trades['symbols'], 
+            str(result_open_trades['symbols']), 
             float(result_open_trades['pl']), 
             result_open_trades['cost_basis'], 
             int(result_closed_trades['trades_cnt']), 
@@ -770,7 +785,8 @@ def update_strategy_state(run_id, timestamp, config, trades_all):
         result_closed_trades = calculate_closed_trades_stats(symbols)
         result_open_trades = calculate_open_trades_stats(symbols)
     
-    todays_return = calculate_todays_return(portfolio, equity, portfolio_size)
+        todays_return = strategy_todays_return(result_open_trades['symbols'], 
+                                               result_open_trades['market_value'])
     sharpe_ratio = calculate_sharpe_ratio(portfolio, todays_return, date, 'overall')
     total_return = calculate_total_return(portfolio, todays_return, date, 'overall')
     absolute_return = calculate_absolute_return(portfolio, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
@@ -810,6 +826,12 @@ def update_strategy_state(run_id, timestamp, config, trades_all):
                 ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
     con.commit()
     con.close()
+    
+def strategy_todays_return(open_symbols, open_trades_mk_value):
+    con = sqlite3.connect('../db/calpha.db')
+    # musim trekovat market_value kazdeho  symbolu v case
+    
+    pass
     
 def generate_id():
     unique_id = uuid.uuid4()

@@ -129,7 +129,8 @@ con.execute("""CREATE TABLE strategy_state(
     total_return REAL,
     max_drawdown REAL,
     max_drawdown_duration INT,
-    daily_return REAL,
+    daily_return_avg REAL,
+    daily_return_median REAL,
     absolute_return REAL,
     symbols_with_zero_trades_cnt INT,
     all_symbols_cnt INT,
@@ -138,6 +139,41 @@ con.execute("""CREATE TABLE strategy_state(
     );""")
 con.commit()
 con.close()
+
+# symbol table
+
+con.execute("DROP TABLE IF EXISTS symbol_state;")
+con.execute("""CREATE TABLE symbol_state(
+    timestamp DATETIME, 
+    date DATE, 
+    portfolio_script_run_id TEXT, 
+    symbol TEXT,
+    is_open TEXT,
+    open_trade_PL REAL, 
+    open_trade_total_return REAL,
+    cost_basis REAL, 
+    daily_return REAL,
+    last_day_close REAL,
+    current_price REAL,
+    market_value REAL,
+    quantity REAL,
+    trade_opened DATE,
+    days_opened INT,        
+    closed_trades_cnt INT, 
+    closed_trades_PL REAL, 
+    days_since_last_closed_trade INT,
+    win_rate REAL, 
+    sharpe_ratio REAL, 
+    calmar_ratio REAL,
+    sortino_ratio REAL,
+    total_return REAL,
+    max_drawdown REAL,
+    max_drawdown_duration INT,
+    absolute_return REAL,
+    );""")
+con.commit()
+con.close()
+
 
 # create strategy table NOT YET
 

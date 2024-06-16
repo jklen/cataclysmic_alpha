@@ -395,15 +395,36 @@ def calculate_open_trades_stats(symbols):
             position = trading_client.get_open_position(symbol)
             position_dict = dict(position)
             keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
-                            'current_price', 'last_day_price']
+                            'current_price', 'lastday_price', 'qty', 'side']
             filtered_position = {key: position_dict[key] for key in keys_to_keep if key in position_dict}
+            
+            # get open position filled date
+            
+            request_params = GetOrdersRequest(
+                    status='closed',
+                    symbols=[symbol]
+                    )
+
+            orders = trading_client.get_orders(filter=request_params)
+            orders_dicts = map(dict, orders)
+            keys_to_keep = ['symbol', 'filled_at']
+            filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
+            df_orders = pd.DataFrame(filtered_orders).sort_values(by = 'filled_at', ascending = False)
+            
+            trade_opened_at = df_orders['filled_at'][0]
+            trade_opened_days = (datetime.now().date() - trade_opened_at).days
+            
+            filtered_position['trade_opened_at'] = trade_opened_at
+            filtered_position['days_since_open'] = trade_opened_days
+            
             stats.append(filtered_position)
+            
         except:
             pass
     if len(stats) > 0:
         df_stats = pd.DataFrame(stats)
         cols = ['cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
-                'current_price', 'last_day_price']
+                'current_price', 'lastday_price', 'qty', 'side']
         df_stats.loc[:,cols] = df_stats.loc[:,cols].astype('float')
         df_stats.set_index('symbol', inplace = True)     
         open_trades_cost_basis = df_stats['cost_basis'].sum()
@@ -411,18 +432,13 @@ def calculate_open_trades_stats(symbols):
         open_trades_symbols = df_stats.index.tolist()
         open_trades_pl = df_stats['unrealized_pl'].sum()
         open_trades_market_value = df_stats['market_value'].sum()
-        daily_return = df_stats['change_today'].tolist()
-        current_price = df_stats['current_price'].tolist()
-        last_day_price = df_stats['last_day_price'].tolist()
         
         return {'cost_basis': open_trades_cost_basis,
             'trades_cnt': open_trades_cnt,
             'symbols': open_trades_symbols,
             'pl': open_trades_pl,
             'market_value':open_trades_market_value,
-            'daily_return_per_symbol':daily_return,
-            'current_price_per_symbol':current_price,
-            'last_day_close_price_per_symbol':last_day_price}
+            'df_stats':df_stats}
         
     else:
         return {'cost_basis': 0,
@@ -430,9 +446,7 @@ def calculate_open_trades_stats(symbols):
                 'symbols': [],
                 'pl':0,
                 'market_value':0,
-                'daily_return_per_symbol':[],
-                'current_price_per_symbol':[],
-                'last_day_close_price_per_symbol':[]}
+                'df_stats':pd.DataFrame()}
         
 def calculate_sharpe_ratio(portfolio, todays_return, date, period, trading_period = 252):
     con = sqlite3.connect('../db/calpha.db')
@@ -832,6 +846,55 @@ def strategy_todays_return(open_symbols, open_trades_mk_value):
     # musim trekovat market_value kazdeho  symbolu v case
     
     pass
+
+def update_symbol_state(run_id, timestamp, symbols, config):
+    logger.info(f"Updating state of symbols")
+    con = sqlite3.connect('../db/calpha.db')
+    date = timestamp.date()
+    
+    result_closed_trades = calculate_closed_trades_stats(symbols)
+    result_open_trades = calculate_open_trades_stats(symbols)
+    df_open = result_open_trades['df_stats']
+    
+    for symbol in symbols:
+        for portfolio, data in config.items():
+            if symbol in data['symbols']:
+                strategy = data['symbols'][symbol].keys()[0]
+                break
+        if symbol in result_open_trades['sybols']:
+            is_open = 'Y'
+        else:
+            is_open = 'N'
+        
+        if is_open == 'Y':
+            open_trade_pl = df_open.loc[symbol, 'unrealized_pl']
+            open_trade_total_return = df_open.loc[symbol, 'unrealized_plpc']
+            open_trade_cost_basis = df_open.loc[symbol, 'cost_basis']
+            open_trade_daily_return = df_open.loc[symbol, 'change_today']
+            open_trade_last_day_close = df_open.loc[symbol, 'lastday_price']
+            open_trade_current_price = df_open.loc[symbol, 'price']
+            open_trade_market_value = df_open.loc[symbol, 'market_value']
+            open_trade_qty = df_open.loc[symbol, 'qty']
+            open_trade_side = df_open.loc[symbol, 'side']
+            open_trade_opened_at = df_open.loc[symbol, 'trade_opened_at']
+            open_trade_days_since_open = df_open.loc[symbol, 'days_since_open']
+            
+    # portfolio OK
+    # strategy OK
+    # is_open OK
+    # open_trade_PL OK
+    # open_trade_total_return OK
+    # cost_basis OK
+    # daily_return OK
+    # last_day_close OK
+    # current_price OK
+    # market_value OK
+    # quantity OK
+    # side OK
+    # trade_opened OK
+    # days_opened OK
+    # closed_trades_cnt
+    # closed_trades_PL
     
 def generate_id():
     unique_id = uuid.uuid4()

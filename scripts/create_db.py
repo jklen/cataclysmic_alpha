@@ -148,6 +148,8 @@ con.execute("""CREATE TABLE symbol_state(
     date DATE, 
     portfolio_script_run_id TEXT, 
     symbol TEXT,
+    portfolio TEXT,
+    strategy TEXT
     is_open TEXT,
     open_trade_PL REAL, 
     open_trade_total_return REAL,
@@ -157,6 +159,7 @@ con.execute("""CREATE TABLE symbol_state(
     current_price REAL,
     market_value REAL,
     quantity REAL,
+    side TEXT, 
     trade_opened DATE,
     days_opened INT,        
     closed_trades_cnt INT, 

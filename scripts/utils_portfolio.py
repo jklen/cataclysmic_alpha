@@ -379,10 +379,13 @@ def calculate_closed_trades_stats(symbols):
     win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
     zero_tr_symbols_cnt = (df_stats['closed_trades_cnt'] == 0).sum()
     
+    pdb.set_trace()
+    
     return {'pl': closed_trades_pl, 
             'trades_cnt': closed_trades_cnt,
             'win_rate': win_rate,
-            'symbols_with_zero_trades_cnt': zero_tr_symbols_cnt}
+            'symbols_with_zero_trades_cnt': zero_tr_symbols_cnt,
+            'df_stats':df_stats}
     
 def calculate_open_trades_stats(symbols):
     logger.info(f"Calculating open trades stats")
@@ -392,7 +395,10 @@ def calculate_open_trades_stats(symbols):
         if symbol in crypto_map.keys():
             symbol = crypto_map[symbol]
         try:
-            position = trading_client.get_open_position(symbol)
+            position = trading_client.get_open_position(symbol)            
+        except:
+            pass
+        else:
             position_dict = dict(position)
             keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
                             'current_price', 'lastday_price', 'qty', 'side']
@@ -412,27 +418,27 @@ def calculate_open_trades_stats(symbols):
             df_orders = pd.DataFrame(filtered_orders).sort_values(by = 'filled_at', ascending = False)
             
             trade_opened_at = df_orders['filled_at'][0]
-            trade_opened_days = (datetime.now().date() - trade_opened_at).days
+            trade_opened_days = (datetime.now().date() - trade_opened_at.date()).days
             
             filtered_position['trade_opened_at'] = trade_opened_at
             filtered_position['days_since_open'] = trade_opened_days
             
             stats.append(filtered_position)
             
-        except:
-            pass
     if len(stats) > 0:
         df_stats = pd.DataFrame(stats)
         cols = ['cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
-                'current_price', 'lastday_price', 'qty', 'side']
+                'current_price', 'lastday_price', 'qty']
         df_stats.loc[:,cols] = df_stats.loc[:,cols].astype('float')
         df_stats.set_index('symbol', inplace = True)     
+        df_stats['side'] = df_stats['side'].apply(lambda x: str(x).split('.')[1])
+        df_stats['trade_opened_at'] = df_stats['trade_opened_at'].apply(lambda x:x.date())
         open_trades_cost_basis = df_stats['cost_basis'].sum()
         open_trades_cnt = len(df_stats)
         open_trades_symbols = df_stats.index.tolist()
         open_trades_pl = df_stats['unrealized_pl'].sum()
         open_trades_market_value = df_stats['market_value'].sum()
-        
+                
         return {'cost_basis': open_trades_cost_basis,
             'trades_cnt': open_trades_cnt,
             'symbols': open_trades_symbols,
@@ -445,8 +451,7 @@ def calculate_open_trades_stats(symbols):
                 'trades_cnt': 0,
                 'symbols': [],
                 'pl':0,
-                'market_value':0,
-                'df_stats':pd.DataFrame()}
+                'market_value':0}
         
 def calculate_sharpe_ratio(portfolio, todays_return, date, period, trading_period = 252):
     con = sqlite3.connect('../db/calpha.db')

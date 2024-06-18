@@ -1,5 +1,6 @@
 from utils_strategy import HigherHighStrategy
 import pandas as pd
+import numpy as np
 import yaml
 from alpaca.trading.client import TradingClient
 from alpaca.trading.requests import OrderRequest, GetOrdersRequest, GetOrderByIdRequest
@@ -368,18 +369,25 @@ def calculate_closed_trades_stats(symbols):
                                     (df_orders['side_lag'] == 'OrderSide.BUY') &
                                     (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
             df_trades['pl'] = (df_trades['filled_qty'] * df_trades['filled_avg_price']) - (df_trades['filled_qty_lag'] * df_trades['filled_avg_price_lag'])
+            
+            last_trade_closed_at = df_trades['filled_at'].max().date()
+            days_since_last_closed_trade = (datetime.now().date() - last_trade_closed_at).days
+            
             stats.append({'closed_trades_pl': df_trades['pl'].sum(), 
                           'closed_trades_cnt':len(df_trades),
-                          'closed_winning_trades_cnt': len(df_trades.loc[df_trades['pl'] > 0, :])})
+                          'closed_winning_trades_cnt': len(df_trades.loc[df_trades['pl'] > 0, :]),
+                          'last_trade_closed_at':last_trade_closed_at,
+                          'days_since_last_closed_trade':days_since_last_closed_trade})
         else:
-            stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0, 'closed_winning_trades_cnt': 0})
+            stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0, 'closed_winning_trades_cnt': 0,
+                          'last_trade_closed_at':None, 'days_since_last_closed_trade':None})
     df_stats = pd.DataFrame(stats, index = symbols)
     closed_trades_pl = df_stats['closed_trades_pl'].sum()
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
     win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
     zero_tr_symbols_cnt = (df_stats['closed_trades_cnt'] == 0).sum()
     
-    pdb.set_trace()
+    #pdb.set_trace()
     
     return {'pl': closed_trades_pl, 
             'trades_cnt': closed_trades_cnt,
@@ -417,8 +425,8 @@ def calculate_open_trades_stats(symbols):
             filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
             df_orders = pd.DataFrame(filtered_orders).sort_values(by = 'filled_at', ascending = False)
             
-            trade_opened_at = df_orders['filled_at'][0]
-            trade_opened_days = (datetime.now().date() - trade_opened_at.date()).days
+            trade_opened_at = df_orders['filled_at'][0].date()
+            trade_opened_days = (datetime.now().date() - trade_opened_at).days
             
             filtered_position['trade_opened_at'] = trade_opened_at
             filtered_position['days_since_open'] = trade_opened_days
@@ -860,6 +868,7 @@ def update_symbol_state(run_id, timestamp, symbols, config):
     result_closed_trades = calculate_closed_trades_stats(symbols)
     result_open_trades = calculate_open_trades_stats(symbols)
     df_open = result_open_trades['df_stats']
+    df_closed = result_closed_trades['df_stats']
     
     for symbol in symbols:
         for portfolio, data in config.items():
@@ -883,6 +892,11 @@ def update_symbol_state(run_id, timestamp, symbols, config):
             open_trade_side = df_open.loc[symbol, 'side']
             open_trade_opened_at = df_open.loc[symbol, 'trade_opened_at']
             open_trade_days_since_open = df_open.loc[symbol, 'days_since_open']
+            closed_trades_cnt = df_closed['closed_trades_cnt']
+            closed_trades_pl = df_closed['closed_trades_pl']
+            last_trade_closed_at = df_closed['last_trade_closed_at']
+            days_since_last_closed_trade = df_closed['days_since_last_closed_trade']
+            
             
     # portfolio OK
     # strategy OK
@@ -898,8 +912,19 @@ def update_symbol_state(run_id, timestamp, symbols, config):
     # side OK
     # trade_opened OK
     # days_opened OK
-    # closed_trades_cnt
-    # closed_trades_PL
+    # closed_trades_cnt OK
+    # closed_trades_PL OK
+    # last_closed_trade_at
+    # days_since_last_closed_trade
+    # closed_winning_trades_cnt
+    # win_rate
+    # sharpe_ratio 
+    # calmar_ratio
+    # sortino_ratio
+    # total_return
+    # max_drawdown
+    # max_drawdown_duration
+    # absolute_return
     
 def generate_id():
     unique_id = uuid.uuid4()

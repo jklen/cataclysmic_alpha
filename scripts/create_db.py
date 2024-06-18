@@ -174,7 +174,7 @@ con.execute("""CREATE TABLE symbol_state(
     total_return REAL,
     max_drawdown REAL,
     max_drawdown_duration INT,
-    absolute_return REAL,
+    absolute_return REAL
     );""")
 con.commit()
 con.close()

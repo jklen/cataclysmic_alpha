@@ -11,7 +11,7 @@ select * from symbol_state;
 
 delete from portfolio_state
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    '4e580c64-d39d-439c-bba5-6abc6550af59',
+    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
     'c6850d85-4707-47c3-bc87-c9d56415bd24',
     '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
     'ae708cfb-f7c3-4265-b040-20d10b800758',
@@ -20,7 +20,7 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 
 delete from portfolio_info
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    '4e580c64-d39d-439c-bba5-6abc6550af59',
+    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
     'c6850d85-4707-47c3-bc87-c9d56415bd24',
     '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
     'ae708cfb-f7c3-4265-b040-20d10b800758',
@@ -29,7 +29,7 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 
 delete from positions
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
-    '4e580c64-d39d-439c-bba5-6abc6550af59',
+    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
     'c6850d85-4707-47c3-bc87-c9d56415bd24',
     '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
     'ae708cfb-f7c3-4265-b040-20d10b800758',
@@ -38,10 +38,25 @@ where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
 
 delete from whole_portfolio_state
 where portfolio_script_run_id in (
-    '4e580c64-d39d-439c-bba5-6abc6550af59',
+    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
     'c6850d85-4707-47c3-bc87-c9d56415bd24',
     '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
     'ae708cfb-f7c3-4265-b040-20d10b800758');
+
+delete from strategy_state
+where portfolio_script_run_id in (
+    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
+    'c6850d85-4707-47c3-bc87-c9d56415bd24',
+    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    'ae708cfb-f7c3-4265-b040-20d10b800758');
+
+delete from symbol_state
+where portfolio_script_run_id in (
+    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
+    'c6850d85-4707-47c3-bc87-c9d56415bd24',
+    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    'ae708cfb-f7c3-4265-b040-20d10b800758');
+
 
 -- drop table if exists portfolio_state_added_cols;
 -- create table portfolio_state_added_cols
@@ -167,31 +182,37 @@ where portfolio_script_run_id in (
 --     symbols_to_close_cnt INT
 --         );
 
-CREATE TABLE symbol_state (
-    timestamp DATETIME, 
-    date DATE, 
-    portfolio_script_run_id TEXT, 
-    symbol TEXT,
-    is_open TEXT,
-    open_trade_PL REAL, 
-    open_trade_total_return REAL,
-    cost_basis REAL, 
-    daily_return REAL,
-    last_day_close REAL,
-    current_price REAL,
-    market_value REAL,
-    quantity REAL,
-    trade_opened DATE,
-    days_opened INT,        
-    closed_trades_cnt INT, 
-    closed_trades_PL REAL, 
-    days_since_last_closed_trade INT,
-    win_rate REAL, 
-    sharpe_ratio REAL, 
-    calmar_ratio REAL,
-    sortino_ratio REAL,
-    total_return REAL,
-    max_drawdown REAL,
-    max_drawdown_duration INT,
-    absolute_return REAL
-    );
+-- drop table if exists symbol_state;
+-- CREATE TABLE symbol_state(
+--     timestamp DATETIME, 
+--     date DATE, 
+--     portfolio_script_run_id TEXT, 
+--     symbol TEXT,
+--     portfolio TEXT,
+--     strategy TEXT
+--     is_open TEXT,
+--     open_trade_PL REAL, 
+--     open_trade_total_return REAL,
+--     cost_basis REAL, 
+--     daily_return REAL,
+--     last_day_close REAL,
+--     current_price REAL,
+--     market_value REAL,
+--     quantity REAL,
+--     side TEXT, 
+--     trade_opened DATE,
+--     days_opened INT,        
+--     closed_trades_cnt INT, 
+--     closed_trades_PL REAL, 
+--     last_closed_trade_at DATE,
+--     days_since_last_closed_trade INT,
+--     closed_winning_trades_cnt INT,
+--     win_rate REAL, 
+--     sharpe_ratio REAL, 
+--     calmar_ratio REAL,
+--     sortino_ratio REAL,
+--     total_return REAL,
+--     max_drawdown REAL,
+--     max_drawdown_duration INT,
+--     absolute_return REAL
+--     );

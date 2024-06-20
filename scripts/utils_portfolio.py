@@ -522,7 +522,7 @@ def calculate_todays_return(portfolio, equity, portfolio_size):
     
     return todays_return
 
-def calculate_total_return(portfolio, todays_return, date, period):
+def calculate_total_return(type, name, todays_return, date, period):
     con = sqlite3.connect('../db/calpha.db')
     
     if period == '1w':
@@ -536,20 +536,28 @@ def calculate_total_return(portfolio, todays_return, date, period):
     
     period_start = period_start.strftime("%Y-%m-%d")
     
-    if portfolio == 'whole':
-        df = pd.read_sql(f"""select date,
-                                daily_return
-                            from whole_portfolio_state
-                            where date >= '{period_start}'""",
+    if type == 'portfolio':
+        if name == 'whole':
+            df = pd.read_sql(f"""select date,
+                                    daily_return
+                                from whole_portfolio_state
+                                where date >= '{period_start}'""",
+                                con)
+        else:
+            df = pd.read_sql(f"""select date,
+                                    daily_return
+                                from portfolio_state
+                                where portfolio_name = '{name}'
+                                    and date >= '{period_start}'""",
                             con)
-    else:
+    elif type == 'symbol':
         df = pd.read_sql(f"""select date,
-                                daily_return
-                            from portfolio_state
-                            where portfolio_name = '{portfolio}'
-                                and date >= '{period_start}'""",
-                        con)
-        con.close()
+                                    daily_return
+                                from symbol_state
+                                where symbol = '{name}'
+                                    and date >= '{period_start}'""",
+                            con)
+    con.close()
     
     df.sort_values('date', inplace = True)
     s = df.set_index('date')['daily_return']
@@ -558,7 +566,7 @@ def calculate_total_return(portfolio, todays_return, date, period):
         
     return total_return
 
-def calculate_absolute_return(portfolio, date, closed_trades_pl, open_trades_pl, period):
+def calculate_absolute_return(type, name, portfolio, date, closed_trades_pl, open_trades_pl, period):
     con = sqlite3.connect('../db/calpha.db')
     
     if period == '1w':
@@ -572,19 +580,27 @@ def calculate_absolute_return(portfolio, date, closed_trades_pl, open_trades_pl,
     
     period_start = period_start.strftime("%Y-%m-%d")
     
-    if portfolio == 'whole':
-        df = pd.read_sql(f"""select date,
-                                closed_trades_PL
-                            from whole_portfolio_state
-                            where date >= '{period_start}'""",
+    if type == 'portfolio':
+        if name == 'whole':
+            df = pd.read_sql(f"""select date,
+                                    closed_trades_PL
+                                from whole_portfolio_state
+                                where date >= '{period_start}'""",
+                                con)
+        else:
+            df = pd.read_sql(f"""select date,
+                                    closed_trades_PL
+                                from portfolio_state
+                                where portfolio_name = '{name}'
+                                    and date >= '{period_start}'""",
                             con)
-    else:
+    elif type == 'symbol':
         df = pd.read_sql(f"""select date,
-                                closed_trades_PL
-                            from portfolio_state
-                            where portfolio_name = '{portfolio}'
-                                and date >= '{period_start}'""",
-                        con)
+                                    closed_trades_PL
+                                from symbol_state
+                                where symbol = '{name}'
+                                    and date >= '{period_start}'""",
+                            con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -594,21 +610,28 @@ def calculate_absolute_return(portfolio, date, closed_trades_pl, open_trades_pl,
     
     return abs_return
 
-def calculate_drawdown(portfolio, date, todays_return):
+def calculate_drawdown(type, name,  date, todays_return):
     con = sqlite3.connect('../db/calpha.db')    
     
-    if portfolio == 'whole':
-        df = pd.read_sql(f"""select date,
-                                daily_return
-                            from whole_portfolio_state
-                            """,
+    if type == 'portfolio':
+        if name == 'whole':
+            df = pd.read_sql(f"""select date,
+                                    daily_return
+                                from whole_portfolio_state
+                                """,
+                                con)
+        else:
+            df = pd.read_sql(f"""select date,
+                                    daily_return
+                                from portfolio_state
+                                where portfolio_name = '{name}'""",
                             con)
-    else:
+    elif type == 'symbol':
         df = pd.read_sql(f"""select date,
-                                daily_return
-                            from portfolio_state
-                            where portfolio_name = '{portfolio}'""",
-                        con)
+                                    daily_return
+                                from symbol_state
+                                where symbol = '{name}'""",
+                            con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -712,9 +735,9 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     
     todays_return = calculate_todays_return(portfolio, equity, portfolio_size)
     sharpe_ratio = calculate_sharpe_ratio('portfolio', portfolio, todays_return, date, 'overall')
-    total_return = calculate_total_return(portfolio, todays_return, date, 'overall')
-    absolute_return = calculate_absolute_return(portfolio, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
-    max_drawdown, max_drawdown_duration = calculate_drawdown(portfolio, date, todays_return)
+    total_return = calculate_total_return('portfolio', portfolio, todays_return, date, 'overall')
+    absolute_return = calculate_absolute_return('portfolio', portfolio, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
+    max_drawdown, max_drawdown_duration = calculate_drawdown('portfolio', portfolio, date, todays_return)
     calmar_ratio = calculate_calmar_ratio('portfolio', portfolio, date, max_drawdown, todays_return)
     sortino_ratio = calculate_sortino_ratio('portfolio', portfolio, date, todays_return)
     symbols_to_open_cnt = len([key for key, value in trades.items() if value == 'open'])
@@ -785,9 +808,9 @@ def update_whole_portfolio_state(run_id, timestamp, config):
     closed_trades_stats = calculate_closed_trades_stats(symbols)
     todays_return = ((equity - last_equity)/last_equity) - (deposits_withdrawals/last_equity)
     sharpe_ratio = calculate_sharpe_ratio('portfolio', 'whole', todays_return, date, 'overall')
-    total_return = calculate_total_return('whole', todays_return, date, 'overall')
-    absolute_return = calculate_absolute_return('whole', date, closed_trades_stats['pl'], open_trades_stats['pl'], 'overall')
-    max_drawdown, max_drawdown_duration = calculate_drawdown('whole', date, todays_return)
+    total_return = calculate_total_return('portfolio', 'whole', todays_return, date, 'overall')
+    absolute_return = calculate_absolute_return('portfolio', 'whole', date, closed_trades_stats['pl'], open_trades_stats['pl'], 'overall')
+    max_drawdown, max_drawdown_duration = calculate_drawdown('portfolio', 'whole', date, todays_return)
     calmar_ratio = calculate_calmar_ratio('portfolio', 'whole', date, max_drawdown, todays_return)
     sortino_ratio = calculate_sortino_ratio('portfolio', 'whole', date, todays_return)
     
@@ -905,28 +928,69 @@ def update_symbol_state(run_id, timestamp, symbols, config):
         else:
             is_open = 'N'
         
-        if is_open == 'Y':
-            open_trade_pl = df_open.loc[symbol, 'unrealized_pl']
-            open_trade_total_return = df_open.loc[symbol, 'unrealized_plpc']
-            open_trade_cost_basis = df_open.loc[symbol, 'cost_basis']
-            open_trade_daily_return = df_open.loc[symbol, 'change_today']
-            open_trade_last_day_close = df_open.loc[symbol, 'lastday_price']
-            open_trade_current_price = df_open.loc[symbol, 'price']
-            open_trade_market_value = df_open.loc[symbol, 'market_value']
-            open_trade_qty = df_open.loc[symbol, 'qty']
-            open_trade_side = df_open.loc[symbol, 'side']
-            open_trade_opened_at = df_open.loc[symbol, 'trade_opened_at']
-            open_trade_days_since_open = df_open.loc[symbol, 'days_since_open']
-            closed_trades_cnt = df_closed['closed_trades_cnt']
-            closed_trades_pl = df_closed['closed_trades_pl']
-            last_trade_closed_at = df_closed['last_trade_closed_at']
-            days_since_last_closed_trade = df_closed['days_since_last_closed_trade']
-            closed_winning_trades_cnt = df_closed['closed_winning_trades_cnt']
-            win_rate = df_closed['win_rate']
-            sharpe_ratio = calculate_sharpe_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
-            calmar_ratio = calculate_calmar_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
-            sortino_ratio = calculate_sortino_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
-            
+        #TODO calc open trades funkciu prerobit aby df_stats mal aj symboly co nemaju ziadny otvoreny trade, alebo aj tu
+        open_trade_pl = df_open.loc[symbol, 'unrealized_pl']
+        open_trade_total_return = df_open.loc[symbol, 'unrealized_plpc']
+        open_trade_cost_basis = df_open.loc[symbol, 'cost_basis']
+        open_trade_daily_return = df_open.loc[symbol, 'change_today']
+        open_trade_last_day_close = df_open.loc[symbol, 'lastday_price']
+        open_trade_current_price = df_open.loc[symbol, 'price']
+        open_trade_market_value = df_open.loc[symbol, 'market_value']
+        open_trade_qty = df_open.loc[symbol, 'qty']
+        open_trade_side = df_open.loc[symbol, 'side']
+        open_trade_opened_at = df_open.loc[symbol, 'trade_opened_at']
+        open_trade_days_since_open = df_open.loc[symbol, 'days_since_open']
+        closed_trades_cnt = df_closed['closed_trades_cnt']
+        closed_trades_pl = df_closed['closed_trades_pl']
+        last_trade_closed_at = df_closed['last_trade_closed_at']
+        days_since_last_closed_trade = df_closed['days_since_last_closed_trade']
+        closed_winning_trades_cnt = df_closed['closed_winning_trades_cnt']
+        win_rate = df_closed['win_rate']
+        sharpe_ratio = calculate_sharpe_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
+        calmar_ratio = calculate_calmar_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
+        sortino_ratio = calculate_sortino_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
+        total_return = calculate_total_return('symbol', symbol, open_trade_daily_return, date, 'overall')
+        max_drawdown, max_d_period = calculate_drawdown('symbol', symbol, open_trade_daily_return, date, 'overall')
+        absolute_return = calculate_absolute_return('symbol', 
+                                                    symbol, 
+                                                    date, 
+                                                    df_closed.loc[symbol, 'closed_trades_pl'], 
+                                                    df_open.loc[symbol, 'unrealized_pl'], 
+                                                    'overall')
+        data = (timestamp, 
+            date, 
+            run_id, 
+            portfolio,
+            strategy,
+            is_open,
+            open_trade_pl,
+            open_trade_total_return,
+            open_trade_cost_basis,
+            open_trade_daily_return,
+            open_trade_last_day_close,
+            open_trade_current_price,
+            open_trade_market_value,
+            open_trade_qty,
+            open_trade_side,
+            open_trade_opened_at,
+            open_trade_days_since_open,
+            closed_trades_cnt,
+            closed_trades_pl,
+            last_trade_closed_at,
+            days_since_last_closed_trade,
+            closed_winning_trades_cnt,
+            win_rate,
+            sharpe_ratio,
+            calmar_ratio,
+            sortino_ratio,
+            total_return,
+            max_drawdown,
+            max_d_period,
+            absolute_return)
+        con.execute("""INSERT INTO whole_portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+        con.commit()
+    con.close()
             
     # portfolio OK
     # strategy OK
@@ -951,10 +1015,10 @@ def update_symbol_state(run_id, timestamp, symbols, config):
     # sharpe_ratio OK
     # calmar_ratio OK
     # sortino_ratio OK
-    # total_return
-    # max_drawdown
-    # max_drawdown_duration
-    # absolute_return
+    # total_return OK
+    # max_drawdown OK
+    # max_drawdown_duration OK
+    # absolute_return OK
     
 def generate_id():
     unique_id = uuid.uuid4()

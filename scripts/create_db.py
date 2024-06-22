@@ -161,7 +161,7 @@ con.execute("""CREATE TABLE symbol_state(
     quantity REAL,
     side TEXT, 
     trade_opened DATE,
-    days_opened INT,        
+    days_opened REAL,        
     closed_trades_cnt INT, 
     closed_trades_PL REAL, 
     last_closed_trade_at DATE,

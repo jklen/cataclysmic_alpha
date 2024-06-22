@@ -382,7 +382,7 @@ def calculate_closed_trades_stats(symbols):
                           'win_rate':closed_winning_trades_cnt/len(df_trades)})
         else:
             stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0, 'closed_winning_trades_cnt': 0,
-                          'last_trade_closed_at':None, 'days_since_last_closed_trade':0})
+                          'last_trade_closed_at':np.nan, 'days_since_last_closed_trade':0})
     df_stats = pd.DataFrame(stats, index = symbols)
     closed_trades_pl = df_stats['closed_trades_pl'].sum()
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
@@ -401,13 +401,17 @@ def calculate_open_trades_stats(symbols):
     logger.info(f"Calculating open trades stats")
     trading_client = create_trading_client()
     stats = []
+    stats_not_opened = []
     for symbol in symbols:
         if symbol in crypto_map.keys():
             symbol = crypto_map[symbol]
         try:
             position = trading_client.get_open_position(symbol)            
         except:
-            pass
+            stats_not_opened.append({'symbol':symbol, 'cost_basis':np.nan, 'unrealized_pl':np.nan,
+                          'unrealized_plpc':np.nan, 'market_value':np.nan, 'change_today':0.,
+                          'current_price':np.nan, 'lastday_price':np.nan, 'qty':np.nan,
+                          'side':np.nan, 'trade_opened_at':np.nan, 'days_since_open':np.nan})
         else:
             position_dict = dict(position)
             keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
@@ -434,7 +438,9 @@ def calculate_open_trades_stats(symbols):
             filtered_position['days_since_open'] = trade_opened_days
             
             stats.append(filtered_position)
-            
+    
+    df_stats_not_opened = pd.DataFrame(stats_not_opened).set_index('symbol')
+    
     if len(stats) > 0:
         df_stats = pd.DataFrame(stats)
         cols = ['cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
@@ -449,6 +455,8 @@ def calculate_open_trades_stats(symbols):
         open_trades_pl = df_stats['unrealized_pl'].sum()
         open_trades_market_value = df_stats['market_value'].sum()
                 
+        df_stats = pd.concat([df_stats, df_stats_not_opened], axis = 0)
+                
         return {'cost_basis': open_trades_cost_basis,
             'trades_cnt': open_trades_cnt,
             'symbols': open_trades_symbols,
@@ -461,7 +469,8 @@ def calculate_open_trades_stats(symbols):
                 'trades_cnt': 0,
                 'symbols': [],
                 'pl':0,
-                'market_value':0}
+                'market_value':0, 
+                'df_stats':df_stats_not_opened}
         
 def calculate_sharpe_ratio(type, name, todays_return, date, period, trading_period = 252):
     con = sqlite3.connect('../db/calpha.db')
@@ -566,7 +575,7 @@ def calculate_total_return(type, name, todays_return, date, period):
         
     return total_return
 
-def calculate_absolute_return(type, name, portfolio, date, closed_trades_pl, open_trades_pl, period):
+def calculate_absolute_return(type, name, date, closed_trades_pl, open_trades_pl, period):
     con = sqlite3.connect('../db/calpha.db')
     
     if period == '1w':
@@ -605,8 +614,7 @@ def calculate_absolute_return(type, name, portfolio, date, closed_trades_pl, ope
     
     df.sort_values('date', inplace = True)
     s = df.set_index('date')['closed_trades_PL']
-    s = pd.concat([s, pd.Series(closed_trades_pl, index = [date])])
-    abs_return = (s - s.shift(1)).sum() + open_trades_pl
+    abs_return = closed_trades_pl - s[0] + open_trades_pl
     
     return abs_return
 
@@ -713,7 +721,7 @@ def calculate_sortino_ratio(type, name, date, todays_return, trading_period = 25
     if daily_returns.notna().sum() > 1:
         sortino_ratio = qs.stats.sortino(daily_returns, annualize = True, periods = trading_period)
     else:
-        sortino_ratio = None
+        sortino_ratio = np.nan
     
     return sortino_ratio
         
@@ -917,40 +925,39 @@ def update_symbol_state(run_id, timestamp, symbols, config):
     result_open_trades = calculate_open_trades_stats(symbols)
     df_open = result_open_trades['df_stats']
     df_closed = result_closed_trades['df_stats']
-    
+            
     for symbol in symbols:
         for portfolio, data in config.items():
             if symbol in data['symbols']:
-                strategy = data['symbols'][symbol].keys()[0]
+                strategy = list(data['symbols'][symbol].keys())[0]
                 break
-        if symbol in result_open_trades['sybols']:
+        if symbol in result_open_trades['symbols']:
             is_open = 'Y'
         else:
             is_open = 'N'
         
-        #TODO calc open trades funkciu prerobit aby df_stats mal aj symboly co nemaju ziadny otvoreny trade, alebo aj tu
         open_trade_pl = df_open.loc[symbol, 'unrealized_pl']
         open_trade_total_return = df_open.loc[symbol, 'unrealized_plpc']
         open_trade_cost_basis = df_open.loc[symbol, 'cost_basis']
         open_trade_daily_return = df_open.loc[symbol, 'change_today']
         open_trade_last_day_close = df_open.loc[symbol, 'lastday_price']
-        open_trade_current_price = df_open.loc[symbol, 'price']
+        open_trade_current_price = df_open.loc[symbol, 'current_price']
         open_trade_market_value = df_open.loc[symbol, 'market_value']
         open_trade_qty = df_open.loc[symbol, 'qty']
         open_trade_side = df_open.loc[symbol, 'side']
         open_trade_opened_at = df_open.loc[symbol, 'trade_opened_at']
         open_trade_days_since_open = df_open.loc[symbol, 'days_since_open']
-        closed_trades_cnt = df_closed['closed_trades_cnt']
-        closed_trades_pl = df_closed['closed_trades_pl']
-        last_trade_closed_at = df_closed['last_trade_closed_at']
-        days_since_last_closed_trade = df_closed['days_since_last_closed_trade']
-        closed_winning_trades_cnt = df_closed['closed_winning_trades_cnt']
-        win_rate = df_closed['win_rate']
+        closed_trades_cnt = df_closed.loc[symbol, 'closed_trades_cnt']
+        closed_trades_pl = df_closed.loc[symbol, 'closed_trades_pl']
+        last_trade_closed_at = df_closed.loc[symbol, 'last_trade_closed_at']
+        days_since_last_closed_trade = df_closed.loc[symbol, 'days_since_last_closed_trade']
+        closed_winning_trades_cnt = df_closed.loc[symbol, 'closed_winning_trades_cnt']
+        win_rate = df_closed.loc[symbol, 'win_rate']
         sharpe_ratio = calculate_sharpe_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
-        calmar_ratio = calculate_calmar_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
         sortino_ratio = calculate_sortino_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
         total_return = calculate_total_return('symbol', symbol, open_trade_daily_return, date, 'overall')
-        max_drawdown, max_d_period = calculate_drawdown('symbol', symbol, open_trade_daily_return, date, 'overall')
+        max_drawdown, max_d_period = calculate_drawdown('symbol', symbol, date, open_trade_daily_return)
+        calmar_ratio = calculate_calmar_ratio('symbol', symbol, date, max_drawdown, open_trade_daily_return)
         absolute_return = calculate_absolute_return('symbol', 
                                                     symbol, 
                                                     date, 
@@ -960,35 +967,37 @@ def update_symbol_state(run_id, timestamp, symbols, config):
         data = (timestamp, 
             date, 
             run_id, 
+            symbol,
             portfolio,
             strategy,
             is_open,
-            open_trade_pl,
-            open_trade_total_return,
-            open_trade_cost_basis,
-            open_trade_daily_return,
-            open_trade_last_day_close,
-            open_trade_current_price,
-            open_trade_market_value,
-            open_trade_qty,
+            float(open_trade_pl),
+            float(open_trade_total_return),
+            float(open_trade_cost_basis),
+            float(open_trade_daily_return),
+            float(open_trade_last_day_close),
+            float(open_trade_current_price),
+            float(open_trade_market_value),
+            float(open_trade_qty),
             open_trade_side,
             open_trade_opened_at,
-            open_trade_days_since_open,
-            closed_trades_cnt,
-            closed_trades_pl,
+            float(open_trade_days_since_open),
+            int(closed_trades_cnt),
+            float(closed_trades_pl),
             last_trade_closed_at,
-            days_since_last_closed_trade,
-            closed_winning_trades_cnt,
-            win_rate,
-            sharpe_ratio,
-            calmar_ratio,
-            sortino_ratio,
-            total_return,
-            max_drawdown,
-            max_d_period,
-            absolute_return)
-        con.execute("""INSERT INTO whole_portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+            int(days_since_last_closed_trade),
+            int(closed_winning_trades_cnt),
+            float(win_rate),
+            float(sharpe_ratio),
+            float(calmar_ratio),
+            float(sortino_ratio),
+            float(total_return),
+            float(max_drawdown),
+            int(max_d_period),
+            float(absolute_return))
+        pdb.set_trace()
+        con.execute("""INSERT INTO symbol_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
         con.commit()
     con.close()
             

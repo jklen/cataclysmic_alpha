@@ -10,7 +10,7 @@ from utils_strategy import data_load
 from utils_portfolio import check_weights, run_strategy, position_sizes, \
     open_positions, close_positions, eval_position, strategies_directions, correct_date, \
     update_portfolio_state, update_portfolio_info, generate_id, crypto_map, \
-    update_whole_portfolio_state, update_strategy_state
+    update_whole_portfolio_state, update_strategy_state, update_symbol_state
     
 # Create logger
 logger = logging.getLogger('')
@@ -88,7 +88,7 @@ def main(path_config):
         trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
         trades_all.append(trades)
         logger.info(f"Portfolio {portfolio} symbols actions - {str(trades)}")
-        close_positions(trades)
+        #close_positions(trades)
         update_portfolio_state(portfolio, 
                         config[portfolio]['portfolio_size'], 
                         list(config[portfolio]['symbols'].keys()), 
@@ -101,11 +101,12 @@ def main(path_config):
                                script_run_id,
                                timestamp)
         logger.info(f"Portfolio {portfolio} position sizes - {str(sizes)}")
-        open_positions(sizes, trades)
+        #open_positions(sizes, trades)
         
         logger.info(f"XXXXXXXXXXXXXXXXXXXX --- DONE --- XXXXXXXXXXXXXXXXXXXX")
     
-    #update_symbol_state()
+    all_symbols = list({symbol for portfolio in config.values() for symbol in portfolio['symbols'].keys()})
+    update_symbol_state(script_run_id, timestamp, all_symbols, config)
     #update_strategy_state(script_run_id, timestamp, config, trades_all)
     #TODO update_symbol_state
     

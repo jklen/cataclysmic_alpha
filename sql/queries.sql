@@ -12,49 +12,49 @@ select * from symbol_state;
 delete from portfolio_state
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
     'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
-    'c6850d85-4707-47c3-bc87-c9d56415bd24',
-    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
-    'ae708cfb-f7c3-4265-b040-20d10b800758',
+    '44571bf0-c78f-43d0-bfe6-23fad07e9b96',
+    'd6ebe700-0827-4d43-96d8-3e764b83d27e',
+    'a25a5876-7406-4588-b1a1-938a62d85f00',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
             );
 
 delete from portfolio_info
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
     'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
-    'c6850d85-4707-47c3-bc87-c9d56415bd24',
-    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
-    'ae708cfb-f7c3-4265-b040-20d10b800758',
+    '44571bf0-c78f-43d0-bfe6-23fad07e9b96',
+    'd6ebe700-0827-4d43-96d8-3e764b83d27e',
+    'a25a5876-7406-4588-b1a1-938a62d85f00',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
             );
 
 delete from positions
 where portfolio_script_run_id IN ('99fe02eb-1722-474c-b7df-8b3c632b55c3',
     'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
-    'c6850d85-4707-47c3-bc87-c9d56415bd24',
-    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
-    'ae708cfb-f7c3-4265-b040-20d10b800758',
+    '44571bf0-c78f-43d0-bfe6-23fad07e9b96',
+    'd6ebe700-0827-4d43-96d8-3e764b83d27e',
+    'a25a5876-7406-4588-b1a1-938a62d85f00',
      '8fb8b06d-71d9-4bea-bb28-00ebc7b27284'
             );
 
 delete from whole_portfolio_state
 where portfolio_script_run_id in (
-    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
-    'c6850d85-4707-47c3-bc87-c9d56415bd24',
-    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    '44571bf0-c78f-43d0-bfe6-23fad07e9b96',
+    'd6ebe700-0827-4d43-96d8-3e764b83d27e',
+    'a25a5876-7406-4588-b1a1-938a62d85f00',
     'ae708cfb-f7c3-4265-b040-20d10b800758');
 
 delete from strategy_state
 where portfolio_script_run_id in (
-    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
-    'c6850d85-4707-47c3-bc87-c9d56415bd24',
-    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    '44571bf0-c78f-43d0-bfe6-23fad07e9b96',
+    'd6ebe700-0827-4d43-96d8-3e764b83d27e',
+    'a25a5876-7406-4588-b1a1-938a62d85f00',
     'ae708cfb-f7c3-4265-b040-20d10b800758');
 
 delete from symbol_state
 where portfolio_script_run_id in (
-    'ec3b6c93-e1c3-4dd8-ae88-8e92957a6e91',
-    'c6850d85-4707-47c3-bc87-c9d56415bd24',
-    '280e3bef-0fec-4c1f-9234-9a33a1d192c4',
+    '44571bf0-c78f-43d0-bfe6-23fad07e9b96',
+    'd6ebe700-0827-4d43-96d8-3e764b83d27e',
+    'a25a5876-7406-4588-b1a1-938a62d85f00',
     'ae708cfb-f7c3-4265-b040-20d10b800758');
 
 
@@ -201,7 +201,7 @@ where portfolio_script_run_id in (
 --     quantity REAL,
 --     side TEXT, 
 --     trade_opened DATE,
---     days_opened INT,        
+--     days_opened REAL,        
 --     closed_trades_cnt INT, 
 --     closed_trades_PL REAL, 
 --     last_closed_trade_at DATE,

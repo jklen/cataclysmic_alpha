@@ -507,6 +507,35 @@ def generate_metric_elements_subp(df):
 
     return dbc.Row(category_elements, className="g-3", style = {'marginTop':'0.2rem'})
 
+#TODO symbols tab:
+#   sekcie overview, open positions, returns, trades, ratios
+#   overview 
+#      - polar chart s metrikami (posledne hodnoty) + tabulka pod:
+#           closed_trades_cnt
+#           closed_trades_pl
+#           days since last closed trade
+#           win_rate
+#           sharpe, calmar, sortino
+#           total return
+#           max drawdown, max drawdown duration
+#           absolute return
+#   open positions
+#      - polar chart a tabulka pod:
+#           - symbol, trade total return, trade PL
+#           - cost basis, daily return, days since open, side, cost basis a market value
+#   returns (v case)
+#       close price symbolu
+#       total return, absolute return, daily return, histogram daily returns
+#       max drawdown, max drawdown period
+#   trades ( v case)
+#       closed trades cnt, closed trades pl, win rate
+#   ratios (v case)
+#       sharpe, calmar, sortino
+
+#   prompty (na line charty)
+#      filter by - portfolio/strategy (select)
+#      select symbol - symbols gouped by filter by (multiselect)
+
 # App layout
 app.layout = html.Div([dcc.Location(id="url"), 
                        sidebar, 

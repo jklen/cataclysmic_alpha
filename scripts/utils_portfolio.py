@@ -348,6 +348,7 @@ def calculate_closed_trades_stats(symbols):
             status='closed',
             symbols=[symbol]
         )
+
         # long only strategies
         orders = trading_client.get_orders(filter=request_params)
         orders_dicts = map(dict, orders)
@@ -383,7 +384,8 @@ def calculate_closed_trades_stats(symbols):
         else:
             stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0, 'closed_winning_trades_cnt': 0,
                           'last_trade_closed_at':np.nan, 'days_since_last_closed_trade':0})
-    df_stats = pd.DataFrame(stats, index = symbols)
+    index = pd.Series(symbols).map(lambda x: crypto_map[x] if x in crypto_map else x)
+    df_stats = pd.DataFrame(stats, index = index)
     closed_trades_pl = df_stats['closed_trades_pl'].sum()
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
     win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
@@ -614,6 +616,10 @@ def calculate_absolute_return(type, name, date, closed_trades_pl, open_trades_pl
     
     df.sort_values('date', inplace = True)
     s = df.set_index('date')['closed_trades_PL']
+    
+    if len(s) == 0:
+        return np.nan
+    
     abs_return = closed_trades_pl - s[0] + open_trades_pl
     
     return abs_return
@@ -814,7 +820,7 @@ def update_whole_portfolio_state(run_id, timestamp, config):
     symbols = [item for sublist in symbols for item in sublist]
     open_trades_stats = calculate_open_trades_stats(symbols)
     closed_trades_stats = calculate_closed_trades_stats(symbols)
-    todays_return = ((equity - last_equity)/last_equity) - (deposits_withdrawals/last_equity)
+    todays_return = ((equity - last_equity)/last_equity) - (deposits_withdrawals/last_equity) #TODO change calc to use my previous equity instead last equity from account info
     sharpe_ratio = calculate_sharpe_ratio('portfolio', 'whole', todays_return, date, 'overall')
     total_return = calculate_total_return('portfolio', 'whole', todays_return, date, 'overall')
     absolute_return = calculate_absolute_return('portfolio', 'whole', date, closed_trades_stats['pl'], open_trades_stats['pl'], 'overall')
@@ -925,8 +931,9 @@ def update_symbol_state(run_id, timestamp, symbols, config):
     result_open_trades = calculate_open_trades_stats(symbols)
     df_open = result_open_trades['df_stats']
     df_closed = result_closed_trades['df_stats']
-            
+                
     for symbol in symbols:
+        logger.info(f"Updating symbol stats - {symbol}")
         for portfolio, data in config.items():
             if symbol in data['symbols']:
                 strategy = list(data['symbols'][symbol].keys())[0]
@@ -935,6 +942,9 @@ def update_symbol_state(run_id, timestamp, symbols, config):
             is_open = 'Y'
         else:
             is_open = 'N'
+        
+        if symbol in crypto_map.keys():
+            symbol = crypto_map[symbol]
         
         open_trade_pl = df_open.loc[symbol, 'unrealized_pl']
         open_trade_total_return = df_open.loc[symbol, 'unrealized_plpc']
@@ -954,7 +964,7 @@ def update_symbol_state(run_id, timestamp, symbols, config):
         closed_winning_trades_cnt = df_closed.loc[symbol, 'closed_winning_trades_cnt']
         win_rate = df_closed.loc[symbol, 'win_rate']
         sharpe_ratio = calculate_sharpe_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
-        sortino_ratio = calculate_sortino_ratio('symbol', symbol, open_trade_daily_return, date, 'overall')
+        sortino_ratio = calculate_sortino_ratio('symbol', symbol, date, open_trade_daily_return)
         total_return = calculate_total_return('symbol', symbol, open_trade_daily_return, date, 'overall')
         max_drawdown, max_d_period = calculate_drawdown('symbol', symbol, date, open_trade_daily_return)
         calmar_ratio = calculate_calmar_ratio('symbol', symbol, date, max_drawdown, open_trade_daily_return)
@@ -995,9 +1005,9 @@ def update_symbol_state(run_id, timestamp, symbols, config):
             float(max_drawdown),
             int(max_d_period),
             float(absolute_return))
-        pdb.set_trace()
-        con.execute("""INSERT INTO symbol_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+        con.execute("""INSERT INTO symbol_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
         con.commit()
     con.close()
             

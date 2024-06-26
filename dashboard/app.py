@@ -1,6 +1,7 @@
 # Import packages
-from dash import Dash, html, dcc, Input, Output, callback_context
+from dash import Dash, html, dcc, Input, Output, callback_context, State
 import dash_bootstrap_components as dbc
+import dash_mantine_components as dmc
 import dash
 import sqlite3
 import pandas as pd
@@ -35,6 +36,8 @@ sidebar = html.Div(
             ],
             body=True
         ),
+        html.Div(id = 'prompts')
+        
     ],
     style={
         "position": "fixed",
@@ -48,8 +51,8 @@ sidebar = html.Div(
 )
 
 # Define the main content layout function
-def main_content_layout(button_id):
-    if button_id == 'whole_portfolio_link':
+def main_content_layout(pathname):
+    if pathname == '/':
         return html.Div(
             [
                 dbc.Tabs(id='tabs_whole_portfolio', 
@@ -73,7 +76,7 @@ def main_content_layout(button_id):
                 "padding": "0.5rem 0.5rem",
             }
         )
-    elif button_id == 'subportfolios_link':
+    elif pathname == '/subportfolios':
         return html.Div(
             [
                 dbc.Tabs(id='tabs_subportfolios', 
@@ -100,23 +103,15 @@ def main_content_layout(button_id):
     else:
         return []
 
-
 # Callback to update the main content based on the selected navigation item
 @app.callback(
     Output('page_content', 'children'),
-    [Input('whole_portfolio_link', 'n_clicks'),
-     Input('subportfolios_link', 'n_clicks'),
-     Input('strategies_link', 'n_clicks'),
-     Input('symbols_link', 'n_clicks')]
+    [Input('url', 'pathname')]
 )
-def page_content_children(n1, n2, n3, n4):
+def page_content_children(pathname):
     print('page_content')
-    ctx = callback_context
-    if not ctx.triggered:
-        return main_content_layout("whole_portfolio_link")
-    else:
-        button_id = ctx.triggered[0]['prop_id'].split('.')[0]
-        return main_content_layout(button_id)
+    
+    return main_content_layout(pathname)
 
 @app.callback(
     Output('tabs_content_whole_portfolio', 'children'),
@@ -507,6 +502,39 @@ def generate_metric_elements_subp(df):
 
     return dbc.Row(category_elements, className="g-3", style = {'marginTop':'0.2rem'})
 
+# callback to show prompts
+
+@app.callback(
+    Output('prompts', 'children'),
+    [Input('url', 'pathname')]
+)
+def prompts_children(pathname):
+            
+    if pathname == '/symbols':
+        return dbc.Card(
+            [
+                dmc.MultiSelect(
+                    id = 'select_portfolio',
+                    data = portfolio_options
+                )
+            ]
+        )
+    else:
+        return html.Div()
+        
+def generate_portfolio_options():
+    con = sqlite3.connect('../db/calpha.db')
+    df = pd.read_sql('select distinct portfolio_name from portfolio_state', con)
+    portfolios = df['portfolio_name'].tolist()
+    con.close()
+    
+    portfolio_options = [{'value':portfolio, 'label':portfolio} for portfolio in portfolios]
+    portfolio_options.append({'value':'all', 'label':'all'})
+    
+    return portfolio_options
+
+portfolio_options = generate_portfolio_options()
+
 #TODO symbols tab:
 #   sekcie overview, open positions, returns, trades, ratios
 #   overview 
@@ -526,7 +554,7 @@ def generate_metric_elements_subp(df):
 #   returns (v case)
 #       close price symbolu
 #       total return, absolute return, daily return, histogram daily returns
-#       max drawdown, max drawdown period
+#       max drawdown, max drawdown period, korelacnu maticu daily returns
 #   trades ( v case)
 #       closed trades cnt, closed trades pl, win rate
 #   ratios (v case)

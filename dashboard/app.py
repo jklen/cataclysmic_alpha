@@ -36,7 +36,31 @@ sidebar = html.Div(
             ],
             body=True
         ),
-        html.Div(id = 'prompts')
+        html.Div(id = 'prompts_symbol',
+                 children = [
+                     dbc.Card(
+                        [
+                            dcc.Dropdown(
+                                id = 'select_symbols_by',
+                                options = [{'value':'portfolio', 'label':'Portfolio'},
+                                        {'value':'strategy', 'label':'Strategy'}],
+                                placeholder = 'Group symbols by',
+                                value = 'portfolio'                                
+                            ),
+                            
+                            dmc.MultiSelect(
+                                id = 'select_symbols',
+                                data = [],
+                                placeholder = 'Select symbols',
+                                searchable = True,
+                                maxValues = 20,
+                                hidePickedOptions=True
+                                
+                            )
+                        ]
+                    )
+                 ],
+                 style = {'display':'inline'})
         
     ],
     style={
@@ -109,7 +133,7 @@ def main_content_layout(pathname):
     [Input('url', 'pathname')]
 )
 def page_content_children(pathname):
-    print('page_content')
+    print('page_content callback')
     
     return main_content_layout(pathname)
 
@@ -118,8 +142,7 @@ def page_content_children(pathname):
     [Input('tabs_whole_portfolio', 'active_tab')]
 )
 def tabs_content__children_wp(active_tab):
-    print('update')
-    print(active_tab)
+    print('tabs content callback')
     con = sqlite3.connect('../db/calpha.db')
     query = """
         SELECT *
@@ -505,35 +528,36 @@ def generate_metric_elements_subp(df):
 # callback to show prompts
 
 @app.callback(
-    Output('prompts', 'children'),
+    Output('prompts_symbol', 'style'),
     [Input('url', 'pathname')]
 )
-def prompts_children(pathname):
-            
+def prompts_style(pathname):   
     if pathname == '/symbols':
-        return dbc.Card(
-            [
-                dmc.MultiSelect(
-                    id = 'select_portfolio',
-                    data = portfolio_options
-                )
-            ]
-        )
+        return {'display':'inline'}
     else:
-        return html.Div()
+        return {'display':'none'}
         
-def generate_portfolio_options():
+        
+@app.callback(
+    Output('select_symbols', 'data'),
+    [Input('select_symbols_by', 'value')]
+)
+def select_symbols__data(by):
+    print('symbols callback')
     con = sqlite3.connect('../db/calpha.db')
-    df = pd.read_sql('select distinct portfolio_name from portfolio_state', con)
-    portfolios = df['portfolio_name'].tolist()
+    
+    if by == 'portfolio':
+        df = pd.read_sql('select portfolio, symbol from symbol_state group by portfolio, symbol', con)
+        grouped_data = df.groupby('portfolio')['symbol'].apply(list).reset_index()
+        result = [{"group": row['portfolio'], "items": row['symbol']} for index, row in grouped_data.iterrows()][:4]
+    elif by == 'strategy':
+        df = pd.read_sql('select strategy, symbol from symbol_state group by strategy, symbol', con)
+        grouped_data = df.groupby('strategy')['symbol'].apply(list).reset_index()
+        result = [{"group": row['strategy'], "items": row['symbol']} for index, row in grouped_data.iterrows()][:4]
+    else:
+        result = []
     con.close()
-    
-    portfolio_options = [{'value':portfolio, 'label':portfolio} for portfolio in portfolios]
-    portfolio_options.append({'value':'all', 'label':'all'})
-    
-    return portfolio_options
-
-portfolio_options = generate_portfolio_options()
+    return result
 
 #TODO symbols tab:
 #   sekcie overview, open positions, returns, trades, ratios
@@ -554,21 +578,24 @@ portfolio_options = generate_portfolio_options()
 #   returns (v case)
 #       close price symbolu
 #       total return, absolute return, daily return, histogram daily returns
-#       max drawdown, max drawdown period, korelacnu maticu daily returns
+#       max drawdown, max drawdown period, korelacnu maticu daily returns vsetkych symbolov
+#       histogram total return vsetkych symbolov + podtym data table so zoznamom vyselectovanych symbolov z histogramu
 #   trades ( v case)
 #       closed trades cnt, closed trades pl, win rate
 #   ratios (v case)
 #       sharpe, calmar, sortino
+#   data
+#       datatable posledneho runu
 
 #   prompty (na line charty)
 #      filter by - portfolio/strategy (select)
 #      select symbol - symbols gouped by filter by (multiselect)
 
 # App layout
-app.layout = html.Div([dcc.Location(id="url"), 
+app.layout = dmc.MantineProvider(html.Div([dcc.Location(id="url"), 
                        sidebar, 
                        html.Div(id="page_content", style={"marginLeft": "1rem", "padding": "2px"})
-])
+]))
 
 
 # Run the app

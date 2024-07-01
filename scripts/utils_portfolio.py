@@ -1010,34 +1010,6 @@ def update_symbol_state(run_id, timestamp, symbols, config):
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
         con.commit()
     con.close()
-            
-    # portfolio OK
-    # strategy OK
-    # is_open OK
-    # open_trade_PL OK
-    # open_trade_total_return OK
-    # cost_basis OK
-    # daily_return OK
-    # last_day_close OK
-    # current_price OK
-    # market_value OK
-    # quantity OK
-    # side OK
-    # trade_opened OK
-    # days_opened OK
-    # closed_trades_cnt OK
-    # closed_trades_PL OK
-    # last_closed_trade_at OK
-    # days_since_last_closed_trade OK
-    # closed_winning_trades_cnt OK
-    # win_rate OK
-    # sharpe_ratio OK
-    # calmar_ratio OK
-    # sortino_ratio OK
-    # total_return OK
-    # max_drawdown OK
-    # max_drawdown_duration OK
-    # absolute_return OK
     
 def generate_id():
     unique_id = uuid.uuid4()

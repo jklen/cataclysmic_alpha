@@ -1,5 +1,5 @@
 # Import packages
-from dash import Dash, html, dcc, Input, Output, callback_context, State
+from dash import Dash, html, dcc, Input, Output, callback_context, State, dash_table
 import dash_bootstrap_components as dbc
 import dash_mantine_components as dmc
 import dash
@@ -38,27 +38,24 @@ sidebar = html.Div(
         ),
         html.Div(id = 'prompts_symbol',
                  children = [
-                     dbc.Card(
-                        [
-                            dcc.Dropdown(
-                                id = 'select_symbols_by',
-                                options = [{'value':'portfolio', 'label':'Portfolio'},
-                                        {'value':'strategy', 'label':'Strategy'}],
-                                placeholder = 'Group symbols by',
-                                value = 'portfolio'                                
-                            ),
+
+                        dcc.Dropdown(
+                            id = 'select_symbols_by',
+                            options = [{'value':'portfolio', 'label':'Portfolio'},
+                                    {'value':'strategy', 'label':'Strategy'}],
+                            placeholder = 'Group symbols by',
+                            value = 'portfolio'                                
+                        ),
+                        
+                        dmc.MultiSelect(
+                            id = 'select_symbols',
+                            data = [],
+                            searchable = True,
+                            maxValues = 20,
+                            hidePickedOptions=True
                             
-                            dmc.MultiSelect(
-                                id = 'select_symbols',
-                                data = [],
-                                placeholder = 'Select symbols',
-                                searchable = True,
-                                maxValues = 20,
-                                hidePickedOptions=True
-                                
-                            )
-                        ]
-                    )
+                        )                   
+                    
                  ],
                  style = {'display':'inline'})
         
@@ -124,6 +121,32 @@ def main_content_layout(pathname):
                 "padding": "0.5rem 0.5rem",
             }
         )
+    elif pathname == '/symbols':
+        return html.Div(
+            [
+                dbc.Tabs(id='tabs_symbols', 
+                         children=[
+                             dbc.Tab(label='Overview', tab_id='symbols_tab1_overview',
+                                     children = []),
+                             dbc.Tab(label='Open positions', tab_id='symbols_tab2_positions',
+                                     children = []),
+                             dbc.Tab(label='Returns', tab_id='symbols_tab3_returns',
+                                     children = []),
+                             dbc.Tab(label='Trades', tab_id='symbols_tab4_trades',
+                                     children = []),
+                             dbc.Tab(label='Ratios', tab_id='symbols_tab5_ratios',
+                                     children = []),
+                             dbc.Tab(label='Data', tab_id='symbols_tab6_data',
+                                     children = [])
+                         ]
+                ),
+                html.Div(id = 'tabs_content_symbols')
+            ],
+            style={
+                "marginLeft": "17rem",
+                "padding": "0.5rem 0.5rem",
+            }
+        )
     else:
         return []
 
@@ -136,6 +159,8 @@ def page_content_children(pathname):
     print('page_content callback')
     
     return main_content_layout(pathname)
+
+# WHOLE PORTFOLIO CALLBACKS
 
 @app.callback(
     Output('tabs_content_whole_portfolio', 'children'),
@@ -320,6 +345,8 @@ def generate_metric_elements_wp(series):
         )
 
     return dbc.Row(category_elements, className="g-3", style = {'marginTop':'0.2rem'})
+
+# PORTFOLIOS CALLBACKS
 
 @app.callback(
     Output('tabs_content_subportfolios', 'children'),
@@ -525,7 +552,7 @@ def generate_metric_elements_subp(df):
 
     return dbc.Row(category_elements, className="g-3", style = {'marginTop':'0.2rem'})
 
-# callback to show prompts
+# SYMBOL PROMPTS CALLBACKS
 
 @app.callback(
     Output('prompts_symbol', 'style'),
@@ -558,6 +585,46 @@ def select_symbols__data(by):
         result = []
     con.close()
     return result
+
+# SYMBOL CALLBACKS
+
+@app.callback(
+    Output('tabs_content_symbols', 'children'),
+    [Input('tabs_symbols', 'active_tab')]
+)
+def tabs_content__children_wp(active_tab):
+    print('tabs content callback')
+    con = sqlite3.connect('../db/calpha.db')
+    df = pd.read_sql('select * from symbol_state', con)
+    
+    if active_tab == 'symbols_tab1_overview':
+        metrics_toplot = ['portfolio', 'closed_trades_cnt', 'closed_trades_PL', 'win_rate', 'total_return', 'sharpe_ratio']
+        df_plot = df.loc[df['date'] == df['date'].max(), metrics_toplot]
+        portfolio_mapping = {portfolio: idx for idx, portfolio in enumerate(df_plot['portfolio'].unique())}
+        df_plot['portfolio_num'] = df_plot['portfolio'].map(portfolio_mapping)
+        color_sequence = px.colors.qualitative.Set1
+        
+        plot1 = px.parallel_coordinates(
+            df_plot,
+            color="portfolio_num",
+            dimensions=metrics_toplot,
+            color_continuous_scale=color_sequence,
+            labels={"portfolio_num": "Portfolio"},
+        )
+
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'symbol_tab1_plot1', figure = plot1), width = 11),
+                        dbc.Col(html.Div(id = 'test'), width = 1)])
+        row2 = dash_table.DataTable(df_plot.to_dict('records'), [{"name": i, "id": i} for i in df_plot.columns])
+        
+        
+        return [row1, row2]
+    
+@app.callback(
+    Output('test', 'children'),
+    [Input('symbol_tab1_plot1', 'restyleData')]
+)
+def test_children(data):
+    return html.P(str(data))
 
 #TODO symbols tab:
 #   sekcie overview, open positions, returns, trades, ratios

@@ -39,13 +39,23 @@ sidebar = html.Div(
         html.Div(id = 'prompts_symbol',
                  children = [
 
-                        dcc.Dropdown(
-                            id = 'select_symbols_by',
-                            options = [{'value':'portfolio', 'label':'Portfolio'},
-                                    {'value':'strategy', 'label':'Strategy'}],
-                            placeholder = 'Group symbols by',
-                            value = 'portfolio'                                
-                        ),
+                        dmc.MultiSelect(
+                            id = 'select_portfolio',
+                            data = [],
+                            searchable = True,
+                            maxValues = 20,
+                            hidePickedOptions=True
+                            
+                        ) ,
+                        
+                        dmc.MultiSelect(
+                            id = 'select_strategy',
+                            data = [],
+                            searchable = True,
+                            maxValues = 20,
+                            hidePickedOptions=True
+                            
+                        ), 
                         
                         dmc.MultiSelect(
                             id = 'select_symbols',
@@ -562,29 +572,63 @@ def prompts_style(pathname):
     if pathname == '/symbols':
         return {'display':'inline'}
     else:
-        return {'display':'none'}
-        
-        
+        return {'display':'none'}   
+    
+@app.callback(
+    Output('select_portfolio', 'data'),
+    [Input('url', 'pathname')]
+)
+def select_portfolio__data(pathname):
+    if pathname == '/symbols':
+        con = sqlite3.connect('../db/calpha.db')
+        df = pd.read_sql('select distinct portfolio from symbol_state where date = (select max(date) from symbol_state)', con)
+        portfolios = df['portfolio'].sort_values().to_list()
+        con.close()
+    else:
+        portfolios = None
+    
+    return portfolios
+
+@app.callback(
+    Output('select_strategy', 'data'),
+    [Input('select_portfolio', 'value')]
+)
+def select_strategy__data(portfolios):
+    con = sqlite3.connect('../db/calpha.db')
+    df = pd.read_sql("""select portfolio, strategy 
+                     from symbol_state 
+                     where date = (select max(date) from symbol_state
+                     group by portfolio, strategy)
+                     """, con)
+    if portfolios:
+        strategies = df.loc[df['portfolio'].isin(portfolios), 'strategy'].unique()
+    else:
+        strategies = df['strategy'].unique()
+    
+    return strategies
+
 @app.callback(
     Output('select_symbols', 'data'),
-    [Input('select_symbols_by', 'value')]
+    Input('select_portfolio', 'value'),
+    Input('select_strategy', 'value')
 )
-def select_symbols__data(by):
-    print('symbols callback')
+def select_strategy__data(portfolios, strategies):
     con = sqlite3.connect('../db/calpha.db')
+    df = pd.read_sql("""select portfolio, strategy, symbol
+                     from symbol_state 
+                     where date = (select max(date) from symbol_state
+                     group by portfolio, strategy, symbol)
+                     """, con)
+    if portfolios:
+        df = df.loc[df['portfolio'].isin(portfolios), :]
     
-    if by == 'portfolio':
-        df = pd.read_sql('select portfolio, symbol from symbol_state group by portfolio, symbol', con)
-        grouped_data = df.groupby('portfolio')['symbol'].apply(list).reset_index()
-        result = [{"group": row['portfolio'], "items": row['symbol']} for index, row in grouped_data.iterrows()][:4]
-    elif by == 'strategy':
-        df = pd.read_sql('select strategy, symbol from symbol_state group by strategy, symbol', con)
-        grouped_data = df.groupby('strategy')['symbol'].apply(list).reset_index()
-        result = [{"group": row['strategy'], "items": row['symbol']} for index, row in grouped_data.iterrows()][:4]
-    else:
-        result = []
-    con.close()
-    return result
+    if strategies:
+        df = df.loc[df['strategy'].isin(strategies), :]
+        
+    data = [{"group": portfolio, "items": list(group["symbol"])}
+            for portfolio, group in df.groupby("portfolio")]
+        
+    return data
 
 # SYMBOL CALLBACKS
 
@@ -592,39 +636,77 @@ def select_symbols__data(by):
     Output('tabs_content_symbols', 'children'),
     [Input('tabs_symbols', 'active_tab')]
 )
-def tabs_content__children_wp(active_tab):
+def tabs_content_symbols__children(active_tab):
     print('tabs content callback')
+    
+    
+    if active_tab == 'symbols_tab1_overview':
+        
+        row1 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab1_chart1'), width = 11),
+                        dbc.Col(html.Div(id = 'test'), width = 1)])
+        row2 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab1_table'), width = 12)])
+        
+        
+        return [row1 ,row2]
+    
+@app.callback(
+    Output('symbol_tab1_chart1', 'children'),
+    [Input('select_portfolio', 'value'),
+     Input('select_strategy', 'value'),
+     Input('select_symbols', 'value')]
+)
+def symbol_tab1_plot1_figure(portfolios, strategies, symbols):
+    print('parallel plot callback')
+    print(portfolios, strategies, symbols)
     con = sqlite3.connect('../db/calpha.db')
     df = pd.read_sql('select * from symbol_state', con)
     
-    if active_tab == 'symbols_tab1_overview':
-        metrics_toplot = ['portfolio', 'closed_trades_cnt', 'closed_trades_PL', 'win_rate', 'total_return', 'sharpe_ratio']
-        df_plot = df.loc[df['date'] == df['date'].max(), metrics_toplot]
-        portfolio_mapping = {portfolio: idx for idx, portfolio in enumerate(df_plot['portfolio'].unique())}
-        df_plot['portfolio_num'] = df_plot['portfolio'].map(portfolio_mapping)
-        color_sequence = px.colors.qualitative.Set1
+    metrics_toplot = ['portfolio', 'closed_trades_cnt', 'closed_trades_PL', 'win_rate', 'total_return', 'sharpe_ratio']
         
-        plot1 = px.parallel_coordinates(
-            df_plot,
-            color="portfolio_num",
-            dimensions=metrics_toplot,
-            color_continuous_scale=color_sequence,
-            labels={"portfolio_num": "Portfolio"},
-        )
-
-        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'symbol_tab1_plot1', figure = plot1), width = 11),
-                        dbc.Col(html.Div(id = 'test'), width = 1)])
-        row2 = dash_table.DataTable(df_plot.to_dict('records'), [{"name": i, "id": i} for i in df_plot.columns])
-        
-        
-        return [row1, row2]
+    if portfolios:
+        df = df.loc[df['portfolio'].isin(portfolios), :]
     
+    if strategies:
+        df = df.loc[df['strategy'].isin(strategies), :]
+    
+    if symbols:
+        df = df.loc[df['symbol'].isin(symbols), :]
+        
+        
+    df_plot = df.loc[df['date'] == df['date'].max(), :]
+    
+    plot1 = px.parallel_coordinates(
+        df_plot,
+        dimensions=metrics_toplot
+    )    
+    
+    return dcc.Graph(id = 'symbol_tab1_parallel_plot', figure = plot1)
+
 @app.callback(
-    Output('test', 'children'),
-    [Input('symbol_tab1_plot1', 'restyleData')]
+    Output('symbol_tab1_table', 'children'),
+    Input('symbol_tab1_parallel_plot', 'restyleData')
 )
-def test_children(data):
-    return html.P(str(data))
+def symbol_tab1_table__children(data):
+    print('restyleData callback')
+    print(data)
+    con = sqlite3.connect('../db/calpha.db')
+    df = pd.read_sql('select * from symbol_state', con)
+    columns = ['symbol', 'strategy', 'portfolio', 'closed_trades_cnt', 'closed_trades_PL', 'win_rate', 
+               'total_return', 'sharpe_ratio']
+    df = df.loc[:, columns]
+    
+    table = dash_table.DataTable(df.to_dict('records'), [{"name": i, "id": i} for i in df.columns])
+    
+    return table
+    
+    
+    
+# @app.callback(
+#     Output('test', 'children'),
+#     [Input('symbol_tab1_plot1', 'restyleData')]
+# )
+# def test_children(data):
+#     return html.P(str(data))
 
 #TODO symbols tab:
 #   sekcie overview, open positions, returns, trades, ratios

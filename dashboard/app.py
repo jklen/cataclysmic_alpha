@@ -1,5 +1,6 @@
 # Import packages
-from dash import Dash, html, dcc, Input, Output, callback_context, State, dash_table
+from dash import Dash, html, dcc, Input, Output, callback_context, State, dash_table, Patch
+from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 import dash_mantine_components as dmc
 import dash
@@ -14,6 +15,8 @@ import numpy as np
 # Initialize the app - incorporate a Dash Bootstrap theme
 external_stylesheets = [dbc.themes.CERULEAN]
 app = Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=False)
+
+symbol_parcoord_metrics = ['closed_trades_cnt', 'closed_trades_PL', 'win_rate', 'total_return', 'sharpe_ratio']
 
 # Sidebar layout
 sidebar = html.Div(
@@ -150,7 +153,8 @@ def main_content_layout(pathname):
                                      children = [])
                          ]
                 ),
-                html.Div(id = 'tabs_content_symbols')
+                html.Div(id = 'tabs_content_symbols'),
+                dcc.Store(id='parcoord_filters', data={})
             ],
             style={
                 "marginLeft": "17rem",
@@ -642,7 +646,7 @@ def tabs_content_symbols__children(active_tab):
     
     if active_tab == 'symbols_tab1_overview':
         
-        row1 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab1_chart1'), width = 11),
+        row1 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab1_chart1'), width = 12),
                         dbc.Col(html.Div(id = 'test'), width = 1)])
         row2 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab1_table'), width = 12)])
         
@@ -660,8 +664,6 @@ def symbol_tab1_plot1_figure(portfolios, strategies, symbols):
     print(portfolios, strategies, symbols)
     con = sqlite3.connect('../db/calpha.db')
     df = pd.read_sql('select * from symbol_state', con)
-    
-    metrics_toplot = ['portfolio', 'closed_trades_cnt', 'closed_trades_PL', 'win_rate', 'total_return', 'sharpe_ratio']
         
     if portfolios:
         df = df.loc[df['portfolio'].isin(portfolios), :]
@@ -677,27 +679,87 @@ def symbol_tab1_plot1_figure(portfolios, strategies, symbols):
     
     plot1 = px.parallel_coordinates(
         df_plot,
-        dimensions=metrics_toplot
+        dimensions=symbol_parcoord_metrics
     )    
     
     return dcc.Graph(id = 'symbol_tab1_parallel_plot', figure = plot1)
 
 @app.callback(
     Output('symbol_tab1_table', 'children'),
-    Input('symbol_tab1_parallel_plot', 'restyleData')
+    [Input('parcoord_filters', 'data'),
+     Input('select_portfolio', 'value'),
+     Input('select_strategy', 'value'),
+     Input('select_symbols', 'value')]
 )
-def symbol_tab1_table__children(data):
+def symbol_tab1_table__children(data, portfolios, strategies, symbols):
     print('restyleData callback')
     print(data)
     con = sqlite3.connect('../db/calpha.db')
     df = pd.read_sql('select * from symbol_state', con)
-    columns = ['symbol', 'strategy', 'portfolio', 'closed_trades_cnt', 'closed_trades_PL', 'win_rate', 
-               'total_return', 'sharpe_ratio']
-    df = df.loc[:, columns]
+    columns = ['symbol', 'strategy', 'portfolio']
+    columns.extend(symbol_parcoord_metrics)
+    df = df.loc[df['date'] == df['date'].max(), columns]
     
-    table = dash_table.DataTable(df.to_dict('records'), [{"name": i, "id": i} for i in df.columns])
+    if portfolios:
+        df = df.loc[df['portfolio'].isin(portfolios), :]
+    
+    if strategies:
+        df = df.loc[df['strategy'].isin(strategies), :]
+    
+    if symbols:
+        df = df.loc[df['symbol'].isin(symbols), :]
+        
+    if data:
+        dff = df.copy()
+        for col in data:
+            if data[col]:
+                rng = data[col][0]
+                if isinstance(rng[0], list):
+                    # if multiple choices combine df
+                    dff3 = pd.DataFrame(columns=df.columns)
+                    for i in rng:
+                        dff2 = dff[dff[col].between(i[0], i[1])]
+                        dff3 = pd.concat([dff3, dff2])
+                    dff = dff3
+                else:
+                    # if one choice
+                    dff = dff[dff[col].between(rng[0], rng[1])]
+    else:
+        dff = df
+    
+    table = dash_table.DataTable(dff.to_dict('records'), [{"name": i, "id": i} for i in dff.columns],
+                                 row_selectable='single',
+                                 id = 'symbol_parcoord_table',)
     
     return table
+
+@app.callback(
+    Output('parcoord_filters', 'data'),
+    Input("symbol_tab1_parallel_plot", "restyleData")
+)
+def updateFilters(data):
+    if data:
+        key = list(data[0].keys())[0]
+        col = symbol_parcoord_metrics[int(key.split('[')[1].split(']')[0])]
+        newData = Patch()
+        newData[col] = data[0][key]
+        return newData
+    return {}
+
+@app.callback(Output('symbol_tab1_parallel_plot', 'figure'), 
+              Input('symbol_parcoord_table', 'selected_rows'),
+              State('symbol_tab1_parallel_plot', 'figure'),
+              State('symbol_parcoord_table', 'data'))
+def pick(rows, figure, table_data):
+    if rows is None:
+        raise PreventUpdate
+    df = pd.DataFrame.from_dict(table_data)
+    row = df[symbol_parcoord_metrics].loc[rows[0]].to_list()
+    #pdb.set_trace()
+    for i, v in enumerate(figure.get('data')[0].get('dimensions')):
+        v.update({'constraintrange': [row[i] - row[i] / 100000, row[i]]})
+
+    return figure
     
     
     

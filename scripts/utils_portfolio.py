@@ -344,6 +344,7 @@ def calculate_closed_trades_stats(symbols):
     trading_client = create_trading_client()
     stats = []
     for symbol in symbols:
+        #logger.info(f"Closed trades stats for symbol - {symbol}")
         request_params = GetOrdersRequest(
             status='closed',
             symbols=[symbol]
@@ -356,7 +357,7 @@ def calculate_closed_trades_stats(symbols):
         filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
         df_orders = pd.DataFrame(filtered_orders)
         
-        if len(df_orders) > 0:
+        if len(df_orders) >= 2: # 2 orders - buy & sell for 1 closed trade
             df_orders = df_orders.loc[~df_orders['filled_at'].isna(),:]
             df_orders['filled_qty'] = df_orders['filled_qty'].apply(float)
             df_orders['filled_avg_price'] = df_orders['filled_avg_price'].apply(float) # converting via astype does not work

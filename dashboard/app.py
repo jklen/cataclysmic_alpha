@@ -728,7 +728,7 @@ def symbol_tab1_table__children(data, portfolios, strategies, symbols):
         dff = df
     
     table = dash_table.DataTable(dff.to_dict('records'), [{"name": i, "id": i} for i in dff.columns],
-                                 row_selectable='single',
+                                 row_selectable='multi',
                                  id = 'symbol_parcoord_table',)
     
     return table
@@ -754,11 +754,19 @@ def pick(rows, figure, table_data):
     if rows is None:
         raise PreventUpdate
     df = pd.DataFrame.from_dict(table_data)
-    row = df[symbol_parcoord_metrics].loc[rows[0]].to_list()
+    rows_list = df[symbol_parcoord_metrics].loc[rows].values.tolist()
     #pdb.set_trace()
     for i, v in enumerate(figure.get('data')[0].get('dimensions')):
-        v.update({'constraintrange': [row[i] - row[i] / 100000, row[i]]})
-
+        constraint_range = []
+        for row in rows_list:
+            if row[i] == 0:
+                start_range = -0.000000005
+                end_range = 0.
+            else:
+                start_range = row[i] - abs(row[i])/100_000
+                end_range = row[i]
+            constraint_range.append([start_range, end_range])   
+        v.update({'constraintrange': constraint_range})
     return figure
     
     

@@ -16,7 +16,9 @@ import numpy as np
 external_stylesheets = [dbc.themes.CERULEAN]
 app = Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=False)
 
-symbol_parcoord_metrics = ['closed_trades_cnt', 'closed_trades_PL', 'win_rate', 'total_return', 'sharpe_ratio']
+symbol_parcoord_metrics_overview = ['closed_trades_cnt', 'closed_trades_PL', 'win_rate', 'total_return', 'sharpe_ratio']
+symbol_parcoord_metrics_positions = ['open_trade_PL', 'open_trade_total_return', 'daily_return', 'cost_basis', 'market_value', \
+    'days_opened']
 
 # Sidebar layout
 sidebar = html.Div(
@@ -154,7 +156,8 @@ def main_content_layout(pathname):
                          ]
                 ),
                 html.Div(id = 'tabs_content_symbols'),
-                dcc.Store(id='parcoord_filters', data={})
+                dcc.Store(id='parcoord_filters', data={}),
+                dcc.Store(id = 'parcoord_positions_filters', data = {})
             ],
             style={
                 "marginLeft": "17rem",
@@ -646,12 +649,20 @@ def tabs_content_symbols__children(active_tab):
     
     if active_tab == 'symbols_tab1_overview':
         
-        row1 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab1_chart1'), width = 12),
-                        dbc.Col(html.Div(id = 'test'), width = 1)])
+        row1 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab1_chart1'), width = 12)])
         row2 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab1_table'), width = 12)])
         
         
         return [row1 ,row2]
+    elif active_tab == 'symbols_tab2_positions':
+        
+        row1 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab2_chart1'), width = 12)])
+        row2 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab2_table'), width = 12)])
+        
+        
+        return [row1 ,row2]
+    
+# SYMBOL CALLBACKS - tab 1 - overview
     
 @app.callback(
     Output('symbol_tab1_chart1', 'children'),
@@ -679,7 +690,7 @@ def symbol_tab1_plot1_figure(portfolios, strategies, symbols):
     
     plot1 = px.parallel_coordinates(
         df_plot,
-        dimensions=symbol_parcoord_metrics
+        dimensions=symbol_parcoord_metrics_overview
     )    
     
     return dcc.Graph(id = 'symbol_tab1_parallel_plot', figure = plot1)
@@ -697,7 +708,7 @@ def symbol_tab1_table__children(data, portfolios, strategies, symbols):
     con = sqlite3.connect('../db/calpha.db')
     df = pd.read_sql('select * from symbol_state', con)
     columns = ['symbol', 'strategy', 'portfolio']
-    columns.extend(symbol_parcoord_metrics)
+    columns.extend(symbol_parcoord_metrics_overview)
     df = df.loc[df['date'] == df['date'].max(), columns]
     
     if portfolios:
@@ -740,7 +751,7 @@ def symbol_tab1_table__children(data, portfolios, strategies, symbols):
 def updateFilters(data):
     if data:
         key = list(data[0].keys())[0]
-        col = symbol_parcoord_metrics[int(key.split('[')[1].split(']')[0])]
+        col = symbol_parcoord_metrics_overview[int(key.split('[')[1].split(']')[0])]
         newData = Patch()
         newData[col] = data[0][key]
         return newData
@@ -754,7 +765,7 @@ def pick(rows, figure, table_data):
     if rows is None:
         raise PreventUpdate
     df = pd.DataFrame.from_dict(table_data)
-    rows_list = df[symbol_parcoord_metrics].loc[rows].values.tolist()
+    rows_list = df[symbol_parcoord_metrics_overview].loc[rows].values.tolist()
     #pdb.set_trace()
     for i, v in enumerate(figure.get('data')[0].get('dimensions')):
         constraint_range = []
@@ -768,15 +779,120 @@ def pick(rows, figure, table_data):
             constraint_range.append([start_range, end_range])   
         v.update({'constraintrange': constraint_range})
     return figure
+
+# SYMBOL CALLBACKS - tab2 - open positions
+
+@app.callback(
+    Output('symbol_tab2_chart1', 'children'),
+    [Input('select_portfolio', 'value'),
+     Input('select_strategy', 'value'),
+     Input('select_symbols', 'value')]
+)
+def symbol_tab2_plot1_figure(portfolios, strategies, symbols):
+    con = sqlite3.connect('../db/calpha.db')
+    df = pd.read_sql("select * from symbol_state where is_open = 'Y'", con)
+        
+    if portfolios:
+        df = df.loc[df['portfolio'].isin(portfolios), :]
     
+    if strategies:
+        df = df.loc[df['strategy'].isin(strategies), :]
     
+    if symbols:
+        df = df.loc[df['symbol'].isin(symbols), :]
+        
+        
+    df_plot = df.loc[df['date'] == df['date'].max(), :]
     
-# @app.callback(
-#     Output('test', 'children'),
-#     [Input('symbol_tab1_plot1', 'restyleData')]
-# )
-# def test_children(data):
-#     return html.P(str(data))
+    plot1 = px.parallel_coordinates(
+        df_plot,
+        dimensions=symbol_parcoord_metrics_positions
+    )    
+    
+    return dcc.Graph(id = 'symbol_tab2_parallel_plot', figure = plot1)
+
+@app.callback(
+    Output('symbol_tab2_table', 'children'),
+    [Input('parcoord_positions_filters', 'data'),
+     Input('select_portfolio', 'value'),
+     Input('select_strategy', 'value'),
+     Input('select_symbols', 'value')]
+)
+def symbol_tab1_table__children(data, portfolios, strategies, symbols):
+    con = sqlite3.connect('../db/calpha.db')
+    df = pd.read_sql("select * from symbol_state where is_open = 'Y'", con)
+    columns = ['symbol', 'strategy', 'portfolio', 'side']
+    columns.extend(symbol_parcoord_metrics_positions)
+    df = df.loc[df['date'] == df['date'].max(), columns]
+    
+    if portfolios:
+        df = df.loc[df['portfolio'].isin(portfolios), :]
+    
+    if strategies:
+        df = df.loc[df['strategy'].isin(strategies), :]
+    
+    if symbols:
+        df = df.loc[df['symbol'].isin(symbols), :]
+        
+    if data:
+        dff = df.copy()
+        for col in data:
+            if data[col]:
+                rng = data[col][0]
+                if isinstance(rng[0], list):
+                    # if multiple choices combine df
+                    dff3 = pd.DataFrame(columns=df.columns)
+                    for i in rng:
+                        dff2 = dff[dff[col].between(i[0], i[1])]
+                        dff3 = pd.concat([dff3, dff2])
+                    dff = dff3
+                else:
+                    # if one choice
+                    dff = dff[dff[col].between(rng[0], rng[1])]
+    else:
+        dff = df
+    
+    table = dash_table.DataTable(dff.to_dict('records'), [{"name": i, "id": i} for i in dff.columns],
+                                 row_selectable='multi',
+                                 id = 'symbol_parcoord_table_positions')
+    
+    return table
+
+@app.callback(
+    Output('parcoord_positions_filters', 'data'),
+    Input("symbol_tab2_parallel_plot", "restyleData")
+)
+def updateFilters(data):
+    if data:
+        key = list(data[0].keys())[0]
+        col = symbol_parcoord_metrics_positions[int(key.split('[')[1].split(']')[0])]
+        newData = Patch()
+        newData[col] = data[0][key]
+        return newData
+    return {}
+
+@app.callback(Output('symbol_tab2_parallel_plot', 'figure'), 
+              Input('symbol_parcoord_table_positions', 'selected_rows'),
+              State('symbol_tab2_parallel_plot', 'figure'),
+              State('symbol_parcoord_table_positions', 'data'))
+def pick(rows, figure, table_data):
+    if rows is None:
+        raise PreventUpdate
+    df = pd.DataFrame.from_dict(table_data)
+    rows_list = df[symbol_parcoord_metrics_positions].loc[rows].values.tolist()
+    #pdb.set_trace()
+    for i, v in enumerate(figure.get('data')[0].get('dimensions')):
+        constraint_range = []
+        for row in rows_list:
+            if row[i] == 0:
+                start_range = -0.000000005
+                end_range = 0.
+            else:
+                start_range = row[i] - abs(row[i])/100_000
+                end_range = row[i]
+            constraint_range.append([start_range, end_range])   
+        v.update({'constraintrange': constraint_range})
+    return figure
 
 #TODO symbols tab:
 #   sekcie overview, open positions, returns, trades, ratios

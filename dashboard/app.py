@@ -617,15 +617,20 @@ def select_strategy__data(portfolios):
 @app.callback(
     Output('select_symbols', 'data'),
     Input('select_portfolio', 'value'),
-    Input('select_strategy', 'value')
+    Input('select_strategy', 'value'),
+    Input('tabs_symbols', 'active_tab')
 )
-def select_strategy__data(portfolios, strategies):
+def select_strategy__data(portfolios, strategies, tab):
     con = sqlite3.connect('../db/calpha.db')
-    df = pd.read_sql("""select portfolio, strategy, symbol
+    df = pd.read_sql("""select portfolio, strategy, symbol, is_open
                      from symbol_state 
                      where date = (select max(date) from symbol_state
                      group by portfolio, strategy, symbol)
                      """, con)
+    
+    if tab == 'symbols_tab2_positions':
+        df = df.loc[df['is_open'] == 'Y', :]
+
     if portfolios:
         df = df.loc[df['portfolio'].isin(portfolios), :]
     
@@ -661,6 +666,10 @@ def tabs_content_symbols__children(active_tab):
         
         
         return [row1 ,row2]
+    elif active_tab == 'symbols_tab3_returns':
+        
+        row1 = dbc.Row([dbc.Col()])
+        pass
     
 # SYMBOL CALLBACKS - tab 1 - overview
     
@@ -671,7 +680,7 @@ def tabs_content_symbols__children(active_tab):
      Input('select_symbols', 'value')]
 )
 def symbol_tab1_plot1_figure(portfolios, strategies, symbols):
-    print('parallel plot callback')
+    print('symbol tab 1 callback')
     print(portfolios, strategies, symbols)
     con = sqlite3.connect('../db/calpha.db')
     df = pd.read_sql('select * from symbol_state', con)
@@ -911,12 +920,14 @@ def pick(rows, figure, table_data):
 #           - symbol, trade total return, trade PL
 #           - cost basis, daily return, days since open, side, cost basis a market value
 #   returns (v case)
-#       close price symbolu
-#       total return, absolute return, daily return, histogram daily returns
-#       max drawdown, max drawdown period, korelacnu maticu daily returns vsetkych symbolov
-#       histogram total return vsetkych symbolov + podtym data table so zoznamom vyselectovanych symbolov z histogramu
+#       close price symbolu, total return, 
+#       absolute return, daily return, 
+#       histogram open trades daily returns
+#       max drawdown, max drawdown period, 
+#       korelacnu maticu daily returns  symbolov
 #   trades ( v case)
-#       closed trades cnt, closed trades pl, win rate
+#       closed trades cnt, closed trades pl, 
+#       win rate, closed trades return histogram, closed trades PL histogram
 #   ratios (v case)
 #       sharpe, calmar, sortino
 #   data

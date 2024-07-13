@@ -442,7 +442,10 @@ def calculate_open_trades_stats(symbols):
             
             stats.append(filtered_position)
     
-    df_stats_not_opened = pd.DataFrame(stats_not_opened).set_index('symbol')
+    if len(stats_not_opened) > 0:
+        df_stats_not_opened = pd.DataFrame(stats_not_opened).set_index('symbol')
+    else:
+        df_stats_not_opened = pd.DataFrame()
     
     if len(stats) > 0:
         df_stats = pd.DataFrame(stats)
@@ -740,6 +743,7 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     # available_cash
     #   portfolio_size + sum(PL of closed trades) - (cost basis of open trades)
     result_closed_trades = calculate_closed_trades_stats(symbols)
+
     result_open_trades = calculate_open_trades_stats(symbols)
     available_cash = portfolio_size + result_closed_trades['pl'] - \
         result_open_trades['cost_basis']

@@ -11,6 +11,10 @@ import plotly.express as px
 import plotly.io as pio
 import plotly.figure_factory as ff
 import numpy as np
+import os
+import sys
+from datetime import datetime
+from utils import get_alpaca_data
 
 # Initialize the app - incorporate a Dash Bootstrap theme
 external_stylesheets = [dbc.themes.CERULEAN]
@@ -72,9 +76,18 @@ sidebar = html.Div(
                         )                   
                     
                  ],
-                 style = {'display':'inline'})
-        
-    ],
+                 style = {'display':'inline'}),
+        html.Div(id = 'prompts_symbol_returns',
+                 children = [
+
+                        dmc.RadioGroup([dmc.Radio(l, value=k) for k, l in [['alpaca', 'Alpaca'], ['yf', 'Yahoo Finance']]],
+                            id="radio_datapref",
+                            value="alpaca",
+                            label="Data preference",
+                            size="lg")
+            
+                ],
+                 style = {'display':'inline'})],
     style={
         "position": "fixed",
         "top": 0,
@@ -668,8 +681,16 @@ def tabs_content_symbols__children(active_tab):
         return [row1 ,row2]
     elif active_tab == 'symbols_tab3_returns':
         
-        row1 = dbc.Row([dbc.Col()])
-        pass
+        row1 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart1'), width = 12)])
+        row2 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart3'), width = 6),
+                        dbc.Col(html.Div(id = 'symbol_tab3_chart4'), width = 6)])
+        row3 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart5'), width = 6),
+                        dbc.Col(html.Div(id = 'symbol_tab3_chart6'), width = 6)])
+        row4 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart7'), width = 6),
+                        dbc.Col(html.Div(id = 'symbol_tab3_chart8'), width = 6)])
+        row5 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart9'), width = 6)])
+        
+        return [row1, row2, row3, row4, row5]
     
 # SYMBOL CALLBACKS - tab 1 - overview
     
@@ -902,6 +923,29 @@ def pick(rows, figure, table_data):
             constraint_range.append([start_range, end_range])   
         v.update({'constraintrange': constraint_range})
     return figure
+
+# SYMBOL CALLBACKS - tab 3 - returns
+    
+@app.callback(
+    Output('symbol_tab3_chart1', 'children'),
+    [Input('select_symbols', 'value')]
+)
+def symbol_tab3_plot1_figure(symbols):
+    if symbols:
+        df = get_alpaca_data(symbols, 
+                   datetime(2000, 1, 1), 
+                   datetime.today().date(), 
+                   5)
+    
+        plot1 = px.line(df,
+                        x = 'timestamp',
+                        y = 'close',
+                        color = 'symbol')
+    else:
+        plot1 = px.line()
+    
+    return dcc.Graph(id = 'symbol_tab3_price', figure = plot1)
+    
 
 #TODO symbols tab:
 #   sekcie overview, open positions, returns, trades, ratios

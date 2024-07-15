@@ -1,0 +1,264 @@
+2024-07-14 11:35:07,332 - root - INFO - Logger is setup
+2024-07-14 11:35:07,378 - utils_portfolio - INFO - Updating whole portfolio state
+2024-07-14 11:35:08,484 - utils_portfolio - INFO - Calculating open trades stats
+2024-07-14 11:35:24,054 - utils_portfolio - INFO - Calculating closed trades stats
+2024-07-14 11:35:33,775 - utils_portfolio - INFO - Updating info of portfolio - p1
+2024-07-14 11:35:33,853 - utils_portfolio - INFO - Calculating symbols weights
+2024-07-14 11:35:33,853 - root - INFO - Portfolio p1 symbols weights - {'PLTR': 0.09090909090909091, 'BTC/USD': 0.09090909090909091, 'AAL': 0.09090909090909091, 'VRT': 0.09090909090909091, 'GBTC': 0.09090909090909091, 'DELL': 0.09090909090909091, 'GM': 0.09090909090909091, 'IYR': 0.09090909090909091, 'DKNG': 0.09090909090909091, 'EBAY': 0.09090909090909091, 'CRWD': 0.09090909090909091}
+2024-07-14 11:35:33,853 - utils_strategy - INFO - PLTR - downloading data from alpaca
+2024-07-14 11:35:34,744 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:34,744 - utils_strategy - INFO - BTC/USD - downloading data from alpaca
+2024-07-14 11:35:35,967 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:35,967 - utils_portfolio - INFO - BTC/USD - running symbols strategy to get entries and exits
+2024-07-14 11:35:35,989 - utils_portfolio - INFO - Evaluating symbol if to open, close, or no change
+2024-07-14 11:35:41,244 - utils_strategy - INFO - AAL - downloading data from alpaca
+2024-07-14 11:35:42,655 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:42,656 - utils_strategy - INFO - VRT - downloading data from alpaca
+2024-07-14 11:35:43,558 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:43,558 - utils_strategy - INFO - GBTC - downloading data from alpaca
+2024-07-14 11:35:43,936 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:43,936 - utils_strategy - INFO - DELL - downloading data from alpaca
+2024-07-14 11:35:44,790 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:44,791 - utils_strategy - INFO - GM - downloading data from alpaca
+2024-07-14 11:35:46,084 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:46,084 - utils_strategy - INFO - IYR - downloading data from alpaca
+2024-07-14 11:35:47,360 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:47,360 - utils_strategy - INFO - DKNG - downloading data from alpaca
+2024-07-14 11:35:48,294 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:48,294 - utils_strategy - INFO - EBAY - downloading data from alpaca
+2024-07-14 11:35:49,397 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:49,397 - utils_strategy - INFO - CRWD - downloading data from alpaca
+2024-07-14 11:35:50,419 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:50,419 - root - INFO - Portfolio p1 symbols actions - {'BTCUSD': 'no_change'}
+2024-07-14 11:35:50,419 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-07-14 11:35:50,419 - utils_portfolio - INFO - Updating state of portfolio - p1
+2024-07-14 11:35:50,419 - utils_portfolio - INFO - Calculating closed trades stats
+2024-07-14 11:35:52,857 - utils_portfolio - INFO - Calculating open trades stats
+2024-07-14 11:35:55,753 - utils_portfolio - INFO - Portfolio p1 - calculating position sizes
+2024-07-14 11:35:55,772 - root - INFO - Portfolio p1 position sizes - symbol
+PLTR      457.85
+BTCUSD    457.85
+AAL       457.85
+VRT       457.85
+GBTC      457.85
+DELL      457.85
+GM        457.85
+IYR       457.85
+DKNG      457.85
+EBAY      457.85
+CRWD      457.85
+Name: position, dtype: float64
+2024-07-14 11:35:55,772 - utils_portfolio - INFO - Submitting orders to open positions
+2024-07-14 11:35:55,772 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p1 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-07-14 11:35:55,773 - utils_portfolio - INFO - Updating info of portfolio - p2
+2024-07-14 11:35:55,829 - utils_portfolio - INFO - Calculating symbols weights
+2024-07-14 11:35:55,829 - utils_portfolio - INFO - Calculating closed trades count
+2024-07-14 11:35:58,071 - root - INFO - Portfolio p2 symbols weights - {'AAPL': 0.1111111111111111, 'GOOGL': 0.1111111111111111, 'META': 0.1111111111111111, 'MRVL': 0.1111111111111111, 'MSTR': 0.1111111111111111, 'SCHD': 0.1111111111111111, 'BITO': 0.1111111111111111, 'AVGO': 0.1111111111111111, 'SOUN': 0.1111111111111111}
+2024-07-14 11:35:58,072 - utils_strategy - INFO - AAPL - downloading data from yfinance
+2024-07-14 11:35:58,822 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:58,822 - utils_strategy - INFO - GOOGL - downloading data from yfinance
+2024-07-14 11:35:59,013 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:59,013 - utils_strategy - INFO - META - downloading data from yfinance
+2024-07-14 11:35:59,182 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:59,182 - utils_strategy - INFO - MRVL - downloading data from yfinance
+2024-07-14 11:35:59,401 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:59,401 - utils_strategy - INFO - MSTR - downloading data from yfinance
+2024-07-14 11:35:59,605 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:59,605 - utils_strategy - INFO - SCHD - downloading data from yfinance
+2024-07-14 11:35:59,765 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:59,766 - utils_strategy - INFO - BITO - downloading data from yfinance
+2024-07-14 11:35:59,906 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:35:59,907 - utils_strategy - INFO - AVGO - downloading data from yfinance
+2024-07-14 11:36:00,156 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:00,157 - utils_strategy - INFO - SOUN - downloading data from yfinance
+2024-07-14 11:36:00,237 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:00,238 - root - INFO - Portfolio p2 symbols actions - {}
+2024-07-14 11:36:00,238 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-07-14 11:36:00,238 - utils_portfolio - INFO - Updating state of portfolio - p2
+2024-07-14 11:36:00,238 - utils_portfolio - INFO - Calculating closed trades stats
+2024-07-14 11:36:02,382 - utils_portfolio - INFO - Calculating open trades stats
+2024-07-14 11:36:05,581 - utils_portfolio - INFO - Portfolio p2 - calculating position sizes
+2024-07-14 11:36:05,600 - root - INFO - Portfolio p2 position sizes - symbol
+AAPL     610.19
+GOOGL    610.19
+META     610.19
+MRVL     610.19
+MSTR     610.19
+SCHD     610.19
+BITO     610.19
+AVGO     610.19
+SOUN     610.19
+Name: position, dtype: float64
+2024-07-14 11:36:05,600 - utils_portfolio - INFO - Submitting orders to open positions
+2024-07-14 11:36:05,600 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p2 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-07-14 11:36:05,601 - utils_portfolio - INFO - Updating info of portfolio - p3
+2024-07-14 11:36:05,658 - utils_portfolio - INFO - Calculating symbols weights
+2024-07-14 11:36:05,659 - root - INFO - Portfolio p3 symbols weights - {'TSLA': 0.1, 'NVDA': 0.1, 'AMD': 0.1, 'QQQ': 0.1, 'AMZN': 0.1, 'TQQQ': 0.1, 'VOO': 0.1, 'BABA': 0.1, 'BA': 0.1, 'XLI': 0.1}
+2024-07-14 11:36:05,659 - utils_strategy - INFO - TSLA - downloading data from yfinance
+2024-07-14 11:36:05,865 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:05,866 - utils_strategy - INFO - NVDA - downloading data from yfinance
+2024-07-14 11:36:06,125 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:06,125 - utils_strategy - INFO - AMD - downloading data from yfinance
+2024-07-14 11:36:06,374 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:06,374 - utils_strategy - INFO - QQQ - downloading data from yfinance
+2024-07-14 11:36:06,600 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:06,600 - utils_strategy - INFO - AMZN - downloading data from yfinance
+2024-07-14 11:36:06,804 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:06,804 - utils_strategy - INFO - TQQQ - downloading data from yfinance
+2024-07-14 11:36:06,985 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:06,985 - utils_strategy - INFO - VOO - downloading data from yfinance
+2024-07-14 11:36:07,166 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:07,166 - utils_strategy - INFO - BABA - downloading data from yfinance
+2024-07-14 11:36:07,306 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:07,306 - utils_strategy - INFO - BA - downloading data from yfinance
+2024-07-14 11:36:07,837 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:07,837 - utils_strategy - INFO - XLI - downloading data from yfinance
+2024-07-14 11:36:08,162 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:08,162 - root - INFO - Portfolio p3 symbols actions - {}
+2024-07-14 11:36:08,162 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-07-14 11:36:08,163 - utils_portfolio - INFO - Updating state of portfolio - p3
+2024-07-14 11:36:08,163 - utils_portfolio - INFO - Calculating closed trades stats
+2024-07-14 11:36:10,139 - utils_portfolio - INFO - Calculating open trades stats
+2024-07-14 11:36:14,114 - utils_portfolio - INFO - Portfolio p3 - calculating position sizes
+2024-07-14 11:36:14,116 - utils_portfolio - WARNING - Increasing of the portfolio size because not having min available cash
+2024-07-14 11:36:14,133 - root - INFO - Portfolio p3 position sizes - symbol
+TSLA    501.93
+NVDA    501.93
+AMD     501.93
+QQQ     501.93
+AMZN    501.93
+TQQQ    501.93
+VOO     501.93
+BABA    501.93
+BA      501.93
+XLI     501.93
+Name: position, dtype: float64
+2024-07-14 11:36:14,133 - utils_portfolio - INFO - Submitting orders to open positions
+2024-07-14 11:36:14,133 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p3 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-07-14 11:36:14,133 - utils_portfolio - INFO - Updating info of portfolio - p4
+2024-07-14 11:36:14,262 - utils_portfolio - INFO - Calculating symbols weights
+2024-07-14 11:36:14,262 - root - INFO - Portfolio p4 symbols weights - {'RIOT': 0.05, 'NEE': 0.05, 'SLV': 0.05, 'SHOP': 0.05, 'FAST': 0.05, 'SPXL': 0.05, 'VALE': 0.05, 'SNAP': 0.05, 'WDC': 0.05, 'MO': 0.05, 'PM': 0.05, 'SQ': 0.05, 'PDD': 0.05, 'ABBV': 0.05, 'ON': 0.05, 'UPRO': 0.05, 'TSLL': 0.05, 'PBR': 0.05, 'MP': 0.05, 'U': 0.05}
+2024-07-14 11:36:14,262 - utils_strategy - INFO - RIOT - downloading data from yfinance
+2024-07-14 11:36:14,412 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:14,413 - utils_strategy - INFO - NEE - downloading data from yfinance
+2024-07-14 11:36:14,757 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:14,757 - utils_strategy - INFO - SLV - downloading data from yfinance
+2024-07-14 11:36:14,977 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:14,977 - utils_strategy - INFO - SHOP - downloading data from yfinance
+2024-07-14 11:36:15,153 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:15,154 - utils_strategy - INFO - FAST - downloading data from yfinance
+2024-07-14 11:36:15,443 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:15,443 - utils_strategy - INFO - SPXL - downloading data from yfinance
+2024-07-14 11:36:15,657 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:15,657 - utils_strategy - INFO - VALE - downloading data from yfinance
+2024-07-14 11:36:15,875 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:15,875 - utils_strategy - INFO - SNAP - downloading data from yfinance
+2024-07-14 11:36:15,987 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:15,987 - utils_strategy - INFO - WDC - downloading data from yfinance
+2024-07-14 11:36:16,200 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:16,200 - utils_strategy - INFO - MO - downloading data from yfinance
+2024-07-14 11:36:16,461 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:16,461 - utils_strategy - INFO - PM - downloading data from yfinance
+2024-07-14 11:36:16,723 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:16,723 - utils_strategy - INFO - SQ - downloading data from yfinance
+2024-07-14 11:36:16,837 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:16,837 - utils_strategy - INFO - PDD - downloading data from yfinance
+2024-07-14 11:36:16,943 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:16,943 - utils_strategy - INFO - ABBV - downloading data from yfinance
+2024-07-14 11:36:17,103 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:17,104 - utils_strategy - INFO - ON - downloading data from yfinance
+2024-07-14 11:36:17,277 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:17,277 - utils_strategy - INFO - UPRO - downloading data from yfinance
+2024-07-14 11:36:17,504 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:17,504 - utils_strategy - INFO - TSLL - downloading data from yfinance
+2024-07-14 11:36:17,610 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:17,610 - utils_strategy - INFO - PBR - downloading data from yfinance
+2024-07-14 11:36:17,913 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:17,913 - utils_strategy - INFO - MP - downloading data from yfinance
+2024-07-14 11:36:18,018 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:18,019 - utils_strategy - INFO - U - downloading data from yfinance
+2024-07-14 11:36:18,118 - utils_portfolio - INFO - Checking if we have correct date
+2024-07-14 11:36:18,118 - root - INFO - Portfolio p4 symbols actions - {}
+2024-07-14 11:36:18,119 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-07-14 11:36:18,119 - utils_portfolio - INFO - Updating state of portfolio - p4
+2024-07-14 11:36:18,119 - utils_portfolio - INFO - Calculating closed trades stats
+2024-07-14 11:36:22,144 - utils_portfolio - INFO - Calculating open trades stats
+2024-07-14 11:36:28,688 - utils_portfolio - INFO - Portfolio p4 - calculating position sizes
+2024-07-14 11:36:28,710 - root - INFO - Portfolio p4 position sizes - symbol
+RIOT    253.43
+NEE     254.19
+SLV     254.19
+SHOP    254.19
+FAST    254.19
+SPXL    254.19
+VALE    254.19
+SNAP    253.43
+WDC     254.19
+MO      254.19
+PM      254.19
+SQ      253.43
+PDD     254.19
+ABBV    254.19
+ON      254.19
+UPRO    254.19
+TSLL    253.43
+PBR     254.19
+MP      254.19
+U       253.43
+Name: position, dtype: float64
+2024-07-14 11:36:28,710 - utils_portfolio - INFO - Submitting orders to open positions
+2024-07-14 11:36:28,710 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p4 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-07-14 11:36:28,710 - utils_portfolio - INFO - Updating state of symbols
+2024-07-14 11:36:28,710 - utils_portfolio - INFO - Calculating closed trades stats
+2024-07-14 11:36:38,732 - utils_portfolio - INFO - Calculating open trades stats
+2024-07-14 11:36:53,655 - utils_portfolio - INFO - Updating symbol stats - META
+2024-07-14 11:36:53,694 - utils_portfolio - INFO - Updating symbol stats - RIOT
+2024-07-14 11:36:53,727 - utils_portfolio - INFO - Updating symbol stats - VRT
+2024-07-14 11:36:53,763 - utils_portfolio - INFO - Updating symbol stats - SPXL
+2024-07-14 11:36:53,785 - utils_portfolio - INFO - Updating symbol stats - ABBV
+2024-07-14 11:36:53,806 - utils_portfolio - INFO - Updating symbol stats - MP
+2024-07-14 11:36:53,827 - utils_portfolio - INFO - Updating symbol stats - PM
+2024-07-14 11:36:53,850 - utils_portfolio - INFO - Updating symbol stats - CRWD
+2024-07-14 11:36:53,889 - utils_portfolio - INFO - Updating symbol stats - BITO
+2024-07-14 11:36:53,911 - utils_portfolio - INFO - Updating symbol stats - PLTR
+2024-07-14 11:36:53,933 - utils_portfolio - INFO - Updating symbol stats - AAL
+2024-07-14 11:36:53,972 - utils_portfolio - INFO - Updating symbol stats - AMD
+2024-07-14 11:36:53,994 - utils_portfolio - INFO - Updating symbol stats - FAST
+2024-07-14 11:36:54,033 - utils_portfolio - INFO - Updating symbol stats - AVGO
+2024-07-14 11:36:54,069 - utils_portfolio - INFO - Updating symbol stats - EBAY
+2024-07-14 11:36:54,091 - utils_portfolio - INFO - Updating symbol stats - VALE
+2024-07-14 11:36:54,114 - utils_portfolio - INFO - Updating symbol stats - PDD
+2024-07-14 11:36:54,136 - utils_portfolio - INFO - Updating symbol stats - PBR
+2024-07-14 11:36:54,168 - utils_portfolio - INFO - Updating symbol stats - DELL
+2024-07-14 11:36:54,192 - utils_portfolio - INFO - Updating symbol stats - MO
+2024-07-14 11:36:54,222 - utils_portfolio - INFO - Updating symbol stats - ON
+2024-07-14 11:36:54,244 - utils_portfolio - INFO - Updating symbol stats - GM
+2024-07-14 11:36:54,265 - utils_portfolio - INFO - Updating symbol stats - UPRO
+2024-07-14 11:36:54,288 - utils_portfolio - INFO - Updating symbol stats - BA
+2024-07-14 11:36:54,310 - utils_portfolio - INFO - Updating symbol stats - NEE
+2024-07-14 11:36:54,333 - utils_portfolio - INFO - Updating symbol stats - GBTC
+2024-07-14 11:36:54,355 - utils_portfolio - INFO - Updating symbol stats - SLV
+2024-07-14 11:36:54,378 - utils_portfolio - INFO - Updating symbol stats - XLI
+2024-07-14 11:36:54,431 - utils_portfolio - INFO - Updating symbol stats - SQ
+2024-07-14 11:36:54,459 - utils_portfolio - INFO - Updating symbol stats - SHOP
+2024-07-14 11:36:54,483 - utils_portfolio - INFO - Updating symbol stats - SOUN
+2024-07-14 11:36:54,508 - utils_portfolio - INFO - Updating symbol stats - DKNG
+2024-07-14 11:36:54,538 - utils_portfolio - INFO - Updating symbol stats - GOOGL
+2024-07-14 11:36:54,559 - utils_portfolio - INFO - Updating symbol stats - TSLA
+2024-07-14 11:36:54,580 - utils_portfolio - INFO - Updating symbol stats - IYR
+2024-07-14 11:36:54,602 - utils_portfolio - INFO - Updating symbol stats - NVDA
+2024-07-14 11:36:54,624 - utils_portfolio - INFO - Updating symbol stats - AMZN
+2024-07-14 11:36:54,648 - utils_portfolio - INFO - Updating symbol stats - BABA
+2024-07-14 11:36:54,700 - utils_portfolio - INFO - Updating symbol stats - MRVL
+2024-07-14 11:36:54,723 - utils_portfolio - INFO - Updating symbol stats - WDC
+2024-07-14 11:36:54,748 - utils_portfolio - INFO - Updating symbol stats - SNAP
+2024-07-14 11:36:54,777 - utils_portfolio - INFO - Updating symbol stats - QQQ
+2024-07-14 11:36:54,807 - utils_portfolio - INFO - Updating symbol stats - U
+2024-07-14 11:36:54,829 - utils_portfolio - INFO - Updating symbol stats - BTC/USD
+2024-07-14 11:36:54,851 - utils_portfolio - INFO - Updating symbol stats - MSTR
+2024-07-14 11:36:54,884 - utils_portfolio - INFO - Updating symbol stats - TQQQ
+2024-07-14 11:36:54,909 - utils_portfolio - INFO - Updating symbol stats - TSLL
+2024-07-14 11:36:54,930 - utils_portfolio - INFO - Updating symbol stats - AAPL
+2024-07-14 11:36:54,954 - utils_portfolio - INFO - Updating symbol stats - VOO
+2024-07-14 11:36:54,996 - utils_portfolio - INFO - Updating symbol stats - SCHD
+2024-07-14 11:36:55,018 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Everything DONE --- XXXXXXXXXXXXXXXXXXXX

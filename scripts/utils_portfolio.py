@@ -406,7 +406,10 @@ def calculate_open_trades_stats(symbols):
     stats = []
     stats_not_opened = []
     for symbol in symbols:
+        logger.info(f"Processing symbol - {symbol}")
+
         if symbol in crypto_map.keys():
+            symbol_orig = symbol
             symbol = crypto_map[symbol]
         try:
             position = trading_client.get_open_position(symbol)            
@@ -425,9 +428,8 @@ def calculate_open_trades_stats(symbols):
             
             request_params = GetOrdersRequest(
                     status='closed',
-                    symbols=[symbol]
+                    symbols=[symbol if symbol not in crypto_map.values() else symbol_orig]
                     )
-
             orders = trading_client.get_orders(filter=request_params)
             orders_dicts = map(dict, orders)
             keys_to_keep = ['symbol', 'filled_at']
@@ -441,6 +443,7 @@ def calculate_open_trades_stats(symbols):
             filtered_position['days_since_open'] = trade_opened_days
             
             stats.append(filtered_position)
+
     
     if len(stats_not_opened) > 0:
         df_stats_not_opened = pd.DataFrame(stats_not_opened).set_index('symbol')

@@ -14,7 +14,7 @@ import numpy as np
 import os
 import sys
 from datetime import datetime
-from utils import get_alpaca_data
+from utils import get_alpaca_data, get_yf_data
 
 # Initialize the app - incorporate a Dash Bootstrap theme
 external_stylesheets = [dbc.themes.CERULEAN]
@@ -76,17 +76,6 @@ sidebar = html.Div(
                         )                   
                     
                  ],
-                 style = {'display':'inline'}),
-        html.Div(id = 'prompts_symbol_returns',
-                 children = [
-
-                        dmc.RadioGroup([dmc.Radio(l, value=k) for k, l in [['alpaca', 'Alpaca'], ['yf', 'Yahoo Finance']]],
-                            id="radio_datapref",
-                            value="alpaca",
-                            label="Data preference",
-                            size="lg")
-            
-                ],
                  style = {'display':'inline'})],
     style={
         "position": "fixed",
@@ -680,17 +669,10 @@ def tabs_content_symbols__children(active_tab):
         
         return [row1 ,row2]
     elif active_tab == 'symbols_tab3_returns':
-        
-        row1 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart1'), width = 12)])
-        row2 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart3'), width = 6),
-                        dbc.Col(html.Div(id = 'symbol_tab3_chart4'), width = 6)])
-        row3 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart5'), width = 6),
-                        dbc.Col(html.Div(id = 'symbol_tab3_chart6'), width = 6)])
-        row4 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart7'), width = 6),
-                        dbc.Col(html.Div(id = 'symbol_tab3_chart8'), width = 6)])
-        row5 = dbc.Row([dbc.Col(html.Div(id = 'symbol_tab3_chart9'), width = 6)])
-        
-        return [row1, row2, row3, row4, row5]
+        return html.Div(id = 'symbols_tab3_returns_div')
+    
+    elif active_tab == 'symbols_tab4_trades':
+        return html.Div(id = 'symbols_tab4_trades_div')
     
 # SYMBOL CALLBACKS - tab 1 - overview
     
@@ -924,29 +906,116 @@ def pick(rows, figure, table_data):
         v.update({'constraintrange': constraint_range})
     return figure
 
-# SYMBOL CALLBACKS - tab 3 - returns
+# SYMBOL CALLBACKS - tab 3 - returns 
     
 @app.callback(
-    Output('symbol_tab3_chart1', 'children'),
+    Output('symbols_tab3_returns_div', 'children'),
     [Input('select_symbols', 'value')]
 )
 def symbol_tab3_plot1_figure(symbols):
+    print('symbol tab3 returns callback')
     if symbols:
-        df = get_alpaca_data(symbols, 
+        
+        # price
+        
+        df_price = get_yf_data(symbols, 
                    datetime(2000, 1, 1), 
                    datetime.today().date(), 
                    5)
     
-        plot1 = px.line(df,
+        plot1 = px.line(df_price,
                         x = 'timestamp',
                         y = 'close',
-                        color = 'symbol')
+                        color = 'symbol',
+                        title = 'Close price')
+        
+        # data for other charts
+        
+        con = sqlite3.connect('../db/calpha.db')
+        df = pd.read_sql("""select timestamp, 
+                                symbol, 
+                                total_return, 
+                                absolute_return, 
+                                daily_return, 
+                                max_drawdown, 
+                                max_drawdown_duration, 
+                                is_open 
+                            from symbol_state""", con)
+        con.close()
+        df = df.loc[df['symbol'].isin(symbols), :]
+        
+        # total return
+        
+        plot2 = px.line(df,
+                        x = 'timestamp',
+                        y = 'total_return',
+                        color = 'symbol',
+                        title = 'Total return')
+        
+        # absolute return
+        
+        plot3 = px.line(df,
+                        x = 'timestamp',
+                        y = 'absolute_return',
+                        color = 'symbol',
+                        title = 'Absolute return')
+        
+        # daily return
+        
+        plot4 = px.line(df,
+                        x = 'timestamp',
+                        y = 'daily_return',
+                        color = 'symbol',
+                        title = 'Daily return')
+        
+        # daily return distplot
+        df_ret = df.loc[df['is_open'] == 'Y', :].reset_index(drop = True)
+        df_daily_ret = df_ret.pivot_table(index=df_ret.index, columns='symbol', values='daily_return')
+        daily_ret = [df_daily_ret[column].dropna().tolist() for column in df_daily_ret.columns]
+        plot5 = ff.create_distplot(daily_ret, group_labels = df_daily_ret.columns.tolist(),
+                                   show_hist = False)
+        plot5.update_layout(title_text='Daily returns distplot')
+        
+        # max drawdown
+        
+        plot6 = px.line(df,
+                        x = 'timestamp',
+                        y = 'max_drawdown',
+                        color = 'symbol',
+                        title = 'Max drawdown')
+        
+        # max drawdown duration
+        
+        plot7 = px.line(df,
+                        x = 'timestamp',
+                        y = 'max_drawdown_duration',
+                        color = 'symbol',
+                        title = 'Max drawdown duration')
+        
+        for plot in [plot1, plot2, plot3, plot4, plot5, plot6, plot7]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(figure = plot1), width = 12)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(figure = plot2), width = 6),
+                        dbc.Col(dcc.Graph(figure = plot3), width = 6)])
+        row3 = dbc.Row([dbc.Col(dcc.Graph(figure = plot4), width = 6),
+                        dbc.Col(dcc.Graph(figure = plot5), width = 6)])
+        row4 = dbc.Row([dbc.Col(dcc.Graph(figure = plot6), width = 6),
+                        dbc.Col(dcc.Graph(figure = plot7), width = 6)])
+        
+        return [row1, row2, row3, row4]
+        
     else:
-        plot1 = px.line()
+        return html.Div()
     
-    return dcc.Graph(id = 'symbol_tab3_price', figure = plot1)
-    
-
 #TODO symbols tab:
 #   sekcie overview, open positions, returns, trades, ratios
 #   overview 
@@ -964,14 +1033,15 @@ def symbol_tab3_plot1_figure(symbols):
 #           - symbol, trade total return, trade PL
 #           - cost basis, daily return, days since open, side, cost basis a market value
 #   returns (v case)
-#       close price symbolu, total return, 
-#       absolute return, daily return, 
-#       histogram open trades daily returns
+#       close price symbolu, 
+#       total return, absolute return, 
+#       daily return, histogram open trades daily returns
 #       max drawdown, max drawdown period, 
-#       korelacnu maticu daily returns  symbolov
+#       korelacnu maticu daily returns  symbolov #TODO later
 #   trades ( v case)
 #       closed trades cnt, closed trades pl, 
-#       win rate, closed trades return histogram, closed trades PL histogram
+#       win rate, closed trades return histogram, 
+#       closed trades PL histogram
 #   ratios (v case)
 #       sharpe, calmar, sortino
 #   data

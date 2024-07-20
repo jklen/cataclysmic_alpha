@@ -105,7 +105,7 @@ def get_yf_data(symbol, start, end, attempts = 10):
             df = yf.download(symbol, start=start, end=end, timeout=100)
             break
         except:
-            logger.warning(f"{symbol} - attempt {attempt} to download data from YF faile, retrying")
+            logger.warning(f"{symbol} - attempt {attempt} to download data from YF failed, retrying")
         
     df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
     df.columns = df.columns.str.lower()

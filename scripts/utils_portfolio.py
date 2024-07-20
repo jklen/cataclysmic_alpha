@@ -414,10 +414,10 @@ def calculate_open_trades_stats(symbols):
         try:
             position = trading_client.get_open_position(symbol)            
         except:
-            stats_not_opened.append({'symbol':symbol, 'cost_basis':np.nan, 'unrealized_pl':np.nan,
-                          'unrealized_plpc':np.nan, 'market_value':np.nan, 'change_today':0.,
-                          'current_price':np.nan, 'lastday_price':np.nan, 'qty':np.nan,
-                          'side':np.nan, 'trade_opened_at':np.nan, 'days_since_open':np.nan})
+            stats_not_opened.append({'symbol':symbol, 'cost_basis':0, 'unrealized_pl':0,
+                          'unrealized_plpc':0, 'market_value':0 'change_today':0.,
+                          'current_price':0, 'lastday_price':0, 'qty':0,
+                          'side':np.nan, 'trade_opened_at':0, 'days_since_open':0})
         else:
             position_dict = dict(position)
             keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
@@ -939,20 +939,20 @@ def update_symbol_state(run_id, timestamp, symbols, config):
     result_open_trades = calculate_open_trades_stats(symbols)
     df_open = result_open_trades['df_stats']
     df_closed = result_closed_trades['df_stats']
-                
-    for symbol in symbols:
+                    
+    for symbol in symbols:            
         logger.info(f"Updating symbol stats - {symbol}")
         for portfolio, data in config.items():
             if symbol in data['symbols']:
                 strategy = list(data['symbols'][symbol].keys())[0]
                 break
+        if symbol in crypto_map.keys():
+            symbol = crypto_map[symbol]
+            
         if symbol in result_open_trades['symbols']:
             is_open = 'Y'
         else:
             is_open = 'N'
-        
-        if symbol in crypto_map.keys():
-            symbol = crypto_map[symbol]
         
         open_trade_pl = df_open.loc[symbol, 'unrealized_pl']
         open_trade_total_return = df_open.loc[symbol, 'unrealized_plpc']

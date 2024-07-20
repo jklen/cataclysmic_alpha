@@ -5,6 +5,7 @@ from alpaca.data.timeframe import TimeFrame
 import logging
 import pandas as pd
 import pdb
+import yfinance as yf
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +43,28 @@ def get_alpaca_data(symbols, start, end, attempts = 10):
         except:
             continue
         df = df[['open', 'high', 'low', 'close', 'volume']]
+        dfs.append(df)
+    df_whole = pd.concat(dfs, axis = 0)
+    df_whole.reset_index(inplace = True)
+    
+    return df_whole
+
+def get_yf_data(symbols, start, end, attempts = 10):
+    dfs = []
+    for symbol in symbols:
+        if symbol in crypto_map.keys():
+            symbol = crypto_map[symbol].replace('/', '-')
+        for attempt in range(1, attempts + 1):
+            try:
+                df = yf.download(symbol, start=start, end=end, timeout=100)
+                break
+            except:
+                pass
+            
+        df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
+        df.columns = df.columns.str.lower()
+        df['symbol'] = symbol
+        df.index.name = 'timestamp'
         dfs.append(df)
     df_whole = pd.concat(dfs, axis = 0)
     df_whole.reset_index(inplace = True)

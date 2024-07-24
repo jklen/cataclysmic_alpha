@@ -14,7 +14,7 @@ import numpy as np
 import os
 import sys
 from datetime import datetime
-from utils import get_alpaca_data, get_yf_data
+from utils import get_alpaca_data, get_yf_data, get_trades
 
 # Initialize the app - incorporate a Dash Bootstrap theme
 external_stylesheets = [dbc.themes.CERULEAN]
@@ -912,8 +912,7 @@ def pick(rows, figure, table_data):
     Output('symbols_tab3_returns_div', 'children'),
     [Input('select_symbols', 'value')]
 )
-def symbol_tab3_plot1_figure(symbols):
-    print('symbol tab3 returns callback')
+def symbol_tab3_div(symbols):
     if symbols:
         
         # price
@@ -1016,32 +1015,101 @@ def symbol_tab3_plot1_figure(symbols):
     else:
         return html.Div()
     
+# SYMBOL CALLBACKS - tab 4 - trades 
+    
+@app.callback(
+    Output('symbols_tab4_trades_div', 'children'),
+    [Input('select_symbols', 'value')]
+)
+def symbol_tab4_div(symbols):
+    if symbols:
+        con = sqlite3.connect('../db/calpha.db')
+        df = pd.read_sql("""select timestamp, 
+                                symbol, 
+                                closed_trades_cnt, 
+                                closed_trades_pl, 
+                                win_rate
+                            from symbol_state""", con)
+        con.close()
+        df = df.loc[df['symbol'].isin(symbols), :]
+                
+        plot1 = px.line(df,
+                        x = 'timestamp',
+                        y = 'closed_trades_cnt',
+                        color = 'symbol',
+                        title = 'Closed trades count')
+        
+        plot2 = px.line(df,
+                        x = 'timestamp',
+                        y = 'closed_trades_PL',
+                        color = 'symbol',
+                        title = 'Closed trades PL')
+        
+        plot3 = px.line(df,
+                        x = 'timestamp',
+                        y = 'win_rate',
+                        color = 'symbol',
+                        title = 'Win rate')
+        
+        # trades return distplot
+        
+        df_trades = get_trades(symbols)
+        symbols_with_one_trade = df_trades['symbol'].value_counts()
+        symbols_with_one_trade = symbols_with_one_trade[symbols_with_one_trade == 1].index.tolist()
+        df_trades = df_trades.loc[~df_trades['symbol'].isin(symbols_with_one_trade), :]
+        
+        df_piv = df_trades.pivot_table(index=df_trades.index, columns='symbol', values='return')
+        trades_returns = [df_piv[column].dropna().tolist() for column in df_piv.columns]
+        
+        #pdb.set_trace()
+        
+        if len(trades_returns) > 0:
+            plot4 = ff.create_distplot(trades_returns, group_labels = df_piv.columns.tolist(),
+                                   show_hist = False)
+        else:
+            plot4 = px.line()
+        plot4.update_layout(title_text='Trades returns distplot')
+        
+        # trades pl distplot
+                
+        df_piv = df_trades.pivot_table(index=df_trades.index, columns='symbol', values='pl')
+        trades_pl = [df_piv[column].dropna().tolist() for column in df_piv.columns]
+        
+        if len(trades_pl) > 0:
+            plot5 = ff.create_distplot(trades_pl, group_labels = df_piv.columns.tolist(),
+                                   show_hist = False)
+        else:
+            plot5 = px.line()
+        plot5.update_layout(title_text='Trades PL distplot')
+        
+        for plot in [plot1, plot2, plot3, plot4, plot5]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(figure = plot4), width = 6)])
+        row3 = dbc.Row([dbc.Col(dcc.Graph(figure = plot5), width = 6)])
+        
+        return [row1, row2, row3]
+    else:
+        return html.Div()
+
 #TODO symbols tab:
-#   sekcie overview, open positions, returns, trades, ratios
-#   overview 
-#      - polar chart s metrikami (posledne hodnoty) + tabulka pod:
-#           closed_trades_cnt
-#           closed_trades_pl
-#           days since last closed trade
-#           win_rate
-#           sharpe, calmar, sortino
-#           total return
-#           max drawdown, max drawdown duration
-#           absolute return
-#   open positions
-#      - polar chart a tabulka pod:
-#           - symbol, trade total return, trade PL
-#           - cost basis, daily return, days since open, side, cost basis a market value
 #   returns (v case)
-#       close price symbolu, 
-#       total return, absolute return, 
-#       daily return, histogram open trades daily returns
-#       max drawdown, max drawdown period, 
 #       korelacnu maticu daily returns  symbolov #TODO later
 #   trades ( v case)
 #       closed trades cnt, closed trades pl, 
-#       win rate, closed trades return histogram, 
-#       closed trades PL histogram
+#       win rate, closed trades return #TODO later - nie je v db
+#       closed trades return histogram, closed trades PL histogram
 #   ratios (v case)
 #       sharpe, calmar, sortino
 #   data

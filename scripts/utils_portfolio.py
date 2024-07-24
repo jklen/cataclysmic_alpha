@@ -344,7 +344,10 @@ def calculate_closed_trades_stats(symbols):
     trading_client = create_trading_client()
     stats = []
     for symbol in symbols:
-        #logger.info(f"Closed trades stats for symbol - {symbol}")
+        logger.info(f"Processing symbol - {symbol}")
+        if symbol in crypto_map.keys():
+            symbol = crypto_map[symbol]
+            
         request_params = GetOrdersRequest(
             status='closed',
             symbols=[symbol]
@@ -391,9 +394,7 @@ def calculate_closed_trades_stats(symbols):
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
     win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
     zero_tr_symbols_cnt = (df_stats['closed_trades_cnt'] == 0).sum()
-    
-    #pdb.set_trace()
-    
+        
     return {'pl': closed_trades_pl, 
             'trades_cnt': closed_trades_cnt,
             'win_rate': win_rate,
@@ -415,7 +416,7 @@ def calculate_open_trades_stats(symbols):
             position = trading_client.get_open_position(symbol)            
         except:
             stats_not_opened.append({'symbol':symbol, 'cost_basis':0, 'unrealized_pl':0,
-                          'unrealized_plpc':0, 'market_value':0 'change_today':0.,
+                          'unrealized_plpc':0, 'market_value':0, 'change_today':0.,
                           'current_price':0, 'lastday_price':0, 'qty':0,
                           'side':np.nan, 'trade_opened_at':0, 'days_since_open':0})
         else:

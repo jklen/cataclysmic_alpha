@@ -152,8 +152,6 @@ def main_content_layout(pathname):
                              dbc.Tab(label='Trades', tab_id='symbols_tab4_trades',
                                      children = []),
                              dbc.Tab(label='Ratios', tab_id='symbols_tab5_ratios',
-                                     children = []),
-                             dbc.Tab(label='Data', tab_id='symbols_tab6_data',
                                      children = [])
                          ]
                 ),
@@ -674,6 +672,9 @@ def tabs_content_symbols__children(active_tab):
     elif active_tab == 'symbols_tab4_trades':
         return html.Div(id = 'symbols_tab4_trades_div')
     
+    elif active_tab == 'symbols_tab5_ratios':
+        return html.Div(id = 'symbols_tab5_ratios_div')
+    
 # SYMBOL CALLBACKS - tab 1 - overview
     
 @app.callback(
@@ -1103,6 +1104,61 @@ def symbol_tab4_div(symbols):
     else:
         return html.Div()
 
+# SYMBOL CALLBACKS - tab 5 - ratios 
+    
+@app.callback(
+    Output('symbols_tab5_ratios_div', 'children'),
+    [Input('select_symbols', 'value')]
+)
+def symbol_tab5_div(symbols):
+    if symbols:
+        con = sqlite3.connect('../db/calpha.db')
+        df = pd.read_sql("""select timestamp, 
+                                symbol, 
+                                sharpe_ratio, 
+                                calmar_ratio, 
+                                sortino_ratio
+                            from symbol_state""", con)
+        con.close()
+        df = df.loc[df['symbol'].isin(symbols), :]
+                
+        plot1 = px.line(df,
+                        x = 'timestamp',
+                        y = 'sharpe_ratio',
+                        color = 'symbol',
+                        title = 'Sharpe ratio')
+        
+        plot2 = px.line(df,
+                        x = 'timestamp',
+                        y = 'calmar_ratio',
+                        color = 'symbol',
+                        title = 'Calmar ratio')
+        
+        plot3 = px.line(df,
+                        x = 'timestamp',
+                        y = 'sortino_ratio',
+                        color = 'symbol',
+                        title = 'Sortino ratio')
+        
+        for plot in [plot1, plot2, plot3]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(figure = plot3), width = 6)])
+        
+        return [row1, row2]
+    else:
+        return html.Div()
+
 #TODO symbols tab:
 #   returns (v case)
 #       korelacnu maticu daily returns  symbolov #TODO later
@@ -1112,8 +1168,6 @@ def symbol_tab4_div(symbols):
 #       closed trades return histogram, closed trades PL histogram
 #   ratios (v case)
 #       sharpe, calmar, sortino
-#   data
-#       datatable posledneho runu
 
 #   prompty (na line charty)
 #      filter by - portfolio/strategy (select)

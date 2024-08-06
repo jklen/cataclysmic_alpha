@@ -345,8 +345,6 @@ def calculate_closed_trades_stats(symbols):
     stats = []
     for symbol in symbols:
         logger.info(f"Processing symbol - {symbol}")
-        if symbol in crypto_map.keys():
-            symbol = crypto_map[symbol]
             
         request_params = GetOrdersRequest(
             status='closed',
@@ -394,7 +392,7 @@ def calculate_closed_trades_stats(symbols):
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
     win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
     zero_tr_symbols_cnt = (df_stats['closed_trades_cnt'] == 0).sum()
-        
+            
     return {'pl': closed_trades_pl, 
             'trades_cnt': closed_trades_cnt,
             'win_rate': win_rate,
@@ -464,6 +462,7 @@ def calculate_open_trades_stats(symbols):
         open_trades_symbols = df_stats.index.tolist()
         open_trades_pl = df_stats['unrealized_pl'].sum()
         open_trades_market_value = df_stats['market_value'].sum()
+        open_trades_total_return = (df_stats['market_value'].sum()/df_stats['cost_basis'].sum()) - 1
                 
         df_stats = pd.concat([df_stats, df_stats_not_opened], axis = 0)
                 
@@ -472,6 +471,7 @@ def calculate_open_trades_stats(symbols):
             'symbols': open_trades_symbols,
             'pl': open_trades_pl,
             'market_value':open_trades_market_value,
+            'total_return':open_trades_total_return,
             'df_stats':df_stats}
         
     else:
@@ -480,6 +480,7 @@ def calculate_open_trades_stats(symbols):
                 'symbols': [],
                 'pl':0,
                 'market_value':0, 
+                'total_return':0,
                 'df_stats':df_stats_not_opened}
         
 def calculate_sharpe_ratio(type, name, todays_return, date, period, trading_period = 252):
@@ -869,7 +870,7 @@ def update_whole_portfolio_state(run_id, timestamp, config):
     con.commit()
     con.close()
     
-def update_strategy_state(run_id, timestamp, config, trades_all):
+def update_strategy_state(run_id, timestamp, config, trades):
     logger.info(f"Updating state of strategies")
     con = sqlite3.connect('../db/calpha.db')
     date = timestamp.date()
@@ -878,60 +879,78 @@ def update_strategy_state(run_id, timestamp, config, trades_all):
                         for portfolio in config.keys()
                         for symbol in config[portfolio]['symbols'].keys()})
     unique_strategies = symbol_strategy_pairs.unique()
+    
     for strategy in unique_strategies:
         symbols = symbol_strategy_pairs[symbol_strategy_pairs == strategy].index.tolist()
         result_closed_trades = calculate_closed_trades_stats(symbols)
         result_open_trades = calculate_open_trades_stats(symbols)
+        df_open = result_open_trades['df_stats']
+        
+        long_positions_cnt = (df_open['side'] == 'LONG').sum()
+        short_positions_cnt = (df_open['side'] == 'SHORT').sum()
     
         todays_return = strategy_todays_return(result_open_trades['symbols'], 
                                                result_open_trades['market_value'])
-    sharpe_ratio = calculate_sharpe_ratio('strategy', portfolio, todays_return, date, 'overall')
-    total_return = calculate_total_return(portfolio, todays_return, date, 'overall')
-    absolute_return = calculate_absolute_return(portfolio, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
-    max_drawdown, max_drawdown_duration = calculate_drawdown(portfolio, date, todays_return)
-    calmar_ratio = calculate_calmar_ratio(portfolio, date, max_drawdown, todays_return)
-    sortino_ratio = calculate_sortino_ratio(portfolio, date, todays_return)
-    symbols_to_open_cnt = len([key for key, value in trades.items() if value == 'open'])
-    symbols_to_close_cnt = len([key for key, value in trades.items() if value == 'close'])
-    
-    data = (timestamp, 
-            date, 
-            run_id, 
-            portfolio,
-            portfolio_size, 
-            float(available_cash), 
-            float(equity), 
-            result_open_trades['trades_cnt'],
-            result_open_trades['symbols'], 
-            float(result_open_trades['pl']), 
-            result_open_trades['cost_basis'], 
-            int(result_closed_trades['trades_cnt']), 
-            float(result_closed_trades['pl']), 
-            float(result_closed_trades['win_rate']), 
-            float(sharpe_ratio), 
-            calmar_ratio, 
-            sortino_ratio,
-            float(total_return), 
-            float(max_drawdown), 
-            int(max_drawdown_duration),
-            float(todays_return),
-            float(absolute_return),
-            int(result_closed_trades['symbols_with_zero_trades_cnt']),
-            len(symbols),
-            symbols_to_open_cnt,
-            symbols_to_close_cnt)
-    con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
-    con.commit()
-    con.close()
+        sharpe_ratio = calculate_sharpe_ratio('strategy', portfolio, todays_return, date, 'overall')
+        total_return = calculate_total_return(portfolio, todays_return, date, 'overall')
+        absolute_return = calculate_absolute_return(portfolio, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
+        max_drawdown, max_drawdown_duration = calculate_drawdown(portfolio, date, todays_return)
+        calmar_ratio = calculate_calmar_ratio(portfolio, date, max_drawdown, todays_return)
+        sortino_ratio = calculate_sortino_ratio(portfolio, date, todays_return)
+        symbols_to_open_cnt = len([key for key, value in trades.items() if value == 'open'])
+        symbols_to_close_cnt = len([key for key, value in trades.items() if value == 'close'])
+        
+        data = (timestamp, 
+                date, 
+                run_id, 
+                strategy,
+                result_open_trades['trades_cnt'], #OK
+                result_open_trades['symbols'], #OK
+                float(result_open_trades['pl']), #OK
+                float(result_open_trades['total_return']), # OK
+                result_open_trades['cost_basis'], #OK
+                result_open_trades['market_value'],#OK
+                long_positions_cnt, # OK
+                short_positions_cnt, # OK
+                todays_return, # OK
+                int(result_closed_trades['trades_cnt']), #OK
+                float(result_closed_trades['pl']), #OK
+                result_closed_trades['winning_trades_cnt'], # dorobit v closed trades calc funkcii
+                float(result_closed_trades['win_rate']), #OK
+                float(sharpe_ratio), # dorobit vo sharpe ratio calc funkcii
+                calmar_ratio, # --//--
+                sortino_ratio, # --//--
+                float(total_return), # --//--
+                float(max_drawdown), # --//--
+                int(max_drawdown_duration), # --//--
+                float(absolute_return), # --//--
+                int(result_closed_trades['symbols_with_zero_trades_cnt']), #OK
+                len(symbols), # --//--
+                symbols_to_open_cnt, #OK
+                symbols_to_close_cnt) #OK
+        con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+        con.commit()
+        con.close()
     
 def strategy_todays_return(open_symbols, open_trades_mk_value):
     con = sqlite3.connect('../db/calpha.db')
-    # musim trekovat market_value kazdeho  symbolu v case
+    df = pd.read_sql("""select date, symbol, cost_basis, market_value, days_opened from symbol_state""", con)
+    con.close()
     
-    pass
+    mk_value = df.loc[(df['symbol'].isin(open_symbols)) & (df['date'] == (df['date'].max() - timedelta(days = 1))), 'market_value'].sum()
+    cost_basis = df.loc[(df['symbol'].isin(open_symbols)) & (df['date'] == df['date'].max()) & (df['days_opened'] == 1), 'cost_basis'].sum()
+    
+    try:
+        todays_return = (open_trades_mk_value/(mk_value + cost_basis)) - 1
+    except:
+        return 0
+    
+    return todays_return
+    
+    # SUM(market value DNES otvorenych symbolov)/SUM(market value tych istych symbolov predosleho dna, ak otvorene 1 den cost basis)
 
-def update_symbol_state(run_id, timestamp, symbols, config):
+def update_symbol_state(run_id, timestamp, symbols, config): #TODO add to_open_today (Y, N)
     logger.info(f"Updating state of symbols")
     con = sqlite3.connect('../db/calpha.db')
     date = timestamp.date()

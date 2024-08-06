@@ -1160,18 +1160,10 @@ def symbol_tab5_div(symbols):
         return html.Div()
 
 #TODO symbols tab:
-#   returns (v case)
 #       korelacnu maticu daily returns  symbolov #TODO later
 #   trades ( v case)
-#       closed trades cnt, closed trades pl, 
-#       win rate, closed trades return #TODO later - nie je v db
-#       closed trades return histogram, closed trades PL histogram
-#   ratios (v case)
-#       sharpe, calmar, sortino
+#       closed trades return #TODO later - nie je v db
 
-#   prompty (na line charty)
-#      filter by - portfolio/strategy (select)
-#      select symbol - symbols gouped by filter by (multiselect)
 
 # App layout
 app.layout = dmc.MantineProvider(html.Div([dcc.Location(id="url"), 

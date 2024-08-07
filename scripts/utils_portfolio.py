@@ -392,9 +392,11 @@ def calculate_closed_trades_stats(symbols):
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
     win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
     zero_tr_symbols_cnt = (df_stats['closed_trades_cnt'] == 0).sum()
+    winning_trades_cnt = df_stats['closed_winning_trades_cnt'].sum()
             
     return {'pl': closed_trades_pl, 
             'trades_cnt': closed_trades_cnt,
+            'winning_trades_cnt': winning_trades_cnt,
             'win_rate': win_rate,
             'symbols_with_zero_trades_cnt': zero_tr_symbols_cnt,
             'df_stats':df_stats}
@@ -518,6 +520,13 @@ def calculate_sharpe_ratio(type, name, todays_return, date, period, trading_peri
                          where date >= '{period_start}'
                             and symbol = '{name}'""", 
                          con)
+    elif type == 'strategy':
+        df = pd.read_sql(f"""select date,
+                            daily_return
+                         from strategy_state
+                         where date >= '{period_start}'
+                            and strategy = '{name}'""", 
+                         con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -577,6 +586,13 @@ def calculate_total_return(type, name, todays_return, date, period):
                                 where symbol = '{name}'
                                     and date >= '{period_start}'""",
                             con)
+    elif type == 'strategy':
+        df = pd.read_sql(f"""select date,
+                            daily_return
+                         from strategy_state
+                         where date >= '{period_start}'
+                            and strategy = '{name}'""", 
+                         con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -621,6 +637,13 @@ def calculate_absolute_return(type, name, date, closed_trades_pl, open_trades_pl
                                 where symbol = '{name}'
                                     and date >= '{period_start}'""",
                             con)
+    elif type == 'strategy':
+        df = pd.read_sql(f"""select date,
+                            daily_return
+                         from strategy_state
+                         where date >= '{period_start}'
+                            and strategy = '{name}'""", 
+                         con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -655,6 +678,12 @@ def calculate_drawdown(type, name,  date, todays_return):
                                 from symbol_state
                                 where symbol = '{name}'""",
                             con)
+    elif type == 'strategy':
+        df = pd.read_sql(f"""select date,
+                            daily_return
+                         from strategy_state
+                         where strategy = '{name}'""", 
+                         con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -689,6 +718,12 @@ def calculate_calmar_ratio(type, name, date, max_drawdown, todays_return, tradin
                             from symbol_state
                             where symbol = '{name}'""",
                         con)
+    elif type == 'strategy':
+        df = pd.read_sql(f"""select date,
+                            daily_return
+                         from strategy_state
+                         where strategy = '{name}'""", 
+                         con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -727,6 +762,12 @@ def calculate_sortino_ratio(type, name, date, todays_return, trading_period = 25
                                 from symbol_state
                                 where symbol = '{name}'""",
                             con)
+    elif type == 'strategy':
+        df = pd.read_sql(f"""select date,
+                            daily_return
+                         from strategy_state
+                         where strategy = '{name}'""", 
+                         con)
     con.close()
     
     df.sort_values('date', inplace = True)
@@ -891,12 +932,12 @@ def update_strategy_state(run_id, timestamp, config, trades):
     
         todays_return = strategy_todays_return(result_open_trades['symbols'], 
                                                result_open_trades['market_value'])
-        sharpe_ratio = calculate_sharpe_ratio('strategy', portfolio, todays_return, date, 'overall')
-        total_return = calculate_total_return(portfolio, todays_return, date, 'overall')
-        absolute_return = calculate_absolute_return(portfolio, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
-        max_drawdown, max_drawdown_duration = calculate_drawdown(portfolio, date, todays_return)
-        calmar_ratio = calculate_calmar_ratio(portfolio, date, max_drawdown, todays_return)
-        sortino_ratio = calculate_sortino_ratio(portfolio, date, todays_return)
+        sharpe_ratio = calculate_sharpe_ratio('strategy', strategy, todays_return, date, 'overall')
+        total_return = calculate_total_return('strategy', strategy, todays_return, date, 'overall')
+        absolute_return = calculate_absolute_return('strategy', strategy, date, result_closed_trades['pl'], result_open_trades['pl'], 'overall')
+        max_drawdown, max_drawdown_duration = calculate_drawdown('strategy', strategy, date, todays_return)
+        calmar_ratio = calculate_calmar_ratio('strategy', strategy, date, max_drawdown, todays_return)
+        sortino_ratio = calculate_sortino_ratio('strategy', strategy, date, todays_return)
         symbols_to_open_cnt = len([key for key, value in trades.items() if value == 'open'])
         symbols_to_close_cnt = len([key for key, value in trades.items() if value == 'close'])
         
@@ -915,20 +956,20 @@ def update_strategy_state(run_id, timestamp, config, trades):
                 todays_return, # OK
                 int(result_closed_trades['trades_cnt']), #OK
                 float(result_closed_trades['pl']), #OK
-                result_closed_trades['winning_trades_cnt'], # dorobit v closed trades calc funkcii
+                result_closed_trades['winning_trades_cnt'], # OK
                 float(result_closed_trades['win_rate']), #OK
-                float(sharpe_ratio), # dorobit vo sharpe ratio calc funkcii
-                calmar_ratio, # --//--
-                sortino_ratio, # --//--
-                float(total_return), # --//--
-                float(max_drawdown), # --//--
-                int(max_drawdown_duration), # --//--
-                float(absolute_return), # --//--
+                float(sharpe_ratio), # OK
+                calmar_ratio, # OK
+                sortino_ratio, # OK
+                float(total_return), # OK
+                float(max_drawdown), # OK
+                int(max_drawdown_duration), # OK
+                float(absolute_return), # OK
                 int(result_closed_trades['symbols_with_zero_trades_cnt']), #OK
-                len(symbols), # --//--
+                len(symbols), # OK
                 symbols_to_open_cnt, #OK
                 symbols_to_close_cnt) #OK
-        con.execute("""INSERT INTO portfolio_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+        con.execute("""INSERT INTO strategy_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
         con.commit()
         con.close()

@@ -118,7 +118,7 @@ con.execute("""CREATE TABLE strategy_state(
     portfolio_script_run_id TEXT, 
     strategy TEXT,
     open_trades_cnt REAL,
-    open_trades_symbols TEXT
+    open_trades_symbols TEXT,
     open_trades_PL REAL, 
     open_trades_total_return REAL,
     cost_basis REAL, 
@@ -126,21 +126,21 @@ con.execute("""CREATE TABLE strategy_state(
     long_positions_cnt REAL, 
     short_positions_cnt REAL,
     daily_return REAL,
-    closed_trades_cnt INT, 
+    closed_trades_cnt REAL, 
     closed_trades_PL REAL, 
-    closed_winning_trades_cnt INT,
+    closed_winning_trades_cnt REAL,
     win_rate REAL, 
     sharpe_ratio REAL, 
     calmar_ratio REAL,
     sortino_ratio REAL,
     total_return REAL,
     max_drawdown REAL,
-    max_drawdown_duration INT,
+    max_drawdown_duration REAL,
     absolute_return REAL,
-    symbols_with_zero_trades_cnt INT,
-    symbols_cnt INT,
-    symbols_to_open_cnt INT,
-    symbols_to_close_cnt INT
+    symbols_with_zero_trades_cnt REAL,
+    symbols_cnt REAL,
+    symbols_to_open_cnt REAL,
+    symbols_to_close_cnt REAL
     );""")
 con.commit()
 con.close()

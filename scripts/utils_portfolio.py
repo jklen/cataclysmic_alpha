@@ -639,7 +639,7 @@ def calculate_absolute_return(type, name, date, closed_trades_pl, open_trades_pl
                             con)
     elif type == 'strategy':
         df = pd.read_sql(f"""select date,
-                            daily_return
+                            closed_trades_PL
                          from strategy_state
                          where date >= '{period_start}'
                             and strategy = '{name}'""", 
@@ -938,39 +938,40 @@ def update_strategy_state(run_id, timestamp, config, trades):
         max_drawdown, max_drawdown_duration = calculate_drawdown('strategy', strategy, date, todays_return)
         calmar_ratio = calculate_calmar_ratio('strategy', strategy, date, max_drawdown, todays_return)
         sortino_ratio = calculate_sortino_ratio('strategy', strategy, date, todays_return)
-        symbols_to_open_cnt = len([key for key, value in trades.items() if value == 'open'])
-        symbols_to_close_cnt = len([key for key, value in trades.items() if value == 'close'])
+        symbols_to_open_cnt = sum(1 for entry in trades for symbol in symbols if entry.get(symbol) == 'open')
+        symbols_to_close_cnt = sum(1 for entry in trades for symbol in symbols if entry.get(symbol) == 'close')
         
         data = (timestamp, 
                 date, 
                 run_id, 
                 strategy,
-                result_open_trades['trades_cnt'], #OK
-                result_open_trades['symbols'], #OK
-                float(result_open_trades['pl']), #OK
-                float(result_open_trades['total_return']), # OK
-                result_open_trades['cost_basis'], #OK
-                result_open_trades['market_value'],#OK
-                long_positions_cnt, # OK
-                short_positions_cnt, # OK
-                todays_return, # OK
-                int(result_closed_trades['trades_cnt']), #OK
-                float(result_closed_trades['pl']), #OK
-                result_closed_trades['winning_trades_cnt'], # OK
-                float(result_closed_trades['win_rate']), #OK
-                float(sharpe_ratio), # OK
-                calmar_ratio, # OK
-                sortino_ratio, # OK
-                float(total_return), # OK
-                float(max_drawdown), # OK
-                int(max_drawdown_duration), # OK
-                float(absolute_return), # OK
-                int(result_closed_trades['symbols_with_zero_trades_cnt']), #OK
-                len(symbols), # OK
-                symbols_to_open_cnt, #OK
-                symbols_to_close_cnt) #OK
+                float(result_open_trades['trades_cnt']), 
+                str(result_open_trades['symbols']), 
+                float(result_open_trades['pl']),
+                float(result_open_trades['total_return']), 
+                float(result_open_trades['cost_basis']), 
+                float(result_open_trades['market_value']),
+                float(long_positions_cnt), 
+                float(short_positions_cnt), 
+                float(todays_return), 
+                float(result_closed_trades['trades_cnt']),
+                float(result_closed_trades['pl']), 
+                float(result_closed_trades['winning_trades_cnt']), 
+                float(result_closed_trades['win_rate']),
+                float(sharpe_ratio), 
+                float(calmar_ratio), 
+                float(sortino_ratio), 
+                float(total_return), 
+                float(max_drawdown), 
+                float(max_drawdown_duration),
+                float(absolute_return),
+                float(result_closed_trades['symbols_with_zero_trades_cnt']),
+                float(len(symbols)), 
+                float(symbols_to_open_cnt),
+                float(symbols_to_close_cnt))
+        pdb.set_trace()
         con.execute("""INSERT INTO strategy_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
         con.commit()
         con.close()
     
@@ -978,6 +979,8 @@ def strategy_todays_return(open_symbols, open_trades_mk_value):
     con = sqlite3.connect('../db/calpha.db')
     df = pd.read_sql("""select date, symbol, cost_basis, market_value, days_opened from symbol_state""", con)
     con.close()
+    
+    df['date'] = pd.to_datetime(df['date'])
     
     mk_value = df.loc[(df['symbol'].isin(open_symbols)) & (df['date'] == (df['date'].max() - timedelta(days = 1))), 'market_value'].sum()
     cost_basis = df.loc[(df['symbol'].isin(open_symbols)) & (df['date'] == df['date'].max()) & (df['days_opened'] == 1), 'cost_basis'].sum()

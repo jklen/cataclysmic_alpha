@@ -40,7 +40,7 @@ def main(path_config):
     config = yaml.safe_load(open(path_config, 'r'))
     script_run_id = generate_id()
     timestamp = datetime.now()
-    update_whole_portfolio_state(script_run_id, timestamp, config)
+    update_whole_portfolio_state(script_run_id, timestamp, config) #TODO na koniec scriptu
     trades_all = []
     
     for portfolio in config.keys():

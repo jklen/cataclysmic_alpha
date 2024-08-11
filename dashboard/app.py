@@ -164,6 +164,30 @@ def main_content_layout(pathname):
                 "padding": "0.5rem 0.5rem",
             }
         )
+    elif pathname == '/strategies':
+        return html.Div(
+            [
+                dbc.Tabs(id='tabs_strategies', 
+                         children=[
+                             dbc.Tab(label='Overview', tab_id='strategies_tab1_overview',
+                                     children = []),
+                             dbc.Tab(label='Returns', tab_id='sstrategies_tab2_returns',
+                                     children = []),
+                             dbc.Tab(label='Open positions', tab_id='strategies_tab3_positions',
+                                     children = []),
+                             dbc.Tab(label='Closed trades', tab_id='strategies_tab4_trades',
+                                     children = []),
+                             dbc.Tab(label='Ratios', tab_id='strategies_tab5_ratios',
+                                     children = [])
+                         ]
+                ),
+                html.Div(id = 'tabs_content_strategies')
+            ],
+            style={
+                "marginLeft": "17rem",
+                "padding": "0.5rem 0.5rem",
+            }
+        )
     else:
         return []
 
@@ -414,7 +438,7 @@ def tabs_content__children_subp(active_tab):
             'sortino_ratio':'Sortino ratio',
             'portfolio_name':'Portfolio'
         }, inplace = True)
-        return generate_metric_elements_subp(df_tab)
+        return generate_metric_elements(df_tab, type = 'portfolio')
     elif active_tab == 'subportfolios_tab2_equity':
         plot1 = px.line(df, x = 'date', y = 'equity', color = 'portfolio_name', title = 'Equity')
         plot2 = px.line(df, x = 'date', y = 'available_cash', color = 'portfolio_name', title = 'Available cash')
@@ -531,17 +555,39 @@ categories_subp = {
     "Ratios": [("Sharpe ratio", "Calmar ratio"), ("Sortino ratio", )]
 }
 
-def generate_metric_elements_subp(df):
+categories_strategies = {
+    'Returns':[('Last daily return', 'Total return'), 
+               ('Absolute return', ),
+               ('Max drawdown', 'Max drawdown duration'),
+               ('Symbols count', 'Symbols to open count'), 
+               ('Symbols to close count', 'Symbols with 0 trades count')],
+    'Positions':[('Open positions count', 'Open positions PL'), 
+                 ('Open positions total return', ),
+                 ('Cost basis', 'Market value'),
+                 ('Long positions count', 'Short positions count')],
+    'Closed trades':[('Trades count', 'Trades PL'),
+                     ('Winning trades count', 'Win rate')],
+    'Ratios':[('Sharpe ratio', 'Calmar ratio'), 
+              ('Sortino ratio', )]
+}
+
+def generate_metric_elements(df, type):
+    if type == 'strategy':
+        type = 'Strategy'
+        categories = categories_strategies
+    elif type == 'portfolio':
+        type = 'Portfolio'
+        categories = categories_subp
     category_elements = []
 
-    for category, metrics in categories_subp.items():
+    for category, metrics in categories.items():
         card_elements = []
         for metric in metrics:
             try:
                 metric[1]
-                df_f = df[['Portfolio', metric[0], metric[1]]]
+                df_f = df[[type, metric[0], metric[1]]]
             except:
-                df_f = df[['Portfolio', metric[0]]]
+                df_f = df[[type, metric[0]]]
             card_elements.append(
                 html.Div(
                     [
@@ -1163,6 +1209,178 @@ def symbol_tab5_div(symbols):
 #       korelacnu maticu daily returns  symbolov #TODO later
 #   trades ( v case)
 #       closed trades return #TODO later - nie je v db
+
+# STRATEGIES CALLBACKS
+
+@app.callback(
+    Output('tabs_content_strategies', 'children'),
+    [Input('tabs_strategies', 'active_tab')]
+)
+def tabs_content__children_subp(active_tab):
+    con = sqlite3.connect('../db/calpha.db')
+    query = """
+        SELECT *
+        FROM strategy_state
+        ORDER BY date ASC
+        """
+    df = pd.read_sql(query, con)
+    
+    df['daily_return'] = df['daily_return'].round(8)
+    df['total_return'] = df['total_return'].round(4)
+    df['absolute_return'] = df['absolute_return'].round(2)
+    df['max_drawdown'] = df['max_drawdown'].round(2)
+    df['max_drawdown_duration'] = df['max_drawdown_duration'].round(2)
+    df['open_trades_PL'] = df['open_trades_PL'].round(2)
+    df['open_trades_total_return'] = df['open_trades_total_return'].round(4)
+    df['cost_basis'] = df['cost_basis'].round(2)
+    df['market_value'] = df['market_value'].round(2)
+    df['closed_trades_PL'] = df['closed_trades_PL'].round(2)
+    df['win_rate'] = df['win_rate'].round(2)    
+    df['sharpe_ratio'] = df['sharpe_ratio'].round(2)
+    df['calmar_ratio'] = df['calmar_ratio'].round(2)
+    df['sortino_ratio'] = df['sortino_ratio'].round(2)
+    
+    if active_tab == 'strategies_tab1_overview':
+        df_tab = df.loc[df['date'] == df['date'].max(), :]
+        df_tab.rename(columns = {
+            'max_drawdown':'Max drawdown',
+            'max_drawdown_duration':'Max drawdown duration',
+            'total_return':'Total return',
+            'absolute_return':'Absolute return',
+            'daily_return':'Last daily return',
+            'open_trades_total_return':'Open positions total return',
+            'open_trades_cnt':'Open positions count',
+            'open_trades_PL':'Open positions PL',
+            'closed_trades_cnt':'Trades count',
+            'closed_trades_PL':'Trades PL',
+            'closed_winning_trades_cnt':'Winning trades count',
+            'win_rate':'Win rate',
+            'symbols_with_zero_trades_cnt':'Symbols with 0 trades count',
+            'symbols_to_open_cnt':'Symbols to open count',
+            'symbols_to_close_cnt':'Symbols to close count',
+            'symbols_cnt':'Symbols count',
+            'cost_basis':'Cost basis',
+            'market_value':'Market value',
+            'sharpe_ratio':'Sharpe ratio',
+            'calmar_ratio':'Calmar ratio',
+            'sortino_ratio':'Sortino ratio',
+            'long_positions_cnt': 'Long positions count',
+            'short_positions_cnt':'Short positions count',
+            'strategy':'Strategy'
+        }, inplace = True)
+        return generate_metric_elements(df_tab, type = 'strategy')
+    elif active_tab == 'strategies_tab2_returns':
+        plot1 = px.line(df, x = 'date', y = 'equity', color = 'portfolio_name', title = 'Equity')
+        plot2 = px.line(df, x = 'date', y = 'available_cash', color = 'portfolio_name', title = 'Available cash')
+        plot3 = px.line(df, x = 'date', y = 'max_drawdown', color = 'portfolio_name', title = 'Max drawdown')
+        plot4 = px.line(df, x = 'date', y = 'max_drawdown_duration', color = 'portfolio_name', title = 'Max drawdown duration')
+        
+        for plot in [plot1, plot2, plot3, plot4]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab2_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab2_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab2_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab2_plot4', figure = plot4), width = 6)])
+        
+        return [row1, row2]
+    elif active_tab == 'strategies_tab3_positions':
+        plot1 = px.line(df, x = 'date', y = 'total_return', color = 'portfolio_name', title = 'Total return')
+        plot2 = px.line(df, x = 'date', y = 'absolute_return', color = 'portfolio_name', title = 'Total absolute return')
+        plot3 = px.line(df, x = 'date', y = 'daily_return', color = 'portfolio_name', title = 'Daily returns')
+        
+        df_daily_ret = df.pivot_table(index=df.index, columns='portfolio_name', values='daily_return')
+        daily_ret = [df_daily_ret[column].dropna().tolist() for column in df_daily_ret.columns]
+        plot4 = ff.create_distplot(daily_ret, group_labels = df_daily_ret.columns.tolist(),
+                                   show_hist = False)
+        plot4.update_layout(title_text='Daily returns distplot')
+        
+        for plot in [plot1, plot2, plot3, plot4]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab3_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab3_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab3_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab3_plot4', figure = plot4), width = 6)])
+        
+        return [row1, row2]
+    
+    elif active_tab == 'strategies_tab4_trades':
+        plot1 = px.line(df, x = 'date', y = 'open_trades_cnt', color = 'portfolio_name', title = 'Open trades count')
+        plot2 = px.line(df, x = 'date', y = 'open_trades_PL', color = 'portfolio_name', title = 'Open trades PL')
+        plot3 = px.line(df, x = 'date', y = 'closed_trades_cnt', color = 'portfolio_name', title = 'Closed trades count')
+        plot4 = px.line(df, x = 'date', y = 'closed_trades_PL', color = 'portfolio_name', title = 'Closed trades PL')
+        plot5 = px.line(df, x = 'date', y = 'win_rate', color = 'portfolio_name', title = 'Win rate')
+        plot6 = px.line(df, x = 'date', y = 'symbols_to_open_cnt', color = 'portfolio_name', title = 'Symblos to open count')
+        plot7 = px.line(df, x = 'date', y = 'symbols_to_close_cnt', color = 'portfolio_name', title = 'Symblos to close count')
+        
+        for plot in [plot1, plot2, plot3, plot4, plot5, plot6, plot7]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab4_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab4_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab4_plot3', figure = plot3), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab4_plot4', figure = plot4), width = 6)])
+        row3 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab4_plot5', figure = plot5), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab4_plot6', figure = plot6), width = 6)])
+        row4 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab4_plot7', figure = plot7), width = 6)])
+        
+        return [row1, row2, row3, row4]
+    
+    elif active_tab == 'strategies_tab5_ratios':
+        plot1 = px.line(df, x = 'date', y = 'sharpe_ratio', color = 'portfolio_name', title = 'Sharpe ratio')
+        plot2 = px.line(df, x = 'date', y = 'calmar_ratio', color = 'portfolio_name', title = 'Calmar ratio')
+        plot3 = px.line(df, x = 'date', y = 'sortino_ratio', color = 'portfolio_name', title = 'Sortino ratio')
+        
+        for plot in [plot1, plot2, plot3]:
+            plot.update_layout(
+                title={
+                    'y': 0.9,
+                    'x': 0.5,
+                    'xanchor': 'center',
+                    'yanchor': 'top',
+                    'font': {'size': 26}
+                }
+            )
+        
+        row1 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab5_plot1', figure = plot1), width = 6),
+                        dbc.Col(dcc.Graph(id = 'sp_tab5_plot2', figure = plot2), width = 6)])
+        row2 = dbc.Row([dbc.Col(dcc.Graph(id = 'sp_tab5_plot3', figure = plot3), width = 6)])
+        
+        return [row1, row2]
+    else:
+        return html.Div()
+
+# tab1 - overview
+#   returns - daily return, total return, max drawdown + period, absolute return, 
+#       symbols cnt, symobls to open cnt, symbols to close cnt, symbols with zero trades cnt, histogram of daily returns
+#   open positions - open trades cnt, PL, total return, cost basis, mk value, long & short positions cnt
+#   closed trades - closed trades cnt, PL, winning trades cnt, win rate, histogram of trades returns
+#   ratios - sharpe, calmar, sortino
 
 
 # App layout

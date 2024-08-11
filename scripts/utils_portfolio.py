@@ -418,7 +418,7 @@ def calculate_open_trades_stats(symbols):
             stats_not_opened.append({'symbol':symbol, 'cost_basis':0, 'unrealized_pl':0,
                           'unrealized_plpc':0, 'market_value':0, 'change_today':0.,
                           'current_price':0, 'lastday_price':0, 'qty':0,
-                          'side':np.nan, 'trade_opened_at':0, 'days_since_open':0})
+                          'side':np.nan, 'trade_opened_at':np.nan, 'days_since_open':0})
         else:
             position_dict = dict(position)
             keys_to_keep = ['symbol', 'cost_basis', 'unrealized_pl', 'unrealized_plpc', 'market_value', 'change_today', 
@@ -969,19 +969,25 @@ def update_strategy_state(run_id, timestamp, config, trades):
                 float(len(symbols)), 
                 float(symbols_to_open_cnt),
                 float(symbols_to_close_cnt))
-        pdb.set_trace()
         con.execute("""INSERT INTO strategy_state VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", data)
         con.commit()
         con.close()
     
 def strategy_todays_return(open_symbols, open_trades_mk_value):
+    #pdb.set_trace()
     con = sqlite3.connect('../db/calpha.db')
-    df = pd.read_sql("""select date, symbol, cost_basis, market_value, days_opened from symbol_state""", con)
+    df = pd.read_sql("""select date, symbol, cost_basis, market_value, days_opened, trade_opened from symbol_state""", con)
     con.close()
     
     df['date'] = pd.to_datetime(df['date'])
+    df['trade_opened'] = pd.to_datetime(df['trade_opened'])
     
+    open_crypto_symbols = [symbol for symbol in crypto_map.values() if symbol in open_symbols]
+    crypto_today_opened_mk_value = df.loc[(df['date'] == df['date'].max()) & 
+                                          (df['symbol'].isin(open_crypto_symbols)) & 
+                                          (df['trade_opened'] == df['date'].max()), 'market_value'].sum()
+    open_trades_mk_value = open_trades_mk_value - crypto_today_opened_mk_value
     mk_value = df.loc[(df['symbol'].isin(open_symbols)) & (df['date'] == (df['date'].max() - timedelta(days = 1))), 'market_value'].sum()
     cost_basis = df.loc[(df['symbol'].isin(open_symbols)) & (df['date'] == df['date'].max()) & (df['days_opened'] == 1), 'cost_basis'].sum()
     

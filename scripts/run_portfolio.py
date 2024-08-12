@@ -40,7 +40,6 @@ def main(path_config):
     config = yaml.safe_load(open(path_config, 'r'))
     script_run_id = generate_id()
     timestamp = datetime.now()
-    update_whole_portfolio_state(script_run_id, timestamp, config) #TODO na koniec scriptu
     trades_all = []
     
     for portfolio in config.keys():
@@ -88,7 +87,7 @@ def main(path_config):
         trades = {crypto_map[key] if key in crypto_map else key: value for key, value in trades.items()}
         trades_all.append(trades)
         logger.info(f"Portfolio {portfolio} symbols actions - {str(trades)}")
-        #close_positions(trades)
+        close_positions(trades)
         update_portfolio_state(portfolio, 
                         config[portfolio]['portfolio_size'], 
                         list(config[portfolio]['symbols'].keys()), 
@@ -101,10 +100,10 @@ def main(path_config):
                                script_run_id,
                                timestamp)
         logger.info(f"Portfolio {portfolio} position sizes - {str(sizes)}")
-        #open_positions(sizes, trades)
+        open_positions(sizes, trades)
         
         logger.info(f"XXXXXXXXXXXXXXXXXXXX --- Portfolio {portfolio} - DONE --- XXXXXXXXXXXXXXXXXXXX")
-    
+    update_whole_portfolio_state(script_run_id, timestamp, config)
     all_symbols = list({symbol for portfolio in config.values() for symbol in portfolio['symbols'].keys()})
     update_symbol_state(script_run_id, timestamp, all_symbols, config)
     update_strategy_state(script_run_id, timestamp, config, trades_all)

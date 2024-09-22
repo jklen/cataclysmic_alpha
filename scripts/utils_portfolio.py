@@ -1,4 +1,4 @@
-from utils_strategy import HigherHighStrategy
+from strategies import HigherHighStrategy
 import pandas as pd
 import numpy as np
 import yaml
@@ -80,6 +80,7 @@ def calculate_win_rates(symbols):
     trading_client = create_trading_client()
     win_rates = {}
     for symbol in symbols:
+        logger.info(f'Processing symbol - {symbol}')
         request_params = GetOrdersRequest(
             status='closed',
             symbols=[symbol]
@@ -91,6 +92,7 @@ def calculate_win_rates(symbols):
         keys_to_keep = ['symbol', 'filled_at', 'filled_qty', 'filled_avg_price', 'side']
         filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
         df_orders = pd.DataFrame(filtered_orders)
+        df_orders.loc[:, ['filled_qty', 'filled_avg_price']] = df_orders.loc[:, ['filled_qty', 'filled_avg_price']].astype('float')
         df_orders['filled_qty'] = df_orders['filled_qty'].round(3)
         df_orders['side'] = df_orders['side'].apply(str)
         df_orders.sort_values(by = 'filled_at', inplace = True)
@@ -136,6 +138,7 @@ def check_weights(symbols, weights_params):
     else:
         if if_running_weights(symbols, weights_params):
             if weights_params['running'] == 'win_rate':
+                #pdb.set_trace()
                 series_metric = calculate_win_rates(symbols)
                 print(series_metric)
             weights = calculate_weights(series_metric, weights_params['running_params'])
@@ -298,6 +301,7 @@ def position_sizes(portfolio, min_avail_cash, weights, run_id, timestamp):
     return df.set_index('symbol')['position'].round(2) #df[['symbol', 'position']].set_index('symbol')
 
 def open_positions(sizes, trades):
+    #TODO check if already opened
     logger.info(f"Submitting orders to open positions")
     trading_client = create_trading_client()
     for symbol in trades.keys():

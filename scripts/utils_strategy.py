@@ -26,43 +26,11 @@ from scipy.spatial.distance import pdist, squareform
 import pickle
 import ast
 import gc
+from strategies import HigherHighStrategy
 
 logger = logging.getLogger(__name__)
 
 cryptos = ['BTC/USD']
-
-# Define the strategy logic in a function
-def hh_hl_strategy_logic(close, window_entry, hh_hl_counts, 
-                   window_exit, lh_counts):
-    #pdb.set_trace()
-    if isinstance(close, np.ndarray):
-        close = pd.DataFrame(close)
-        
-    if (hh_hl_counts > window_entry) or (lh_counts > window_exit):
-        df_empty = pd.DataFrame(np.nan, index=close.index, columns=close.columns)
-        return df_empty, df_empty
-    
-    higher_highs = close > close.rolling(window=window_entry, min_periods=window_entry).max().shift(1)
-    higher_lows = close > close.rolling(window=window_entry, min_periods=window_entry).min().shift(1)
-
-    hh_count = higher_highs.rolling(window=window_entry).sum() # asi -1, lebo prenasa True z higher_highs z predosleho okna
-    hl_count = higher_lows.rolling(window=window_entry).sum() # asi -1, lebo prenasa True z higher_lows z predosleho okna
-
-    entry_signal = (hl_count.shift(1) >= hh_hl_counts) & (hh_count.shift(1) >= hh_hl_counts) & higher_lows
-
-    lower_highs = close < close.rolling(window=window_exit, min_periods=1).max().shift(1)
-    lh_count = lower_highs.rolling(window=window_exit).sum()
-    exit_signal = (lh_count >= lh_counts) & lower_highs
-
-    return entry_signal, exit_signal
-
-# Create a custom indicator using the IndicatorFactory
-HigherHighStrategy = vbt.IndicatorFactory(
-    input_names=['close'],
-    param_names=['window_entry', 'hh_hl_counts',
-                 'window_exit', 'lh_counts'],
-    output_names=['entry_signal', 'exit_signal']
-).from_apply_func(hh_hl_strategy_logic)
 
 def get_alpaca_data(symbol, start, end, attempts = 10):
     keys = yaml.safe_load(open('../keys.yaml', 'r'))

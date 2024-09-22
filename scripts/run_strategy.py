@@ -4,8 +4,9 @@ import yaml
 import sys
 import shutil
 import os
-from utils_strategy import HigherHighStrategy, data_load, data_stats, data_split, strategy_stats,\
+from utils_strategy import data_load, data_stats, data_split, strategy_stats,\
     strategy_grouped_stats, get_best_params, create_path, process_df_stats
+from strategies import HigherHighStrategy
 from datetime import datetime
 from time import ctime
 import pdb

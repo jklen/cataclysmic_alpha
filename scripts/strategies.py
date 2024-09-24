@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import vectorbt as vbt
 import itertools
+import pdb
 
 # HigherHigh strategy
 
@@ -44,6 +45,7 @@ def hhhl_ml1_strategy_logic(datasets:list, models:list, dataset_params:dict,
     true_exit_signals = []
     #pdb.set_trace()
     for i, dataset in enumerate(datasets):
+        print(f"starting processing dataset - {i}")
         model = models[i]
         close = dataset['Adj Close']
         expanded_params = {key: list(range(val[0], val[1] + 1)) for key, val in dataset_params.items()}
@@ -52,6 +54,7 @@ def hhhl_ml1_strategy_logic(datasets:list, models:list, dataset_params:dict,
         df_entry_signals = pd.DataFrame(index = close.index)
         df_exit_signals = pd.DataFrame(index = close.index)
         df_probs = pd.DataFrame(index = close.index)
+        print(f"starting processing param combinations")
         for comb in combinations:
             
             # entry signals - original strategy
@@ -75,7 +78,7 @@ def hhhl_ml1_strategy_logic(datasets:list, models:list, dataset_params:dict,
             x['hh_hl_counts'] = comb[1]
             x['window_exit'] = comb[2]
             x['lh_counts'] = comb[3] # dataset ready
-            predicted_proba = model.predict_proba(x)
+            predicted_proba = model.predict_proba(x)[:,1] # len True classa
             df_probs[comb] = predicted_proba # df predikovanych probabilit
             
             # exit signals - original strategy
@@ -84,15 +87,14 @@ def hhhl_ml1_strategy_logic(datasets:list, models:list, dataset_params:dict,
             lh_count = lower_highs.rolling(window=comb[2]).sum()
             exit_signal = (lh_count >= comb[3]) & lower_highs
             df_exit_signals[comb] = exit_signal # df exit signalov
-            
-            
+        print("param combinations finished")    
         df_probs_masked = df_probs.where(df_entry_signals)
         max_combs = df_probs_masked.idxmax(axis=1) # series s param kombinaciami kde bolo max prob
         max_probs = df_probs_masked.max(axis=1)# series s max prob
         true_entry_signal = max_probs >= probability_threshold
-        
+        print("calculating final entry and exit signals")
         open_trade = False
-        for i, entry in true_entry_signal.tolist():
+        for i, entry in enumerate(true_entry_signal.tolist()):
             if open_trade:
                 exit_comb = df_exit_signals[params]
                 is_exit_signal = exit_comb[i]
@@ -105,10 +107,10 @@ def hhhl_ml1_strategy_logic(datasets:list, models:list, dataset_params:dict,
                 if entry:
                     open_trade = True
                     params = max_combs[i]
-                    
-        true_exit_signal = not true_entry_signal
+        true_exit_signal = ~true_entry_signal
         true_exit_signals.append(true_exit_signal)
         true_entry_signals.append(true_entry_signal)
+    print("concatenating entry and exit signals for all datasets")
     df_true_entry_signals = pd.concat(true_entry_signals, axis = 1)
     df_true_exit_signals = pd.concat(true_exit_signals, axis = 1)
 

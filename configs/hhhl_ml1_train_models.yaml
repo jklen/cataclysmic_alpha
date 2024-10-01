@@ -1,0 +1,13 @@
+symbols: '../data/top100_symbols.pickle'
+rewrite_existing_symbols: True
+strategy_params:
+  hhhl:
+    stop_loss: 0.1
+    param_ranges:
+      window_entry: [2, 9]
+      hh_hl_counts: [1, 5]
+      window_exit: [2, 9]
+      lh_counts: [1, 5]
+timeseries_split:
+  n_splits: 6
+  test_size: 30000

@@ -1,0 +1,22 @@
+experiment_name: experiment1
+rewrite_existing_symbols: true
+strategy_params:
+  hhhl:
+    param_ranges:
+      hh_hl_counts:
+      - 1
+      - 5
+      lh_counts:
+      - 1
+      - 5
+      window_entry:
+      - 2
+      - 9
+      window_exit:
+      - 2
+      - 9
+    stop_loss: 0.1
+symbols: ../data/top100_symbols.pickle
+timeseries_split:
+  n_splits: 6
+  test_size: 30000

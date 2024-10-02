@@ -17,6 +17,7 @@ import pickle
 import logging
 import logging.config
 from logging.handlers import TimedRotatingFileHandler
+import pdb
 
 # Create logger
 logger = logging.getLogger('')
@@ -50,16 +51,20 @@ def main(path_config):
         with open(config['symbols'], 'rb') as file:
             symbols = pickle.load(file)
     
-    if config['rewrite_existing_symbols']: 
-        shutil.rmtree('../outputs_hhhl_ml1')
-        os.mkdir('../outputs_hhhl_ml1')
+    if config['rewrite_existing_symbols']:
+        if os.path.exists(f"../outputs_hhhl_ml1/{config['experiment_name']}"):
+            shutil.rmtree(f"../outputs_hhhl_ml1/{config['experiment_name']}")
+        os.mkdir(f"../outputs_hhhl_ml1/{config['experiment_name']}")
+    
+    with open(f"../outputs_hhhl_ml1/{config['experiment_name']}/config.yaml", 'w') as file:
+        yaml.dump(config, file, default_flow_style=False)
         
-    already_existing_symbols = [f.name for f in os.scandir('../outputs_hhhl_ml1') if f.is_dir()]
+    already_existing_symbols = [f.name for f in os.scandir(f"../outputs_hhhl_ml1/{config['experiment_name']}") if f.is_dir()]
 
     for symbol in symbols:
         
         if symbol not in already_existing_symbols:
-            os.mkdir(f"../outputs_hhhl_ml1/{symbol}")
+            os.mkdir(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}")
             logger.info(f"Downloading price data for symbol - {symbol} from yfinance")
             
             data= yf.download(symbol, start=datetime(2000, 1,1), end=datetime.now())
@@ -88,8 +93,8 @@ def main(path_config):
             df_trades = pf.entry_trades.records_readable
             
             logger.info(f"Generating dataset with technical data for symbol - {symbol}")
-            
-            df_price = data.loc[:, (slice(None), 'AAPL')].droplevel(1, axis = 'columns')
+
+            df_price = data
             df_price.ta.strategy('All')            
             df_trades[['window_entry', 'hh_hl_counts', 'window_exit', 'lh_counts']] = df_trades['Column'].tolist()
             df = df_trades.loc[:, ['window_entry', 'hh_hl_counts', 'window_exit', 'lh_counts', 'Entry Timestamp']]
@@ -100,7 +105,6 @@ def main(path_config):
             
             x = df.iloc[:, :-1]
             y = df.iloc[:, -1]
-            tscv = TimeSeriesSplit(**config['timeseries_split'])
             
             param_grid = {
                 'learning_rate': [0.01, 0.05, 0.1],
@@ -127,14 +131,37 @@ def main(path_config):
                 n_jobs=-1, 
                 verbose=1
             )
-
+            
+            max_splits = (len(x) - config['timeseries_split']['test_size']) // config['timeseries_split']['test_size']
+            n_splits = min(config['timeseries_split']['n_splits'], max_splits)
+            logger.info(f"Calculated number of splits for trades dataset of {len(x)} size - {n_splits} - symbol {symbol}")
+            if n_splits < 1:
+                logger.warning(f"!!! - not enough data for {config['timeseries_split']['test_size']} test set...skipping symbol - {symbol} !!!")
+                shutil.rmtree(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}")
+                continue
+            
+            tscv = TimeSeriesSplit(n_splits = n_splits, test_size = config['timeseries_split']['test_size'])
+            
             logger.info(f"Starting training loop for symbol - {symbol}")
             
-            for train_index, test_index in tscv.split(x):
-                train_stuff['train_mins'].append(x.iloc[train_index].index.min().date())
-                train_stuff['train_maxs'].append(x.iloc[train_index].index.max().date())
-                train_stuff['test_mins'].append(x.iloc[test_index].index.min().date() + pd.Timedelta(days = 1))
-                train_stuff['test_maxs'].append(x.iloc[test_index].index.max().date())
+            for i, (train_index, test_index) in enumerate(tscv.split(x)):
+                logger.info(f"Training on split {i}")
+                
+                train_min_date = x.iloc[train_index].index.min().date()
+                train_max_date = x.iloc[train_index].index.max().date()
+                test_min_date = x.iloc[test_index].index.min().date() + pd.Timedelta(days = 1)
+                test_max_date = x.iloc[test_index].index.max().date()
+                
+                train_trades_cnt = len(x.iloc[train_index])
+                test_trades_cnt = len(x.iloc[test_index])
+                
+                logger.info(f"Split - {i} has training period - {(train_max_date - train_min_date).days} days, nr of trades - {train_trades_cnt}")
+                logger.info(f"Split - {i} has test period - {(test_max_date - test_min_date).days} days, nr of trades - {test_trades_cnt}")
+                
+                train_stuff['train_mins'].append(train_min_date)
+                train_stuff['train_maxs'].append(train_max_date)
+                train_stuff['test_mins'].append(test_min_date)
+                train_stuff['test_maxs'].append(test_max_date)
                 
                 x_train, x_test = x.iloc[train_index], x.iloc[test_index]
                 y_train, y_test = y.iloc[train_index], y.iloc[test_index]
@@ -154,10 +181,10 @@ def main(path_config):
                 print(100*'-')
             
             logger.info(f"Dumping train stuff - periods and models")
-            with open(f"../outputs_hhhl_ml1/{symbol}/train_stuff.pickle", 'wb') as f:
+            with open(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}/train_stuff.pickle", 'wb') as f:
                 pickle.dump(train_stuff, f)
             logger.info(f"XXXXXXXXXXXXXXXXXXXXXXXXXX - symbol {symbol} DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX")
-    logger.info(f"XXXXXXXXXXXXXXXXXXXXXXXXXX - ALL YMBOLS DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX")
+    logger.info(f"XXXXXXXXXXXXXXXXXXXXXXXXXX - ALL SYMBOLS DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX")
 
 if __name__ == '__main__':
     main()

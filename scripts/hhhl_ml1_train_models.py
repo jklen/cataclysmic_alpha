@@ -16,9 +16,7 @@ import pandas as pd
 import pickle
 import logging
 import logging.config
-from logging.handlers import TimedRotatingFileHandler
 import pdb
-
 # Create logger
 logger = logging.getLogger('')
 logger.setLevel(logging.DEBUG)
@@ -32,9 +30,9 @@ console_handler.setLevel(logging.INFO)
 console_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 
-# Create file handler
+# Create file handler (single log file for the entire script run)
 logger_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-file_handler = TimedRotatingFileHandler(f'../logs_model_train/hhhl_ml1_train_models_{logger_timestamp}.log', when="h", interval=1, backupCount=0)
+file_handler = logging.FileHandler(f'../logs_model_train/hhhl_ml1_train_models_{logger_timestamp}.log')
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
@@ -45,11 +43,12 @@ logger.info('Logger is setup')
 @click.option("-c", "--path_config", help="Path to config yml to use")
 def main(path_config):
     config = yaml.safe_load(open(path_config, 'r'))
+    logger.info(f"Starting experiment - {config['experiment_name']}")
     if isinstance(config['symbols'], list):
         symbols = config['symbols']
     else:
         with open(config['symbols'], 'rb') as file:
-            symbols = pickle.load(file)
+            symbols = pickle.load(file)[:5]
     
     if config['rewrite_existing_symbols']:
         if os.path.exists(f"../outputs_hhhl_ml1/{config['experiment_name']}"):
@@ -95,7 +94,8 @@ def main(path_config):
             logger.info(f"Generating dataset with technical data for symbol - {symbol}")
 
             df_price = data
-            df_price.ta.strategy('All')            
+            df_price.ta.strategy('All')
+            df_price.to_csv(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}/df_price.csv", index = True, header = True)        
             df_trades[['window_entry', 'hh_hl_counts', 'window_exit', 'lh_counts']] = df_trades['Column'].tolist()
             df = df_trades.loc[:, ['window_entry', 'hh_hl_counts', 'window_exit', 'lh_counts', 'Entry Timestamp']]
             df['positive_return'] = df_trades['Return'] > 0
@@ -118,6 +118,9 @@ def main(path_config):
                 'train_maxs':[],
                 'test_mins':[],
                 'test_maxs':[],
+                'train_class_reports':[],
+                'test_class_reports':[],
+                'gridsearch_best_params':[],
                 'gridsearch_objs':[]
             }
 
@@ -165,20 +168,23 @@ def main(path_config):
                 
                 x_train, x_test = x.iloc[train_index], x.iloc[test_index]
                 y_train, y_test = y.iloc[train_index], y.iloc[test_index]
-                
-                print(len(x_train), len(x_test))
-                
+                                
                 grid_search.fit(x_train, y_train)    
                 train_stuff['gridsearch_objs'].append(grid_search)
                 y_pred_test = grid_search.predict(x_test)
                 y_pred_train = grid_search.predict(x_train)
                 
-                print(grid_search.best_params_)
-                print('--- train ---')
-                print(classification_report(y_train, y_pred_train))
-                print('--- test ---')
-                print(classification_report(y_test, y_pred_test))
-                print(100*'-')
+                gs_best_params = grid_search.best_params_
+                train_class_report = classification_report(y_train, y_pred_train)
+                test_class_report = classification_report(y_test, y_pred_test)
+                
+                train_stuff['gridsearch_best_params'].append(gs_best_params)
+                train_stuff['train_class_reports'].append(train_class_report)
+                train_stuff['test_class_reports'].append(test_class_report)
+                
+                logger.info('Best model params:\n%s', gs_best_params)
+                logger.info('Train classification report:\n%s:', train_class_report)
+                logger.info('Test classification report:\n%s', test_class_report)
             
             logger.info(f"Dumping train stuff - periods and models")
             with open(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}/train_stuff.pickle", 'wb') as f:

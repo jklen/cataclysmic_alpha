@@ -54,6 +54,7 @@ def main(path_config):
         if os.path.exists(f"../outputs_hhhl_ml1/{config['experiment_name']}"):
             shutil.rmtree(f"../outputs_hhhl_ml1/{config['experiment_name']}")
         os.mkdir(f"../outputs_hhhl_ml1/{config['experiment_name']}")
+        os.chmod(f"../outputs_hhhl_ml1/{config['experiment_name']}", 0o777)
     
     with open(f"../outputs_hhhl_ml1/{config['experiment_name']}/config.yaml", 'w') as file:
         yaml.dump(config, file, default_flow_style=False)
@@ -65,6 +66,7 @@ def main(path_config):
             
             if symbol not in already_existing_symbols:
                 os.mkdir(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}")
+                os.chmod(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}", 0o777)
                 logger.info(f"Downloading price data for symbol - {symbol} from yfinance")
                 
                 data= yf.download(symbol, start=datetime(2000, 1,1), end=datetime.now())

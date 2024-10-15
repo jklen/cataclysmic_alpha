@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     libsm6 \
     libxrender1 \
     git \
+    nano \
+    sudo \
     && rm -rf /var/lib/apt/lists/*
 
 # Install micromamba

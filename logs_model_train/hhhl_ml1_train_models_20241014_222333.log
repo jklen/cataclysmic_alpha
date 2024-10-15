@@ -1,0 +1,827 @@
+2024-10-14 22:23:33,536 - root - INFO - Logger is setup
+2024-10-14 22:23:33,539 - root - INFO - Starting experiment - experiment1
+2024-10-14 22:23:33,544 - root - INFO - Downloading price data for symbol - TSLA from yfinance
+2024-10-14 22:23:33,932 - root - INFO - Generating trades for symbol - TSLA
+2024-10-14 22:23:43,875 - root - INFO - Generating dataset with technical data for symbol - TSLA
+2024-10-14 22:23:47,731 - root - INFO - Calculated number of splits for trades dataset of 131872 size - 3 - symbol TSLA
+2024-10-14 22:23:47,731 - root - INFO - Starting training loop for symbol - TSLA
+2024-10-14 22:23:47,731 - root - INFO - Training on split 0 - symbol - TSLA
+2024-10-14 22:23:47,874 - root - INFO - Split - 0 has training period - 1480 days, nr of trades - 41872
+2024-10-14 22:23:47,874 - root - INFO - Split - 0 has test period - 1164 days, nr of trades - 30000
+2024-10-14 22:33:05,277 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-14 22:33:05,277 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.99      0.98      0.99     24923
+        True       0.97      0.99      0.98     16949
+
+    accuracy                           0.98     41872
+   macro avg       0.98      0.98      0.98     41872
+weighted avg       0.98      0.98      0.98     41872
+:
+2024-10-14 22:33:05,277 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.81      0.77      0.79     18360
+        True       0.66      0.71      0.69     11640
+
+    accuracy                           0.75     30000
+   macro avg       0.74      0.74      0.74     30000
+weighted avg       0.75      0.75      0.75     30000
+
+2024-10-14 22:33:05,277 - root - INFO - Training on split 1 - symbol - TSLA
+2024-10-14 22:33:05,481 - root - INFO - Split - 1 has training period - 2645 days, nr of trades - 71872
+2024-10-14 22:33:05,481 - root - INFO - Split - 1 has test period - 1145 days, nr of trades - 30000
+2024-10-14 22:47:30,614 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-14 22:47:30,622 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.97      0.98     43283
+        True       0.95      0.97      0.96     28589
+
+    accuracy                           0.97     71872
+   macro avg       0.97      0.97      0.97     71872
+weighted avg       0.97      0.97      0.97     71872
+:
+2024-10-14 22:47:30,622 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.79      0.71      0.75     16716
+        True       0.67      0.77      0.72     13284
+
+    accuracy                           0.73     30000
+   macro avg       0.73      0.74      0.73     30000
+weighted avg       0.74      0.73      0.73     30000
+
+2024-10-14 22:47:30,623 - root - INFO - Training on split 2 - symbol - TSLA
+2024-10-14 22:47:30,887 - root - INFO - Split - 2 has training period - 3791 days, nr of trades - 101872
+2024-10-14 22:47:30,887 - root - INFO - Split - 2 has test period - 1412 days, nr of trades - 30000
+2024-10-14 23:09:19,996 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-14 23:09:19,996 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.97      0.96      0.97     59999
+        True       0.95      0.96      0.95     41873
+
+    accuracy                           0.96    101872
+   macro avg       0.96      0.96      0.96    101872
+weighted avg       0.96      0.96      0.96    101872
+:
+2024-10-14 23:09:19,997 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.79      0.74      0.76     16120
+        True       0.72      0.77      0.74     13880
+
+    accuracy                           0.75     30000
+   macro avg       0.75      0.75      0.75     30000
+weighted avg       0.76      0.75      0.75     30000
+
+2024-10-14 23:09:19,997 - root - INFO - Dumping train stuff - periods and models
+2024-10-14 23:09:20,016 - root - INFO - XXXXXXXXXXXXXXXXXXXXXXXXXX - symbol TSLA DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX
+2024-10-14 23:09:20,017 - root - INFO - Downloading price data for symbol - NVDA from yfinance
+2024-10-14 23:09:20,421 - root - INFO - Generating trades for symbol - NVDA
+2024-10-14 23:09:27,610 - root - INFO - Generating dataset with technical data for symbol - NVDA
+2024-10-14 23:09:34,669 - root - INFO - Calculated number of splits for trades dataset of 235985 size - 6 - symbol NVDA
+2024-10-14 23:09:34,669 - root - INFO - Starting training loop for symbol - NVDA
+2024-10-14 23:09:34,669 - root - INFO - Training on split 0 - symbol - NVDA
+2024-10-14 23:09:34,823 - root - INFO - Split - 0 has training period - 2266 days, nr of trades - 55985
+2024-10-14 23:09:34,824 - root - INFO - Split - 0 has test period - 1205 days, nr of trades - 30000
+2024-10-14 23:21:18,723 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-14 23:21:18,724 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.97      0.98     31722
+        True       0.97      0.98      0.97     24263
+
+    accuracy                           0.98     55985
+   macro avg       0.98      0.98      0.98     55985
+weighted avg       0.98      0.98      0.98     55985
+:
+2024-10-14 23:21:18,724 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.83      0.75      0.79     18667
+        True       0.65      0.75      0.69     11333
+
+    accuracy                           0.75     30000
+   macro avg       0.74      0.75      0.74     30000
+weighted avg       0.76      0.75      0.75     30000
+
+2024-10-14 23:21:18,724 - root - INFO - Training on split 1 - symbol - NVDA
+2024-10-14 23:21:18,939 - root - INFO - Split - 1 has training period - 3472 days, nr of trades - 85985
+2024-10-14 23:21:18,940 - root - INFO - Split - 1 has test period - 1329 days, nr of trades - 30000
+2024-10-14 23:37:04,017 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-14 23:37:04,018 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.97      0.97     50389
+        True       0.95      0.97      0.96     35596
+
+    accuracy                           0.97     85985
+   macro avg       0.97      0.97      0.97     85985
+weighted avg       0.97      0.97      0.97     85985
+:
+2024-10-14 23:37:04,018 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.77      0.87      0.82     19225
+        True       0.70      0.52      0.60     10775
+
+    accuracy                           0.75     30000
+   macro avg       0.73      0.70      0.71     30000
+weighted avg       0.74      0.75      0.74     30000
+
+2024-10-14 23:37:04,018 - root - INFO - Training on split 2 - symbol - NVDA
+2024-10-14 23:37:04,289 - root - INFO - Split - 2 has training period - 4802 days, nr of trades - 115985
+2024-10-14 23:37:04,289 - root - INFO - Split - 2 has test period - 1082 days, nr of trades - 30000
+2024-10-14 23:57:12,277 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-14 23:57:12,278 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.97      0.95      0.96     69614
+        True       0.93      0.96      0.95     46371
+
+    accuracy                           0.96    115985
+   macro avg       0.95      0.96      0.95    115985
+weighted avg       0.96      0.96      0.96    115985
+:
+2024-10-14 23:57:12,278 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.77      0.79      0.78     17217
+        True       0.71      0.68      0.69     12783
+
+    accuracy                           0.74     30000
+   macro avg       0.74      0.74      0.74     30000
+weighted avg       0.74      0.74      0.74     30000
+
+2024-10-14 23:57:12,278 - root - INFO - Training on split 3 - symbol - NVDA
+2024-10-14 23:57:12,575 - root - INFO - Split - 3 has training period - 5885 days, nr of trades - 145985
+2024-10-14 23:57:12,575 - root - INFO - Split - 3 has test period - 1042 days, nr of trades - 30000
+2024-10-15 00:21:22,847 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 00:21:22,847 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.97      0.95      0.96     86831
+        True       0.93      0.95      0.94     59154
+
+    accuracy                           0.95    145985
+   macro avg       0.95      0.95      0.95    145985
+weighted avg       0.95      0.95      0.95    145985
+:
+2024-10-15 00:21:22,847 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.71      0.64      0.67     13802
+        True       0.72      0.78      0.75     16198
+
+    accuracy                           0.71     30000
+   macro avg       0.71      0.71      0.71     30000
+weighted avg       0.71      0.71      0.71     30000
+
+2024-10-15 00:21:22,847 - root - INFO - Training on split 4 - symbol - NVDA
+2024-10-15 00:21:23,192 - root - INFO - Split - 4 has training period - 6928 days, nr of trades - 175985
+2024-10-15 00:21:23,193 - root - INFO - Split - 4 has test period - 967 days, nr of trades - 30000
+2024-10-15 00:49:55,323 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 00:49:55,331 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.96      0.94      0.95    100633
+        True       0.92      0.94      0.93     75352
+
+    accuracy                           0.94    175985
+   macro avg       0.94      0.94      0.94    175985
+weighted avg       0.94      0.94      0.94    175985
+:
+2024-10-15 00:49:55,331 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.56      0.84      0.67     14630
+        True       0.71      0.38      0.50     15370
+
+    accuracy                           0.60     30000
+   macro avg       0.64      0.61      0.59     30000
+weighted avg       0.64      0.60      0.58     30000
+
+2024-10-15 00:49:55,331 - root - INFO - Training on split 5 - symbol - NVDA
+2024-10-15 00:49:55,721 - root - INFO - Split - 5 has training period - 7896 days, nr of trades - 205985
+2024-10-15 00:49:55,721 - root - INFO - Split - 5 has test period - 1140 days, nr of trades - 30000
+2024-10-15 01:23:00,211 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 50}
+2024-10-15 01:23:00,219 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.95      0.94      0.94    115263
+        True       0.92      0.94      0.93     90722
+
+    accuracy                           0.94    205985
+   macro avg       0.94      0.94      0.94    205985
+weighted avg       0.94      0.94      0.94    205985
+:
+2024-10-15 01:23:00,219 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.75      0.73      0.74     14300
+        True       0.76      0.78      0.77     15700
+
+    accuracy                           0.75     30000
+   macro avg       0.75      0.75      0.75     30000
+weighted avg       0.75      0.75      0.75     30000
+
+2024-10-15 01:23:00,220 - root - INFO - Dumping train stuff - periods and models
+2024-10-15 01:23:00,268 - root - INFO - XXXXXXXXXXXXXXXXXXXXXXXXXX - symbol NVDA DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX
+2024-10-15 01:23:00,269 - root - INFO - Downloading price data for symbol - AAPL from yfinance
+2024-10-15 01:23:00,846 - root - INFO - Generating trades for symbol - AAPL
+2024-10-15 01:23:07,670 - root - INFO - Generating dataset with technical data for symbol - AAPL
+2024-10-15 01:23:14,921 - root - INFO - Calculated number of splits for trades dataset of 234374 size - 6 - symbol AAPL
+2024-10-15 01:23:14,921 - root - INFO - Starting training loop for symbol - AAPL
+2024-10-15 01:23:14,922 - root - INFO - Training on split 0 - symbol - AAPL
+2024-10-15 01:23:15,057 - root - INFO - Split - 0 has training period - 2295 days, nr of trades - 54374
+2024-10-15 01:23:15,057 - root - INFO - Split - 0 has test period - 1217 days, nr of trades - 30000
+2024-10-15 01:33:37,408 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 01:33:37,408 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.98      0.98     30504
+        True       0.97      0.97      0.97     23870
+
+    accuracy                           0.98     54374
+   macro avg       0.98      0.98      0.98     54374
+weighted avg       0.98      0.98      0.98     54374
+:
+2024-10-15 01:33:37,408 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.50      0.96      0.65     13235
+        True       0.88      0.23      0.37     16765
+
+    accuracy                           0.55     30000
+   macro avg       0.69      0.60      0.51     30000
+weighted avg       0.71      0.55      0.50     30000
+
+2024-10-15 01:33:37,409 - root - INFO - Training on split 1 - symbol - AAPL
+2024-10-15 01:33:37,607 - root - INFO - Split - 1 has training period - 3513 days, nr of trades - 84374
+2024-10-15 01:33:37,607 - root - INFO - Split - 1 has test period - 1039 days, nr of trades - 30000
+2024-10-15 01:48:26,171 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 01:48:26,171 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.96      0.97      0.97     43739
+        True       0.97      0.96      0.96     40635
+
+    accuracy                           0.97     84374
+   macro avg       0.97      0.97      0.97     84374
+weighted avg       0.97      0.97      0.97     84374
+:
+2024-10-15 01:48:26,171 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.64      0.91      0.75     15211
+        True       0.83      0.47      0.60     14789
+
+    accuracy                           0.69     30000
+   macro avg       0.73      0.69      0.67     30000
+weighted avg       0.73      0.69      0.67     30000
+
+2024-10-15 01:48:26,171 - root - INFO - Training on split 2 - symbol - AAPL
+2024-10-15 01:48:26,416 - root - INFO - Split - 2 has training period - 4553 days, nr of trades - 114374
+2024-10-15 01:48:26,416 - root - INFO - Split - 2 has test period - 1207 days, nr of trades - 30000
+2024-10-15 02:07:41,528 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 02:07:41,529 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.95      0.97      0.96     58950
+        True       0.96      0.95      0.96     55424
+
+    accuracy                           0.96    114374
+   macro avg       0.96      0.96      0.96    114374
+weighted avg       0.96      0.96      0.96    114374
+:
+2024-10-15 02:07:41,529 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.78      0.79      0.78     15720
+        True       0.76      0.76      0.76     14280
+
+    accuracy                           0.77     30000
+   macro avg       0.77      0.77      0.77     30000
+weighted avg       0.77      0.77      0.77     30000
+
+2024-10-15 02:07:41,529 - root - INFO - Training on split 3 - symbol - AAPL
+2024-10-15 02:07:41,820 - root - INFO - Split - 3 has training period - 5761 days, nr of trades - 144374
+2024-10-15 02:07:41,820 - root - INFO - Split - 3 has test period - 1070 days, nr of trades - 30000
+2024-10-15 02:31:25,737 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 02:31:25,738 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.95      0.96      0.95     74670
+        True       0.96      0.94      0.95     69704
+
+    accuracy                           0.95    144374
+   macro avg       0.95      0.95      0.95    144374
+weighted avg       0.95      0.95      0.95    144374
+:
+2024-10-15 02:31:25,738 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.66      0.78      0.71     14490
+        True       0.75      0.62      0.68     15510
+
+    accuracy                           0.70     30000
+   macro avg       0.70      0.70      0.69     30000
+weighted avg       0.70      0.70      0.69     30000
+
+2024-10-15 02:31:25,738 - root - INFO - Training on split 4 - symbol - AAPL
+2024-10-15 02:31:26,076 - root - INFO - Split - 4 has training period - 6832 days, nr of trades - 174374
+2024-10-15 02:31:26,076 - root - INFO - Split - 4 has test period - 1052 days, nr of trades - 30000
+2024-10-15 02:59:44,749 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 02:59:44,749 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.94      0.95      0.95     89160
+        True       0.95      0.94      0.94     85214
+
+    accuracy                           0.95    174374
+   macro avg       0.95      0.95      0.95    174374
+weighted avg       0.95      0.95      0.95    174374
+:
+2024-10-15 02:59:44,749 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.57      0.83      0.68     12886
+        True       0.80      0.53      0.64     17114
+
+    accuracy                           0.66     30000
+   macro avg       0.69      0.68      0.66     30000
+weighted avg       0.70      0.66      0.66     30000
+
+2024-10-15 02:59:44,749 - root - INFO - Training on split 5 - symbol - AAPL
+2024-10-15 02:59:45,137 - root - INFO - Split - 5 has training period - 7885 days, nr of trades - 204374
+2024-10-15 02:59:45,137 - root - INFO - Split - 5 has test period - 1150 days, nr of trades - 30000
+2024-10-15 03:32:22,577 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 50}
+2024-10-15 03:32:22,578 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.93      0.95      0.94    102046
+        True       0.95      0.93      0.94    102328
+
+    accuracy                           0.94    204374
+   macro avg       0.94      0.94      0.94    204374
+weighted avg       0.94      0.94      0.94    204374
+:
+2024-10-15 03:32:22,578 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.72      0.87      0.79     16336
+        True       0.80      0.60      0.69     13664
+
+    accuracy                           0.75     30000
+   macro avg       0.76      0.74      0.74     30000
+weighted avg       0.76      0.75      0.74     30000
+
+2024-10-15 03:32:22,578 - root - INFO - Dumping train stuff - periods and models
+2024-10-15 03:32:22,614 - root - INFO - XXXXXXXXXXXXXXXXXXXXXXXXXX - symbol AAPL DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX
+2024-10-15 03:32:22,614 - root - INFO - Downloading price data for symbol - SPY from yfinance
+2024-10-15 03:32:22,946 - root - INFO - Generating trades for symbol - SPY
+2024-10-15 03:32:29,758 - root - INFO - Generating dataset with technical data for symbol - SPY
+2024-10-15 03:32:36,536 - root - INFO - Calculated number of splits for trades dataset of 254360 size - 6 - symbol SPY
+2024-10-15 03:32:36,537 - root - INFO - Starting training loop for symbol - SPY
+2024-10-15 03:32:36,537 - root - INFO - Training on split 0 - symbol - SPY
+2024-10-15 03:32:36,702 - root - INFO - Split - 0 has training period - 2781 days, nr of trades - 74360
+2024-10-15 03:32:36,702 - root - INFO - Split - 0 has test period - 1119 days, nr of trades - 30000
+2024-10-15 03:46:04,902 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 50}
+2024-10-15 03:46:04,902 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.95      0.96     46451
+        True       0.92      0.96      0.94     27909
+
+    accuracy                           0.96     74360
+   macro avg       0.95      0.96      0.95     74360
+weighted avg       0.96      0.96      0.96     74360
+:
+2024-10-15 03:46:04,902 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.79      0.75      0.77     18221
+        True       0.64      0.69      0.66     11779
+
+    accuracy                           0.73     30000
+   macro avg       0.71      0.72      0.72     30000
+weighted avg       0.73      0.73      0.73     30000
+
+2024-10-15 03:46:04,902 - root - INFO - Training on split 1 - symbol - SPY
+2024-10-15 03:46:05,129 - root - INFO - Split - 1 has training period - 3901 days, nr of trades - 104360
+2024-10-15 03:46:05,129 - root - INFO - Split - 1 has test period - 959 days, nr of trades - 30000
+2024-10-15 04:04:04,335 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 04:04:04,335 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.97      0.94      0.96     64672
+        True       0.91      0.95      0.93     39688
+
+    accuracy                           0.95    104360
+   macro avg       0.94      0.95      0.95    104360
+weighted avg       0.95      0.95      0.95    104360
+:
+2024-10-15 04:04:04,335 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.86      0.43      0.57     15757
+        True       0.59      0.92      0.72     14243
+
+    accuracy                           0.67     30000
+   macro avg       0.73      0.68      0.65     30000
+weighted avg       0.74      0.67      0.65     30000
+
+2024-10-15 04:04:04,335 - root - INFO - Training on split 2 - symbol - SPY
+2024-10-15 04:04:04,611 - root - INFO - Split - 2 has training period - 4861 days, nr of trades - 134360
+2024-10-15 04:04:04,612 - root - INFO - Split - 2 has test period - 1109 days, nr of trades - 30000
+2024-10-15 04:26:36,045 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 04:26:36,046 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.96      0.94      0.95     80429
+        True       0.92      0.94      0.93     53931
+
+    accuracy                           0.94    134360
+   macro avg       0.94      0.94      0.94    134360
+weighted avg       0.94      0.94      0.94    134360
+:
+2024-10-15 04:26:36,046 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.92      0.71      0.80     15284
+        True       0.76      0.93      0.84     14716
+
+    accuracy                           0.82     30000
+   macro avg       0.84      0.82      0.82     30000
+weighted avg       0.84      0.82      0.82     30000
+
+2024-10-15 04:26:36,046 - root - INFO - Training on split 3 - symbol - SPY
+2024-10-15 04:26:36,384 - root - INFO - Split - 3 has training period - 5971 days, nr of trades - 164360
+2024-10-15 04:26:36,385 - root - INFO - Split - 3 has test period - 1031 days, nr of trades - 30000
+2024-10-15 04:53:46,168 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 04:53:46,168 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.96      0.94      0.95     95713
+        True       0.92      0.94      0.93     68647
+
+    accuracy                           0.94    164360
+   macro avg       0.94      0.94      0.94    164360
+weighted avg       0.94      0.94      0.94    164360
+:
+2024-10-15 04:53:46,176 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.70      0.78      0.74     14063
+        True       0.78      0.71      0.74     15937
+
+    accuracy                           0.74     30000
+   macro avg       0.74      0.74      0.74     30000
+weighted avg       0.74      0.74      0.74     30000
+
+2024-10-15 04:53:46,177 - root - INFO - Training on split 4 - symbol - SPY
+2024-10-15 04:53:46,546 - root - INFO - Split - 4 has training period - 7003 days, nr of trades - 194360
+2024-10-15 04:53:46,546 - root - INFO - Split - 4 has test period - 949 days, nr of trades - 30000
+2024-10-15 05:25:29,135 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 50}
+2024-10-15 05:25:29,143 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.95      0.94      0.94    109776
+        True       0.92      0.93      0.93     84584
+
+    accuracy                           0.94    194360
+   macro avg       0.93      0.93      0.93    194360
+weighted avg       0.94      0.94      0.94    194360
+:
+2024-10-15 05:25:29,143 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.74      0.62      0.68     13252
+        True       0.73      0.82      0.78     16748
+
+    accuracy                           0.73     30000
+   macro avg       0.74      0.72      0.73     30000
+weighted avg       0.74      0.73      0.73     30000
+
+2024-10-15 05:25:29,143 - root - INFO - Training on split 5 - symbol - SPY
+2024-10-15 05:25:29,564 - root - INFO - Split - 5 has training period - 7953 days, nr of trades - 224360
+2024-10-15 05:25:29,564 - root - INFO - Split - 5 has test period - 1087 days, nr of trades - 30000
+2024-10-15 06:01:52,164 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 06:01:52,166 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.94      0.94      0.94    123028
+        True       0.92      0.92      0.92    101332
+
+    accuracy                           0.93    224360
+   macro avg       0.93      0.93      0.93    224360
+weighted avg       0.93      0.93      0.93    224360
+:
+2024-10-15 06:01:52,167 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.80      0.59      0.68     14405
+        True       0.70      0.86      0.77     15595
+
+    accuracy                           0.73     30000
+   macro avg       0.75      0.73      0.72     30000
+weighted avg       0.75      0.73      0.73     30000
+
+2024-10-15 06:01:52,167 - root - INFO - Dumping train stuff - periods and models
+2024-10-15 06:01:52,269 - root - INFO - XXXXXXXXXXXXXXXXXXXXXXXXXX - symbol SPY DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX
+2024-10-15 06:01:52,270 - root - INFO - Downloading price data for symbol - SOXL from yfinance
+2024-10-15 06:01:52,668 - root - INFO - Generating trades for symbol - SOXL
+2024-10-15 06:01:58,473 - root - INFO - Generating dataset with technical data for symbol - SOXL
+2024-10-15 06:02:02,856 - root - INFO - Calculated number of splits for trades dataset of 149013 size - 3 - symbol SOXL
+2024-10-15 06:02:02,857 - root - INFO - Starting training loop for symbol - SOXL
+2024-10-15 06:02:02,858 - root - INFO - Training on split 0 - symbol - SOXL
+2024-10-15 06:02:03,004 - root - INFO - Split - 0 has training period - 2261 days, nr of trades - 59013
+2024-10-15 06:02:03,004 - root - INFO - Split - 0 has test period - 985 days, nr of trades - 30000
+2024-10-15 06:13:28,161 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 06:13:28,162 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.97      0.98     32951
+        True       0.97      0.97      0.97     26062
+
+    accuracy                           0.97     59013
+   macro avg       0.97      0.97      0.97     59013
+weighted avg       0.97      0.97      0.97     59013
+:
+2024-10-15 06:13:28,162 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.66      0.84      0.74     16642
+        True       0.70      0.46      0.56     13358
+
+    accuracy                           0.67     30000
+   macro avg       0.68      0.65      0.65     30000
+weighted avg       0.68      0.67      0.66     30000
+
+2024-10-15 06:13:28,162 - root - INFO - Training on split 1 - symbol - SOXL
+2024-10-15 06:13:28,364 - root - INFO - Split - 1 has training period - 3247 days, nr of trades - 89013
+2024-10-15 06:13:28,364 - root - INFO - Split - 1 has test period - 986 days, nr of trades - 30000
+2024-10-15 06:29:11,568 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 06:29:11,568 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.97      0.96      0.97     49593
+        True       0.96      0.96      0.96     39420
+
+    accuracy                           0.96     89013
+   macro avg       0.96      0.96      0.96     89013
+weighted avg       0.96      0.96      0.96     89013
+:
+2024-10-15 06:29:11,568 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.77      0.76      0.77     16856
+        True       0.70      0.71      0.70     13144
+
+    accuracy                           0.74     30000
+   macro avg       0.74      0.74      0.74     30000
+weighted avg       0.74      0.74      0.74     30000
+
+2024-10-15 06:29:11,568 - root - INFO - Training on split 2 - symbol - SOXL
+2024-10-15 06:29:11,819 - root - INFO - Split - 2 has training period - 4234 days, nr of trades - 119013
+2024-10-15 06:29:11,819 - root - INFO - Split - 2 has test period - 1087 days, nr of trades - 30000
+2024-10-15 06:49:09,033 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 06:49:09,033 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.96      0.95      0.96     66449
+        True       0.94      0.95      0.95     52564
+
+    accuracy                           0.95    119013
+   macro avg       0.95      0.95      0.95    119013
+weighted avg       0.95      0.95      0.95    119013
+:
+2024-10-15 06:49:09,033 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.83      0.67      0.74     19908
+        True       0.53      0.72      0.61     10092
+
+    accuracy                           0.69     30000
+   macro avg       0.68      0.70      0.68     30000
+weighted avg       0.73      0.69      0.70     30000
+
+2024-10-15 06:49:09,033 - root - INFO - Dumping train stuff - periods and models
+2024-10-15 06:49:09,046 - root - INFO - XXXXXXXXXXXXXXXXXXXXXXXXXX - symbol SOXL DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX
+2024-10-15 06:49:09,047 - root - INFO - Downloading price data for symbol - AMD from yfinance
+2024-10-15 06:49:09,360 - root - INFO - Generating trades for symbol - AMD
+2024-10-15 06:49:16,058 - root - INFO - Generating dataset with technical data for symbol - AMD
+2024-10-15 06:49:22,621 - root - INFO - Calculated number of splits for trades dataset of 223048 size - 6 - symbol AMD
+2024-10-15 06:49:22,622 - root - INFO - Starting training loop for symbol - AMD
+2024-10-15 06:49:22,623 - root - INFO - Training on split 0 - symbol - AMD
+2024-10-15 06:49:22,747 - root - INFO - Split - 0 has training period - 1728 days, nr of trades - 43048
+2024-10-15 06:49:22,747 - root - INFO - Split - 0 has test period - 1314 days, nr of trades - 30000
+2024-10-15 06:58:05,276 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 06:58:05,276 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.99      0.99      0.99     29027
+        True       0.97      0.99      0.98     14021
+
+    accuracy                           0.99     43048
+   macro avg       0.98      0.99      0.98     43048
+weighted avg       0.99      0.99      0.99     43048
+:
+2024-10-15 06:58:05,276 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.69      0.88      0.77     17943
+        True       0.69      0.40      0.51     12057
+
+    accuracy                           0.69     30000
+   macro avg       0.69      0.64      0.64     30000
+weighted avg       0.69      0.69      0.67     30000
+
+2024-10-15 06:58:05,276 - root - INFO - Training on split 1 - symbol - AMD
+2024-10-15 06:58:05,456 - root - INFO - Split - 1 has training period - 3043 days, nr of trades - 73048
+2024-10-15 06:58:05,456 - root - INFO - Split - 1 has test period - 1266 days, nr of trades - 30000
+2024-10-15 07:11:20,489 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 07:11:20,489 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.99      0.97      0.98     46970
+        True       0.95      0.98      0.96     26078
+
+    accuracy                           0.97     73048
+   macro avg       0.97      0.97      0.97     73048
+weighted avg       0.97      0.97      0.97     73048
+:
+2024-10-15 07:11:20,489 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.76      0.84      0.80     18080
+        True       0.71      0.60      0.65     11920
+
+    accuracy                           0.74     30000
+   macro avg       0.73      0.72      0.72     30000
+weighted avg       0.74      0.74      0.74     30000
+
+2024-10-15 07:11:20,489 - root - INFO - Training on split 2 - symbol - AMD
+2024-10-15 07:11:20,716 - root - INFO - Split - 2 has training period - 4310 days, nr of trades - 103048
+2024-10-15 07:11:20,716 - root - INFO - Split - 2 has test period - 1331 days, nr of trades - 30000
+2024-10-15 07:28:47,230 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 07:28:47,230 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.96      0.97     65050
+        True       0.94      0.97      0.96     37998
+
+    accuracy                           0.97    103048
+   macro avg       0.96      0.97      0.96    103048
+weighted avg       0.97      0.97      0.97    103048
+:
+2024-10-15 07:28:47,231 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.79      0.74      0.77     20338
+        True       0.53      0.60      0.56      9662
+
+    accuracy                           0.70     30000
+   macro avg       0.66      0.67      0.66     30000
+weighted avg       0.71      0.70      0.70     30000
+
+2024-10-15 07:28:47,231 - root - INFO - Training on split 3 - symbol - AMD
+2024-10-15 07:28:47,501 - root - INFO - Split - 3 has training period - 5642 days, nr of trades - 133048
+2024-10-15 07:28:47,501 - root - INFO - Split - 3 has test period - 1055 days, nr of trades - 30000
+2024-10-15 07:50:42,669 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 07:50:42,669 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.95      0.97     85388
+        True       0.92      0.96      0.94     47660
+
+    accuracy                           0.96    133048
+   macro avg       0.95      0.96      0.96    133048
+weighted avg       0.96      0.96      0.96    133048
+:
+2024-10-15 07:50:42,669 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.83      0.71      0.77     17101
+        True       0.68      0.80      0.74     12899
+
+    accuracy                           0.75     30000
+   macro avg       0.75      0.76      0.75     30000
+weighted avg       0.76      0.75      0.75     30000
+
+2024-10-15 07:50:42,669 - root - INFO - Training on split 4 - symbol - AMD
+2024-10-15 07:50:42,988 - root - INFO - Split - 4 has training period - 6698 days, nr of trades - 163048
+2024-10-15 07:50:42,988 - root - INFO - Split - 4 has test period - 1113 days, nr of trades - 30000
+2024-10-15 08:16:44,172 - root - INFO - Best model params:
+{'l2_regularization': 0.1, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 08:16:44,172 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.97      0.95      0.96    102489
+        True       0.92      0.96      0.94     60559
+
+    accuracy                           0.95    163048
+   macro avg       0.95      0.95      0.95    163048
+weighted avg       0.95      0.95      0.95    163048
+:
+2024-10-15 08:16:44,172 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.83      0.67      0.74     18581
+        True       0.59      0.78      0.67     11419
+
+    accuracy                           0.71     30000
+   macro avg       0.71      0.72      0.71     30000
+weighted avg       0.74      0.71      0.72     30000
+
+2024-10-15 08:16:44,172 - root - INFO - Training on split 5 - symbol - AMD
+2024-10-15 08:16:44,542 - root - INFO - Split - 5 has training period - 7812 days, nr of trades - 193048
+2024-10-15 08:16:44,543 - root - INFO - Split - 5 has test period - 1229 days, nr of trades - 30000
+2024-10-15 08:47:13,792 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 08:47:13,792 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.97      0.94      0.96    121070
+        True       0.91      0.95      0.93     71978
+
+    accuracy                           0.95    193048
+   macro avg       0.94      0.95      0.94    193048
+weighted avg       0.95      0.95      0.95    193048
+:
+2024-10-15 08:47:13,792 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.61      0.92      0.73     14839
+        True       0.85      0.42      0.56     15161
+
+    accuracy                           0.67     30000
+   macro avg       0.73      0.67      0.65     30000
+weighted avg       0.73      0.67      0.64     30000
+
+2024-10-15 08:47:13,792 - root - INFO - Dumping train stuff - periods and models
+2024-10-15 08:47:13,817 - root - INFO - XXXXXXXXXXXXXXXXXXXXXXXXXX - symbol AMD DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX
+2024-10-15 08:47:13,818 - root - INFO - Downloading price data for symbol - QQQ from yfinance
+2024-10-15 08:47:14,163 - root - INFO - Generating trades for symbol - QQQ
+2024-10-15 08:47:20,601 - root - INFO - Generating dataset with technical data for symbol - QQQ
+2024-10-15 08:47:27,482 - root - INFO - Calculated number of splits for trades dataset of 248860 size - 6 - symbol QQQ
+2024-10-15 08:47:27,482 - root - INFO - Starting training loop for symbol - QQQ
+2024-10-15 08:47:27,483 - root - INFO - Training on split 0 - symbol - QQQ
+2024-10-15 08:47:27,646 - root - INFO - Split - 0 has training period - 2734 days, nr of trades - 68860
+2024-10-15 08:47:27,647 - root - INFO - Split - 0 has test period - 1161 days, nr of trades - 30000
+2024-10-15 08:59:59,353 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-10-15 08:59:59,353 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.98      0.96      0.97     42471
+        True       0.94      0.97      0.96     26389
+
+    accuracy                           0.97     68860
+   macro avg       0.96      0.97      0.96     68860
+weighted avg       0.97      0.97      0.97     68860
+:
+2024-10-15 08:59:59,353 - root - INFO - Test classification report:
+              precision    recall  f1-score   support
+
+       False       0.79      0.69      0.74     15663
+        True       0.71      0.80      0.75     14337
+
+    accuracy                           0.75     30000
+   macro avg       0.75      0.75      0.75     30000
+weighted avg       0.75      0.75      0.75     30000
+
+2024-10-15 08:59:59,354 - root - INFO - Training on split 1 - symbol - QQQ
+2024-10-15 08:59:59,570 - root - INFO - Split - 1 has training period - 3896 days, nr of trades - 98860
+2024-10-15 08:59:59,570 - root - INFO - Split - 1 has test period - 1053 days, nr of trades - 30000

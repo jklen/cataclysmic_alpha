@@ -9,7 +9,7 @@ from strategies import HigherHighStrategy
 import numpy as np
 import vectorbt as vbt
 import pandas_ta as ta
-from sklearn.model_selection import train_test_split, TimeSeriesSplit, GridSearchCV
+from sklearn.model_selection import TimeSeriesSplit, GridSearchCV, StratifiedKFold
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import classification_report
 import pandas as pd
@@ -126,17 +126,6 @@ def main(path_config):
                     'gridsearch_best_params':[],
                     'gridsearch_objs':[]
                 }
-
-                clf = HistGradientBoostingClassifier(class_weight='balanced', random_state=42)
-
-                grid_search = GridSearchCV(
-                    estimator=clf,
-                    param_grid=param_grid,
-                    cv=3,  
-                    scoring='precision',
-                    n_jobs=-1, 
-                    verbose=1
-                )
                 
                 max_splits = (len(x) - config['timeseries_split']['test_size']) // config['timeseries_split']['test_size']
                 n_splits = min(config['timeseries_split']['n_splits'], max_splits)
@@ -175,6 +164,18 @@ def main(path_config):
                     
                     x_train, x_test = x.iloc[train_index], x.iloc[test_index]
                     y_train, y_test = y.iloc[train_index], y.iloc[test_index]
+                    
+                    clf = HistGradientBoostingClassifier(class_weight='balanced', random_state=42)
+                    cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=42)
+                    #pdb.set_trace()
+                    grid_search = GridSearchCV(
+                        estimator=clf,
+                        param_grid=param_grid,
+                        cv=cv,  
+                        scoring='precision',
+                        n_jobs=-1, 
+                        verbose=1
+                    )
                                     
                     grid_search.fit(x_train, y_train)    
                     train_stuff['gridsearch_objs'].append(grid_search)

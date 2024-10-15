@@ -89,7 +89,7 @@ for i in range(0, len(train_stuff['train_mins'])):
     fig.update_layout(title=f"train_{i}_stats")
     pio.write_html(fig, file = f"debug/train_{i}_stats.html")
     fig.write_image(f"debug/train_{i}_stats.png")
-    
+    pdb.set_trace()
     fig = pf_test.plot()
     fig.update_layout(title=f"test_{i}_stats")
     pio.write_html(fig, file = f"debug/test_{i}_stats.html")
@@ -97,7 +97,7 @@ for i in range(0, len(train_stuff['train_mins'])):
     
 df_stats = pd.concat(stats_all, axis = 1)
 #pdb.set_trace()
-df_stats.to_csv('df_stats_aapl.csv', index = True, header = True)
+df_stats.to_csv('debug/df_stats_aapl.csv', index = True, header = True)
 
 #TODO
 # spravna metrika na modely

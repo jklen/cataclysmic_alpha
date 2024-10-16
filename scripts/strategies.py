@@ -49,7 +49,10 @@ def hhhl_ml1_strategy_logic(dataset, model, dataset_params:dict,
     exit_signals_list = []
     probs_list = []
     print(f"starting processing param combinations")
+    
     for comb in combinations:
+        if (comb[1] > comb[0]) or (comb[3] > comb[2]):
+            continue
         
         # entry signals - original strategy
         

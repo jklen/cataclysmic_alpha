@@ -56,9 +56,7 @@ def main(path_config):
         os.mkdir(f"../outputs_hhhl_ml1/{config['experiment_name']}")
         os.chmod(f"../outputs_hhhl_ml1/{config['experiment_name']}", 0o777)
     
-    with open(f"../outputs_hhhl_ml1/{config['experiment_name']}/config.yaml", 'w') as file:
-        yaml.dump(config, file, default_flow_style=False)
-        
+    shutil.copy(path_config, f"../outputs_hhhl_ml1/{config['experiment_name']}/config.yaml")        
     already_existing_symbols = [f.name for f in os.scandir(f"../outputs_hhhl_ml1/{config['experiment_name']}") if f.is_dir()]
 
     for symbol in symbols:

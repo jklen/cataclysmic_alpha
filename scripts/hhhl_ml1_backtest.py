@@ -144,18 +144,39 @@ def main(path_config):
 if __name__ == '__main__':
     main()
 
-    #TODO
+#TODO
+# vyber symbolov do 2 portfolii - 50/25 symbolov + volake random portfolio
+#   - diverzifikacia podla industry a co najmensej korelacie ceny
+#   - analyza charakteristik train setu vs test setu, tj
+#      - trend a seasonal komponent
+#      - noise
+#      - std
+#      - priemerny pocet obchodov za tyzden/mesiac
+#      - descriptive stats vynosov z obchodov
+#      - pocet negativnych outlierov vo vynosoch z obchodov (eg. -40%, -30%, ...)
+#      - max drawdown a max drawdown period ceny
+#      - ci je v sucasnosti v max drawdown periode
+#      - kolko % je cena v sucasnosti z max ceny historicky
+#      - aky je v sucasnosti kratkodoby, strednodoby dlhodoby trend ceny
+#      - statistiky train portfolia OK
+#      - statistiky train modelu
+#      - korelacia kumulativnych vynosov s cenou (KEY symbol napr.)
+#      - v sucasnosti (tj posledny den train periody) - apendnut technicke data?
+#      vs.
+#      - portfolio statistiky test setu OK
+#   - dataset - jeden riadok - jedna train/test kombinacia
+#   - vytvorit linearny model na zvolene metriky test setu (bez outlierov)
+#   - potom podla tohto modelu + diverzifikacnych rulov vyselektovat symboly do portfolii
+#   - skript na vyvoj celeho portfolia podla roznych sizing method (equal %, 
+#       win rate, equal start, sharpe ratio
+#       meta strategia - otvorit obchod v celej vyske portfolia v symbole kde je probability najvacsia,
+#       sizing podla toho v akej miere je rozdelenie vynosov z obchodov na danom symboole podobne backtestu)
+# simulacia buducnosti cez brownian motion?
 # liftcharty
 # probability threshold ako param (ked zvysim, zvysi sa mi win rate strategie?)
 # custom scoring metrika, eg. meria precision na top n podla predikovanej probability
-# entry exit signaly obchodu musia byt rovnake ako v orig. strategii !!!
 # koreluje nejaka metrika modelu s nejakou metrikou strategie?
 # zanalyzovat obchody na train a test periodach strategie:
 #   uspesny obchod vs. probability, liftcharty
 #   trvanie obchodu vs. win rate
 # v backteste test perioda premenliva, podla toho ci potrebujem retrenovat model - ako?
-# scripty:
-#   data prep
-#   trening + mlflow
-#   backtest
-#   eval

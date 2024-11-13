@@ -148,19 +148,22 @@ if __name__ == '__main__':
 # vyber symbolov do 2 portfolii - 50/25 symbolov + volake random portfolio
 #   - diverzifikacia podla industry a co najmensej korelacie ceny
 #   - analyza charakteristik train setu vs test setu, tj
-#      - trend a seasonal komponent
-#      - noise
-#      - std
-#      - priemerny pocet obchodov za tyzden/mesiac
-#      - descriptive stats vynosov z obchodov
-#      - pocet negativnych outlierov vo vynosoch z obchodov (eg. -40%, -30%, ...)
-#      - max drawdown a max drawdown period ceny
-#      - ci je v sucasnosti v max drawdown periode
-#      - kolko % je cena v sucasnosti z max ceny historicky
-#      - aky je v sucasnosti kratkodoby, strednodoby dlhodoby trend ceny
+#      - trend seasonal, cyclic, noise component OK
+#      - noise OK
+#      - max pocet dni po sebe bez obchodov (ako % z celkovej periody) OK
+#      - std standardizovanu OK
+#      - priemerny pocet obchodov za tyzden/mesiac OK
+#      - descriptive stats vynosov z obchodov OK
+#      - pocet negativnych outlierov vo vynosoch z obchodov (eg. -40%, -30%, ...) OK
+#      - max drawdown a max drawdown period ceny OK
+#      - % sucasnej drawdown periody z max drawdown periody OK
+#      - kolko % je cena v sucasnosti z max ceny historicky OK
+#      - aky je v sucasnosti kratkodoby, strednodoby dlhodoby trend ceny OK
 #      - statistiky train portfolia OK
-#      - statistiky train modelu
-#      - korelacia kumulativnych vynosov s cenou (KEY symbol napr.)
+#      - statistiky train modelu OK
+#      - korelacia kumulativnych vynosov s cenou (KEY symbol napr.) OK
+#      - desc stats klzavej korelacie kumulativnych vynosov s cenou OK
+#      - feature importance premennych - pri modely ktory to poskytuje, alebo permutation_importance
 #      - v sucasnosti (tj posledny den train periody) - apendnut technicke data?
 #      vs.
 #      - portfolio statistiky test setu OK
@@ -171,6 +174,8 @@ if __name__ == '__main__':
 #       win rate, equal start, sharpe ratio
 #       meta strategia - otvorit obchod v celej vyske portfolia v symbole kde je probability najvacsia,
 #       sizing podla toho v akej miere je rozdelenie vynosov z obchodov na danom symboole podobne backtestu)
+#   - selekcia symbolov do portfolii mozno az po testovani na paper money (tj nahodit na paper vsetkych 200 symbolov
+#        a potom vyselektovat tie ktore preklopim na live)
 # simulacia buducnosti cez brownian motion?
 # liftcharty
 # probability threshold ako param (ked zvysim, zvysi sa mi win rate strategie?)

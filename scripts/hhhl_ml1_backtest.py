@@ -148,30 +148,41 @@ if __name__ == '__main__':
 # vyber symbolov do 2 portfolii - 50/25 symbolov + volake random portfolio
 #   - diverzifikacia podla industry a co najmensej korelacie ceny
 #   - analyza charakteristik train setu vs test setu, tj
-#      - trend seasonal, cyclic, noise component OK
-#      - noise OK
-#      - max pocet dni po sebe bez obchodov (ako % z celkovej periody) OK
-#      - std standardizovanu OK
-#      - priemerny pocet obchodov za tyzden/mesiac OK
-#      - descriptive stats vynosov z obchodov OK
-#      - pocet negativnych outlierov vo vynosoch z obchodov (eg. -40%, -30%, ...) OK
-#      - max drawdown a max drawdown period ceny OK
-#      - % sucasnej drawdown periody z max drawdown periody OK
-#      - kolko % je cena v sucasnosti z max ceny historicky OK
-#      - aky je v sucasnosti kratkodoby, strednodoby dlhodoby trend ceny OK
-#      - statistiky train portfolia OK
-#      - statistiky train modelu OK
-#      - korelacia kumulativnych vynosov s cenou (KEY symbol napr.) OK
-#      - desc stats klzavej korelacie kumulativnych vynosov s cenou OK
 #      - feature importance premennych - pri modely ktory to poskytuje, alebo permutation_importance
 #      - v sucasnosti (tj posledny den train periody) - apendnut technicke data?
-#      vs.
 #      - portfolio statistiky test setu OK
-#   - dataset - jeden riadok - jedna train/test kombinacia
-#   - vytvorit linearny model na zvolene metriky test setu (bez outlierov)
+#   - vytvorit model na zvolene metriky test setu
 #   - potom podla tohto modelu + diverzifikacnych rulov vyselektovat symboly do portfolii
-#   - skript na vyvoj celeho portfolia podla roznych sizing method (equal %, 
-#       win rate, equal start, sharpe ratio
+#   - po portfolio modeli dalsie moznosti:
+#       - dalsie kroky:
+#           1. test na paper accounte hhhl_ml strategie - 5000 EUR, 50/25 symbolov, pouzit
+#               existujuce modely + existujuci portfolio model, sizing bude nejaky default - 
+#               equal - ide o test
+#           2. natrenovat nove modely, ktore sa potom pouziju live, na vsetkych 200 symbolov, potom
+#               tieto bezat na paper accounte - je jedno aky sizing, ide o obchody a ich vynos,
+#               rozne kombinacie portfolii, sizing method a pod si viem dopocitat
+#           3. toto ked bude bezat, mozem pracovat na historickej simulacii. 
+#           4. porovnam historicku simulaciu s performance tych 200 symbolov, zvolim portfolio + sizing,
+#               preklopim na live
+#               
+#           2. nakod strategiu
+#       - natrenovat modely na vsetkych symboloch, na celej periode (tj len gridsearch bez walk forward),
+#           toto treba za kazdych okolnosti ked pojdem nazivo
+#       - 1. historicka simulacia - ako to realne budem robit? - spis moznosti - toto budu moznosti simulacie
+#               - na 0 kombinacii train-test natrenovat portfolio model, "live" trading sa uskutocni az
+#                   od 1 kombinacie. Vytvorim si portfolio/subportfolia (1. top 50 s najlepsou predikciou 2. kde je
+#                   najuzsi confidence interval)
+#               - natrenujem model strategie na celej periode 0 train-test kombinacie - tj len gridsearch
+#                   len modelov v portfoliach
+#               - simuluj portfolio najblizsie 3 roky. Tj 2 moznosti selekcie portfoliia X 2 portfolia X
+#                   4 sizing metody, tj uvidim 16 roznych vysledkov za 3 roky (equal %, 
+#                   win rate, equal start, sharpe ratio)
+#               - pre vsetkych 16 vysledkov znova zopakovat to iste. tj - natrenujem portfolio model,
+#                   vyselektujem symboli do portfolii, natrenujem model strategie a spravim simulaciu na 
+#                   4 sizing metodach, tj teraz budem mat uz 16x4 = 64 vysledkov
+#               - toto cele opakovat az po posledne data
+
+
 #       meta strategia - otvorit obchod v celej vyske portfolia v symbole kde je probability najvacsia,
 #       sizing podla toho v akej miere je rozdelenie vynosov z obchodov na danom symboole podobne backtestu)
 #   - selekcia symbolov do portfolii mozno az po testovani na paper money (tj nahodit na paper vsetkych 200 symbolov

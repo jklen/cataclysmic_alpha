@@ -1,4 +1,4 @@
-from strategies import HigherHighStrategy
+from strategies import HigherHighStrategy, hhhl_ml1_strategy_logic
 import pandas as pd
 import numpy as np
 import yaml
@@ -21,7 +21,8 @@ logger = logging.getLogger(__name__)
 keys = yaml.safe_load(open('../keys.yaml', 'r'))
 
 strategies_directions = {
-    'hhhl':'long'
+    'hhhl':'long',
+    'hhhl_ml1':'long'
 }
 
 crypto_map = {'BTC/USD':'BTCUSD', 'LINK/BTC':'LINKBTC'}
@@ -152,6 +153,10 @@ def run_strategy(df_symbol, symbol, strategy, strategy_params):
     logger.info(f"{symbol} - running symbols strategy to get entries and exits")
     if strategy == 'hhhl':
         Strategy = HigherHighStrategy
+    elif strategy == 'hhhl_ml1':
+        # hhhl_ml1_strategy_logic (df_price, model, 0.5, param_ranges) tj ine params ako run_stratgy funkcia
+        # dostanem entry, exit signals
+        pass
     
     close_price = df_symbol['close']
     indicator = Strategy.run(close_price, **strategy_params)

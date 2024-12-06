@@ -1,0 +1,677 @@
+2024-12-01 11:35:54,389 - root - INFO - Logger is setup
+2024-12-01 11:35:54,443 - utils_portfolio - INFO - Updating info of portfolio - p1
+2024-12-01 11:35:54,527 - utils_portfolio - INFO - Calculating symbols weights
+2024-12-01 11:35:54,527 - root - INFO - Portfolio p1 symbols weights - {'PLTR': 0.09090909090909091, 'BTC/USD': 0.09090909090909091, 'AAL': 0.09090909090909091, 'VRT': 0.09090909090909091, 'GBTC': 0.09090909090909091, 'DELL': 0.09090909090909091, 'GM': 0.09090909090909091, 'IYR': 0.09090909090909091, 'DKNG': 0.09090909090909091, 'EBAY': 0.09090909090909091, 'CRWD': 0.09090909090909091}
+2024-12-01 11:35:54,527 - utils_strategy - INFO - PLTR - downloading data from alpaca
+2024-12-01 11:35:55,445 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:35:55,445 - utils_strategy - INFO - BTC/USD - downloading data from alpaca
+2024-12-01 11:35:56,324 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:35:56,325 - utils_portfolio - INFO - BTC/USD - running symbols strategy to get entries and exits
+2024-12-01 11:35:56,352 - utils_portfolio - INFO - Evaluating symbol if to open, close, or no change
+2024-12-01 11:36:02,117 - utils_strategy - INFO - AAL - downloading data from alpaca
+2024-12-01 11:36:03,268 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:03,268 - utils_strategy - INFO - VRT - downloading data from alpaca
+2024-12-01 11:36:04,019 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:04,019 - utils_strategy - INFO - GBTC - downloading data from alpaca
+2024-12-01 11:36:04,426 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:04,426 - utils_strategy - INFO - DELL - downloading data from alpaca
+2024-12-01 11:36:05,310 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:05,310 - utils_strategy - INFO - GM - downloading data from alpaca
+2024-12-01 11:36:06,550 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:06,550 - utils_strategy - INFO - IYR - downloading data from alpaca
+2024-12-01 11:36:07,599 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:07,599 - utils_strategy - INFO - DKNG - downloading data from alpaca
+2024-12-01 11:36:08,389 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:08,389 - utils_strategy - INFO - EBAY - downloading data from alpaca
+2024-12-01 11:36:09,589 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:09,589 - utils_strategy - INFO - CRWD - downloading data from alpaca
+2024-12-01 11:36:10,398 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:10,398 - root - INFO - Portfolio p1 symbols actions - {'BTCUSD': 'no_change'}
+2024-12-01 11:36:10,399 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-12-01 11:36:10,399 - utils_portfolio - INFO - Updating state of portfolio - p1
+2024-12-01 11:36:10,399 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-01 11:36:10,399 - utils_portfolio - INFO - Processing symbol - PLTR
+2024-12-01 11:36:11,331 - utils_portfolio - INFO - Processing symbol - BTC/USD
+2024-12-01 11:36:11,535 - utils_portfolio - INFO - Processing symbol - AAL
+2024-12-01 11:36:11,713 - utils_portfolio - INFO - Processing symbol - VRT
+2024-12-01 11:36:11,948 - utils_portfolio - INFO - Processing symbol - GBTC
+2024-12-01 11:36:12,146 - utils_portfolio - INFO - Processing symbol - DELL
+2024-12-01 11:36:12,298 - utils_portfolio - INFO - Processing symbol - GM
+2024-12-01 11:36:12,560 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-01 11:36:12,693 - utils_portfolio - INFO - Processing symbol - DKNG
+2024-12-01 11:36:12,869 - utils_portfolio - INFO - Processing symbol - EBAY
+2024-12-01 11:36:13,071 - utils_portfolio - INFO - Processing symbol - CRWD
+2024-12-01 11:36:13,216 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-01 11:36:13,217 - utils_portfolio - INFO - Processing symbol - PLTR
+2024-12-01 11:36:13,585 - utils_portfolio - INFO - Processing symbol - BTC/USD
+2024-12-01 11:36:13,696 - utils_portfolio - INFO - Processing symbol - AAL
+2024-12-01 11:36:13,856 - utils_portfolio - INFO - Processing symbol - VRT
+2024-12-01 11:36:14,062 - utils_portfolio - INFO - Processing symbol - GBTC
+2024-12-01 11:36:14,175 - utils_portfolio - INFO - Processing symbol - DELL
+2024-12-01 11:36:14,290 - utils_portfolio - INFO - Processing symbol - GM
+2024-12-01 11:36:14,468 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-01 11:36:14,896 - utils_portfolio - INFO - Processing symbol - DKNG
+2024-12-01 11:36:15,083 - utils_portfolio - INFO - Processing symbol - EBAY
+2024-12-01 11:36:15,332 - utils_portfolio - INFO - Processing symbol - CRWD
+2024-12-01 11:36:15,933 - utils_portfolio - INFO - Portfolio p1 - calculating position sizes
+2024-12-01 11:36:15,960 - root - INFO - Portfolio p1 position sizes - symbol
+PLTR      451.89
+BTCUSD    451.89
+AAL       451.89
+VRT       451.89
+GBTC      451.89
+DELL      451.89
+GM        451.89
+IYR       494.13
+DKNG      451.89
+EBAY      494.13
+CRWD      494.13
+Name: position, dtype: float64
+2024-12-01 11:36:15,960 - utils_portfolio - INFO - Submitting orders to open positions
+2024-12-01 11:36:15,961 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p1 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-12-01 11:36:15,961 - utils_portfolio - INFO - Updating info of portfolio - p2
+2024-12-01 11:36:16,022 - utils_portfolio - INFO - Calculating symbols weights
+2024-12-01 11:36:16,022 - utils_portfolio - INFO - Calculating closed trades count
+2024-12-01 11:36:18,084 - utils_portfolio - INFO - Calculating win rates
+2024-12-01 11:36:18,086 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:36:18,502 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:36:18,711 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:36:18,866 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:36:19,120 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:36:19,331 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:36:19,533 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:36:19,715 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:36:19,929 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:36:20,147 - utils_portfolio - INFO - Calculating closed trades count
+2024-12-01 11:36:22,022 - root - INFO - Portfolio p2 symbols weights - {'AAPL': 0.1985574883326262, 'GOOGL': 0.1158252015273653, 'META': 0.1069155706406449, 'MRVL': 0.07127704709376327, 'MSTR': 0.1158252015273653, 'SCHD': 0.07721680101824353, 'BITO': 0.0992787441663131, 'AVGO': 0.0992787441663131, 'SOUN': 0.1158252015273653}
+2024-12-01 11:36:22,022 - utils_strategy - INFO - AAPL - downloading data from yfinance
+2024-12-01 11:36:22,644 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:22,645 - utils_strategy - INFO - GOOGL - downloading data from yfinance
+2024-12-01 11:36:22,867 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:22,867 - utils_strategy - INFO - META - downloading data from yfinance
+2024-12-01 11:36:23,015 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:23,016 - utils_strategy - INFO - MRVL - downloading data from yfinance
+2024-12-01 11:36:23,265 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:23,265 - utils_strategy - INFO - MSTR - downloading data from yfinance
+2024-12-01 11:36:23,465 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:23,465 - utils_strategy - INFO - SCHD - downloading data from yfinance
+2024-12-01 11:36:23,616 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:23,616 - utils_strategy - INFO - BITO - downloading data from yfinance
+2024-12-01 11:36:23,717 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:23,717 - utils_strategy - INFO - AVGO - downloading data from yfinance
+2024-12-01 11:36:23,908 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:23,909 - utils_strategy - INFO - SOUN - downloading data from yfinance
+2024-12-01 11:36:23,990 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:23,990 - root - INFO - Portfolio p2 symbols actions - {}
+2024-12-01 11:36:23,990 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-12-01 11:36:23,991 - utils_portfolio - INFO - Updating state of portfolio - p2
+2024-12-01 11:36:23,991 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-01 11:36:23,991 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:36:24,489 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:36:24,644 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:36:24,835 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:36:24,987 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:36:25,154 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:36:25,336 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:36:25,539 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:36:25,742 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:36:25,974 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-01 11:36:25,974 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:36:26,663 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:36:26,861 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:36:27,284 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:36:27,689 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:36:27,885 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:36:28,302 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:36:28,500 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:36:28,704 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:36:28,867 - utils_portfolio - INFO - Portfolio p2 - calculating position sizes
+2024-12-01 11:36:28,885 - root - INFO - Portfolio p2 position sizes - symbol
+AAPL     912.12
+GOOGL    532.07
+META     491.14
+MRVL     327.43
+MSTR     532.07
+SCHD     354.71
+BITO     456.06
+AVGO     456.06
+SOUN     532.07
+Name: position, dtype: float64
+2024-12-01 11:36:28,885 - utils_portfolio - INFO - Submitting orders to open positions
+2024-12-01 11:36:28,886 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p2 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-12-01 11:36:28,886 - utils_portfolio - INFO - Updating info of portfolio - p3
+2024-12-01 11:36:28,945 - utils_portfolio - INFO - Calculating symbols weights
+2024-12-01 11:36:28,945 - root - INFO - Portfolio p3 symbols weights - {'TSLA': 0.1, 'NVDA': 0.1, 'AMD': 0.1, 'QQQ': 0.1, 'AMZN': 0.1, 'TQQQ': 0.1, 'VOO': 0.1, 'BABA': 0.1, 'BA': 0.1, 'XLI': 0.1}
+2024-12-01 11:36:28,946 - utils_strategy - INFO - TSLA - downloading data from yfinance
+2024-12-01 11:36:29,386 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:29,386 - utils_strategy - INFO - NVDA - downloading data from yfinance
+2024-12-01 11:36:29,641 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:29,641 - utils_strategy - INFO - AMD - downloading data from yfinance
+2024-12-01 11:36:29,906 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:29,906 - utils_strategy - INFO - QQQ - downloading data from yfinance
+2024-12-01 11:36:30,240 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:30,240 - utils_strategy - INFO - AMZN - downloading data from yfinance
+2024-12-01 11:36:30,483 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:30,483 - utils_strategy - INFO - TQQQ - downloading data from yfinance
+2024-12-01 11:36:30,687 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:30,688 - utils_strategy - INFO - VOO - downloading data from yfinance
+2024-12-01 11:36:30,917 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:30,917 - utils_strategy - INFO - BABA - downloading data from yfinance
+2024-12-01 11:36:31,058 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:31,059 - utils_strategy - INFO - BA - downloading data from yfinance
+2024-12-01 11:36:31,333 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:31,333 - utils_strategy - INFO - XLI - downloading data from yfinance
+2024-12-01 11:36:31,605 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:31,605 - root - INFO - Portfolio p3 symbols actions - {}
+2024-12-01 11:36:31,605 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-12-01 11:36:31,605 - utils_portfolio - INFO - Updating state of portfolio - p3
+2024-12-01 11:36:31,606 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-01 11:36:31,606 - utils_portfolio - INFO - Processing symbol - TSLA
+2024-12-01 11:36:32,223 - utils_portfolio - INFO - Processing symbol - NVDA
+2024-12-01 11:36:32,428 - utils_portfolio - INFO - Processing symbol - AMD
+2024-12-01 11:36:32,630 - utils_portfolio - INFO - Processing symbol - QQQ
+2024-12-01 11:36:32,810 - utils_portfolio - INFO - Processing symbol - AMZN
+2024-12-01 11:36:33,045 - utils_portfolio - INFO - Processing symbol - TQQQ
+2024-12-01 11:36:33,196 - utils_portfolio - INFO - Processing symbol - VOO
+2024-12-01 11:36:33,453 - utils_portfolio - INFO - Processing symbol - BABA
+2024-12-01 11:36:33,653 - utils_portfolio - INFO - Processing symbol - BA
+2024-12-01 11:36:33,832 - utils_portfolio - INFO - Processing symbol - XLI
+2024-12-01 11:36:34,040 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-01 11:36:34,041 - utils_portfolio - INFO - Processing symbol - TSLA
+2024-12-01 11:36:34,541 - utils_portfolio - INFO - Processing symbol - NVDA
+2024-12-01 11:36:34,745 - utils_portfolio - INFO - Processing symbol - AMD
+2024-12-01 11:36:34,950 - utils_portfolio - INFO - Processing symbol - QQQ
+2024-12-01 11:36:35,156 - utils_portfolio - INFO - Processing symbol - AMZN
+2024-12-01 11:36:35,475 - utils_portfolio - INFO - Processing symbol - TQQQ
+2024-12-01 11:36:35,666 - utils_portfolio - INFO - Processing symbol - VOO
+2024-12-01 11:36:36,004 - utils_portfolio - INFO - Processing symbol - BABA
+2024-12-01 11:36:36,179 - utils_portfolio - INFO - Processing symbol - BA
+2024-12-01 11:36:36,596 - utils_portfolio - INFO - Processing symbol - XLI
+2024-12-01 11:36:37,073 - utils_portfolio - INFO - Portfolio p3 - calculating position sizes
+2024-12-01 11:36:37,108 - root - INFO - Portfolio p3 position sizes - symbol
+TSLA    501.67
+NVDA    501.67
+AMD     501.67
+QQQ     501.67
+AMZN    504.60
+TQQQ    501.67
+VOO     504.60
+BABA    501.67
+BA      504.60
+XLI     504.60
+Name: position, dtype: float64
+2024-12-01 11:36:37,108 - utils_portfolio - INFO - Submitting orders to open positions
+2024-12-01 11:36:37,108 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p3 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-12-01 11:36:37,108 - utils_portfolio - INFO - Updating info of portfolio - p4
+2024-12-01 11:36:37,258 - utils_portfolio - INFO - Calculating symbols weights
+2024-12-01 11:36:37,259 - root - INFO - Portfolio p4 symbols weights - {'RIOT': 0.05, 'NEE': 0.05, 'SLV': 0.05, 'SHOP': 0.05, 'FAST': 0.05, 'SPXL': 0.05, 'VALE': 0.05, 'SNAP': 0.05, 'WDC': 0.05, 'MO': 0.05, 'PM': 0.05, 'SQ': 0.05, 'PDD': 0.05, 'ABBV': 0.05, 'ON': 0.05, 'UPRO': 0.05, 'TSLL': 0.05, 'PBR': 0.05, 'MP': 0.05, 'U': 0.05}
+2024-12-01 11:36:37,259 - utils_strategy - INFO - RIOT - downloading data from yfinance
+2024-12-01 11:36:37,401 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:37,401 - utils_strategy - INFO - NEE - downloading data from yfinance
+2024-12-01 11:36:37,718 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:37,718 - utils_strategy - INFO - SLV - downloading data from yfinance
+2024-12-01 11:36:37,867 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:37,867 - utils_strategy - INFO - SHOP - downloading data from yfinance
+2024-12-01 11:36:38,034 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:38,034 - utils_strategy - INFO - FAST - downloading data from yfinance
+2024-12-01 11:36:38,311 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:38,311 - utils_strategy - INFO - SPXL - downloading data from yfinance
+2024-12-01 11:36:38,515 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:38,515 - utils_strategy - INFO - VALE - downloading data from yfinance
+2024-12-01 11:36:38,727 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:38,727 - utils_strategy - INFO - SNAP - downloading data from yfinance
+2024-12-01 11:36:38,827 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:38,827 - utils_strategy - INFO - WDC - downloading data from yfinance
+2024-12-01 11:36:39,016 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:39,016 - utils_strategy - INFO - MO - downloading data from yfinance
+2024-12-01 11:36:39,316 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:39,317 - utils_strategy - INFO - PM - downloading data from yfinance
+2024-12-01 11:36:39,561 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:39,561 - utils_strategy - INFO - SQ - downloading data from yfinance
+2024-12-01 11:36:39,712 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:39,712 - utils_strategy - INFO - PDD - downloading data from yfinance
+2024-12-01 11:36:39,827 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:39,827 - utils_strategy - INFO - ABBV - downloading data from yfinance
+2024-12-01 11:36:39,990 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:39,990 - utils_strategy - INFO - ON - downloading data from yfinance
+2024-12-01 11:36:40,151 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:40,152 - utils_strategy - INFO - UPRO - downloading data from yfinance
+2024-12-01 11:36:40,418 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:40,418 - utils_strategy - INFO - TSLL - downloading data from yfinance
+2024-12-01 11:36:40,607 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:40,607 - utils_strategy - INFO - PBR - downloading data from yfinance
+2024-12-01 11:36:40,883 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:40,883 - utils_strategy - INFO - MP - downloading data from yfinance
+2024-12-01 11:36:40,990 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:40,990 - utils_strategy - INFO - U - downloading data from yfinance
+2024-12-01 11:36:41,072 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-01 11:36:41,072 - root - INFO - Portfolio p4 symbols actions - {}
+2024-12-01 11:36:41,072 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-12-01 11:36:41,072 - utils_portfolio - INFO - Updating state of portfolio - p4
+2024-12-01 11:36:41,072 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-01 11:36:41,072 - utils_portfolio - INFO - Processing symbol - RIOT
+2024-12-01 11:36:41,557 - utils_portfolio - INFO - Processing symbol - NEE
+2024-12-01 11:36:41,681 - utils_portfolio - INFO - Processing symbol - SLV
+2024-12-01 11:36:41,811 - utils_portfolio - INFO - Processing symbol - SHOP
+2024-12-01 11:36:41,934 - utils_portfolio - INFO - Processing symbol - FAST
+2024-12-01 11:36:42,129 - utils_portfolio - INFO - Processing symbol - SPXL
+2024-12-01 11:36:42,333 - utils_portfolio - INFO - Processing symbol - VALE
+2024-12-01 11:36:42,541 - utils_portfolio - INFO - Processing symbol - SNAP
+2024-12-01 11:36:42,712 - utils_portfolio - INFO - Processing symbol - WDC
+2024-12-01 11:36:42,947 - utils_portfolio - INFO - Processing symbol - MO
+2024-12-01 11:36:43,149 - utils_portfolio - INFO - Processing symbol - PM
+2024-12-01 11:36:43,338 - utils_portfolio - INFO - Processing symbol - SQ
+2024-12-01 11:36:43,561 - utils_portfolio - INFO - Processing symbol - PDD
+2024-12-01 11:36:43,685 - utils_portfolio - INFO - Processing symbol - ABBV
+2024-12-01 11:36:43,815 - utils_portfolio - INFO - Processing symbol - ON
+2024-12-01 11:36:43,938 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-01 11:36:44,072 - utils_portfolio - INFO - Processing symbol - TSLL
+2024-12-01 11:36:44,277 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-01 11:36:44,482 - utils_portfolio - INFO - Processing symbol - MP
+2024-12-01 11:36:44,685 - utils_portfolio - INFO - Processing symbol - U
+2024-12-01 11:36:44,897 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-01 11:36:44,897 - utils_portfolio - INFO - Processing symbol - RIOT
+2024-12-01 11:36:45,290 - utils_portfolio - INFO - Processing symbol - NEE
+2024-12-01 11:36:45,401 - utils_portfolio - INFO - Processing symbol - SLV
+2024-12-01 11:36:45,597 - utils_portfolio - INFO - Processing symbol - SHOP
+2024-12-01 11:36:45,922 - utils_portfolio - INFO - Processing symbol - FAST
+2024-12-01 11:36:46,319 - utils_portfolio - INFO - Processing symbol - SPXL
+2024-12-01 11:36:46,729 - utils_portfolio - INFO - Processing symbol - VALE
+2024-12-01 11:36:46,928 - utils_portfolio - INFO - Processing symbol - SNAP
+2024-12-01 11:36:47,343 - utils_portfolio - INFO - Processing symbol - WDC
+2024-12-01 11:36:47,752 - utils_portfolio - INFO - Processing symbol - MO
+2024-12-01 11:36:48,163 - utils_portfolio - INFO - Processing symbol - PM
+2024-12-01 11:36:48,364 - utils_portfolio - INFO - Processing symbol - SQ
+2024-12-01 11:36:48,568 - utils_portfolio - INFO - Processing symbol - PDD
+2024-12-01 11:36:48,772 - utils_portfolio - INFO - Processing symbol - ABBV
+2024-12-01 11:36:49,085 - utils_portfolio - INFO - Processing symbol - ON
+2024-12-01 11:36:49,417 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-01 11:36:49,699 - utils_portfolio - INFO - Processing symbol - TSLL
+2024-12-01 11:36:49,899 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-01 11:36:50,210 - utils_portfolio - INFO - Processing symbol - MP
+2024-12-01 11:36:50,439 - utils_portfolio - INFO - Processing symbol - U
+2024-12-01 11:36:50,717 - utils_portfolio - INFO - Portfolio p4 - calculating position sizes
+2024-12-01 11:36:50,743 - root - INFO - Portfolio p4 position sizes - symbol
+RIOT    269.42
+NEE     269.42
+SLV     269.42
+SHOP    271.01
+FAST    271.01
+SPXL    271.01
+VALE    269.42
+SNAP    271.01
+WDC     271.01
+MO      271.01
+PM      269.42
+SQ      269.42
+PDD     269.42
+ABBV    271.01
+ON      271.01
+UPRO    271.01
+TSLL    269.42
+PBR     271.01
+MP      271.01
+U       271.01
+Name: position, dtype: float64
+2024-12-01 11:36:50,743 - utils_portfolio - INFO - Submitting orders to open positions
+2024-12-01 11:36:50,744 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p4 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-12-01 11:36:50,744 - utils_portfolio - INFO - Updating whole portfolio state
+2024-12-01 11:36:51,460 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-01 11:36:51,460 - utils_portfolio - INFO - Processing symbol - PLTR
+2024-12-01 11:36:51,947 - utils_portfolio - INFO - Processing symbol - BTC/USD
+2024-12-01 11:36:52,151 - utils_portfolio - INFO - Processing symbol - AAL
+2024-12-01 11:36:52,357 - utils_portfolio - INFO - Processing symbol - VRT
+2024-12-01 11:36:52,561 - utils_portfolio - INFO - Processing symbol - GBTC
+2024-12-01 11:36:52,708 - utils_portfolio - INFO - Processing symbol - DELL
+2024-12-01 11:36:52,819 - utils_portfolio - INFO - Processing symbol - GM
+2024-12-01 11:36:52,970 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-01 11:36:53,292 - utils_portfolio - INFO - Processing symbol - DKNG
+2024-12-01 11:36:53,404 - utils_portfolio - INFO - Processing symbol - EBAY
+2024-12-01 11:36:53,692 - utils_portfolio - INFO - Processing symbol - CRWD
+2024-12-01 11:36:53,921 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:36:54,224 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:36:54,336 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:36:54,718 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:36:54,949 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:36:55,121 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:36:55,407 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:36:55,531 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:36:55,736 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:36:55,940 - utils_portfolio - INFO - Processing symbol - TSLA
+2024-12-01 11:36:56,146 - utils_portfolio - INFO - Processing symbol - NVDA
+2024-12-01 11:36:56,350 - utils_portfolio - INFO - Processing symbol - AMD
+2024-12-01 11:36:56,555 - utils_portfolio - INFO - Processing symbol - QQQ
+2024-12-01 11:36:56,666 - utils_portfolio - INFO - Processing symbol - AMZN
+2024-12-01 11:36:56,946 - utils_portfolio - INFO - Processing symbol - TQQQ
+2024-12-01 11:36:57,057 - utils_portfolio - INFO - Processing symbol - VOO
+2024-12-01 11:36:57,482 - utils_portfolio - INFO - Processing symbol - BABA
+2024-12-01 11:36:57,683 - utils_portfolio - INFO - Processing symbol - BA
+2024-12-01 11:36:58,107 - utils_portfolio - INFO - Processing symbol - XLI
+2024-12-01 11:36:58,517 - utils_portfolio - INFO - Processing symbol - RIOT
+2024-12-01 11:36:58,707 - utils_portfolio - INFO - Processing symbol - NEE
+2024-12-01 11:36:58,909 - utils_portfolio - INFO - Processing symbol - SLV
+2024-12-01 11:36:59,116 - utils_portfolio - INFO - Processing symbol - SHOP
+2024-12-01 11:36:59,533 - utils_portfolio - INFO - Processing symbol - FAST
+2024-12-01 11:36:59,913 - utils_portfolio - INFO - Processing symbol - SPXL
+2024-12-01 11:37:00,250 - utils_portfolio - INFO - Processing symbol - VALE
+2024-12-01 11:37:00,407 - utils_portfolio - INFO - Processing symbol - SNAP
+2024-12-01 11:37:00,759 - utils_portfolio - INFO - Processing symbol - WDC
+2024-12-01 11:37:01,088 - utils_portfolio - INFO - Processing symbol - MO
+2024-12-01 11:37:01,329 - utils_portfolio - INFO - Processing symbol - PM
+2024-12-01 11:37:01,444 - utils_portfolio - INFO - Processing symbol - SQ
+2024-12-01 11:37:01,575 - utils_portfolio - INFO - Processing symbol - PDD
+2024-12-01 11:37:01,779 - utils_portfolio - INFO - Processing symbol - ABBV
+2024-12-01 11:37:02,108 - utils_portfolio - INFO - Processing symbol - ON
+2024-12-01 11:37:02,351 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-01 11:37:02,716 - utils_portfolio - INFO - Processing symbol - TSLL
+2024-12-01 11:37:02,903 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-01 11:37:03,324 - utils_portfolio - INFO - Processing symbol - MP
+2024-12-01 11:37:03,731 - utils_portfolio - INFO - Processing symbol - U
+2024-12-01 11:37:04,069 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-01 11:37:04,070 - utils_portfolio - INFO - Processing symbol - PLTR
+2024-12-01 11:37:04,578 - utils_portfolio - INFO - Processing symbol - BTC/USD
+2024-12-01 11:37:04,782 - utils_portfolio - INFO - Processing symbol - AAL
+2024-12-01 11:37:04,974 - utils_portfolio - INFO - Processing symbol - VRT
+2024-12-01 11:37:05,126 - utils_portfolio - INFO - Processing symbol - GBTC
+2024-12-01 11:37:05,282 - utils_portfolio - INFO - Processing symbol - DELL
+2024-12-01 11:37:05,455 - utils_portfolio - INFO - Processing symbol - GM
+2024-12-01 11:37:05,704 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-01 11:37:05,914 - utils_portfolio - INFO - Processing symbol - DKNG
+2024-12-01 11:37:06,118 - utils_portfolio - INFO - Processing symbol - EBAY
+2024-12-01 11:37:06,306 - utils_portfolio - INFO - Processing symbol - CRWD
+2024-12-01 11:37:06,525 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:37:06,730 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:37:06,932 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:37:07,140 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:37:07,345 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:37:07,549 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:37:07,753 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:37:07,937 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:37:08,164 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:37:08,310 - utils_portfolio - INFO - Processing symbol - TSLA
+2024-12-01 11:37:08,461 - utils_portfolio - INFO - Processing symbol - NVDA
+2024-12-01 11:37:08,677 - utils_portfolio - INFO - Processing symbol - AMD
+2024-12-01 11:37:08,833 - utils_portfolio - INFO - Processing symbol - QQQ
+2024-12-01 11:37:08,960 - utils_portfolio - INFO - Processing symbol - AMZN
+2024-12-01 11:37:09,188 - utils_portfolio - INFO - Processing symbol - TQQQ
+2024-12-01 11:37:09,393 - utils_portfolio - INFO - Processing symbol - VOO
+2024-12-01 11:37:09,598 - utils_portfolio - INFO - Processing symbol - BABA
+2024-12-01 11:37:09,802 - utils_portfolio - INFO - Processing symbol - BA
+2024-12-01 11:37:09,983 - utils_portfolio - INFO - Processing symbol - XLI
+2024-12-01 11:37:10,213 - utils_portfolio - INFO - Processing symbol - RIOT
+2024-12-01 11:37:10,409 - utils_portfolio - INFO - Processing symbol - NEE
+2024-12-01 11:37:10,558 - utils_portfolio - INFO - Processing symbol - SLV
+2024-12-01 11:37:10,709 - utils_portfolio - INFO - Processing symbol - SHOP
+2024-12-01 11:37:10,930 - utils_portfolio - INFO - Processing symbol - FAST
+2024-12-01 11:37:11,132 - utils_portfolio - INFO - Processing symbol - SPXL
+2024-12-01 11:37:11,338 - utils_portfolio - INFO - Processing symbol - VALE
+2024-12-01 11:37:11,541 - utils_portfolio - INFO - Processing symbol - SNAP
+2024-12-01 11:37:11,746 - utils_portfolio - INFO - Processing symbol - WDC
+2024-12-01 11:37:11,903 - utils_portfolio - INFO - Processing symbol - MO
+2024-12-01 11:37:12,029 - utils_portfolio - INFO - Processing symbol - PM
+2024-12-01 11:37:12,259 - utils_portfolio - INFO - Processing symbol - SQ
+2024-12-01 11:37:12,466 - utils_portfolio - INFO - Processing symbol - PDD
+2024-12-01 11:37:12,672 - utils_portfolio - INFO - Processing symbol - ABBV
+2024-12-01 11:37:12,876 - utils_portfolio - INFO - Processing symbol - ON
+2024-12-01 11:37:13,053 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-01 11:37:13,282 - utils_portfolio - INFO - Processing symbol - TSLL
+2024-12-01 11:37:13,492 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-01 11:37:13,694 - utils_portfolio - INFO - Processing symbol - MP
+2024-12-01 11:37:13,899 - utils_portfolio - INFO - Processing symbol - U
+2024-12-01 11:37:14,096 - utils_portfolio - INFO - Updating state of symbols
+2024-12-01 11:37:14,096 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-01 11:37:14,096 - utils_portfolio - INFO - Processing symbol - GBTC
+2024-12-01 11:37:14,593 - utils_portfolio - INFO - Processing symbol - VRT
+2024-12-01 11:37:14,822 - utils_portfolio - INFO - Processing symbol - VALE
+2024-12-01 11:37:14,999 - utils_portfolio - INFO - Processing symbol - PM
+2024-12-01 11:37:15,229 - utils_portfolio - INFO - Processing symbol - RIOT
+2024-12-01 11:37:15,434 - utils_portfolio - INFO - Processing symbol - AMD
+2024-12-01 11:37:15,638 - utils_portfolio - INFO - Processing symbol - BA
+2024-12-01 11:37:15,822 - utils_portfolio - INFO - Processing symbol - FAST
+2024-12-01 11:37:15,976 - utils_portfolio - INFO - Processing symbol - SLV
+2024-12-01 11:37:16,126 - utils_portfolio - INFO - Processing symbol - U
+2024-12-01 11:37:16,357 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:37:16,560 - utils_portfolio - INFO - Processing symbol - AMZN
+2024-12-01 11:37:16,763 - utils_portfolio - INFO - Processing symbol - DELL
+2024-12-01 11:37:16,972 - utils_portfolio - INFO - Processing symbol - AAL
+2024-12-01 11:37:17,173 - utils_portfolio - INFO - Processing symbol - SPXL
+2024-12-01 11:37:17,380 - utils_portfolio - INFO - Processing symbol - TSLL
+2024-12-01 11:37:17,584 - utils_portfolio - INFO - Processing symbol - GM
+2024-12-01 11:37:17,788 - utils_portfolio - INFO - Processing symbol - NEE
+2024-12-01 11:37:17,977 - utils_portfolio - INFO - Processing symbol - VOO
+2024-12-01 11:37:18,198 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:37:18,405 - utils_portfolio - INFO - Processing symbol - SHOP
+2024-12-01 11:37:18,606 - utils_portfolio - INFO - Processing symbol - DKNG
+2024-12-01 11:37:18,816 - utils_portfolio - INFO - Processing symbol - BABA
+2024-12-01 11:37:18,996 - utils_portfolio - INFO - Processing symbol - MO
+2024-12-01 11:37:19,222 - utils_portfolio - INFO - Processing symbol - MP
+2024-12-01 11:37:19,429 - utils_portfolio - INFO - Processing symbol - PLTR
+2024-12-01 11:37:19,629 - utils_portfolio - INFO - Processing symbol - TSLA
+2024-12-01 11:37:19,838 - utils_portfolio - INFO - Processing symbol - SNAP
+2024-12-01 11:37:20,020 - utils_portfolio - INFO - Processing symbol - ABBV
+2024-12-01 11:37:20,227 - utils_portfolio - INFO - Processing symbol - ON
+2024-12-01 11:37:20,450 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:37:20,602 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:37:20,849 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-01 11:37:21,002 - utils_portfolio - INFO - Processing symbol - XLI
+2024-12-01 11:37:21,160 - utils_portfolio - INFO - Processing symbol - WDC
+2024-12-01 11:37:21,312 - utils_portfolio - INFO - Processing symbol - PDD
+2024-12-01 11:37:21,461 - utils_portfolio - INFO - Processing symbol - TQQQ
+2024-12-01 11:37:21,618 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:37:21,779 - utils_portfolio - INFO - Processing symbol - QQQ
+2024-12-01 11:37:21,995 - utils_portfolio - INFO - Processing symbol - CRWD
+2024-12-01 11:37:22,123 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-01 11:37:22,250 - utils_portfolio - INFO - Processing symbol - EBAY
+2024-12-01 11:37:22,407 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:37:22,601 - utils_portfolio - INFO - Processing symbol - SQ
+2024-12-01 11:37:22,751 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-01 11:37:22,899 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:37:23,042 - utils_portfolio - INFO - Processing symbol - NVDA
+2024-12-01 11:37:23,220 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:37:23,370 - utils_portfolio - INFO - Processing symbol - BTC/USD
+2024-12-01 11:37:23,522 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:37:23,732 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-01 11:37:23,734 - utils_portfolio - INFO - Processing symbol - GBTC
+2024-12-01 11:37:24,286 - utils_portfolio - INFO - Processing symbol - VRT
+2024-12-01 11:37:24,409 - utils_portfolio - INFO - Processing symbol - VALE
+2024-12-01 11:37:24,612 - utils_portfolio - INFO - Processing symbol - PM
+2024-12-01 11:37:24,788 - utils_portfolio - INFO - Processing symbol - RIOT
+2024-12-01 11:37:24,921 - utils_portfolio - INFO - Processing symbol - AMD
+2024-12-01 11:37:25,126 - utils_portfolio - INFO - Processing symbol - BA
+2024-12-01 11:37:25,366 - utils_portfolio - INFO - Processing symbol - FAST
+2024-12-01 11:37:25,653 - utils_portfolio - INFO - Processing symbol - SLV
+2024-12-01 11:37:25,787 - utils_portfolio - INFO - Processing symbol - U
+2024-12-01 11:37:26,039 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:37:26,152 - utils_portfolio - INFO - Processing symbol - AMZN
+2024-12-01 11:37:26,387 - utils_portfolio - INFO - Processing symbol - DELL
+2024-12-01 11:37:26,558 - utils_portfolio - INFO - Processing symbol - AAL
+2024-12-01 11:37:26,765 - utils_portfolio - INFO - Processing symbol - SPXL
+2024-12-01 11:37:27,077 - utils_portfolio - INFO - Processing symbol - TSLL
+2024-12-01 11:37:27,277 - utils_portfolio - INFO - Processing symbol - GM
+2024-12-01 11:37:27,481 - utils_portfolio - INFO - Processing symbol - NEE
+2024-12-01 11:37:27,686 - utils_portfolio - INFO - Processing symbol - VOO
+2024-12-01 11:37:28,100 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:37:28,302 - utils_portfolio - INFO - Processing symbol - SHOP
+2024-12-01 11:37:28,718 - utils_portfolio - INFO - Processing symbol - DKNG
+2024-12-01 11:37:28,891 - utils_portfolio - INFO - Processing symbol - BABA
+2024-12-01 11:37:29,015 - utils_portfolio - INFO - Processing symbol - MO
+2024-12-01 11:37:29,338 - utils_portfolio - INFO - Processing symbol - MP
+2024-12-01 11:37:29,742 - utils_portfolio - INFO - Processing symbol - PLTR
+2024-12-01 11:37:29,939 - utils_portfolio - INFO - Processing symbol - TSLA
+2024-12-01 11:37:30,143 - utils_portfolio - INFO - Processing symbol - SNAP
+2024-12-01 11:37:30,469 - utils_portfolio - INFO - Processing symbol - ABBV
+2024-12-01 11:37:30,710 - utils_portfolio - INFO - Processing symbol - ON
+2024-12-01 11:37:30,987 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:37:31,166 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:37:31,493 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-01 11:37:31,899 - utils_portfolio - INFO - Processing symbol - XLI
+2024-12-01 11:37:32,309 - utils_portfolio - INFO - Processing symbol - WDC
+2024-12-01 11:37:32,719 - utils_portfolio - INFO - Processing symbol - PDD
+2024-12-01 11:37:32,908 - utils_portfolio - INFO - Processing symbol - TQQQ
+2024-12-01 11:37:33,112 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:37:33,532 - utils_portfolio - INFO - Processing symbol - QQQ
+2024-12-01 11:37:33,727 - utils_portfolio - INFO - Processing symbol - CRWD
+2024-12-01 11:37:34,140 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-01 11:37:34,536 - utils_portfolio - INFO - Processing symbol - EBAY
+2024-12-01 11:37:34,972 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:37:35,370 - utils_portfolio - INFO - Processing symbol - SQ
+2024-12-01 11:37:35,488 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-01 11:37:35,893 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:37:36,083 - utils_portfolio - INFO - Processing symbol - NVDA
+2024-12-01 11:37:36,288 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:37:36,704 - utils_portfolio - INFO - Processing symbol - BTC/USD
+2024-12-01 11:37:36,902 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:37:37,047 - utils_portfolio - INFO - Updating symbol stats - GBTC
+2024-12-01 11:37:37,101 - utils_portfolio - INFO - Updating symbol stats - VRT
+2024-12-01 11:37:37,145 - utils_portfolio - INFO - Updating symbol stats - VALE
+2024-12-01 11:37:37,182 - utils_portfolio - INFO - Updating symbol stats - PM
+2024-12-01 11:37:37,215 - utils_portfolio - INFO - Updating symbol stats - RIOT
+2024-12-01 11:37:37,251 - utils_portfolio - INFO - Updating symbol stats - AMD
+2024-12-01 11:37:37,292 - utils_portfolio - INFO - Updating symbol stats - BA
+2024-12-01 11:37:37,329 - utils_portfolio - INFO - Updating symbol stats - FAST
+2024-12-01 11:37:37,366 - utils_portfolio - INFO - Updating symbol stats - SLV
+2024-12-01 11:37:37,403 - utils_portfolio - INFO - Updating symbol stats - U
+2024-12-01 11:37:37,439 - utils_portfolio - INFO - Updating symbol stats - SOUN
+2024-12-01 11:37:37,473 - utils_portfolio - INFO - Updating symbol stats - AMZN
+2024-12-01 11:37:37,508 - utils_portfolio - INFO - Updating symbol stats - DELL
+2024-12-01 11:37:37,542 - utils_portfolio - INFO - Updating symbol stats - AAL
+2024-12-01 11:37:37,577 - utils_portfolio - INFO - Updating symbol stats - SPXL
+2024-12-01 11:37:37,621 - utils_portfolio - INFO - Updating symbol stats - TSLL
+2024-12-01 11:37:37,661 - utils_portfolio - INFO - Updating symbol stats - GM
+2024-12-01 11:37:37,700 - utils_portfolio - INFO - Updating symbol stats - NEE
+2024-12-01 11:37:37,739 - utils_portfolio - INFO - Updating symbol stats - VOO
+2024-12-01 11:37:37,777 - utils_portfolio - INFO - Updating symbol stats - MSTR
+2024-12-01 11:37:37,812 - utils_portfolio - INFO - Updating symbol stats - SHOP
+2024-12-01 11:37:37,849 - utils_portfolio - INFO - Updating symbol stats - DKNG
+2024-12-01 11:37:37,884 - utils_portfolio - INFO - Updating symbol stats - BABA
+2024-12-01 11:37:37,918 - utils_portfolio - INFO - Updating symbol stats - MO
+2024-12-01 11:37:37,952 - utils_portfolio - INFO - Updating symbol stats - MP
+2024-12-01 11:37:37,989 - utils_portfolio - INFO - Updating symbol stats - PLTR
+2024-12-01 11:37:38,029 - utils_portfolio - INFO - Updating symbol stats - TSLA
+2024-12-01 11:37:38,063 - utils_portfolio - INFO - Updating symbol stats - SNAP
+2024-12-01 11:37:38,102 - utils_portfolio - INFO - Updating symbol stats - ABBV
+2024-12-01 11:37:38,155 - utils_portfolio - INFO - Updating symbol stats - ON
+2024-12-01 11:37:38,191 - utils_portfolio - INFO - Updating symbol stats - AVGO
+2024-12-01 11:37:38,224 - utils_portfolio - INFO - Updating symbol stats - MRVL
+2024-12-01 11:37:38,257 - utils_portfolio - INFO - Updating symbol stats - UPRO
+2024-12-01 11:37:38,295 - utils_portfolio - INFO - Updating symbol stats - XLI
+2024-12-01 11:37:38,331 - utils_portfolio - INFO - Updating symbol stats - WDC
+2024-12-01 11:37:38,368 - utils_portfolio - INFO - Updating symbol stats - PDD
+2024-12-01 11:37:38,402 - utils_portfolio - INFO - Updating symbol stats - TQQQ
+2024-12-01 11:37:38,435 - utils_portfolio - INFO - Updating symbol stats - META
+2024-12-01 11:37:38,472 - utils_portfolio - INFO - Updating symbol stats - QQQ
+2024-12-01 11:37:38,511 - utils_portfolio - INFO - Updating symbol stats - CRWD
+2024-12-01 11:37:38,555 - utils_portfolio - INFO - Updating symbol stats - IYR
+2024-12-01 11:37:38,598 - utils_portfolio - INFO - Updating symbol stats - EBAY
+2024-12-01 11:37:38,632 - utils_portfolio - INFO - Updating symbol stats - SCHD
+2024-12-01 11:37:38,666 - utils_portfolio - INFO - Updating symbol stats - SQ
+2024-12-01 11:37:38,701 - utils_portfolio - INFO - Updating symbol stats - PBR
+2024-12-01 11:37:38,746 - utils_portfolio - INFO - Updating symbol stats - BITO
+2024-12-01 11:37:38,793 - utils_portfolio - INFO - Updating symbol stats - NVDA
+2024-12-01 11:37:38,827 - utils_portfolio - INFO - Updating symbol stats - AAPL
+2024-12-01 11:37:38,870 - utils_portfolio - INFO - Updating symbol stats - BTC/USD
+2024-12-01 11:37:38,910 - utils_portfolio - INFO - Updating symbol stats - GOOGL
+2024-12-01 11:37:38,945 - utils_portfolio - INFO - Updating state of strategies
+2024-12-01 11:37:38,946 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-01 11:37:38,946 - utils_portfolio - INFO - Processing symbol - PLTR
+2024-12-01 11:37:39,604 - utils_portfolio - INFO - Processing symbol - BTC/USD
+2024-12-01 11:37:39,786 - utils_portfolio - INFO - Processing symbol - AAL
+2024-12-01 11:37:39,935 - utils_portfolio - INFO - Processing symbol - VRT
+2024-12-01 11:37:40,122 - utils_portfolio - INFO - Processing symbol - GBTC
+2024-12-01 11:37:40,276 - utils_portfolio - INFO - Processing symbol - DELL
+2024-12-01 11:37:40,417 - utils_portfolio - INFO - Processing symbol - GM
+2024-12-01 11:37:40,542 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-01 11:37:40,725 - utils_portfolio - INFO - Processing symbol - DKNG
+2024-12-01 11:37:40,852 - utils_portfolio - INFO - Processing symbol - EBAY
+2024-12-01 11:37:41,033 - utils_portfolio - INFO - Processing symbol - CRWD
+2024-12-01 11:37:41,212 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:37:41,419 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:37:41,627 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:37:41,852 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:37:42,063 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:37:42,246 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:37:42,371 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:37:42,574 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:37:42,699 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:37:42,850 - utils_portfolio - INFO - Processing symbol - TSLA
+2024-12-01 11:37:43,082 - utils_portfolio - INFO - Processing symbol - NVDA
+2024-12-01 11:37:43,241 - utils_portfolio - INFO - Processing symbol - AMD
+2024-12-01 11:37:43,493 - utils_portfolio - INFO - Processing symbol - QQQ
+2024-12-01 11:37:43,686 - utils_portfolio - INFO - Processing symbol - AMZN
+2024-12-01 11:37:43,839 - utils_portfolio - INFO - Processing symbol - TQQQ
+2024-12-01 11:37:43,993 - utils_portfolio - INFO - Processing symbol - VOO
+2024-12-01 11:37:44,181 - utils_portfolio - INFO - Processing symbol - BABA
+2024-12-01 11:37:44,329 - utils_portfolio - INFO - Processing symbol - BA
+2024-12-01 11:37:44,515 - utils_portfolio - INFO - Processing symbol - XLI
+2024-12-01 11:37:44,723 - utils_portfolio - INFO - Processing symbol - RIOT
+2024-12-01 11:37:44,877 - utils_portfolio - INFO - Processing symbol - NEE
+2024-12-01 11:37:45,122 - utils_portfolio - INFO - Processing symbol - SLV
+2024-12-01 11:37:45,293 - utils_portfolio - INFO - Processing symbol - SHOP
+2024-12-01 11:37:45,442 - utils_portfolio - INFO - Processing symbol - FAST
+2024-12-01 11:37:45,573 - utils_portfolio - INFO - Processing symbol - SPXL
+2024-12-01 11:37:45,743 - utils_portfolio - INFO - Processing symbol - VALE
+2024-12-01 11:37:45,947 - utils_portfolio - INFO - Processing symbol - SNAP
+2024-12-01 11:37:46,155 - utils_portfolio - INFO - Processing symbol - WDC
+2024-12-01 11:37:46,360 - utils_portfolio - INFO - Processing symbol - MO
+2024-12-01 11:37:46,557 - utils_portfolio - INFO - Processing symbol - PM
+2024-12-01 11:37:46,718 - utils_portfolio - INFO - Processing symbol - SQ
+2024-12-01 11:37:46,844 - utils_portfolio - INFO - Processing symbol - PDD
+2024-12-01 11:37:46,998 - utils_portfolio - INFO - Processing symbol - ABBV
+2024-12-01 11:37:47,168 - utils_portfolio - INFO - Processing symbol - ON
+2024-12-01 11:37:47,384 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-01 11:37:47,587 - utils_portfolio - INFO - Processing symbol - TSLL
+2024-12-01 11:37:47,782 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-01 11:37:47,996 - utils_portfolio - INFO - Processing symbol - MP
+2024-12-01 11:37:48,175 - utils_portfolio - INFO - Processing symbol - U
+2024-12-01 11:37:48,409 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-01 11:37:48,410 - utils_portfolio - INFO - Processing symbol - PLTR
+2024-12-01 11:37:48,883 - utils_portfolio - INFO - Processing symbol - BTC/USD
+2024-12-01 11:37:49,088 - utils_portfolio - INFO - Processing symbol - AAL
+2024-12-01 11:37:49,293 - utils_portfolio - INFO - Processing symbol - VRT
+2024-12-01 11:37:49,497 - utils_portfolio - INFO - Processing symbol - GBTC
+2024-12-01 11:37:49,701 - utils_portfolio - INFO - Processing symbol - DELL
+2024-12-01 11:37:49,907 - utils_portfolio - INFO - Processing symbol - GM
+2024-12-01 11:37:50,111 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-01 11:37:50,527 - utils_portfolio - INFO - Processing symbol - DKNG
+2024-12-01 11:37:50,726 - utils_portfolio - INFO - Processing symbol - EBAY
+2024-12-01 11:37:51,070 - utils_portfolio - INFO - Processing symbol - CRWD
+2024-12-01 11:37:51,369 - utils_portfolio - INFO - Processing symbol - AAPL
+2024-12-01 11:37:51,662 - utils_portfolio - INFO - Processing symbol - GOOGL
+2024-12-01 11:37:51,776 - utils_portfolio - INFO - Processing symbol - META
+2024-12-01 11:37:52,091 - utils_portfolio - INFO - Processing symbol - MRVL
+2024-12-01 11:37:52,381 - utils_portfolio - INFO - Processing symbol - MSTR
+2024-12-01 11:37:52,569 - utils_portfolio - INFO - Processing symbol - SCHD
+2024-12-01 11:37:52,822 - utils_portfolio - INFO - Processing symbol - BITO
+2024-12-01 11:37:52,939 - utils_portfolio - INFO - Processing symbol - AVGO
+2024-12-01 11:37:53,080 - utils_portfolio - INFO - Processing symbol - SOUN
+2024-12-01 11:37:53,285 - utils_portfolio - INFO - Processing symbol - TSLA
+2024-12-01 11:37:53,431 - utils_portfolio - INFO - Processing symbol - NVDA
+2024-12-01 11:37:53,593 - utils_portfolio - INFO - Processing symbol - AMD
+2024-12-01 11:37:53,770 - utils_portfolio - INFO - Processing symbol - QQQ
+2024-12-01 11:37:53,881 - utils_portfolio - INFO - Processing symbol - AMZN
+2024-12-01 11:37:54,211 - utils_portfolio - INFO - Processing symbol - TQQQ
+2024-12-01 11:37:54,412 - utils_portfolio - INFO - Processing symbol - VOO
+2024-12-01 11:37:54,772 - utils_portfolio - INFO - Processing symbol - BABA
+2024-12-01 11:37:54,885 - utils_portfolio - INFO - Processing symbol - BA
+2024-12-01 11:37:55,144 - utils_portfolio - INFO - Processing symbol - XLI
+2024-12-01 11:37:55,442 - utils_portfolio - INFO - Processing symbol - RIOT
+2024-12-01 11:37:55,556 - utils_portfolio - INFO - Processing symbol - NEE
+2024-12-01 11:37:55,668 - utils_portfolio - INFO - Processing symbol - SLV
+2024-12-01 11:37:55,844 - utils_portfolio - INFO - Processing symbol - SHOP
+2024-12-01 11:37:56,258 - utils_portfolio - INFO - Processing symbol - FAST
+2024-12-01 11:37:56,671 - utils_portfolio - INFO - Processing symbol - SPXL
+2024-12-01 11:37:57,089 - utils_portfolio - INFO - Processing symbol - VALE
+2024-12-01 11:37:57,278 - utils_portfolio - INFO - Processing symbol - SNAP
+2024-12-01 11:37:57,615 - utils_portfolio - INFO - Processing symbol - WDC
+2024-12-01 11:37:57,910 - utils_portfolio - INFO - Processing symbol - MO
+2024-12-01 11:37:58,312 - utils_portfolio - INFO - Processing symbol - PM
+2024-12-01 11:37:58,509 - utils_portfolio - INFO - Processing symbol - SQ
+2024-12-01 11:37:58,714 - utils_portfolio - INFO - Processing symbol - PDD
+2024-12-01 11:37:58,918 - utils_portfolio - INFO - Processing symbol - ABBV
+2024-12-01 11:37:59,344 - utils_portfolio - INFO - Processing symbol - ON
+2024-12-01 11:37:59,752 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-01 11:38:00,163 - utils_portfolio - INFO - Processing symbol - TSLL
+2024-12-01 11:38:00,351 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-01 11:38:00,765 - utils_portfolio - INFO - Processing symbol - MP
+2024-12-01 11:38:01,187 - utils_portfolio - INFO - Processing symbol - U
+2024-12-01 11:38:01,576 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Everything DONE --- XXXXXXXXXXXXXXXXXXXX

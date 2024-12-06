@@ -53,10 +53,17 @@ def main(path_config):
         logger.info(f"Portfolio {portfolio} symbols weights - {str(weights)}")
         trades = {}
         for symbol in config[portfolio]['symbols'].keys():
+            # strategy = ...
+            # if strategy == 'hhhl_ml1"
+            #   df_symbol = strategy_data_prep(strategy, symbol)# toto bude df_price
             df_symbol = data_load(symbol, 
                                   config[portfolio]['data_preference'],
                                   datetime(2000, 1, 1), 
                                   datetime.today().date())
+            # extend df_symbol - aby som mal df_price
+            # potrebujem mat niekde zadefinovay experiment, resp. folder s modelmi
+            # load model_obj
+            # load param_ranges z train configu experimentu, ktory bude vo folderi  modelmi
 
             # po polnoci do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
             strategy = config[portfolio]['symbols'][symbol].keys()
@@ -71,11 +78,13 @@ def main(path_config):
                 logger.warning(f"{portfolio} - {symbol} - data is empty, skipping symbol")
                 continue
             if correct_date(symbol, last_day):
+                # tu potrebujem model, df_price = df_symbol, param_ranges, prob_threshold
+                # eg. + kwargs (param_ranges, model obj)
                 entries, exits = run_strategy(df_symbol, 
                                             symbol, 
                                             strategy, 
                                             strategy_params)
-                trades[symbol] = eval_position(df_symbol['close'],
+                trades[symbol] = eval_position(df_symbol['close'], 
                                                entries, 
                                                exits, 
                                                strategy_direction, 

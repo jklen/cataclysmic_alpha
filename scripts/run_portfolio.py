@@ -2,6 +2,7 @@ import pdb
 import logging
 from logging.handlers import TimedRotatingFileHandler
 import json
+import pickle
 import pandas as pd
 import click
 import yaml
@@ -10,7 +11,8 @@ from utils_strategy import data_load
 from utils_portfolio import check_weights, run_strategy, position_sizes, \
     open_positions, close_positions, eval_position, strategies_directions, correct_date, \
     update_portfolio_state, update_portfolio_info, generate_id, crypto_map, \
-    update_whole_portfolio_state, update_strategy_state, update_symbol_state
+    update_whole_portfolio_state, update_strategy_state, update_symbol_state, \
+    strategy_data_prep, model_strategies
     
 # Create logger
 logger = logging.getLogger('')
@@ -53,38 +55,47 @@ def main(path_config):
         logger.info(f"Portfolio {portfolio} symbols weights - {str(weights)}")
         trades = {}
         for symbol in config[portfolio]['symbols'].keys():
-            # strategy = ...
-            # if strategy == 'hhhl_ml1"
-            #   df_symbol = strategy_data_prep(strategy, symbol)# toto bude df_price
-            df_symbol = data_load(symbol, 
-                                  config[portfolio]['data_preference'],
-                                  datetime(2000, 1, 1), 
-                                  datetime.today().date())
-            # extend df_symbol - aby som mal df_price
-            # potrebujem mat niekde zadefinovay experiment, resp. folder s modelmi
-            # load model_obj
-            # load param_ranges z train configu experimentu, ktory bude vo folderi  modelmi
-
-            # po polnoci do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
             strategy = config[portfolio]['symbols'][symbol].keys()
             strategy = list(strategy)[0]
             strategy_params = config[portfolio]['symbols'][symbol][strategy]['params']
             strategy_direction = strategies_directions[strategy]
             stoploss = config[portfolio]['symbols'][symbol][strategy]['stoploss']
             take_profit = config[portfolio]['symbols'][symbol][strategy]['take_profit']
+            
+            df_symbol, close_price = strategy_data_prep(strategy, 
+                                           symbol,
+                                           config[portfolio]['data_preference'],
+                                           datetime(2000, 1, 1), 
+                                           datetime.today().date()
+                                           )
+
+            # po polnoci do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
+
             try:
                 last_day = df_symbol.tail(1).index.get_level_values('timestamp')[0].date()
             except:
                 logger.warning(f"{portfolio} - {symbol} - data is empty, skipping symbol")
                 continue
             if correct_date(symbol, last_day):
-                # tu potrebujem model, df_price = df_symbol, param_ranges, prob_threshold
-                # eg. + kwargs (param_ranges, model obj)
+                if strategy in model_strategies:
+                    model_folder = config[portfolio]['model_folder'][strategy]['model_folder']
+                    symbol_folder = f"../{model_folder}/{symbol}"
+                    with open(f"{symbol_folder}/models.pickle", 'rb') as f:
+                        models = pickle.load(f)
+                    strategy_setup = config['ml_strategies_setup'][strategy]
+                    kwargs = {'models':models, 'strategy_setup':strategy_setup}
+                else:
+                    kwargs = {}
+                
                 entries, exits = run_strategy(df_symbol, 
                                             symbol, 
                                             strategy, 
-                                            strategy_params)
-                trades[symbol] = eval_position(df_symbol['close'], 
+                                            strategy_params,
+                                            **kwargs)
+                #TODO - checkni shift na df_price
+                #TODO - uprav scripty - train, backtest - pred dalsim treningom a backtestom
+                
+                trades[symbol] = eval_position(close_price,
                                                entries, 
                                                exits, 
                                                strategy_direction, 

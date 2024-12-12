@@ -42,7 +42,7 @@ HigherHighStrategy = vbt.IndicatorFactory(
 def hhhl_ml1_strategy_logic(dataset, model, dataset_params:dict, 
                            probability_threshold:float):
     
-    close = dataset['Adj Close']
+    close = dataset['adj close']
     expanded_params = {key: list(range(val[0], val[1] + 1)) for key, val in dataset_params.items()}
     combinations = list(itertools.product(*expanded_params.values()))
     entry_signals_list = []

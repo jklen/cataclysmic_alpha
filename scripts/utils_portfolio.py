@@ -1,5 +1,7 @@
 from strategies import HigherHighStrategy, hhhl_ml1_strategy_logic
+from utils_strategy import data_load
 import pandas as pd
+import pandas_ta as ta
 import numpy as np
 import yaml
 from alpaca.trading.client import TradingClient
@@ -24,6 +26,8 @@ strategies_directions = {
     'hhhl':'long',
     'hhhl_ml1':'long'
 }
+
+model_strategies = ['hhhl_ml1']
 
 crypto_map = {'BTC/USD':'BTCUSD', 'LINK/BTC':'LINKBTC'}
 
@@ -149,14 +153,18 @@ def check_weights(symbols, weights_params):
                 one_symbol_weight = 1./len(symbols)
                 return {symbol:one_symbol_weight for symbol in symbols}
 
-def run_strategy(df_symbol, symbol, strategy, strategy_params):
+def run_strategy(df_symbol, symbol, strategy, strategy_params, **kwargs):
     logger.info(f"{symbol} - running symbols strategy to get entries and exits")
     if strategy == 'hhhl':
         Strategy = HigherHighStrategy
     elif strategy == 'hhhl_ml1':
-        # hhhl_ml1_strategy_logic (df_price, model, 0.5, param_ranges) tj ine params ako run_stratgy funkcia
-        # dostanem entry, exit signals
-        pass
+        param_ranges = kwargs['ml_strategies_setup'][strategy]['param_ranges']
+        model_obj = kwargs['models']['open_trade']
+        entries, exits, _, _ = hhhl_ml1_strategy_logic (df_symbol, 
+                                    model_obj, 
+                                    strategy_params['probability_threshold'], 
+                                    param_ranges)
+        return entries, exits
     
     close_price = df_symbol['close']
     indicator = Strategy.run(close_price, **strategy_params)
@@ -1102,3 +1110,15 @@ def generate_id():
     unique_id = uuid.uuid4()
     unique_id_str = str(unique_id)
     return unique_id_str
+
+def strategy_data_prep(strategy, symbol, data_preference, start, end):
+    if strategy == 'hhhl':
+        df_symbol = data_load(symbol, data_preference, start, end)
+        close_price = df_symbol['close']
+    elif strategy == 'hhhl_ml1':
+        df_symbol = data_load(symbol, data_preference, start, end)
+        df_symbol.ta.strategy('All')
+        close_price = df_symbol['adj close']
+    
+    return df_symbol, close_price
+        

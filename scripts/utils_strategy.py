@@ -75,7 +75,7 @@ def get_yf_data(symbol, start, end, attempts = 10):
         except:
             logger.warning(f"{symbol} - attempt {attempt} to download data from YF failed, retrying")
         
-    df = df[['Open', 'High', 'Low', 'Close', 'Volume']]
+    df = df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']]
     df.columns = df.columns.str.lower()
     df.index.name = 'timestamp' 
     

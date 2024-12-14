@@ -78,11 +78,11 @@ def main(path_config):
                 continue
             if correct_date(symbol, last_day):
                 if strategy in model_strategies:
-                    model_folder = config[portfolio]['model_folder'][strategy]['model_folder']
-                    symbol_folder = f"../{model_folder}/{symbol}"
+                    model_folder = config[portfolio]['model_folder'][strategy]
+                    symbol_folder = f"{model_folder}/{symbol}"
                     with open(f"{symbol_folder}/models.pickle", 'rb') as f:
                         models = pickle.load(f)
-                    strategy_setup = config['ml_strategies_setup'][strategy]
+                    strategy_setup = config[portfolio]['ml_strategies_setup'][strategy]
                     kwargs = {'models':models, 'strategy_setup':strategy_setup}
                 else:
                     kwargs = {}

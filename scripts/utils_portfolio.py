@@ -158,12 +158,14 @@ def run_strategy(df_symbol, symbol, strategy, strategy_params, **kwargs):
     if strategy == 'hhhl':
         Strategy = HigherHighStrategy
     elif strategy == 'hhhl_ml1':
-        param_ranges = kwargs['ml_strategies_setup'][strategy]['param_ranges']
+        #pdb.set_trace()
+        param_ranges = kwargs['strategy_setup']['param_ranges']
         model_obj = kwargs['models']['open_trade']
         entries, exits, _, _ = hhhl_ml1_strategy_logic (df_symbol, 
                                     model_obj, 
-                                    strategy_params['probability_threshold'], 
-                                    param_ranges)
+                                    param_ranges,
+                                    strategy_params['probability_threshold']
+                                    )
         return entries, exits
     
     close_price = df_symbol['close']
@@ -236,7 +238,7 @@ def eval_position(close_price, entries, exits, strategy_direction, stoploss, tak
                                     entries, 
                                     exits,
                                     sl_stop = stoploss, 
-                                    tp_stop = take_profit,
+                                    #tp_stop = take_profit,
                                     direction='longonly',
                                     freq='1D')
         df_trades = pf.trades.records_readable
@@ -402,12 +404,13 @@ def calculate_closed_trades_stats(symbols):
                           'win_rate':closed_winning_trades_cnt/len(df_trades)})
         else:
             stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0, 'closed_winning_trades_cnt': 0,
-                          'last_trade_closed_at':np.nan, 'days_since_last_closed_trade':0})
+                          'last_trade_closed_at':np.nan, 'days_since_last_closed_trade':0,
+                          'win_rate':np.nan})
     index = pd.Series(symbols).map(lambda x: crypto_map[x] if x in crypto_map else x)
     df_stats = pd.DataFrame(stats, index = index)
     closed_trades_pl = df_stats['closed_trades_pl'].sum()
     closed_trades_cnt = df_stats['closed_trades_cnt'].sum()
-    win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else None
+    win_rate = (df_stats['closed_winning_trades_cnt'].sum()/df_stats['closed_trades_cnt'].sum()) if closed_trades_cnt > 0 else np.nan
     zero_tr_symbols_cnt = (df_stats['closed_trades_cnt'] == 0).sum()
     winning_trades_cnt = df_stats['closed_winning_trades_cnt'].sum()
             
@@ -564,6 +567,9 @@ def calculate_todays_return(portfolio, equity, portfolio_size):
                         limit 1""",
                     con)
     con.close()
+
+    if len(df) == 0: # empty db
+        return 0.
     todays_return = ((equity - df['equity'][0])/df['equity'][0]) - ((portfolio_size - df['portfolio_size'][0])/df['equity'][0])
     
     return todays_return
@@ -824,7 +830,7 @@ def update_portfolio_state(portfolio, portfolio_size, symbols, run_id, timestamp
     sortino_ratio = calculate_sortino_ratio('portfolio', portfolio, date, todays_return)
     symbols_to_open_cnt = len([key for key, value in trades.items() if value == 'open'])
     symbols_to_close_cnt = len([key for key, value in trades.items() if value == 'close'])
-    
+    #pdb.set_trace()
     data = (timestamp, 
             date, 
             run_id, 
@@ -1009,10 +1015,9 @@ def strategy_todays_return(open_symbols, open_trades_mk_value):
     cost_basis = df.loc[(df['symbol'].isin(open_symbols)) & (df['date'] == df['date'].max()) & (df['days_opened'] == 1), 'cost_basis'].sum()
     
     try:
-        todays_return = (open_trades_mk_value/(mk_value + cost_basis)) - 1
+        todays_return = (float(open_trades_mk_value)/float(mk_value + cost_basis)) - 1
     except:
         return 0
-    
     return todays_return
     
     # SUM(market value DNES otvorenych symbolov)/SUM(market value tych istych symbolov predosleho dna, ak otvorene 1 den cost basis)
@@ -1026,6 +1031,7 @@ def update_symbol_state(run_id, timestamp, symbols, config): #TODO add to_open_t
     result_open_trades = calculate_open_trades_stats(symbols)
     df_open = result_open_trades['df_stats']
     df_closed = result_closed_trades['df_stats']
+    #pdb.set_trace()
                     
     for symbol in symbols:            
         logger.info(f"Updating symbol stats - {symbol}")

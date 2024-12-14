@@ -1422,3 +1422,5 @@ app.layout = dmc.MantineProvider(html.Div([dcc.Location(id="url"),
 # Run the app
 if __name__ == '__main__':
     app.run(debug=True)
+    
+#TODO - tab s histogramom ceny a vstupnych premennych do modelov

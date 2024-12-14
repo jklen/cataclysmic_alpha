@@ -1,0 +1,79 @@
+2024-12-13 22:46:18,044 - root - INFO - Logger is setup
+2024-12-13 22:46:18,053 - utils_portfolio - INFO - Updating info of portfolio - p1
+2024-12-13 22:46:18,066 - utils_portfolio - INFO - Calculating symbols weights
+2024-12-13 22:46:18,066 - root - INFO - Portfolio p1 symbols weights - {'PBR': 0.5, 'T': 0.5}
+2024-12-13 22:46:18,066 - utils_strategy - INFO - PBR - downloading data from yfinance
+2024-12-13 22:46:21,573 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-13 22:46:21,601 - utils_portfolio - INFO - PBR - running symbols strategy to get entries and exits
+2024-12-13 22:47:11,066 - utils_portfolio - INFO - Evaluating symbol if to open, close, or no change
+2024-12-13 22:47:16,081 - utils_strategy - INFO - T - downloading data from yfinance
+2024-12-13 22:47:19,798 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-13 22:47:19,804 - utils_portfolio - INFO - T - running symbols strategy to get entries and exits
+2024-12-13 22:48:12,254 - utils_portfolio - INFO - Evaluating symbol if to open, close, or no change
+2024-12-13 22:48:12,293 - root - INFO - Portfolio p1 symbols actions - {'PBR': 'no_change', 'T': 'no_change'}
+2024-12-13 22:48:12,293 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-12-13 22:48:12,294 - utils_portfolio - INFO - Updating state of portfolio - p1
+2024-12-13 22:48:12,294 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-13 22:48:12,294 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-13 22:48:12,698 - utils_portfolio - INFO - Processing symbol - T
+2024-12-13 22:48:12,851 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-13 22:48:12,853 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-13 22:48:13,257 - utils_portfolio - INFO - Processing symbol - T
+2024-12-13 22:48:13,433 - utils_portfolio - INFO - Portfolio p1 - calculating position sizes
+2024-12-13 22:48:13,455 - root - INFO - Portfolio p1 position sizes - symbol
+PBR    650.0
+T      650.0
+Name: position, dtype: float64
+2024-12-13 22:48:13,456 - utils_portfolio - INFO - Submitting orders to open positions
+2024-12-13 22:48:13,456 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p1 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-12-13 22:48:13,456 - utils_portfolio - INFO - Updating info of portfolio - p2
+2024-12-13 22:48:13,467 - utils_portfolio - INFO - Calculating symbols weights
+2024-12-13 22:48:13,467 - root - INFO - Portfolio p2 symbols weights - {'UPRO': 0.5, 'IYR': 0.5}
+2024-12-13 22:48:13,467 - utils_strategy - INFO - UPRO - downloading data from yfinance
+2024-12-13 22:48:15,883 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-13 22:48:15,890 - utils_portfolio - INFO - UPRO - running symbols strategy to get entries and exits
+2024-12-13 22:48:54,256 - utils_portfolio - INFO - Evaluating symbol if to open, close, or no change
+2024-12-13 22:48:54,286 - utils_strategy - INFO - IYR - downloading data from yfinance
+2024-12-13 22:48:57,954 - utils_portfolio - INFO - Checking if we have correct date
+2024-12-13 22:48:57,959 - utils_portfolio - INFO - IYR - running symbols strategy to get entries and exits
+2024-12-13 22:49:49,237 - utils_portfolio - INFO - Evaluating symbol if to open, close, or no change
+2024-12-13 22:49:49,276 - root - INFO - Portfolio p2 symbols actions - {'UPRO': 'close', 'IYR': 'no_change'}
+2024-12-13 22:49:49,276 - utils_portfolio - INFO - Submitting orders to close existing positions
+2024-12-13 22:49:49,910 - utils_portfolio - WARNING - UPRO - trying to close non-existing position
+2024-12-13 22:49:49,912 - utils_portfolio - INFO - Updating state of portfolio - p2
+2024-12-13 22:49:49,913 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-13 22:49:49,913 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-13 22:49:50,534 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-13 22:49:50,746 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-13 22:49:50,747 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-13 22:49:51,243 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-13 22:49:51,508 - utils_portfolio - INFO - Portfolio p2 - calculating position sizes
+2024-12-13 22:49:51,536 - root - INFO - Portfolio p2 position sizes - symbol
+UPRO    600.0
+IYR     600.0
+Name: position, dtype: float64
+2024-12-13 22:49:51,536 - utils_portfolio - INFO - Submitting orders to open positions
+2024-12-13 22:49:51,536 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p2 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2024-12-13 22:49:51,537 - utils_portfolio - INFO - Updating whole portfolio state
+2024-12-13 22:49:52,588 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-13 22:49:52,588 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-13 22:49:53,086 - utils_portfolio - INFO - Processing symbol - T
+2024-12-13 22:49:53,291 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-13 22:49:53,496 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-13 22:49:53,701 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-13 22:49:53,702 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-13 22:49:54,216 - utils_portfolio - INFO - Processing symbol - T
+2024-12-13 22:49:54,425 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-13 22:49:54,628 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-13 22:49:54,891 - utils_portfolio - INFO - Updating state of symbols
+2024-12-13 22:49:54,892 - utils_portfolio - INFO - Calculating closed trades stats
+2024-12-13 22:49:54,892 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-13 22:49:55,342 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-13 22:49:55,551 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-13 22:49:55,673 - utils_portfolio - INFO - Processing symbol - T
+2024-12-13 22:49:55,867 - utils_portfolio - INFO - Calculating open trades stats
+2024-12-13 22:49:55,868 - utils_portfolio - INFO - Processing symbol - IYR
+2024-12-13 22:49:56,364 - utils_portfolio - INFO - Processing symbol - PBR
+2024-12-13 22:49:56,533 - utils_portfolio - INFO - Processing symbol - UPRO
+2024-12-13 22:49:56,647 - utils_portfolio - INFO - Processing symbol - T
+2024-12-13 22:50:00,890 - utils_portfolio - INFO - Updating symbol stats - IYR

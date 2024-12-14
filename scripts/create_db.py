@@ -69,8 +69,6 @@ con.execute("""CREATE TABLE positions(
     base REAL, 
     available_cash REAL, 
     min_available_cash REAL);""")
-con.commit()
-con.close()
 
 # whole portfolio state table
 
@@ -106,9 +104,6 @@ con.execute("""create table whole_portfolio_state (
 
 #TODO 2 nove stlpce - symbols_to_open_cnt, symbols_to_close_cnt
 
-con.commit()
-con.close()
-
 # strategy_state table
 
 con.execute("DROP TABLE IF EXISTS strategy_state;")
@@ -142,8 +137,6 @@ con.execute("""CREATE TABLE strategy_state(
     symbols_to_open_cnt REAL,
     symbols_to_close_cnt REAL
     );""")
-con.commit()
-con.close()
 
 # symbol table
 
@@ -154,7 +147,7 @@ con.execute("""CREATE TABLE symbol_state(
     portfolio_script_run_id TEXT, 
     symbol TEXT,
     portfolio TEXT,
-    strategy TEXT
+    strategy TEXT,
     is_open TEXT,
     open_trade_PL REAL, 
     open_trade_total_return REAL,

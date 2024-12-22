@@ -238,7 +238,7 @@ def eval_position(close_price, entries, exits, strategy_direction, stoploss, tak
                                     entries, 
                                     exits,
                                     sl_stop = stoploss, 
-                                    #tp_stop = take_profit,
+                                    tp_stop = take_profit,
                                     direction='longonly',
                                     freq='1D')
         df_trades = pf.trades.records_readable

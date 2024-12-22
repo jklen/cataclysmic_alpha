@@ -4,6 +4,7 @@ from logging.handlers import TimedRotatingFileHandler
 import json
 import pickle
 import pandas as pd
+import ast
 import click
 import yaml
 from datetime import datetime, timedelta
@@ -59,15 +60,15 @@ def main(path_config):
             strategy = list(strategy)[0]
             strategy_params = config[portfolio]['symbols'][symbol][strategy]['params']
             strategy_direction = strategies_directions[strategy]
-            stoploss = config[portfolio]['symbols'][symbol][strategy]['stoploss']
-            take_profit = config[portfolio]['symbols'][symbol][strategy]['take_profit']
+            stoploss = ast.literal_eval(str(config[portfolio]['symbols'][symbol][strategy]['stoploss']))
+            take_profit = ast.literal_eval(str(config[portfolio]['symbols'][symbol][strategy]['take_profit']))
             
             df_symbol, close_price = strategy_data_prep(strategy, 
                                            symbol,
                                            config[portfolio]['data_preference'],
                                            datetime(2000, 1, 1), 
                                            datetime.today().date()
-                                           )
+                                           ) # close price nebude adj close price
 
             # po polnoci do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
 
@@ -92,9 +93,10 @@ def main(path_config):
                                             strategy, 
                                             strategy_params,
                                             **kwargs)
-                #TODO - checkni shift na df_price
                 #TODO - uprav scripty - train, backtest - pred dalsim treningom a backtestom
-                
+                #TODO - otestuj portfolio kde su 2 strategie
+                #TODO - zmena v strategii VSADE - pouzi len close (nie adj close), adj close dropni + 9 premennych (7 + 2)
+                #pdb.set_trace()
                 trades[symbol] = eval_position(close_price,
                                                entries, 
                                                exits, 

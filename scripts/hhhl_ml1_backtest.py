@@ -155,14 +155,13 @@ if __name__ == '__main__':
 #   - potom podla tohto modelu + diverzifikacnych rulov vyselektovat symboly do portfolii
 #   - po portfolio modeli dalsie moznosti:
 #       - dalsie kroky:
-#           1. test na paper accounte hhhl_ml strategie - 5000 EUR, 50/25 symbolov, pouzit
-#               existujuce modely + existujuci portfolio model, sizing bude nejaky default - 
-#               equal - ide o test
-#           2. natrenovat nove modely, ktore sa potom pouziju live, na vsetkych 200 symbolov, potom
+#           1. test na paper accounte hhhl_ml strategie obycajnej strategie v jednom portfoliu
+#           2. oprav scripty ohladne adj close a tech. indikatorou ktore sa spatne menia (9)
+#           3. natrenovat nove modely, ktore sa potom pouziju live, na vsetkych 200 symbolov, potom
 #               tieto bezat na paper accounte - je jedno aky sizing, ide o obchody a ich vynos,
 #               rozne kombinacie portfolii, sizing method a pod si viem dopocitat
-#           3. toto ked bude bezat, mozem pracovat na historickej simulacii. 
-#           4. porovnam historicku simulaciu s performance tych 200 symbolov, zvolim portfolio + sizing,
+#           4. toto ked bude bezat, mozem pracovat na historickej simulacii. 
+#           5. porovnam historicku simulaciu s performance tych 200 symbolov, zvolim portfolio + sizing,
 #               preklopim na live
 #               
 #           2. nakod strategiu

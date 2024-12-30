@@ -1,0 +1,26 @@
+2024-12-24 21:25:54,857 - root - INFO - Logger is setup
+2024-12-24 21:25:54,862 - root - INFO - Starting training prod models - before_good26_rest
+2024-12-24 21:25:54,865 - root - INFO - Downloading price data for symbol - TJX from yfinance
+2024-12-24 21:25:55,405 - root - INFO - Generating trades for symbol - TJX
+2024-12-24 21:26:09,597 - root - INFO - Generating dataset with technical data for symbol - TJX
+2024-12-24 21:26:17,201 - root - INFO - Training symbol - TJX
+2024-12-24 21:26:17,202 - root - INFO - Training period has 9117 days, nr of trades - 242547
+2024-12-24 22:09:14,960 - root - INFO - Best model params:
+{'l2_regularization': 0.0, 'learning_rate': 0.1, 'max_depth': None, 'max_iter': 200, 'min_samples_leaf': 20}
+2024-12-24 22:09:14,968 - root - INFO - Train classification report:
+              precision    recall  f1-score   support
+
+       False       0.95      0.92      0.93    148409
+        True       0.88      0.92      0.90     94138
+
+    accuracy                           0.92    242547
+   macro avg       0.91      0.92      0.91    242547
+weighted avg       0.92      0.92      0.92    242547
+:
+2024-12-24 22:09:14,968 - root - INFO - Dumping train stuff - periods and model
+2024-12-24 22:09:15,021 - root - INFO - XXXXXXXXXXXXXXXXXXXXXXXXXX - symbol TJX DONE - XXXXXXXXXXXXXXXXXXXXXXXXXX
+2024-12-24 22:09:15,022 - root - INFO - Downloading price data for symbol - ZTS from yfinance
+2024-12-24 22:09:15,622 - root - INFO - Generating trades for symbol - ZTS
+2024-12-24 22:09:22,178 - root - INFO - Generating dataset with technical data for symbol - ZTS
+2024-12-24 22:09:27,515 - root - INFO - Training symbol - ZTS
+2024-12-24 22:09:27,516 - root - INFO - Training period has 4328 days, nr of trades - 113619

@@ -1124,7 +1124,13 @@ def strategy_data_prep(strategy, symbol, data_preference, start, end):
     elif strategy == 'hhhl_ml1':
         df_symbol = data_load(symbol, data_preference, start, end)
         df_symbol.ta.strategy('All')
-        close_price = df_symbol['adj close']
+        close_price = df_symbol['close']
+        df_symbol.drop(columns = ['adj close'], inplace = True)
+        df_symbol.ta.strategy('All')
+        df_symbol.drop(columns = ['SSF_10_2', 'TOS_STDEVALL_LR', 'TOS_STDEVALL_L_1', 
+                                    'TOS_STDEVALL_U_1', 'TOS_STDEVALL_L_2', 'TOS_STDEVALL_U_2', 
+                                    'TOS_STDEVALL_L_3', 'TOS_STDEVALL_U_3'], inplace = True) # + PSARs_0.02_0.2,
+        
     
     return df_symbol, close_price
         

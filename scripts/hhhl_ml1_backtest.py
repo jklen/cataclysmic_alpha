@@ -155,17 +155,18 @@ if __name__ == '__main__':
 #   - potom podla tohto modelu + diverzifikacnych rulov vyselektovat symboly do portfolii
 #   - po portfolio modeli dalsie moznosti:
 #       - dalsie kroky:
-#           1. test na paper accounte hhhl_ml strategie obycajnej strategie v jednom portfoliu
-#           2. sprav novy script na train produkcnych modelov
-#           3. natrenovat nove modely, ktore sa potom pouziju live, na vsetkych 200 symbolov, potom
+#           1. OK test na paper accounte hhhl_ml strategie obycajnej strategie v jednom portfoliu. Padne to na cagr calc, strategy state
+#           1.1 OK test run_porftolio.py na cas 200 modelov, ak problem oprav. ~ 1 min na symbol
+#           2. OK sprav novy script na train produkcnych modelov
+#           3. OK natrenovat nove modely, ktore sa potom pouziju live, na vsetkych 200 symbolov, potom
 #               tieto bezat na paper accounte - je jedno aky sizing, ide o obchody a ich vynos,
 #               rozne kombinacie portfolii, sizing method a pod si viem dopocitat
 #           4. oprav scripty ohladne adj close a tech. indikatorou ktore sa spatne menia (9)
 #           5. oprav scripty ohladne rovnakej train-test periody (kvoli hist simulacii) - premysli ci treba
-#           6. zopakuj train + backtest
+#           6. zopakuj train + backtest (lebo dropnute premenne + ine periody)
 #           7. script na historicku simulaciu portfolii
 #           8. porovnam historicku simulaciu s performance tych 200 symbolov, zvolim portfolio + sizing,
-#               preklopim na live
+#               preklopim na live. Asi bude treba novy script na backtest prod modelov (kvoli portfolio modelu)
 #               
 #           2. nakod strategiu
 #       - natrenovat modely na vsetkych symboloch, na celej periode (tj len gridsearch bez walk forward),

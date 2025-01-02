@@ -87,7 +87,6 @@ def main(path_config):
                     kwargs = {'models':models, 'strategy_setup':strategy_setup}
                 else:
                     kwargs = {}
-                
                 entries, exits = run_strategy(df_symbol, 
                                             symbol, 
                                             strategy, 

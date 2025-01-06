@@ -86,10 +86,10 @@ def main(path_config):
                 max_probs_all_test = test_result[3]
 
                 logger.info(f'Creating train portfolio {i} and calculating stats')
-                pf_train = vbt.Portfolio.from_signals(dataset_train['Adj Close'], 
+                pf_train = vbt.Portfolio.from_signals(dataset_train['close'], 
                                                 true_entry_signals_train, 
                                                 true_exit_signals_train,
-                                                price = dataset_train['Open'].shift(-1),
+                                                price = dataset_train['open'].shift(-1),
                                                 direction = 'longonly', 
                                                 freq='1D',
                                                 sl_stop=0.1)
@@ -97,10 +97,10 @@ def main(path_config):
                 stats_train.columns = [f"{i}_train"]
                 
                 logger.info(f'Creating test portfolio {i} and calculating stats')
-                pf_test = vbt.Portfolio.from_signals(dataset_test['Adj Close'], 
+                pf_test = vbt.Portfolio.from_signals(dataset_test['close'], 
                                                 true_entry_signals_test, 
                                                 true_exit_signals_test,
-                                                price = dataset_test['Open'].shift(-1),
+                                                price = dataset_test['open'].shift(-1),
                                                 direction = 'longonly', 
                                                 freq='1D',
                                                 sl_stop = 0.1)
@@ -161,7 +161,7 @@ if __name__ == '__main__':
 #           3. OK natrenovat nove modely, ktore sa potom pouziju live, na vsetkych 200 symbolov, potom
 #               tieto bezat na paper accounte - je jedno aky sizing, ide o obchody a ich vynos,
 #               rozne kombinacie portfolii, sizing method a pod si viem dopocitat
-#           4. oprav scripty ohladne adj close a tech. indikatorou ktore sa spatne menia (9)
+#           4. OK oprav scripty ohladne adj close a tech. indikatorou ktore sa spatne menia (9)
 #           5. oprav scripty ohladne rovnakej train-test periody (kvoli hist simulacii) - premysli ci treba
 #           6. zopakuj train + backtest (lebo dropnute premenne + ine periody)
 #           7. script na historicku simulaciu portfolii

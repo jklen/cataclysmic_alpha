@@ -1,0 +1,2457 @@
+2025-01-04 11:14:42,417 - root - INFO - Logger is setup
+2025-01-04 11:14:42,531 - utils_portfolio - INFO - Updating info of portfolio - p1
+2025-01-04 11:14:43,168 - utils_portfolio - INFO - Calculating symbols weights
+2025-01-04 11:14:43,169 - root - INFO - Portfolio p1 symbols weights - {'ACB': 0.01, 'ACN': 0.01, 'ADBE': 0.01, 'ALB': 0.01, 'AMAT': 0.01, 'AMD': 0.01, 'AMT': 0.01, 'AMZN': 0.01, 'ANET': 0.01, 'ARKK': 0.01, 'AVGO': 0.01, 'BA': 0.01, 'BABA': 0.01, 'BMY': 0.01, 'BSX': 0.01, 'CMCSA': 0.01, 'COP': 0.01, 'CSX': 0.01, 'CVNA': 0.01, 'CVX': 0.01, 'DAL': 0.01, 'DELL': 0.01, 'ENPH': 0.01, 'ETN': 0.01, 'F': 0.01, 'FXI': 0.01, 'GBTC': 0.01, 'GDX': 0.01, 'GDXJ': 0.01, 'GE': 0.01, 'GLD': 0.01, 'GM': 0.01, 'GOOG': 0.01, 'HAL': 0.01, 'HBAN': 0.01, 'HPQ': 0.01, 'HYG': 0.01, 'INTC': 0.01, 'IP': 0.01, 'JNJ': 0.01, 'KEY': 0.01, 'KMI': 0.01, 'KMX': 0.01, 'LOW': 0.01, 'LUV': 0.01, 'MCD': 0.01, 'MDLZ': 0.01, 'MDT': 0.01, 'META': 0.01, 'MMM': 0.01, 'MRIN': 0.01, 'MRO': 0.01, 'MRVL': 0.01, 'MSTR': 0.01, 'NCLH': 0.01, 'NEE': 0.01, 'NEM': 0.01, 'NXPL': 0.01, 'ON': 0.01, 'ORCL': 0.01, 'OXY': 0.01, 'PAAS': 0.01, 'PANW': 0.01, 'PARA': 0.01, 'PLD': 0.01, 'PM': 0.01, 'PYPL': 0.01, 'QCOM': 0.01, 'QLD': 0.01, 'QQQ': 0.01, 'RSP': 0.01, 'RUN': 0.01, 'SCHD': 0.01, 'SHEL': 0.01, 'SHOP': 0.01, 'SIRI': 0.01, 'SMCI': 0.01, 'SNAP': 0.01, 'SOXL': 0.01, 'SPY': 0.01, 'SQQQ': 0.01, 'T': 0.01, 'TFC': 0.01, 'TJX': 0.01, 'TLT': 0.01, 'TMUS': 0.01, 'TZA': 0.01, 'UVXY': 0.01, 'V': 0.01, 'VST': 0.01, 'VTI': 0.01, 'VZ': 0.01, 'WBA': 0.01, 'WFC': 0.01, 'WMB': 0.01, 'WMT': 0.01, 'XLF': 0.01, 'XLU': 0.01, 'XOM': 0.01, 'ZTS': 0.01}
+2025-01-04 11:14:43,170 - utils_strategy - INFO - ACB - downloading data from yfinance
+2025-01-04 11:14:47,070 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:14:47,071 - utils_strategy - INFO - ACN - downloading data from yfinance
+2025-01-04 11:14:53,850 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:14:53,850 - utils_strategy - INFO - ADBE - downloading data from yfinance
+2025-01-04 11:15:01,273 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:01,274 - utils_strategy - INFO - ALB - downloading data from yfinance
+2025-01-04 11:15:10,283 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:10,283 - utils_strategy - INFO - AMAT - downloading data from yfinance
+2025-01-04 11:15:18,347 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:18,347 - utils_strategy - INFO - AMD - downloading data from yfinance
+2025-01-04 11:15:26,554 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:26,555 - utils_strategy - INFO - AMT - downloading data from yfinance
+2025-01-04 11:15:35,216 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:35,216 - utils_strategy - INFO - AMZN - downloading data from yfinance
+2025-01-04 11:15:43,540 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:43,541 - utils_strategy - INFO - ANET - downloading data from yfinance
+2025-01-04 11:15:47,503 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:47,504 - utils_strategy - INFO - ARKK - downloading data from yfinance
+2025-01-04 11:15:51,287 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:51,288 - utils_strategy - INFO - AVGO - downloading data from yfinance
+2025-01-04 11:15:56,691 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:15:56,692 - utils_strategy - INFO - BA - downloading data from yfinance
+2025-01-04 11:16:04,848 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:16:04,848 - utils_strategy - INFO - BABA - downloading data from yfinance
+2025-01-04 11:16:08,700 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:16:08,700 - utils_strategy - INFO - BMY - downloading data from yfinance
+2025-01-04 11:16:16,876 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:16:16,877 - utils_strategy - INFO - BSX - downloading data from yfinance
+2025-01-04 11:16:25,103 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:16:25,103 - utils_strategy - INFO - CMCSA - downloading data from yfinance
+2025-01-04 11:16:33,277 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:16:33,278 - utils_strategy - INFO - COP - downloading data from yfinance
+2025-01-04 11:16:41,490 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:16:41,490 - utils_strategy - INFO - CSX - downloading data from yfinance
+2025-01-04 11:16:49,602 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:16:49,602 - utils_strategy - INFO - CVNA - downloading data from yfinance
+2025-01-04 11:16:52,637 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:16:52,637 - utils_strategy - INFO - CVX - downloading data from yfinance
+2025-01-04 11:17:00,898 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:00,898 - utils_strategy - INFO - DAL - downloading data from yfinance
+2025-01-04 11:17:07,067 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:07,068 - utils_strategy - INFO - DELL - downloading data from yfinance
+2025-01-04 11:17:10,979 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:10,980 - utils_strategy - INFO - ENPH - downloading data from yfinance
+2025-01-04 11:17:15,790 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:15,790 - utils_strategy - INFO - ETN - downloading data from yfinance
+2025-01-04 11:17:24,341 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:24,341 - utils_strategy - INFO - F - downloading data from yfinance
+2025-01-04 11:17:32,878 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:32,879 - utils_strategy - INFO - FXI - downloading data from yfinance
+2025-01-04 11:17:39,921 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:39,921 - utils_strategy - INFO - GBTC - downloading data from yfinance
+2025-01-04 11:17:43,618 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:43,618 - utils_strategy - INFO - GDX - downloading data from yfinance
+2025-01-04 11:17:50,043 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:50,044 - utils_strategy - INFO - GDXJ - downloading data from yfinance
+2025-01-04 11:17:55,517 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:17:55,517 - utils_strategy - INFO - GE - downloading data from yfinance
+2025-01-04 11:18:04,062 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:18:04,062 - utils_strategy - INFO - GLD - downloading data from yfinance
+2025-01-04 11:18:11,026 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:18:11,026 - utils_strategy - INFO - GM - downloading data from yfinance
+2025-01-04 11:18:16,086 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:18:16,087 - utils_strategy - INFO - GOOG - downloading data from yfinance
+2025-01-04 11:18:22,976 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:18:22,976 - utils_strategy - INFO - HAL - downloading data from yfinance
+2025-01-04 11:18:31,079 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:18:31,080 - utils_strategy - INFO - HBAN - downloading data from yfinance
+2025-01-04 11:18:39,578 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:18:39,578 - utils_strategy - INFO - HPQ - downloading data from yfinance
+2025-01-04 11:18:47,842 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:18:47,843 - utils_strategy - INFO - HYG - downloading data from yfinance
+2025-01-04 11:18:54,069 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:18:54,070 - utils_strategy - INFO - INTC - downloading data from yfinance
+2025-01-04 11:19:02,341 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:19:02,341 - utils_strategy - INFO - IP - downloading data from yfinance
+2025-01-04 11:19:10,597 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:19:10,597 - utils_strategy - INFO - JNJ - downloading data from yfinance
+2025-01-04 11:19:18,838 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:19:18,838 - utils_strategy - INFO - KEY - downloading data from yfinance
+2025-01-04 11:19:27,147 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:19:27,148 - utils_strategy - INFO - KMI - downloading data from yfinance
+2025-01-04 11:19:32,232 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:19:32,232 - utils_strategy - INFO - KMX - downloading data from yfinance
+2025-01-04 11:19:40,352 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:19:40,352 - utils_strategy - INFO - LOW - downloading data from yfinance
+2025-01-04 11:19:48,437 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:19:48,437 - utils_strategy - INFO - LUV - downloading data from yfinance
+2025-01-04 11:19:56,560 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:19:56,561 - utils_strategy - INFO - MCD - downloading data from yfinance
+2025-01-04 11:20:04,612 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:20:04,613 - utils_strategy - INFO - MDLZ - downloading data from yfinance
+2025-01-04 11:20:12,319 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:20:12,320 - utils_strategy - INFO - MDT - downloading data from yfinance
+2025-01-04 11:20:20,973 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:20:20,973 - utils_strategy - INFO - META - downloading data from yfinance
+2025-01-04 11:20:25,836 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:20:25,836 - utils_strategy - INFO - MMM - downloading data from yfinance
+2025-01-04 11:20:34,447 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:20:34,448 - utils_strategy - INFO - MRIN - downloading data from yfinance
+2025-01-04 11:20:38,953 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:20:38,954 - utils_strategy - INFO - MRO - downloading data from yfinance
+2025-01-04 11:20:47,344 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:20:47,345 - utils_strategy - INFO - MRVL - downloading data from yfinance
+2025-01-04 11:20:55,682 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:20:55,682 - utils_strategy - INFO - MSTR - downloading data from yfinance
+2025-01-04 11:21:04,234 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:21:04,235 - utils_strategy - INFO - NCLH - downloading data from yfinance
+2025-01-04 11:21:08,748 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:21:08,748 - utils_strategy - INFO - NEE - downloading data from yfinance
+2025-01-04 11:21:17,186 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:21:17,187 - utils_strategy - INFO - NEM - downloading data from yfinance
+2025-01-04 11:21:25,472 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:21:25,473 - utils_strategy - INFO - NXPL - downloading data from yfinance
+2025-01-04 11:21:33,501 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:21:33,501 - utils_strategy - INFO - ON - downloading data from yfinance
+2025-01-04 11:21:41,472 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:21:41,473 - utils_strategy - INFO - ORCL - downloading data from yfinance
+2025-01-04 11:21:49,607 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:21:49,608 - utils_strategy - INFO - OXY - downloading data from yfinance
+2025-01-04 11:21:57,867 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:21:57,867 - utils_strategy - INFO - PAAS - downloading data from yfinance
+2025-01-04 11:22:06,014 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:06,015 - utils_strategy - INFO - PANW - downloading data from yfinance
+2025-01-04 11:22:10,531 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:10,531 - utils_strategy - INFO - PARA - downloading data from yfinance
+2025-01-04 11:22:17,057 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:17,058 - utils_strategy - INFO - PLD - downloading data from yfinance
+2025-01-04 11:22:25,678 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:25,679 - utils_strategy - INFO - PM - downloading data from yfinance
+2025-01-04 11:22:31,659 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:31,660 - utils_strategy - INFO - PYPL - downloading data from yfinance
+2025-01-04 11:22:35,479 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:35,479 - utils_strategy - INFO - QCOM - downloading data from yfinance
+2025-01-04 11:22:44,115 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:44,116 - utils_strategy - INFO - QLD - downloading data from yfinance
+2025-01-04 11:22:50,737 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:50,738 - utils_strategy - INFO - QQQ - downloading data from yfinance
+2025-01-04 11:22:59,269 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:22:59,269 - utils_strategy - INFO - RSP - downloading data from yfinance
+2025-01-04 11:23:06,848 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:06,849 - utils_strategy - INFO - RUN - downloading data from yfinance
+2025-01-04 11:23:10,748 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:10,748 - utils_strategy - INFO - SCHD - downloading data from yfinance
+2025-01-04 11:23:15,645 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:15,646 - utils_strategy - INFO - SHEL - downloading data from yfinance
+2025-01-04 11:23:24,118 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:24,119 - utils_strategy - INFO - SHOP - downloading data from yfinance
+2025-01-04 11:23:27,805 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:27,806 - utils_strategy - INFO - SIRI - downloading data from yfinance
+2025-01-04 11:23:36,308 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:36,308 - utils_strategy - INFO - SMCI - downloading data from yfinance
+2025-01-04 11:23:42,592 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:42,592 - utils_strategy - INFO - SNAP - downloading data from yfinance
+2025-01-04 11:23:45,739 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:45,740 - utils_strategy - INFO - SOXL - downloading data from yfinance
+2025-01-04 11:23:50,995 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:50,996 - utils_strategy - INFO - SPY - downloading data from yfinance
+2025-01-04 11:23:59,191 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:23:59,192 - utils_strategy - INFO - SQQQ - downloading data from yfinance
+2025-01-04 11:24:04,723 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:24:04,723 - utils_strategy - INFO - T - downloading data from yfinance
+2025-01-04 11:24:13,564 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:24:13,564 - utils_strategy - INFO - TFC - downloading data from yfinance
+2025-01-04 11:24:22,006 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:24:22,007 - utils_strategy - INFO - TJX - downloading data from yfinance
+2025-01-04 11:24:30,541 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:24:30,542 - utils_strategy - INFO - TLT - downloading data from yfinance
+2025-01-04 11:24:38,381 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:24:38,382 - utils_strategy - INFO - TMUS - downloading data from yfinance
+2025-01-04 11:24:44,817 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:24:44,817 - utils_strategy - INFO - TZA - downloading data from yfinance
+2025-01-04 11:24:50,863 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:24:50,863 - utils_strategy - INFO - UVXY - downloading data from yfinance
+2025-01-04 11:24:56,069 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:24:56,070 - utils_strategy - INFO - V - downloading data from yfinance
+2025-01-04 11:25:02,292 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:25:02,293 - utils_strategy - INFO - VST - downloading data from yfinance
+2025-01-04 11:25:05,525 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:25:05,526 - utils_strategy - INFO - VTI - downloading data from yfinance
+2025-01-04 11:25:13,301 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:25:13,301 - utils_strategy - INFO - VZ - downloading data from yfinance
+2025-01-04 11:25:21,421 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:25:21,421 - utils_strategy - INFO - WBA - downloading data from yfinance
+2025-01-04 11:25:29,310 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:25:29,310 - utils_strategy - INFO - WFC - downloading data from yfinance
+2025-01-04 11:25:37,183 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:25:37,184 - utils_strategy - INFO - WMB - downloading data from yfinance
+2025-01-04 11:25:45,238 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:25:45,238 - utils_strategy - INFO - WMT - downloading data from yfinance
+2025-01-04 11:25:53,581 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:25:53,581 - utils_strategy - INFO - XLF - downloading data from yfinance
+2025-01-04 11:26:01,561 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:26:01,561 - utils_strategy - INFO - XLU - downloading data from yfinance
+2025-01-04 11:26:09,543 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:26:09,543 - utils_strategy - INFO - XOM - downloading data from yfinance
+2025-01-04 11:26:17,693 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:26:17,694 - utils_strategy - INFO - ZTS - downloading data from yfinance
+2025-01-04 11:26:22,024 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:26:22,025 - root - INFO - Portfolio p1 symbols actions - {}
+2025-01-04 11:26:22,025 - utils_portfolio - INFO - Submitting orders to close existing positions
+2025-01-04 11:26:22,025 - utils_portfolio - INFO - Updating state of portfolio - p1
+2025-01-04 11:26:22,026 - utils_portfolio - INFO - Calculating closed trades stats
+2025-01-04 11:26:22,026 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-04 11:26:22,691 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-04 11:26:22,892 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-04 11:26:23,092 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-04 11:26:23,301 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-04 11:26:23,506 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-04 11:26:23,712 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-04 11:26:23,915 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-04 11:26:24,115 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-04 11:26:24,324 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-04 11:26:24,530 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-04 11:26:24,713 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-04 11:26:24,837 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-04 11:26:25,041 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-04 11:26:25,247 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-04 11:26:25,451 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-04 11:26:25,657 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-04 11:26:25,860 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-04 11:26:26,067 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-04 11:26:26,269 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-04 11:26:26,475 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-04 11:26:26,680 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-04 11:26:26,885 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-04 11:26:27,087 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-04 11:26:27,294 - utils_portfolio - INFO - Processing symbol - F
+2025-01-04 11:26:27,500 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-04 11:26:27,704 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-04 11:26:27,909 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-04 11:26:28,112 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-04 11:26:28,320 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-04 11:26:28,522 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-04 11:26:28,728 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-04 11:26:28,851 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-04 11:26:29,035 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-04 11:26:29,239 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-04 11:26:29,445 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-04 11:26:29,649 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-04 11:26:29,854 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-04 11:26:30,059 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-04 11:26:30,264 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-04 11:26:30,468 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-04 11:26:30,592 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-04 11:26:30,877 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-04 11:26:31,002 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-04 11:26:31,185 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-04 11:26:31,390 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-04 11:26:31,594 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-04 11:26:31,800 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-04 11:26:32,004 - utils_portfolio - INFO - Processing symbol - META
+2025-01-04 11:26:32,210 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-04 11:26:32,413 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-04 11:26:32,619 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-04 11:26:32,823 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-04 11:26:33,028 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-04 11:26:33,233 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-04 11:26:33,437 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-04 11:26:33,644 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-04 11:26:33,847 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-04 11:26:34,052 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-04 11:26:34,257 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-04 11:26:34,462 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-04 11:26:34,666 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-04 11:26:34,871 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-04 11:26:35,077 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-04 11:26:35,284 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-04 11:26:35,485 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-04 11:26:35,690 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-04 11:26:35,813 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-04 11:26:36,096 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-04 11:26:36,305 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-04 11:26:36,509 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-04 11:26:36,715 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-04 11:26:36,921 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-04 11:26:37,120 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-04 11:26:37,330 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-04 11:26:37,534 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-04 11:26:37,739 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-04 11:26:37,944 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-04 11:26:38,143 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-04 11:26:38,353 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-04 11:26:38,558 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-04 11:26:38,764 - utils_portfolio - INFO - Processing symbol - T
+2025-01-04 11:26:38,968 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-04 11:26:39,172 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-04 11:26:39,377 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-04 11:26:39,582 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-04 11:26:39,786 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-04 11:26:39,992 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-04 11:26:40,196 - utils_portfolio - INFO - Processing symbol - V
+2025-01-04 11:26:40,404 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-04 11:26:40,606 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-04 11:26:40,762 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-04 11:26:40,914 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-04 11:26:41,113 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-04 11:26:41,323 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-04 11:26:41,528 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-04 11:26:41,732 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-04 11:26:41,930 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-04 11:26:42,136 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-04 11:26:42,348 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-04 11:26:42,562 - utils_portfolio - INFO - Calculating open trades stats
+2025-01-04 11:26:42,563 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-04 11:26:43,057 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-04 11:26:43,262 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-04 11:26:43,466 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-04 11:26:43,671 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-04 11:26:43,876 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-04 11:26:44,080 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-04 11:26:44,286 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-04 11:26:44,492 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-04 11:26:44,695 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-04 11:26:44,900 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-04 11:26:45,103 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-04 11:26:45,310 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-04 11:26:45,513 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-04 11:26:45,719 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-04 11:26:45,924 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-04 11:26:46,127 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-04 11:26:46,334 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-04 11:26:46,539 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-04 11:26:46,744 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-04 11:26:46,948 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-04 11:26:47,152 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-04 11:26:47,358 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-04 11:26:47,562 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-04 11:26:47,751 - utils_portfolio - INFO - Processing symbol - F
+2025-01-04 11:26:47,869 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-04 11:26:48,075 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-04 11:26:48,279 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-04 11:26:48,701 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-04 11:26:49,102 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-04 11:26:49,304 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-04 11:26:49,508 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-04 11:26:49,713 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-04 11:26:49,918 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-04 11:26:50,121 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-04 11:26:50,327 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-04 11:26:50,532 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-04 11:26:50,736 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-04 11:26:50,942 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-04 11:26:51,147 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-04 11:26:51,351 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-04 11:26:51,556 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-04 11:26:51,760 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-04 11:26:51,966 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-04 11:26:52,170 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-04 11:26:52,376 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-04 11:26:52,580 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-04 11:26:52,785 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-04 11:26:52,990 - utils_portfolio - INFO - Processing symbol - META
+2025-01-04 11:26:53,194 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-04 11:26:53,400 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-04 11:26:53,604 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-04 11:26:53,809 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-04 11:26:54,014 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-04 11:26:54,218 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-04 11:26:54,423 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-04 11:26:54,628 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-04 11:26:54,743 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-04 11:26:54,858 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-04 11:26:55,038 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-04 11:26:55,242 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-04 11:26:55,447 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-04 11:26:55,652 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-04 11:26:55,857 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-04 11:26:56,062 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-04 11:26:56,266 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-04 11:26:56,471 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-04 11:26:56,676 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-04 11:26:56,881 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-04 11:26:57,085 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-04 11:26:57,291 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-04 11:26:57,495 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-04 11:26:57,914 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-04 11:26:58,109 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-04 11:26:58,314 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-04 11:26:58,519 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-04 11:26:58,724 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-04 11:26:58,928 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-04 11:26:59,132 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-04 11:26:59,339 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-04 11:26:59,544 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-04 11:26:59,748 - utils_portfolio - INFO - Processing symbol - T
+2025-01-04 11:26:59,954 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-04 11:27:00,157 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-04 11:27:00,362 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-04 11:27:00,567 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-04 11:27:00,773 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-04 11:27:00,918 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-04 11:27:01,079 - utils_portfolio - INFO - Processing symbol - V
+2025-01-04 11:27:01,284 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-04 11:27:01,489 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-04 11:27:01,694 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-04 11:27:01,899 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-04 11:27:02,102 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-04 11:27:02,309 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-04 11:27:02,513 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-04 11:27:02,718 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-04 11:27:02,922 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-04 11:27:03,127 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-04 11:27:03,284 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-04 11:27:03,815 - utils_portfolio - INFO - Portfolio p1 - calculating position sizes
+2025-01-04 11:27:03,837 - root - INFO - Portfolio p1 position sizes - symbol
+ACB     100.0
+ACN     100.0
+ADBE    100.0
+ALB     100.0
+AMAT    100.0
+        ...  
+WMT     100.0
+XLF     100.0
+XLU     100.0
+XOM     100.0
+ZTS     100.0
+Name: position, Length: 100, dtype: float64
+2025-01-04 11:27:03,837 - utils_portfolio - INFO - Submitting orders to open positions
+2025-01-04 11:27:03,837 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p1 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2025-01-04 11:27:03,837 - utils_portfolio - INFO - Updating info of portfolio - p2
+2025-01-04 11:27:04,596 - utils_portfolio - INFO - Calculating symbols weights
+2025-01-04 11:27:04,597 - root - INFO - Portfolio p2 symbols weights - {'AAL': 0.00847457627118644, 'AAPL': 0.00847457627118644, 'ABBV': 0.00847457627118644, 'ABT': 0.00847457627118644, 'ADI': 0.00847457627118644, 'AMC': 0.00847457627118644, 'APA': 0.00847457627118644, 'APH': 0.00847457627118644, 'AXP': 0.00847457627118644, 'AZN': 0.00847457627118644, 'BAC': 0.00847457627118644, 'BP': 0.00847457627118644, 'BX': 0.00847457627118644, 'C': 0.00847457627118644, 'CAG': 0.00847457627118644, 'CAT': 0.00847457627118644, 'CCJ': 0.00847457627118644, 'CCL': 0.00847457627118644, 'CGC': 0.00847457627118644, 'CLF': 0.00847457627118644, 'COST': 0.00847457627118644, 'CRM': 0.00847457627118644, 'CSCO': 0.00847457627118644, 'CVS': 0.00847457627118644, 'DIA': 0.00847457627118644, 'DIS': 0.00847457627118644, 'DVN': 0.00847457627118644, 'EBAY': 0.00847457627118644, 'EOG': 0.00847457627118644, 'EQT': 0.00847457627118644, 'EWZ': 0.00847457627118644, 'FAST': 0.00847457627118644, 'FCX': 0.00847457627118644, 'FTNT': 0.00847457627118644, 'GFI': 0.00847457627118644, 'GILD': 0.00847457627118644, 'GL': 0.00847457627118644, 'GOLD': 0.00847457627118644, 'GOOGL': 0.00847457627118644, 'HD': 0.00847457627118644, 'HPE': 0.00847457627118644, 'IBM': 0.00847457627118644, 'IVV': 0.00847457627118644, 'IWM': 0.00847457627118644, 'IYR': 0.00847457627118644, 'JD': 0.00847457627118644, 'JPM': 0.00847457627118644, 'KHC': 0.00847457627118644, 'KO': 0.00847457627118644, 'KR': 0.00847457627118644, 'KRE': 0.00847457627118644, 'KSS': 0.00847457627118644, 'LABU': 0.00847457627118644, 'LLY': 0.00847457627118644, 'LQD': 0.00847457627118644, 'LULU': 0.00847457627118644, 'LW': 0.00847457627118644, 'MA': 0.00847457627118644, 'MARA': 0.00847457627118644, 'MCHP': 0.00847457627118644, 'MNST': 0.00847457627118644, 'MO': 0.00847457627118644, 'MPC': 0.00847457627118644, 'MRK': 0.00847457627118644, 'MS': 0.00847457627118644, 'MSFT': 0.00847457627118644, 'MU': 0.00847457627118644, 'NFLX': 0.00847457627118644, 'NKE': 0.00847457627118644, 'NVDA': 0.00847457627118644, 'NVO': 0.00847457627118644, 'O': 0.00847457627118644, 'PBR': 0.00847457627118644, 'PEP': 0.00847457627118644, 'PFE': 0.00847457627118644, 'PG': 0.00847457627118644, 'PGR': 0.00847457627118644, 'PLUG': 0.00847457627118644, 'PR': 0.00847457627118644, 'RIG': 0.00847457627118644, 'RIOT': 0.00847457627118644, 'RTX': 0.00847457627118644, 'SBUX': 0.00847457627118644, 'SCHW': 0.00847457627118644, 'SLB': 0.00847457627118644, 'SLV': 0.00847457627118644, 'SMH': 0.00847457627118644, 'SOXS': 0.00847457627118644, 'SPXL': 0.00847457627118644, 'SQ': 0.00847457627118644, 'TMF': 0.00847457627118644, 'TNA': 0.00847457627118644, 'TQQQ': 0.00847457627118644, 'TSLA': 0.00847457627118644, 'TSM': 0.00847457627118644, 'TXN': 0.00847457627118644, 'UAL': 0.00847457627118644, 'UNH': 0.00847457627118644, 'UPRO': 0.00847457627118644, 'UPS': 0.00847457627118644, 'USB': 0.00847457627118644, 'VALE': 0.00847457627118644, 'VFC': 0.00847457627118644, 'VICI': 0.00847457627118644, 'VIXY': 0.00847457627118644, 'VNQ': 0.00847457627118644, 'VOO': 0.00847457627118644, 'WBD': 0.00847457627118644, 'WDC': 0.00847457627118644, 'XBI': 0.00847457627118644, 'XLB': 0.00847457627118644, 'XLE': 0.00847457627118644, 'XLI': 0.00847457627118644, 'XLK': 0.00847457627118644, 'XLP': 0.00847457627118644, 'XLV': 0.00847457627118644, 'XLY': 0.00847457627118644, 'XOP': 0.00847457627118644}
+2025-01-04 11:27:04,598 - utils_strategy - INFO - AAL - downloading data from yfinance
+2025-01-04 11:27:10,652 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:27:10,653 - utils_strategy - INFO - AAPL - downloading data from yfinance
+2025-01-04 11:27:18,460 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:27:18,460 - utils_strategy - INFO - ABBV - downloading data from yfinance
+2025-01-04 11:27:22,552 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:27:22,553 - utils_strategy - INFO - ABT - downloading data from yfinance
+2025-01-04 11:27:30,151 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:27:30,151 - utils_strategy - INFO - ADI - downloading data from yfinance
+2025-01-04 11:27:37,868 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:27:37,868 - utils_strategy - INFO - AMC - downloading data from yfinance
+2025-01-04 11:27:41,682 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:27:41,683 - utils_strategy - INFO - APA - downloading data from yfinance
+2025-01-04 11:27:49,375 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:27:49,375 - utils_strategy - INFO - APH - downloading data from yfinance
+2025-01-04 11:27:57,251 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:27:57,251 - utils_strategy - INFO - AXP - downloading data from yfinance
+2025-01-04 11:28:05,887 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:28:05,888 - utils_strategy - INFO - AZN - downloading data from yfinance
+2025-01-04 11:28:14,205 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:28:14,206 - utils_strategy - INFO - BAC - downloading data from yfinance
+2025-01-04 11:28:22,513 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:28:22,514 - utils_strategy - INFO - BP - downloading data from yfinance
+2025-01-04 11:28:31,102 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:28:31,103 - utils_strategy - INFO - BX - downloading data from yfinance
+2025-01-04 11:28:37,305 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:28:37,305 - utils_strategy - INFO - C - downloading data from yfinance
+2025-01-04 11:28:45,858 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:28:45,858 - utils_strategy - INFO - CAG - downloading data from yfinance
+2025-01-04 11:28:54,369 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:28:54,369 - utils_strategy - INFO - CAT - downloading data from yfinance
+2025-01-04 11:29:02,642 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:29:02,643 - utils_strategy - INFO - CCJ - downloading data from yfinance
+2025-01-04 11:29:11,013 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:29:11,014 - utils_strategy - INFO - CCL - downloading data from yfinance
+2025-01-04 11:29:19,437 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:29:19,437 - utils_strategy - INFO - CGC - downloading data from yfinance
+2025-01-04 11:29:23,502 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:29:23,503 - utils_strategy - INFO - CLF - downloading data from yfinance
+2025-01-04 11:29:32,015 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:29:32,016 - utils_strategy - INFO - COST - downloading data from yfinance
+2025-01-04 11:29:40,268 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:29:40,268 - utils_strategy - INFO - CRM - downloading data from yfinance
+2025-01-04 11:29:47,360 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:29:47,360 - utils_strategy - INFO - CSCO - downloading data from yfinance
+2025-01-04 11:29:56,202 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:29:56,202 - utils_strategy - INFO - CVS - downloading data from yfinance
+2025-01-04 11:30:04,944 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:30:04,944 - utils_strategy - INFO - DIA - downloading data from yfinance
+2025-01-04 11:30:13,755 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:30:13,756 - utils_strategy - INFO - DIS - downloading data from yfinance
+2025-01-04 11:30:22,354 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:30:22,354 - utils_strategy - INFO - DVN - downloading data from yfinance
+2025-01-04 11:30:31,028 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:30:31,028 - utils_strategy - INFO - EBAY - downloading data from yfinance
+2025-01-04 11:30:39,602 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:30:39,603 - utils_strategy - INFO - EOG - downloading data from yfinance
+2025-01-04 11:30:48,879 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:30:48,879 - utils_strategy - INFO - EQT - downloading data from yfinance
+2025-01-04 11:30:58,143 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:30:58,143 - utils_strategy - INFO - EWZ - downloading data from yfinance
+2025-01-04 11:31:07,096 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:31:07,097 - utils_strategy - INFO - FAST - downloading data from yfinance
+2025-01-04 11:31:16,346 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:31:16,346 - utils_strategy - INFO - FCX - downloading data from yfinance
+2025-01-04 11:31:26,019 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:31:26,019 - utils_strategy - INFO - FTNT - downloading data from yfinance
+2025-01-04 11:31:32,114 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:31:32,114 - utils_strategy - INFO - GFI - downloading data from yfinance
+2025-01-04 11:31:41,539 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:31:41,540 - utils_strategy - INFO - GILD - downloading data from yfinance
+2025-01-04 11:31:50,987 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:31:50,988 - utils_strategy - INFO - GL - downloading data from yfinance
+2025-01-04 11:32:00,347 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:32:00,347 - utils_strategy - INFO - GOLD - downloading data from yfinance
+2025-01-04 11:32:09,942 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:32:09,942 - utils_strategy - INFO - GOOGL - downloading data from yfinance
+2025-01-04 11:32:17,907 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:32:17,907 - utils_strategy - INFO - HD - downloading data from yfinance
+2025-01-04 11:32:27,287 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:32:27,287 - utils_strategy - INFO - HPE - downloading data from yfinance
+2025-01-04 11:32:31,337 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:32:31,337 - utils_strategy - INFO - IBM - downloading data from yfinance
+2025-01-04 11:32:40,898 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:32:40,899 - utils_strategy - INFO - IVV - downloading data from yfinance
+2025-01-04 11:32:49,881 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:32:49,882 - utils_strategy - INFO - IWM - downloading data from yfinance
+2025-01-04 11:32:58,922 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:32:58,922 - utils_strategy - INFO - IYR - downloading data from yfinance
+2025-01-04 11:33:07,918 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:33:07,918 - utils_strategy - INFO - JD - downloading data from yfinance
+2025-01-04 11:33:12,333 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:33:12,333 - utils_strategy - INFO - JPM - downloading data from yfinance
+2025-01-04 11:33:21,722 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:33:21,722 - utils_strategy - INFO - KHC - downloading data from yfinance
+2025-01-04 11:33:26,625 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:33:26,625 - utils_strategy - INFO - KO - downloading data from yfinance
+2025-01-04 11:33:35,974 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:33:35,974 - utils_strategy - INFO - KR - downloading data from yfinance
+2025-01-04 11:33:45,325 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:33:45,326 - utils_strategy - INFO - KRE - downloading data from yfinance
+2025-01-04 11:33:52,547 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:33:52,548 - utils_strategy - INFO - KSS - downloading data from yfinance
+2025-01-04 11:34:01,943 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:01,944 - utils_strategy - INFO - LABU - downloading data from yfinance
+2025-01-04 11:34:06,174 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:06,175 - utils_strategy - INFO - LLY - downloading data from yfinance
+2025-01-04 11:34:15,492 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:15,492 - utils_strategy - INFO - LQD - downloading data from yfinance
+2025-01-04 11:34:23,872 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:23,873 - utils_strategy - INFO - LULU - downloading data from yfinance
+2025-01-04 11:34:30,686 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:30,687 - utils_strategy - INFO - LW - downloading data from yfinance
+2025-01-04 11:34:34,505 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:34,506 - utils_strategy - INFO - MA - downloading data from yfinance
+2025-01-04 11:34:41,750 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:41,751 - utils_strategy - INFO - MARA - downloading data from yfinance
+2025-01-04 11:34:47,195 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:47,195 - utils_strategy - INFO - MCHP - downloading data from yfinance
+2025-01-04 11:34:56,597 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:34:56,597 - utils_strategy - INFO - MNST - downloading data from yfinance
+2025-01-04 11:35:05,709 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:35:05,709 - utils_strategy - INFO - MO - downloading data from yfinance
+2025-01-04 11:35:14,719 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:35:14,719 - utils_strategy - INFO - MPC - downloading data from yfinance
+2025-01-04 11:35:20,128 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:35:20,129 - utils_strategy - INFO - MRK - downloading data from yfinance
+2025-01-04 11:35:30,007 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:35:30,008 - utils_strategy - INFO - MS - downloading data from yfinance
+2025-01-04 11:35:39,414 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:35:39,414 - utils_strategy - INFO - MSFT - downloading data from yfinance
+2025-01-04 11:35:48,929 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:35:48,930 - utils_strategy - INFO - MU - downloading data from yfinance
+2025-01-04 11:35:58,275 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:35:58,275 - utils_strategy - INFO - NFLX - downloading data from yfinance
+2025-01-04 11:36:06,539 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:36:06,539 - utils_strategy - INFO - NKE - downloading data from yfinance
+2025-01-04 11:36:15,258 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:36:15,259 - utils_strategy - INFO - NVDA - downloading data from yfinance
+2025-01-04 11:36:23,800 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:36:23,801 - utils_strategy - INFO - NVO - downloading data from yfinance
+2025-01-04 11:36:32,416 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:36:32,416 - utils_strategy - INFO - O - downloading data from yfinance
+2025-01-04 11:36:40,965 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:36:40,966 - utils_strategy - INFO - PBR - downloading data from yfinance
+2025-01-04 11:36:49,345 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:36:49,345 - utils_strategy - INFO - PEP - downloading data from yfinance
+2025-01-04 11:36:57,914 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:36:57,914 - utils_strategy - INFO - PFE - downloading data from yfinance
+2025-01-04 11:37:06,862 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:37:06,863 - utils_strategy - INFO - PG - downloading data from yfinance
+2025-01-04 11:37:15,532 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:37:15,533 - utils_strategy - INFO - PGR - downloading data from yfinance
+2025-01-04 11:37:24,178 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:37:24,179 - utils_strategy - INFO - PLUG - downloading data from yfinance
+2025-01-04 11:37:32,667 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:37:32,668 - utils_strategy - INFO - PR - downloading data from yfinance
+2025-01-04 11:37:36,358 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:37:36,358 - utils_strategy - INFO - RIG - downloading data from yfinance
+2025-01-04 11:37:45,055 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:37:45,055 - utils_strategy - INFO - RIOT - downloading data from yfinance
+2025-01-04 11:37:48,718 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:37:48,719 - utils_strategy - INFO - RTX - downloading data from yfinance
+2025-01-04 11:37:57,345 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:37:57,346 - utils_strategy - INFO - SBUX - downloading data from yfinance
+2025-01-04 11:38:06,082 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:06,082 - utils_strategy - INFO - SCHW - downloading data from yfinance
+2025-01-04 11:38:14,674 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:14,675 - utils_strategy - INFO - SLB - downloading data from yfinance
+2025-01-04 11:38:23,161 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:23,162 - utils_strategy - INFO - SLV - downloading data from yfinance
+2025-01-04 11:38:29,614 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:29,615 - utils_strategy - INFO - SMH - downloading data from yfinance
+2025-01-04 11:38:37,850 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:37,850 - utils_strategy - INFO - SOXS - downloading data from yfinance
+2025-01-04 11:38:43,546 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:43,546 - utils_strategy - INFO - SPXL - downloading data from yfinance
+2025-01-04 11:38:49,508 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:49,509 - utils_strategy - INFO - SQ - downloading data from yfinance
+2025-01-04 11:38:53,352 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:53,352 - utils_strategy - INFO - TMF - downloading data from yfinance
+2025-01-04 11:38:59,128 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:38:59,128 - utils_strategy - INFO - TNA - downloading data from yfinance
+2025-01-04 11:39:05,041 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:39:05,041 - utils_strategy - INFO - TQQQ - downloading data from yfinance
+2025-01-04 11:39:10,700 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:39:10,701 - utils_strategy - INFO - TSLA - downloading data from yfinance
+2025-01-04 11:39:16,088 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:39:16,088 - utils_strategy - INFO - TSM - downloading data from yfinance
+2025-01-04 11:39:24,715 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:39:24,715 - utils_strategy - INFO - TXN - downloading data from yfinance
+2025-01-04 11:39:33,357 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:39:33,358 - utils_strategy - INFO - UAL - downloading data from yfinance
+2025-01-04 11:39:39,925 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:39:39,925 - utils_strategy - INFO - UNH - downloading data from yfinance
+2025-01-04 11:39:48,070 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:39:48,070 - utils_strategy - INFO - UPRO - downloading data from yfinance
+2025-01-04 11:39:53,420 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:39:53,420 - utils_strategy - INFO - UPS - downloading data from yfinance
+2025-01-04 11:40:01,367 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:01,368 - utils_strategy - INFO - USB - downloading data from yfinance
+2025-01-04 11:40:09,313 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:09,313 - utils_strategy - INFO - VALE - downloading data from yfinance
+2025-01-04 11:40:16,541 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:16,542 - utils_strategy - INFO - VFC - downloading data from yfinance
+2025-01-04 11:40:24,729 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:24,729 - utils_strategy - INFO - VICI - downloading data from yfinance
+2025-01-04 11:40:27,740 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:27,740 - utils_strategy - INFO - VIXY - downloading data from yfinance
+2025-01-04 11:40:32,676 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:32,677 - utils_strategy - INFO - VNQ - downloading data from yfinance
+2025-01-04 11:40:39,401 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:39,402 - utils_strategy - INFO - VOO - downloading data from yfinance
+2025-01-04 11:40:44,395 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:44,395 - utils_strategy - INFO - WBD - downloading data from yfinance
+2025-01-04 11:40:50,994 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:50,995 - utils_strategy - INFO - WDC - downloading data from yfinance
+2025-01-04 11:40:58,978 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:40:58,978 - utils_strategy - INFO - XBI - downloading data from yfinance
+2025-01-04 11:41:05,296 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:41:05,297 - utils_strategy - INFO - XLB - downloading data from yfinance
+2025-01-04 11:41:13,284 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:41:13,285 - utils_strategy - INFO - XLE - downloading data from yfinance
+2025-01-04 11:41:21,281 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:41:21,281 - utils_strategy - INFO - XLI - downloading data from yfinance
+2025-01-04 11:41:29,229 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:41:29,230 - utils_strategy - INFO - XLK - downloading data from yfinance
+2025-01-04 11:41:37,043 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:41:37,044 - utils_strategy - INFO - XLP - downloading data from yfinance
+2025-01-04 11:41:44,986 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:41:44,986 - utils_strategy - INFO - XLV - downloading data from yfinance
+2025-01-04 11:41:52,973 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:41:52,973 - utils_strategy - INFO - XLY - downloading data from yfinance
+2025-01-04 11:42:00,796 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:42:00,797 - utils_strategy - INFO - XOP - downloading data from yfinance
+2025-01-04 11:42:06,953 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-04 11:42:06,954 - root - INFO - Portfolio p2 symbols actions - {}
+2025-01-04 11:42:06,954 - utils_portfolio - INFO - Submitting orders to close existing positions
+2025-01-04 11:42:06,954 - utils_portfolio - INFO - Updating state of portfolio - p2
+2025-01-04 11:42:06,954 - utils_portfolio - INFO - Calculating closed trades stats
+2025-01-04 11:42:06,954 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-04 11:42:07,845 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-04 11:42:08,046 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-04 11:42:08,250 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-04 11:42:08,373 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-04 11:42:08,557 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-04 11:42:08,762 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-04 11:42:08,966 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-04 11:42:09,172 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-04 11:42:09,376 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-04 11:42:09,582 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-04 11:42:09,787 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-04 11:42:09,991 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-04 11:42:10,198 - utils_portfolio - INFO - Processing symbol - C
+2025-01-04 11:42:10,396 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-04 11:42:10,607 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-04 11:42:10,812 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-04 11:42:11,015 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-04 11:42:11,220 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-04 11:42:11,422 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-04 11:42:11,630 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-04 11:42:11,835 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-04 11:42:12,007 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-04 11:42:12,138 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-04 11:42:12,346 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-04 11:42:12,551 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-04 11:42:12,756 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-04 11:42:12,960 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-04 11:42:13,166 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-04 11:42:13,370 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-04 11:42:13,578 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-04 11:42:13,781 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-04 11:42:13,986 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-04 11:42:14,190 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-04 11:42:14,389 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-04 11:42:14,600 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-04 11:42:14,803 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-04 11:42:15,009 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-04 11:42:15,215 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-04 11:42:15,418 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-04 11:42:15,623 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-04 11:42:15,827 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-04 11:42:16,033 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-04 11:42:16,232 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-04 11:42:16,356 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-04 11:42:16,544 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-04 11:42:16,752 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-04 11:42:16,954 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-04 11:42:17,159 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-04 11:42:17,364 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-04 11:42:17,568 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-04 11:42:17,691 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-04 11:42:17,813 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-04 11:42:17,978 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-04 11:42:18,183 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-04 11:42:18,385 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-04 11:42:18,593 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-04 11:42:18,799 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-04 11:42:19,004 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-04 11:42:19,207 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-04 11:42:19,409 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-04 11:42:19,616 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-04 11:42:19,821 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-04 11:42:20,026 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-04 11:42:20,231 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-04 11:42:20,433 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-04 11:42:20,641 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-04 11:42:20,845 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-04 11:42:21,050 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-04 11:42:21,254 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-04 11:42:21,463 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-04 11:42:21,664 - utils_portfolio - INFO - Processing symbol - O
+2025-01-04 11:42:21,873 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-04 11:42:22,074 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-04 11:42:22,280 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-04 11:42:22,484 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-04 11:42:22,689 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-04 11:42:22,893 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-04 11:42:23,098 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-04 11:42:23,303 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-04 11:42:23,509 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-04 11:42:23,710 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-04 11:42:23,917 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-04 11:42:24,122 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-04 11:42:24,325 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-04 11:42:24,527 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-04 11:42:24,738 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-04 11:42:24,942 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-04 11:42:25,148 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-04 11:42:25,351 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-04 11:42:25,551 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-04 11:42:25,673 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-04 11:42:25,864 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-04 11:42:26,068 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-04 11:42:26,276 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-04 11:42:26,477 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-04 11:42:26,685 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-04 11:42:26,887 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-04 11:42:27,092 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-04 11:42:27,297 - utils_portfolio - INFO - Processing symbol - UPS
+2025-01-04 11:42:27,503 - utils_portfolio - INFO - Processing symbol - USB
+2025-01-04 11:42:27,706 - utils_portfolio - INFO - Processing symbol - VALE
+2025-01-04 11:42:27,911 - utils_portfolio - INFO - Processing symbol - VFC
+2025-01-04 11:42:28,117 - utils_portfolio - INFO - Processing symbol - VICI
+2025-01-04 11:42:28,323 - utils_portfolio - INFO - Processing symbol - VIXY
+2025-01-04 11:42:28,525 - utils_portfolio - INFO - Processing symbol - VNQ
+2025-01-04 11:42:28,732 - utils_portfolio - INFO - Processing symbol - VOO
+2025-01-04 11:42:28,935 - utils_portfolio - INFO - Processing symbol - WBD
+2025-01-04 11:42:29,142 - utils_portfolio - INFO - Processing symbol - WDC
+2025-01-04 11:42:29,346 - utils_portfolio - INFO - Processing symbol - XBI
+2025-01-04 11:42:29,552 - utils_portfolio - INFO - Processing symbol - XLB
+2025-01-04 11:42:29,755 - utils_portfolio - INFO - Processing symbol - XLE
+2025-01-04 11:42:29,961 - utils_portfolio - INFO - Processing symbol - XLI
+2025-01-04 11:42:30,165 - utils_portfolio - INFO - Processing symbol - XLK
+2025-01-04 11:42:30,371 - utils_portfolio - INFO - Processing symbol - XLP
+2025-01-04 11:42:30,567 - utils_portfolio - INFO - Processing symbol - XLV
+2025-01-04 11:42:30,780 - utils_portfolio - INFO - Processing symbol - XLY
+2025-01-04 11:42:30,984 - utils_portfolio - INFO - Processing symbol - XOP
+2025-01-04 11:42:31,201 - utils_portfolio - INFO - Calculating open trades stats
+2025-01-04 11:42:31,203 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-04 11:42:31,694 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-04 11:42:31,897 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-04 11:42:32,103 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-04 11:42:32,307 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-04 11:42:32,513 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-04 11:42:32,717 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-04 11:42:32,922 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-04 11:42:33,076 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-04 11:42:33,331 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-04 11:42:33,536 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-04 11:42:33,742 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-04 11:42:33,946 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-04 11:42:34,368 - utils_portfolio - INFO - Processing symbol - C
+2025-01-04 11:42:34,561 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-04 11:42:34,765 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-04 11:42:34,970 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-04 11:42:35,175 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-04 11:42:35,379 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-04 11:42:35,584 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-04 11:42:35,789 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-04 11:42:35,994 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-04 11:42:36,200 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-04 11:42:36,402 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-04 11:42:36,609 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-04 11:42:36,813 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-04 11:42:37,018 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-04 11:42:37,172 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-04 11:42:37,326 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-04 11:42:37,530 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-04 11:42:37,735 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-04 11:42:37,940 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-04 11:42:38,145 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-04 11:42:38,349 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-04 11:42:38,554 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-04 11:42:38,976 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-04 11:42:39,168 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-04 11:42:39,373 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-04 11:42:39,578 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-04 11:42:39,783 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-04 11:42:39,987 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-04 11:42:40,193 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-04 11:42:40,396 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-04 11:42:40,603 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-04 11:42:40,807 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-04 11:42:41,012 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-04 11:42:41,217 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-04 11:42:41,421 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-04 11:42:41,626 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-04 11:42:41,831 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-04 11:42:42,013 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-04 11:42:42,139 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-04 11:42:42,343 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-04 11:42:42,547 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-04 11:42:42,753 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-04 11:42:42,958 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-04 11:42:43,162 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-04 11:42:43,367 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-04 11:42:43,572 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-04 11:42:43,777 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-04 11:42:43,982 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-04 11:42:44,186 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-04 11:42:44,390 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-04 11:42:44,596 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-04 11:42:44,801 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-04 11:42:45,006 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-04 11:42:45,210 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-04 11:42:45,364 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-04 11:42:45,477 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-04 11:42:45,619 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-04 11:42:45,733 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-04 11:42:45,926 - utils_portfolio - INFO - Processing symbol - O
+2025-01-04 11:42:46,133 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-04 11:42:46,337 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-04 11:42:46,542 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-04 11:42:46,746 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-04 11:42:46,952 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-04 11:42:47,156 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-04 11:42:47,361 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-04 11:42:47,566 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-04 11:42:47,752 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-04 11:42:47,866 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-04 11:42:48,078 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-04 11:42:48,283 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-04 11:42:48,487 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-04 11:42:48,691 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-04 11:42:48,897 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-04 11:42:49,101 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-04 11:42:49,311 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-04 11:42:49,511 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-04 11:42:49,717 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-04 11:42:49,921 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-04 11:42:50,126 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-04 11:42:50,330 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-04 11:42:50,534 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-04 11:42:50,740 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-04 11:42:50,945 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-04 11:42:51,149 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-04 11:42:51,354 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-04 11:42:51,560 - utils_portfolio - INFO - Processing symbol - UPS
+2025-01-04 11:42:51,764 - utils_portfolio - INFO - Processing symbol - USB
+2025-01-04 11:42:51,969 - utils_portfolio - INFO - Processing symbol - VALE
+2025-01-04 11:42:52,174 - utils_portfolio - INFO - Processing symbol - VFC
+2025-01-04 11:42:52,378 - utils_portfolio - INFO - Processing symbol - VICI
+2025-01-04 11:42:52,583 - utils_portfolio - INFO - Processing symbol - VIXY
+2025-01-04 11:42:52,788 - utils_portfolio - INFO - Processing symbol - VNQ
+2025-01-04 11:42:52,992 - utils_portfolio - INFO - Processing symbol - VOO
+2025-01-04 11:42:53,198 - utils_portfolio - INFO - Processing symbol - WBD
+2025-01-04 11:42:53,400 - utils_portfolio - INFO - Processing symbol - WDC
+2025-01-04 11:42:53,512 - utils_portfolio - INFO - Processing symbol - XBI
+2025-01-04 11:42:53,709 - utils_portfolio - INFO - Processing symbol - XLB
+2025-01-04 11:42:53,914 - utils_portfolio - INFO - Processing symbol - XLE
+2025-01-04 11:42:54,119 - utils_portfolio - INFO - Processing symbol - XLI
+2025-01-04 11:42:54,324 - utils_portfolio - INFO - Processing symbol - XLK
+2025-01-04 11:42:54,528 - utils_portfolio - INFO - Processing symbol - XLP
+2025-01-04 11:42:54,734 - utils_portfolio - INFO - Processing symbol - XLV
+2025-01-04 11:42:54,938 - utils_portfolio - INFO - Processing symbol - XLY
+2025-01-04 11:42:55,143 - utils_portfolio - INFO - Processing symbol - XOP
+2025-01-04 11:42:55,418 - utils_portfolio - INFO - Portfolio p2 - calculating position sizes
+2025-01-04 11:42:55,438 - root - INFO - Portfolio p2 position sizes - symbol
+AAL     100.85
+AAPL    100.85
+ABBV    100.85
+ABT     100.85
+ADI     100.85
+         ...  
+XLK     100.85
+XLP     100.85
+XLV     100.85
+XLY     100.85
+XOP     100.85
+Name: position, Length: 118, dtype: float64
+2025-01-04 11:42:55,438 - utils_portfolio - INFO - Submitting orders to open positions
+2025-01-04 11:42:55,438 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p2 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2025-01-04 11:42:55,438 - utils_portfolio - INFO - Updating whole portfolio state
+2025-01-04 11:42:56,270 - utils_portfolio - INFO - Calculating open trades stats
+2025-01-04 11:42:56,270 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-04 11:42:56,884 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-04 11:42:57,088 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-04 11:42:57,293 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-04 11:42:57,498 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-04 11:42:57,704 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-04 11:42:57,908 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-04 11:42:58,113 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-04 11:42:58,318 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-04 11:42:58,522 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-04 11:42:58,728 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-04 11:42:58,931 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-04 11:42:59,136 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-04 11:42:59,342 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-04 11:42:59,547 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-04 11:42:59,751 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-04 11:42:59,956 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-04 11:43:00,161 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-04 11:43:00,365 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-04 11:43:00,480 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-04 11:43:00,673 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-04 11:43:00,877 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-04 11:43:01,082 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-04 11:43:01,287 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-04 11:43:01,492 - utils_portfolio - INFO - Processing symbol - F
+2025-01-04 11:43:01,696 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-04 11:43:01,902 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-04 11:43:02,107 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-04 11:43:02,534 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-04 11:43:02,936 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-04 11:43:03,131 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-04 11:43:03,335 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-04 11:43:03,540 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-04 11:43:03,744 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-04 11:43:03,949 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-04 11:43:04,154 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-04 11:43:04,359 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-04 11:43:04,564 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-04 11:43:04,769 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-04 11:43:04,973 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-04 11:43:05,178 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-04 11:43:05,382 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-04 11:43:05,586 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-04 11:43:05,793 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-04 11:43:05,908 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-04 11:43:06,100 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-04 11:43:06,305 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-04 11:43:06,509 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-04 11:43:06,714 - utils_portfolio - INFO - Processing symbol - META
+2025-01-04 11:43:06,919 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-04 11:43:07,124 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-04 11:43:07,328 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-04 11:43:07,533 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-04 11:43:07,738 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-04 11:43:07,943 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-04 11:43:08,146 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-04 11:43:08,351 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-04 11:43:08,557 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-04 11:43:08,761 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-04 11:43:08,967 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-04 11:43:09,172 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-04 11:43:09,376 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-04 11:43:09,581 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-04 11:43:09,786 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-04 11:43:09,992 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-04 11:43:10,196 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-04 11:43:10,400 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-04 11:43:10,605 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-04 11:43:10,810 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-04 11:43:11,016 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-04 11:43:11,220 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-04 11:43:11,333 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-04 11:43:11,560 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-04 11:43:11,670 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-04 11:43:11,834 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-04 11:43:12,039 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-04 11:43:12,244 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-04 11:43:12,358 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-04 11:43:12,551 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-04 11:43:12,756 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-04 11:43:12,960 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-04 11:43:13,165 - utils_portfolio - INFO - Processing symbol - T
+2025-01-04 11:43:13,370 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-04 11:43:13,576 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-04 11:43:13,780 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-04 11:43:13,985 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-04 11:43:14,189 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-04 11:43:14,394 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-04 11:43:14,509 - utils_portfolio - INFO - Processing symbol - V
+2025-01-04 11:43:14,701 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-04 11:43:14,906 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-04 11:43:15,112 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-04 11:43:15,317 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-04 11:43:15,521 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-04 11:43:15,634 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-04 11:43:15,745 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-04 11:43:15,930 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-04 11:43:16,135 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-04 11:43:16,339 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-04 11:43:16,544 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-04 11:43:16,750 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-04 11:43:16,954 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-04 11:43:17,159 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-04 11:43:17,282 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-04 11:43:17,569 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-04 11:43:17,752 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-04 11:43:17,868 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-04 11:43:17,981 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-04 11:43:18,184 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-04 11:43:18,296 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-04 11:43:18,407 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-04 11:43:18,592 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-04 11:43:18,799 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-04 11:43:19,214 - utils_portfolio - INFO - Processing symbol - C
+2025-01-04 11:43:19,326 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-04 11:43:19,514 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-04 11:43:19,720 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-04 11:43:19,924 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-04 11:43:20,129 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-04 11:43:20,285 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-04 11:43:20,436 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-04 11:43:20,640 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-04 11:43:20,846 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-04 11:43:21,050 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-04 11:43:21,255 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-04 11:43:21,460 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-04 11:43:21,665 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-04 11:43:21,869 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-04 11:43:22,073 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-04 11:43:22,279 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-04 11:43:22,484 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-04 11:43:22,688 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-04 11:43:22,894 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-04 11:43:23,099 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-04 11:43:23,303 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-04 11:43:23,724 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-04 11:43:23,918 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-04 11:43:24,123 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-04 11:43:24,327 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-04 11:43:24,532 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-04 11:43:24,737 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-04 11:43:24,941 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-04 11:43:25,147 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-04 11:43:25,351 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-04 11:43:25,554 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-04 11:43:25,707 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-04 11:43:25,820 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-04 11:43:25,965 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-04 11:43:26,171 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-04 11:43:26,375 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-04 11:43:26,579 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-04 11:43:26,785 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-04 11:43:26,990 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-04 11:43:27,194 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-04 11:43:27,399 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-04 11:43:27,604 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-04 11:43:27,808 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-04 11:43:28,013 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-04 11:43:28,218 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-04 11:43:28,423 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-04 11:43:28,626 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-04 11:43:28,833 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-04 11:43:29,038 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-04 11:43:29,242 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-04 11:43:29,448 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-04 11:43:29,650 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-04 11:43:29,857 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-04 11:43:30,062 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-04 11:43:30,266 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-04 11:43:30,471 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-04 11:43:30,676 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-04 11:43:30,881 - utils_portfolio - INFO - Processing symbol - O
+2025-01-04 11:43:31,085 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-04 11:43:31,291 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-04 11:43:31,496 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-04 11:43:31,700 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-04 11:43:31,905 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-04 11:43:32,109 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-04 11:43:32,314 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-04 11:43:32,519 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-04 11:43:32,724 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-04 11:43:32,929 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-04 11:43:33,134 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-04 11:43:33,338 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-04 11:43:33,544 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-04 11:43:33,747 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-04 11:43:33,953 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-04 11:43:34,158 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-04 11:43:34,362 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-04 11:43:34,567 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-04 11:43:34,772 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-04 11:43:34,976 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-04 11:43:35,182 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-04 11:43:35,387 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-04 11:43:35,589 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-04 11:43:35,796 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-04 11:43:36,001 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-04 11:43:36,205 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-04 11:43:36,410 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-04 11:43:36,615 - utils_portfolio - INFO - Processing symbol - UPS
+2025-01-04 11:43:36,820 - utils_portfolio - INFO - Processing symbol - USB
+2025-01-04 11:43:37,025 - utils_portfolio - INFO - Processing symbol - VALE
+2025-01-04 11:43:37,230 - utils_portfolio - INFO - Processing symbol - VFC
+2025-01-04 11:43:37,435 - utils_portfolio - INFO - Processing symbol - VICI
+2025-01-04 11:43:37,637 - utils_portfolio - INFO - Processing symbol - VIXY
+2025-01-04 11:43:37,843 - utils_portfolio - INFO - Processing symbol - VNQ
+2025-01-04 11:43:38,048 - utils_portfolio - INFO - Processing symbol - VOO
+2025-01-04 11:43:38,254 - utils_portfolio - INFO - Processing symbol - WBD
+2025-01-04 11:43:38,459 - utils_portfolio - INFO - Processing symbol - WDC
+2025-01-04 11:43:38,661 - utils_portfolio - INFO - Processing symbol - XBI
+2025-01-04 11:43:38,868 - utils_portfolio - INFO - Processing symbol - XLB
+2025-01-04 11:43:39,073 - utils_portfolio - INFO - Processing symbol - XLE
+2025-01-04 11:43:39,185 - utils_portfolio - INFO - Processing symbol - XLI
+2025-01-04 11:43:39,380 - utils_portfolio - INFO - Processing symbol - XLK
+2025-01-04 11:43:39,584 - utils_portfolio - INFO - Processing symbol - XLP
+2025-01-04 11:43:39,790 - utils_portfolio - INFO - Processing symbol - XLV
+2025-01-04 11:43:39,995 - utils_portfolio - INFO - Processing symbol - XLY
+2025-01-04 11:43:40,199 - utils_portfolio - INFO - Processing symbol - XOP
+2025-01-04 11:43:40,433 - utils_portfolio - INFO - Calculating closed trades stats
+2025-01-04 11:43:40,434 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-04 11:43:40,923 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-04 11:43:41,129 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-04 11:43:41,334 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-04 11:43:41,538 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-04 11:43:41,743 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-04 11:43:41,949 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-04 11:43:42,153 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-04 11:43:42,358 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-04 11:43:42,562 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-04 11:43:42,767 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-04 11:43:42,972 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-04 11:43:43,181 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-04 11:43:43,381 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-04 11:43:43,586 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-04 11:43:43,790 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-04 11:43:43,996 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-04 11:43:44,200 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-04 11:43:44,406 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-04 11:43:44,530 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-04 11:43:44,715 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-04 11:43:44,918 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-04 11:43:45,226 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-04 11:43:45,429 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-04 11:43:45,630 - utils_portfolio - INFO - Processing symbol - F
+2025-01-04 11:43:45,839 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-04 11:43:46,045 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-04 11:43:46,248 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-04 11:43:46,455 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-04 11:43:46,586 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-04 11:43:46,865 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-04 11:43:47,067 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-04 11:43:47,273 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-04 11:43:47,478 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-04 11:43:47,682 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-04 11:43:47,805 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-04 11:43:47,991 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-04 11:43:48,193 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-04 11:43:48,401 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-04 11:43:48,603 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-04 11:43:48,809 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-04 11:43:49,013 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-04 11:43:49,217 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-04 11:43:49,422 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-04 11:43:49,622 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-04 11:43:49,832 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-04 11:43:50,037 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-04 11:43:50,241 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-04 11:43:50,447 - utils_portfolio - INFO - Processing symbol - META
+2025-01-04 11:43:50,650 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-04 11:43:50,857 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-04 11:43:51,061 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-04 11:43:51,267 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-04 11:43:51,471 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-04 11:43:51,670 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-04 11:43:51,881 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-04 11:43:52,085 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-04 11:43:52,290 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-04 11:43:52,496 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-04 11:43:52,699 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-04 11:43:52,907 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-04 11:43:53,032 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-04 11:43:53,213 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-04 11:43:53,519 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-04 11:43:53,724 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-04 11:43:53,930 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-04 11:43:54,134 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-04 11:43:54,338 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-04 11:43:54,537 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-04 11:43:54,742 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-04 11:43:54,954 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-04 11:43:55,163 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-04 11:43:55,365 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-04 11:43:55,560 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-04 11:43:55,745 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-04 11:43:55,868 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-04 11:43:56,079 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-04 11:43:56,283 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-04 11:43:56,490 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-04 11:43:56,692 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-04 11:43:56,898 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-04 11:43:57,103 - utils_portfolio - INFO - Processing symbol - T
+2025-01-04 11:43:57,310 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-04 11:43:57,512 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-04 11:43:57,721 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-04 11:43:57,922 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-04 11:43:58,127 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-04 11:43:58,331 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-04 11:43:58,540 - utils_portfolio - INFO - Processing symbol - V
+2025-01-04 11:43:58,741 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-04 11:43:58,947 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-04 11:43:59,099 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-04 11:43:59,253 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-04 11:43:59,458 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-04 11:43:59,656 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-04 11:43:59,871 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-04 11:44:00,074 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-04 11:44:00,279 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-04 11:44:00,483 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-04 11:44:00,686 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-04 11:44:00,892 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-04 11:44:01,099 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-04 11:44:01,225 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-04 11:44:01,403 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-04 11:44:01,604 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-04 11:44:01,813 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-04 11:44:02,019 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-04 11:44:02,223 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-04 11:44:02,433 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-04 11:44:02,630 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-04 11:44:02,837 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-04 11:44:03,041 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-04 11:44:03,248 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-04 11:44:03,452 - utils_portfolio - INFO - Processing symbol - C
+2025-01-04 11:44:03,651 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-04 11:44:03,861 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-04 11:44:04,066 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-04 11:44:04,263 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-04 11:44:04,476 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-04 11:44:04,679 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-04 11:44:04,886 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-04 11:44:05,089 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-04 11:44:05,296 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-04 11:44:05,500 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-04 11:44:05,705 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-04 11:44:05,909 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-04 11:44:06,117 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-04 11:44:06,320 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-04 11:44:06,524 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-04 11:44:06,729 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-04 11:44:06,938 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-04 11:44:07,138 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-04 11:44:07,346 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-04 11:44:07,548 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-04 11:44:07,755 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-04 11:44:07,946 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-04 11:44:08,069 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-04 11:44:08,264 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-04 11:44:08,469 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-04 11:44:11,847 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-04 11:44:12,053 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-04 11:44:12,258 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-04 11:44:12,463 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-04 11:44:12,665 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-04 11:44:12,873 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-04 11:44:13,077 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-04 11:44:13,282 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-04 11:44:13,486 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-04 11:44:13,694 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-04 11:44:13,897 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-04 11:44:14,101 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-04 11:44:14,306 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-04 11:44:14,491 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-04 11:44:14,715 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-04 11:44:14,921 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-04 11:44:15,124 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-04 11:44:15,332 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-04 11:44:15,533 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-04 11:44:15,741 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-04 11:44:15,943 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-04 11:44:16,150 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-04 11:44:16,302 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-04 11:44:16,427 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-04 11:44:16,560 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-04 11:44:16,765 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-04 11:44:16,969 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-04 11:44:17,173 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-04 11:44:17,378 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-04 11:44:17,584 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-04 11:44:17,706 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-04 11:44:17,829 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-04 11:44:21,169 - utils_portfolio - INFO - Processing symbol - O
+2025-01-04 11:44:21,374 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-04 11:44:21,577 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-04 11:44:21,777 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-04 11:44:21,985 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-04 11:44:22,191 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-04 11:44:22,396 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-04 11:44:22,600 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-04 11:44:22,806 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-04 11:44:23,013 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-04 11:44:23,215 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-04 11:44:23,419 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-04 11:44:23,617 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-04 11:44:23,830 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-04 11:44:24,034 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-04 11:44:24,239 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-04 11:44:24,444 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-04 11:44:24,642 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-04 11:44:24,853 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-04 11:44:25,059 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-04 11:44:25,263 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-04 11:44:25,471 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-04 11:44:25,672 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-04 11:44:25,800 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-04 11:44:25,981 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-04 11:44:26,287 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-04 11:44:26,493 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-04 11:44:26,697 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-04 11:44:26,901 - utils_portfolio - INFO - Processing symbol - UPS
+2025-01-04 11:44:27,108 - utils_portfolio - INFO - Processing symbol - USB
+2025-01-04 11:44:27,312 - utils_portfolio - INFO - Processing symbol - VALE
+2025-01-04 11:44:30,691 - utils_portfolio - INFO - Processing symbol - VFC
+2025-01-04 11:44:30,895 - utils_portfolio - INFO - Processing symbol - VICI
+2025-01-04 11:44:31,012 - utils_portfolio - INFO - Processing symbol - VIXY
+2025-01-04 11:44:31,134 - utils_portfolio - INFO - Processing symbol - VNQ
+2025-01-04 11:44:31,304 - utils_portfolio - INFO - Processing symbol - VOO
+2025-01-04 11:44:31,509 - utils_portfolio - INFO - Processing symbol - WBD
+2025-01-04 11:44:31,628 - utils_portfolio - INFO - Processing symbol - WDC
+2025-01-04 11:44:31,750 - utils_portfolio - INFO - Processing symbol - XBI
+2025-01-04 11:44:31,919 - utils_portfolio - INFO - Processing symbol - XLB
+2025-01-04 11:44:32,127 - utils_portfolio - INFO - Processing symbol - XLE
+2025-01-04 11:44:32,330 - utils_portfolio - INFO - Processing symbol - XLI
+2025-01-04 11:44:32,533 - utils_portfolio - INFO - Processing symbol - XLK
+2025-01-04 11:44:32,657 - utils_portfolio - INFO - Processing symbol - XLP
+2025-01-04 11:44:32,781 - utils_portfolio - INFO - Processing symbol - XLV
+2025-01-04 11:44:32,943 - utils_portfolio - INFO - Processing symbol - XLY
+2025-01-04 11:44:33,147 - utils_portfolio - INFO - Processing symbol - XOP
+2025-01-04 11:44:33,411 - utils_portfolio - INFO - Updating state of symbols
+2025-01-04 11:44:33,411 - utils_portfolio - INFO - Calculating closed trades stats
+2025-01-04 11:44:33,411 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-04 11:44:33,869 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-04 11:44:34,069 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-04 11:44:34,274 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-04 11:44:34,479 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-04 11:44:34,683 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-04 11:44:34,889 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-04 11:44:35,092 - utils_portfolio - INFO - Processing symbol - XLY
+2025-01-04 11:44:35,299 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-04 11:44:35,503 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-04 11:44:35,712 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-04 11:44:35,912 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-04 11:44:36,117 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-04 11:44:36,322 - utils_portfolio - INFO - Processing symbol - META
+2025-01-04 11:44:39,702 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-04 11:44:39,905 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-04 11:44:40,111 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-04 11:44:40,315 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-04 11:44:40,522 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-04 11:44:40,725 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-04 11:44:40,930 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-04 11:44:41,135 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-04 11:44:41,340 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-04 11:44:41,544 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-04 11:44:41,750 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-04 11:44:41,953 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-04 11:44:42,159 - utils_portfolio - INFO - Processing symbol - XLV
+2025-01-04 11:44:42,363 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-04 11:44:42,569 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-04 11:44:42,775 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-04 11:44:42,982 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-04 11:44:43,182 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-04 11:44:43,389 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-04 11:44:43,592 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-04 11:44:43,802 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-04 11:44:44,002 - utils_portfolio - INFO - Processing symbol - C
+2025-01-04 11:44:44,155 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-04 11:44:44,308 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-04 11:44:44,516 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-04 11:44:44,722 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-04 11:44:44,924 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-04 11:44:45,128 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-04 11:44:45,333 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-04 11:44:45,538 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-04 11:44:45,744 - utils_portfolio - INFO - Processing symbol - XLI
+2025-01-04 11:44:45,947 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-04 11:44:46,157 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-04 11:44:49,533 - utils_portfolio - INFO - Processing symbol - XLK
+2025-01-04 11:44:49,738 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-04 11:44:49,940 - utils_portfolio - INFO - Processing symbol - XOP
+2025-01-04 11:44:50,143 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-04 11:44:50,351 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-04 11:44:50,553 - utils_portfolio - INFO - Processing symbol - VNQ
+2025-01-04 11:44:50,761 - utils_portfolio - INFO - Processing symbol - VICI
+2025-01-04 11:44:50,966 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-04 11:44:51,170 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-04 11:44:51,376 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-04 11:44:51,582 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-04 11:44:51,787 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-04 11:44:51,989 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-04 11:44:52,194 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-04 11:44:52,398 - utils_portfolio - INFO - Processing symbol - VOO
+2025-01-04 11:44:52,601 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-04 11:44:52,809 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-04 11:44:53,016 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-04 11:44:53,218 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-04 11:44:53,423 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-04 11:44:53,622 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-04 11:44:53,833 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-04 11:44:54,037 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-04 11:44:54,245 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-04 11:44:54,448 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-04 11:44:54,644 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-04 11:44:54,856 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-04 11:44:55,062 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-04 11:44:55,266 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-04 11:44:55,471 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-04 11:44:55,675 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-04 11:44:55,807 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-04 11:44:55,983 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-04 11:44:59,365 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-04 11:44:59,567 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-04 11:44:59,775 - utils_portfolio - INFO - Processing symbol - V
+2025-01-04 11:44:59,976 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-04 11:45:00,181 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-04 11:45:00,388 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-04 11:45:00,585 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-04 11:45:00,797 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-04 11:45:01,001 - utils_portfolio - INFO - Processing symbol - VIXY
+2025-01-04 11:45:01,205 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-04 11:45:01,410 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-04 11:45:01,609 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-04 11:45:01,821 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-04 11:45:02,026 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-04 11:45:02,230 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-04 11:45:02,436 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-04 11:45:02,632 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-04 11:45:02,843 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-04 11:45:03,049 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-04 11:45:03,253 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-04 11:45:03,458 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-04 11:45:03,659 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-04 11:45:03,868 - utils_portfolio - INFO - Processing symbol - T
+2025-01-04 11:45:04,072 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-04 11:45:04,279 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-04 11:45:04,485 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-04 11:45:04,687 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-04 11:45:04,891 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-04 11:45:05,098 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-04 11:45:05,303 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-04 11:45:05,510 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-04 11:45:05,711 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-04 11:45:05,916 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-04 11:45:09,296 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-04 11:45:09,503 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-04 11:45:09,706 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-04 11:45:09,910 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-04 11:45:10,115 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-04 11:45:10,318 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-04 11:45:10,524 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-04 11:45:10,723 - utils_portfolio - INFO - Processing symbol - XBI
+2025-01-04 11:45:10,933 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-04 11:45:11,138 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-04 11:45:11,342 - utils_portfolio - INFO - Processing symbol - VFC
+2025-01-04 11:45:11,547 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-04 11:45:11,752 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-04 11:45:11,958 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-04 11:45:12,162 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-04 11:45:12,367 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-04 11:45:12,572 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-04 11:45:12,779 - utils_portfolio - INFO - Processing symbol - XLP
+2025-01-04 11:45:12,980 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-04 11:45:13,186 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-04 11:45:13,391 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-04 11:45:13,597 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-04 11:45:13,800 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-04 11:45:14,005 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-04 11:45:14,209 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-04 11:45:14,416 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-04 11:45:14,539 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-04 11:45:14,723 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-04 11:45:14,927 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-04 11:45:15,234 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-04 11:45:15,439 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-04 11:45:15,639 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-04 11:45:15,848 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-04 11:45:19,229 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-04 11:45:19,352 - utils_portfolio - INFO - Processing symbol - VALE
+2025-01-04 11:45:19,535 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-04 11:45:19,739 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-04 11:45:19,938 - utils_portfolio - INFO - Processing symbol - UPS
+2025-01-04 11:45:20,150 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-04 11:45:20,294 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-04 11:45:20,455 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-04 11:45:20,662 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-04 11:45:20,968 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-04 11:45:21,173 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-04 11:45:21,378 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-04 11:45:21,589 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-04 11:45:21,787 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-04 11:45:21,992 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-04 11:45:22,198 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-04 11:45:22,405 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-04 11:45:22,601 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-04 11:45:22,812 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-04 11:45:23,015 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-04 11:45:23,223 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-04 11:45:23,425 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-04 11:45:23,625 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-04 11:45:23,836 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-04 11:45:24,040 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-04 11:45:24,245 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-04 11:45:24,451 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-04 11:45:24,647 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-04 11:45:24,861 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-04 11:45:25,064 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-04 11:45:25,272 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-04 11:45:28,642 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-04 11:45:28,857 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-04 11:45:29,058 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-04 11:45:29,212 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-04 11:45:29,365 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-04 11:45:29,571 - utils_portfolio - INFO - Processing symbol - O
+2025-01-04 11:45:29,775 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-04 11:45:29,980 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-04 11:45:30,183 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-04 11:45:30,390 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-04 11:45:30,587 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-04 11:45:30,803 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-04 11:45:31,006 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-04 11:45:31,210 - utils_portfolio - INFO - Processing symbol - USB
+2025-01-04 11:45:31,415 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-04 11:45:31,612 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-04 11:45:31,824 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-04 11:45:32,029 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-04 11:45:32,232 - utils_portfolio - INFO - Processing symbol - XLE
+2025-01-04 11:45:32,437 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-04 11:45:32,636 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-04 11:45:32,849 - utils_portfolio - INFO - Processing symbol - F
+2025-01-04 11:45:33,052 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-04 11:45:33,257 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-04 11:45:33,464 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-04 11:45:33,660 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-04 11:45:33,872 - utils_portfolio - INFO - Processing symbol - XLB
+2025-01-04 11:45:34,076 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-04 11:45:34,280 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-04 11:45:34,486 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-04 11:45:34,688 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-04 11:45:34,896 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-04 11:45:35,099 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-04 11:45:38,481 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-04 11:45:38,682 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-04 11:45:38,889 - utils_portfolio - INFO - Processing symbol - WBD
+2025-01-04 11:45:39,100 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-04 11:45:39,300 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-04 11:45:39,503 - utils_portfolio - INFO - Processing symbol - WDC
+2025-01-04 11:45:39,708 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-04 11:45:39,913 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-04 11:45:40,129 - utils_portfolio - INFO - Calculating open trades stats
+2025-01-04 11:45:40,131 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-04 11:45:40,620 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-04 11:45:40,826 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-04 11:45:41,031 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-04 11:45:41,236 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-04 11:45:41,441 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-04 11:45:41,644 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-04 11:45:41,851 - utils_portfolio - INFO - Processing symbol - XLY
+2025-01-04 11:45:42,055 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-04 11:45:42,260 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-04 11:45:42,465 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-04 11:45:42,668 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-04 11:45:42,874 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-04 11:45:43,079 - utils_portfolio - INFO - Processing symbol - META
+2025-01-04 11:45:43,283 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-04 11:45:43,489 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-04 11:45:43,694 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-04 11:45:43,899 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-04 11:45:44,103 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-04 11:45:44,307 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-04 11:45:44,512 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-04 11:45:44,718 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-04 11:45:44,923 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-04 11:45:45,127 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-04 11:45:45,332 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-04 11:45:45,538 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-04 11:45:45,742 - utils_portfolio - INFO - Processing symbol - XLV
+2025-01-04 11:45:45,947 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-04 11:45:49,326 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-04 11:45:49,531 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-04 11:45:49,735 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-04 11:45:49,939 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-04 11:45:50,144 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-04 11:45:50,349 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-04 11:45:50,552 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-04 11:45:50,759 - utils_portfolio - INFO - Processing symbol - C
+2025-01-04 11:45:50,964 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-04 11:45:51,169 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-04 11:45:51,374 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-04 11:45:51,578 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-04 11:45:51,783 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-04 11:45:51,988 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-04 11:45:52,193 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-04 11:45:52,398 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-04 11:45:52,602 - utils_portfolio - INFO - Processing symbol - XLI
+2025-01-04 11:45:52,808 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-04 11:45:53,231 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-04 11:45:53,421 - utils_portfolio - INFO - Processing symbol - XLK
+2025-01-04 11:45:53,625 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-04 11:45:53,831 - utils_portfolio - INFO - Processing symbol - XOP
+2025-01-04 11:45:54,036 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-04 11:45:54,240 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-04 11:45:54,446 - utils_portfolio - INFO - Processing symbol - VNQ
+2025-01-04 11:45:54,648 - utils_portfolio - INFO - Processing symbol - VICI
+2025-01-04 11:45:54,855 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-04 11:45:55,060 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-04 11:45:55,265 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-04 11:45:55,470 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-04 11:45:55,674 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-04 11:45:55,856 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-04 11:45:59,155 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-04 11:45:59,360 - utils_portfolio - INFO - Processing symbol - VOO
+2025-01-04 11:45:59,565 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-04 11:45:59,770 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-04 11:45:59,974 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-04 11:46:00,180 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-04 11:46:00,385 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-04 11:46:00,588 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-04 11:46:00,794 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-04 11:46:01,000 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-04 11:46:01,204 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-04 11:46:01,409 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-04 11:46:01,612 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-04 11:46:01,722 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-04 11:46:01,922 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-04 11:46:02,125 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-04 11:46:02,331 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-04 11:46:02,536 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-04 11:46:02,740 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-04 11:46:02,945 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-04 11:46:03,366 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-04 11:46:03,507 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-04 11:46:03,660 - utils_portfolio - INFO - Processing symbol - V
+2025-01-04 11:46:03,866 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-04 11:46:04,071 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-04 11:46:04,275 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-04 11:46:04,481 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-04 11:46:04,686 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-04 11:46:04,891 - utils_portfolio - INFO - Processing symbol - VIXY
+2025-01-04 11:46:05,095 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-04 11:46:05,300 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-04 11:46:08,623 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-04 11:46:08,733 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-04 11:46:08,841 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-04 11:46:08,950 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-04 11:46:09,087 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-04 11:46:09,294 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-04 11:46:09,498 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-04 11:46:09,613 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-04 11:46:09,725 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-04 11:46:09,908 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-04 11:46:10,112 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-04 11:46:10,318 - utils_portfolio - INFO - Processing symbol - T
+2025-01-04 11:46:10,522 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-04 11:46:10,727 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-04 11:46:10,932 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-04 11:46:11,137 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-04 11:46:11,342 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-04 11:46:11,674 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-04 11:46:11,956 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-04 11:46:12,161 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-04 11:46:12,365 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-04 11:46:12,570 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-04 11:46:12,775 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-04 11:46:12,887 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-04 11:46:13,001 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-04 11:46:16,302 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-04 11:46:16,415 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-04 11:46:16,564 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-04 11:46:16,769 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-04 11:46:16,973 - utils_portfolio - INFO - Processing symbol - XBI
+2025-01-04 11:46:17,178 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-04 11:46:17,384 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-04 11:46:17,588 - utils_portfolio - INFO - Processing symbol - VFC
+2025-01-04 11:46:17,763 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-04 11:46:17,876 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-04 11:46:18,099 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-04 11:46:18,278 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-04 11:46:18,389 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-04 11:46:18,612 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-04 11:46:18,817 - utils_portfolio - INFO - Processing symbol - XLP
+2025-01-04 11:46:19,022 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-04 11:46:19,226 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-04 11:46:19,432 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-04 11:46:19,636 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-04 11:46:19,841 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-04 11:46:20,045 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-04 11:46:20,250 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-04 11:46:20,455 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-04 11:46:20,660 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-04 11:46:20,865 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-04 11:46:21,068 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-04 11:46:21,275 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-04 11:46:24,654 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-04 11:46:24,858 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-04 11:46:25,061 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-04 11:46:25,268 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-04 11:46:25,473 - utils_portfolio - INFO - Processing symbol - VALE
+2025-01-04 11:46:25,678 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-04 11:46:25,883 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-04 11:46:25,997 - utils_portfolio - INFO - Processing symbol - UPS
+2025-01-04 11:46:26,189 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-04 11:46:26,394 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-04 11:46:26,599 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-04 11:46:26,804 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-04 11:46:27,008 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-04 11:46:27,213 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-04 11:46:27,418 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-04 11:46:27,623 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-04 11:46:27,828 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-04 11:46:28,032 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-04 11:46:28,238 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-04 11:46:28,443 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-04 11:46:28,647 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-04 11:46:28,852 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-04 11:46:29,057 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-04 11:46:29,479 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-04 11:46:29,671 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-04 11:46:29,875 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-04 11:46:30,079 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-04 11:46:30,285 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-04 11:46:30,491 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-04 11:46:30,695 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-04 11:46:30,900 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-04 11:46:31,104 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-04 11:46:34,484 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-04 11:46:34,688 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-04 11:46:34,895 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-04 11:46:35,097 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-04 11:46:35,303 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-04 11:46:35,509 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-04 11:46:35,713 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-04 11:46:35,918 - utils_portfolio - INFO - Processing symbol - O
+2025-01-04 11:46:36,122 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-04 11:46:36,327 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-04 11:46:36,532 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-04 11:46:36,737 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-04 11:46:36,942 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-04 11:46:37,146 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-04 11:46:37,351 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-04 11:46:37,556 - utils_portfolio - INFO - Processing symbol - USB
+2025-01-04 11:46:37,761 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-04 11:46:37,965 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-04 11:46:38,170 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-04 11:46:38,375 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-04 11:46:38,580 - utils_portfolio - INFO - Processing symbol - XLE
+2025-01-04 11:46:38,785 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-04 11:46:38,990 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-04 11:46:39,194 - utils_portfolio - INFO - Processing symbol - F
+2025-01-04 11:46:39,401 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-04 11:46:39,604 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-04 11:46:39,809 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-04 11:46:40,013 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-04 11:46:40,125 - utils_portfolio - INFO - Processing symbol - XLB
+2025-01-04 11:46:40,321 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-04 11:46:40,526 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-04 11:46:43,904 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-04 11:46:44,109 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-04 11:46:44,314 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-04 11:46:44,519 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-04 11:46:44,940 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-04 11:46:45,133 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-04 11:46:45,339 - utils_portfolio - INFO - Processing symbol - WBD
+2025-01-04 11:46:45,493 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-04 11:46:45,748 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-04 11:46:45,952 - utils_portfolio - INFO - Processing symbol - WDC
+2025-01-04 11:46:46,157 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-04 11:46:46,362 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-04 11:46:46,602 - utils_portfolio - INFO - Updating symbol stats - RSP
+2025-01-04 11:46:46,635 - utils_portfolio - INFO - Updating symbol stats - MA
+2025-01-04 11:46:46,659 - utils_portfolio - INFO - Updating symbol stats - CRM
+2025-01-04 11:46:46,680 - utils_portfolio - INFO - Updating symbol stats - MDLZ
+2025-01-04 11:46:46,703 - utils_portfolio - INFO - Updating symbol stats - QCOM
+2025-01-04 11:46:46,726 - utils_portfolio - INFO - Updating symbol stats - RIG
+2025-01-04 11:46:46,747 - utils_portfolio - INFO - Updating symbol stats - XLU
+2025-01-04 11:46:46,769 - utils_portfolio - INFO - Updating symbol stats - XLY
+2025-01-04 11:46:46,792 - utils_portfolio - INFO - Updating symbol stats - AMT
+2025-01-04 11:46:46,814 - utils_portfolio - INFO - Updating symbol stats - INTC
+2025-01-04 11:46:46,835 - utils_portfolio - INFO - Updating symbol stats - NKE
+2025-01-04 11:46:46,858 - utils_portfolio - INFO - Updating symbol stats - LOW
+2025-01-04 11:46:46,879 - utils_portfolio - INFO - Updating symbol stats - PAAS
+2025-01-04 11:46:46,901 - utils_portfolio - INFO - Updating symbol stats - META
+2025-01-04 11:46:46,922 - utils_portfolio - INFO - Updating symbol stats - LQD
+2025-01-04 11:46:46,945 - utils_portfolio - INFO - Updating symbol stats - LULU
+2025-01-04 11:46:46,967 - utils_portfolio - INFO - Updating symbol stats - ALB
+2025-01-04 11:46:46,989 - utils_portfolio - INFO - Updating symbol stats - PFE
+2025-01-04 11:46:47,010 - utils_portfolio - INFO - Updating symbol stats - MRVL
+2025-01-04 11:46:47,034 - utils_portfolio - INFO - Updating symbol stats - MARA
+2025-01-04 11:46:47,061 - utils_portfolio - INFO - Updating symbol stats - TJX
+2025-01-04 11:46:47,098 - utils_portfolio - INFO - Updating symbol stats - IBM
+2025-01-04 11:46:47,131 - utils_portfolio - INFO - Updating symbol stats - OXY
+2025-01-04 11:46:47,153 - utils_portfolio - INFO - Updating symbol stats - PLD
+2025-01-04 11:46:47,176 - utils_portfolio - INFO - Updating symbol stats - PM
+2025-01-04 11:46:47,198 - utils_portfolio - INFO - Updating symbol stats - BAC
+2025-01-04 11:46:47,221 - utils_portfolio - INFO - Updating symbol stats - XLV
+2025-01-04 11:46:47,244 - utils_portfolio - INFO - Updating symbol stats - CVX
+2025-01-04 11:46:47,269 - utils_portfolio - INFO - Updating symbol stats - GILD
+2025-01-04 11:46:47,291 - utils_portfolio - INFO - Updating symbol stats - IWM
+2025-01-04 11:46:47,313 - utils_portfolio - INFO - Updating symbol stats - GL
+2025-01-04 11:46:47,335 - utils_portfolio - INFO - Updating symbol stats - GE
+2025-01-04 11:46:47,357 - utils_portfolio - INFO - Updating symbol stats - MDT
+2025-01-04 11:46:47,378 - utils_portfolio - INFO - Updating symbol stats - WBA
+2025-01-04 11:46:47,401 - utils_portfolio - INFO - Updating symbol stats - TSLA
+2025-01-04 11:46:47,423 - utils_portfolio - INFO - Updating symbol stats - C
+2025-01-04 11:46:47,445 - utils_portfolio - INFO - Updating symbol stats - HAL
+2025-01-04 11:46:47,467 - utils_portfolio - INFO - Updating symbol stats - RTX
+2025-01-04 11:46:47,489 - utils_portfolio - INFO - Updating symbol stats - XLF
+2025-01-04 11:46:47,511 - utils_portfolio - INFO - Updating symbol stats - NEM
+2025-01-04 11:46:47,532 - utils_portfolio - INFO - Updating symbol stats - SBUX
+2025-01-04 11:46:47,554 - utils_portfolio - INFO - Updating symbol stats - HBAN
+2025-01-04 11:46:47,576 - utils_portfolio - INFO - Updating symbol stats - MMM
+2025-01-04 11:46:47,598 - utils_portfolio - INFO - Updating symbol stats - TFC
+2025-01-04 11:46:47,623 - utils_portfolio - INFO - Updating symbol stats - XLI
+2025-01-04 11:46:47,644 - utils_portfolio - INFO - Updating symbol stats - GFI
+2025-01-04 11:46:47,665 - utils_portfolio - INFO - Updating symbol stats - PARA
+2025-01-04 11:46:47,687 - utils_portfolio - INFO - Updating symbol stats - XLK
+2025-01-04 11:46:47,709 - utils_portfolio - INFO - Updating symbol stats - HPQ
+2025-01-04 11:46:47,732 - utils_portfolio - INFO - Updating symbol stats - XOP
+2025-01-04 11:46:47,755 - utils_portfolio - INFO - Updating symbol stats - CMCSA
+2025-01-04 11:46:47,780 - utils_portfolio - INFO - Updating symbol stats - KR
+2025-01-04 11:46:47,802 - utils_portfolio - INFO - Updating symbol stats - VNQ
+2025-01-04 11:46:47,825 - utils_portfolio - INFO - Updating symbol stats - VICI
+2025-01-04 11:46:47,847 - utils_portfolio - INFO - Updating symbol stats - AXP
+2025-01-04 11:46:47,870 - utils_portfolio - INFO - Updating symbol stats - ENPH
+2025-01-04 11:46:47,891 - utils_portfolio - INFO - Updating symbol stats - SHEL
+2025-01-04 11:46:47,914 - utils_portfolio - INFO - Updating symbol stats - LLY
+2025-01-04 11:46:47,935 - utils_portfolio - INFO - Updating symbol stats - EWZ
+2025-01-04 11:46:47,958 - utils_portfolio - INFO - Updating symbol stats - BABA
+2025-01-04 11:46:47,980 - utils_portfolio - INFO - Updating symbol stats - VZ
+2025-01-04 11:46:48,002 - utils_portfolio - INFO - Updating symbol stats - VOO
+2025-01-04 11:46:48,026 - utils_portfolio - INFO - Updating symbol stats - GLD
+2025-01-04 11:46:48,048 - utils_portfolio - INFO - Updating symbol stats - KMX
+2025-01-04 11:46:48,071 - utils_portfolio - INFO - Updating symbol stats - SMCI
+2025-01-04 11:46:48,099 - utils_portfolio - INFO - Updating symbol stats - EBAY
+2025-01-04 11:46:48,122 - utils_portfolio - INFO - Updating symbol stats - NVDA
+2025-01-04 11:46:48,145 - utils_portfolio - INFO - Updating symbol stats - FXI
+2025-01-04 11:46:48,167 - utils_portfolio - INFO - Updating symbol stats - CAG
+2025-01-04 11:46:48,189 - utils_portfolio - INFO - Updating symbol stats - APH
+2025-01-04 11:46:48,210 - utils_portfolio - INFO - Updating symbol stats - SLB
+2025-01-04 11:46:48,233 - utils_portfolio - INFO - Updating symbol stats - IP
+2025-01-04 11:46:48,255 - utils_portfolio - INFO - Updating symbol stats - HD
+2025-01-04 11:46:48,277 - utils_portfolio - INFO - Updating symbol stats - TXN
+2025-01-04 11:46:48,300 - utils_portfolio - INFO - Updating symbol stats - HPE
+2025-01-04 11:46:48,321 - utils_portfolio - INFO - Updating symbol stats - COST
+2025-01-04 11:46:48,344 - utils_portfolio - INFO - Updating symbol stats - BSX
+2025-01-04 11:46:48,365 - utils_portfolio - INFO - Updating symbol stats - AVGO
+2025-01-04 11:46:48,388 - utils_portfolio - INFO - Updating symbol stats - TNA
+2025-01-04 11:46:48,409 - utils_portfolio - INFO - Updating symbol stats - GDX
+2025-01-04 11:46:48,431 - utils_portfolio - INFO - Updating symbol stats - AMC
+2025-01-04 11:46:48,468 - utils_portfolio - INFO - Updating symbol stats - MU
+2025-01-04 11:46:48,494 - utils_portfolio - INFO - Updating symbol stats - V
+2025-01-04 11:46:48,518 - utils_portfolio - INFO - Updating symbol stats - SQ
+2025-01-04 11:46:48,540 - utils_portfolio - INFO - Updating symbol stats - KHC
+2025-01-04 11:46:48,563 - utils_portfolio - INFO - Updating symbol stats - QQQ
+2025-01-04 11:46:48,584 - utils_portfolio - INFO - Updating symbol stats - SHOP
+2025-01-04 11:46:48,608 - utils_portfolio - INFO - Updating symbol stats - ANET
+2025-01-04 11:46:48,630 - utils_portfolio - INFO - Updating symbol stats - VIXY
+2025-01-04 11:46:48,652 - utils_portfolio - INFO - Updating symbol stats - AMZN
+2025-01-04 11:46:48,677 - utils_portfolio - INFO - Updating symbol stats - GOOGL
+2025-01-04 11:46:48,707 - utils_portfolio - INFO - Updating symbol stats - PG
+2025-01-04 11:46:48,730 - utils_portfolio - INFO - Updating symbol stats - SLV
+2025-01-04 11:46:48,752 - utils_portfolio - INFO - Updating symbol stats - ACN
+2025-01-04 11:46:48,774 - utils_portfolio - INFO - Updating symbol stats - PEP
+2025-01-04 11:46:48,796 - utils_portfolio - INFO - Updating symbol stats - LUV
+2025-01-04 11:46:48,818 - utils_portfolio - INFO - Updating symbol stats - TMUS
+2025-01-04 11:46:48,840 - utils_portfolio - INFO - Updating symbol stats - MSTR
+2025-01-04 11:46:48,861 - utils_portfolio - INFO - Updating symbol stats - SIRI
+2025-01-04 11:46:48,883 - utils_portfolio - INFO - Updating symbol stats - KRE
+2025-01-04 11:46:48,908 - utils_portfolio - INFO - Updating symbol stats - SNAP
+2025-01-04 11:46:48,929 - utils_portfolio - INFO - Updating symbol stats - BA
+2025-01-04 11:46:48,951 - utils_portfolio - INFO - Updating symbol stats - T
+2025-01-04 11:46:48,974 - utils_portfolio - INFO - Updating symbol stats - HYG
+2025-01-04 11:46:48,996 - utils_portfolio - INFO - Updating symbol stats - AMAT
+2025-01-04 11:46:49,018 - utils_portfolio - INFO - Updating symbol stats - CVS
+2025-01-04 11:46:49,041 - utils_portfolio - INFO - Updating symbol stats - KEY
+2025-01-04 11:46:49,064 - utils_portfolio - INFO - Updating symbol stats - BX
+2025-01-04 11:46:49,089 - utils_portfolio - INFO - Updating symbol stats - DVN
+2025-01-04 11:46:49,111 - utils_portfolio - INFO - Updating symbol stats - NFLX
+2025-01-04 11:46:49,134 - utils_portfolio - INFO - Updating symbol stats - ARKK
+2025-01-04 11:46:49,157 - utils_portfolio - INFO - Updating symbol stats - TMF
+2025-01-04 11:46:49,178 - utils_portfolio - INFO - Updating symbol stats - RIOT
+2025-01-04 11:46:49,200 - utils_portfolio - INFO - Updating symbol stats - COP
+2025-01-04 11:46:49,223 - utils_portfolio - INFO - Updating symbol stats - MCHP
+2025-01-04 11:46:49,245 - utils_portfolio - INFO - Updating symbol stats - BP
+2025-01-04 11:46:49,267 - utils_portfolio - INFO - Updating symbol stats - IYR
+2025-01-04 11:46:49,289 - utils_portfolio - INFO - Updating symbol stats - PLUG
+2025-01-04 11:46:49,324 - utils_portfolio - INFO - Updating symbol stats - WMT
+2025-01-04 11:46:49,347 - utils_portfolio - INFO - Updating symbol stats - EOG
+2025-01-04 11:46:49,369 - utils_portfolio - INFO - Updating symbol stats - XBI
+2025-01-04 11:46:49,391 - utils_portfolio - INFO - Updating symbol stats - KO
+2025-01-04 11:46:49,415 - utils_portfolio - INFO - Updating symbol stats - SOXL
+2025-01-04 11:46:49,440 - utils_portfolio - INFO - Updating symbol stats - VFC
+2025-01-04 11:46:49,465 - utils_portfolio - INFO - Updating symbol stats - FAST
+2025-01-04 11:46:49,487 - utils_portfolio - INFO - Updating symbol stats - MRIN
+2025-01-04 11:46:49,508 - utils_portfolio - INFO - Updating symbol stats - GBTC
+2025-01-04 11:46:49,530 - utils_portfolio - INFO - Updating symbol stats - CCL
+2025-01-04 11:46:49,560 - utils_portfolio - INFO - Updating symbol stats - UNH
+2025-01-04 11:46:49,588 - utils_portfolio - INFO - Updating symbol stats - MRK
+2025-01-04 11:46:49,610 - utils_portfolio - INFO - Updating symbol stats - XLP
+2025-01-04 11:46:49,633 - utils_portfolio - INFO - Updating symbol stats - UPRO
+2025-01-04 11:46:49,655 - utils_portfolio - INFO - Updating symbol stats - AZN
+2025-01-04 11:46:49,677 - utils_portfolio - INFO - Updating symbol stats - GM
+2025-01-04 11:46:49,701 - utils_portfolio - INFO - Updating symbol stats - FCX
+2025-01-04 11:46:49,722 - utils_portfolio - INFO - Updating symbol stats - TSM
+2025-01-04 11:46:49,749 - utils_portfolio - INFO - Updating symbol stats - ON
+2025-01-04 11:46:49,782 - utils_portfolio - INFO - Updating symbol stats - WMB
+2025-01-04 11:46:49,805 - utils_portfolio - INFO - Updating symbol stats - SOXS
+2025-01-04 11:46:49,829 - utils_portfolio - INFO - Updating symbol stats - SPXL
+2025-01-04 11:46:49,851 - utils_portfolio - INFO - Updating symbol stats - AMD
+2025-01-04 11:46:49,873 - utils_portfolio - INFO - Updating symbol stats - JD
+2025-01-04 11:46:49,896 - utils_portfolio - INFO - Updating symbol stats - ETN
+2025-01-04 11:46:49,918 - utils_portfolio - INFO - Updating symbol stats - AAPL
+2025-01-04 11:46:49,940 - utils_portfolio - INFO - Updating symbol stats - WFC
+2025-01-04 11:46:49,962 - utils_portfolio - INFO - Updating symbol stats - CLF
+2025-01-04 11:46:49,985 - utils_portfolio - INFO - Updating symbol stats - PBR
+2025-01-04 11:46:50,006 - utils_portfolio - INFO - Updating symbol stats - VALE
+2025-01-04 11:46:50,027 - utils_portfolio - INFO - Updating symbol stats - QLD
+2025-01-04 11:46:50,051 - utils_portfolio - INFO - Updating symbol stats - MSFT
+2025-01-04 11:46:50,074 - utils_portfolio - INFO - Updating symbol stats - UPS
+2025-01-04 11:46:50,101 - utils_portfolio - INFO - Updating symbol stats - ZTS
+2025-01-04 11:46:50,124 - utils_portfolio - INFO - Updating symbol stats - VST
+2025-01-04 11:46:50,146 - utils_portfolio - INFO - Updating symbol stats - ORCL
+2025-01-04 11:46:50,170 - utils_portfolio - INFO - Updating symbol stats - CSCO
+2025-01-04 11:46:50,192 - utils_portfolio - INFO - Updating symbol stats - ACB
+2025-01-04 11:46:50,214 - utils_portfolio - INFO - Updating symbol stats - SQQQ
+2025-01-04 11:46:50,237 - utils_portfolio - INFO - Updating symbol stats - ADI
+2025-01-04 11:46:50,259 - utils_portfolio - INFO - Updating symbol stats - APA
+2025-01-04 11:46:50,282 - utils_portfolio - INFO - Updating symbol stats - SPY
+2025-01-04 11:46:50,304 - utils_portfolio - INFO - Updating symbol stats - AAL
+2025-01-04 11:46:50,325 - utils_portfolio - INFO - Updating symbol stats - DIS
+2025-01-04 11:46:50,347 - utils_portfolio - INFO - Updating symbol stats - TLT
+2025-01-04 11:46:50,369 - utils_portfolio - INFO - Updating symbol stats - EQT
+2025-01-04 11:46:50,391 - utils_portfolio - INFO - Updating symbol stats - LABU
+2025-01-04 11:46:50,412 - utils_portfolio - INFO - Updating symbol stats - RUN
+2025-01-04 11:46:50,435 - utils_portfolio - INFO - Updating symbol stats - XOM
+2025-01-04 11:46:50,456 - utils_portfolio - INFO - Updating symbol stats - TQQQ
+2025-01-04 11:46:50,479 - utils_portfolio - INFO - Updating symbol stats - KMI
+2025-01-04 11:46:50,514 - utils_portfolio - INFO - Updating symbol stats - FTNT
+2025-01-04 11:46:50,538 - utils_portfolio - INFO - Updating symbol stats - JPM
+2025-01-04 11:46:50,560 - utils_portfolio - INFO - Updating symbol stats - MS
+2025-01-04 11:46:50,582 - utils_portfolio - INFO - Updating symbol stats - PANW
+2025-01-04 11:46:50,604 - utils_portfolio - INFO - Updating symbol stats - JNJ
+2025-01-04 11:46:50,627 - utils_portfolio - INFO - Updating symbol stats - DAL
+2025-01-04 11:46:50,649 - utils_portfolio - INFO - Updating symbol stats - SCHD
+2025-01-04 11:46:50,672 - utils_portfolio - INFO - Updating symbol stats - NCLH
+2025-01-04 11:46:50,695 - utils_portfolio - INFO - Updating symbol stats - MO
+2025-01-04 11:46:50,717 - utils_portfolio - INFO - Updating symbol stats - PYPL
+2025-01-04 11:46:50,738 - utils_portfolio - INFO - Updating symbol stats - ABT
+2025-01-04 11:46:50,760 - utils_portfolio - INFO - Updating symbol stats - IVV
+2025-01-04 11:46:50,781 - utils_portfolio - INFO - Updating symbol stats - MNST
+2025-01-04 11:46:50,804 - utils_portfolio - INFO - Updating symbol stats - O
+2025-01-04 11:46:50,825 - utils_portfolio - INFO - Updating symbol stats - SCHW
+2025-01-04 11:46:50,847 - utils_portfolio - INFO - Updating symbol stats - CGC
+2025-01-04 11:46:50,869 - utils_portfolio - INFO - Updating symbol stats - UVXY
+2025-01-04 11:46:50,890 - utils_portfolio - INFO - Updating symbol stats - MPC
+2025-01-04 11:46:50,912 - utils_portfolio - INFO - Updating symbol stats - TZA
+2025-01-04 11:46:50,933 - utils_portfolio - INFO - Updating symbol stats - PGR
+2025-01-04 11:46:50,956 - utils_portfolio - INFO - Updating symbol stats - NEE
+2025-01-04 11:46:50,978 - utils_portfolio - INFO - Updating symbol stats - USB
+2025-01-04 11:46:51,000 - utils_portfolio - INFO - Updating symbol stats - DELL
+2025-01-04 11:46:51,022 - utils_portfolio - INFO - Updating symbol stats - CVNA
+2025-01-04 11:46:51,045 - utils_portfolio - INFO - Updating symbol stats - NXPL
+2025-01-04 11:46:51,075 - utils_portfolio - INFO - Updating symbol stats - CAT
+2025-01-04 11:46:51,117 - utils_portfolio - INFO - Updating symbol stats - XLE
+2025-01-04 11:46:51,151 - utils_portfolio - INFO - Updating symbol stats - CSX
+2025-01-04 11:46:51,173 - utils_portfolio - INFO - Updating symbol stats - DIA
+2025-01-04 11:46:51,195 - utils_portfolio - INFO - Updating symbol stats - F
+2025-01-04 11:46:51,222 - utils_portfolio - INFO - Updating symbol stats - ABBV
+2025-01-04 11:46:51,244 - utils_portfolio - INFO - Updating symbol stats - BMY
+2025-01-04 11:46:51,269 - utils_portfolio - INFO - Updating symbol stats - NVO
+2025-01-04 11:46:51,291 - utils_portfolio - INFO - Updating symbol stats - SMH
+2025-01-04 11:46:51,313 - utils_portfolio - INFO - Updating symbol stats - XLB
+2025-01-04 11:46:51,337 - utils_portfolio - INFO - Updating symbol stats - CCJ
+2025-01-04 11:46:51,362 - utils_portfolio - INFO - Updating symbol stats - UAL
+2025-01-04 11:46:51,386 - utils_portfolio - INFO - Updating symbol stats - GOOG
+2025-01-04 11:46:51,412 - utils_portfolio - INFO - Updating symbol stats - GOLD
+2025-01-04 11:46:51,434 - utils_portfolio - INFO - Updating symbol stats - PR
+2025-01-04 11:46:51,464 - utils_portfolio - INFO - Updating symbol stats - GDXJ
+2025-01-04 11:46:51,488 - utils_portfolio - INFO - Updating symbol stats - ADBE
+2025-01-04 11:46:51,513 - utils_portfolio - INFO - Updating symbol stats - VTI
+2025-01-04 11:46:51,534 - utils_portfolio - INFO - Updating symbol stats - WBD
+2025-01-04 11:46:51,562 - utils_portfolio - INFO - Updating symbol stats - KSS
+2025-01-04 11:46:51,585 - utils_portfolio - INFO - Updating symbol stats - MRO
+2025-01-04 11:46:51,608 - utils_portfolio - INFO - Updating symbol stats - WDC
+2025-01-04 11:46:51,630 - utils_portfolio - INFO - Updating symbol stats - LW
+2025-01-04 11:46:51,653 - utils_portfolio - INFO - Updating symbol stats - MCD
+2025-01-04 11:46:51,675 - utils_portfolio - INFO - Updating state of strategies
+2025-01-04 11:46:51,676 - utils_portfolio - INFO - Calculating closed trades stats
+2025-01-04 11:46:51,676 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-04 11:46:52,310 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-04 11:46:52,519 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-04 11:46:52,719 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-04 11:46:52,923 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-04 11:46:53,123 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-04 11:46:53,245 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-04 11:46:53,439 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-04 11:46:53,641 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-04 11:46:53,844 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-04 11:46:54,051 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-04 11:46:54,254 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-04 11:46:54,460 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-04 11:46:54,664 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-04 11:46:54,871 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-04 11:46:55,069 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-04 11:46:55,227 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-04 11:46:55,381 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-04 11:46:55,579 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-04 11:46:55,790 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-04 11:46:55,924 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-04 11:46:56,052 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-04 11:46:56,201 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-04 11:46:56,398 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-04 11:46:56,610 - utils_portfolio - INFO - Processing symbol - F
+2025-01-04 11:46:56,814 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-04 11:46:57,022 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-04 11:46:57,228 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-04 11:46:57,431 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-04 11:46:57,636 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-04 11:46:57,841 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-04 11:46:58,043 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-04 11:46:58,249 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-04 11:46:58,373 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-04 11:46:58,556 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-04 11:46:58,759 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-04 11:46:58,969 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-04 11:46:59,169 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-04 11:46:59,377 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-04 11:46:59,580 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-04 11:46:59,785 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-04 11:46:59,990 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-04 11:47:00,194 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-04 11:47:00,403 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-04 11:47:00,597 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-04 11:47:00,807 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-04 11:47:01,014 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-04 11:47:01,218 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-04 11:47:01,426 - utils_portfolio - INFO - Processing symbol - META
+2025-01-04 11:47:01,627 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-04 11:47:01,835 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-04 11:47:02,037 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-04 11:47:02,246 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-04 11:47:02,448 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-04 11:47:02,653 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-04 11:47:02,856 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-04 11:47:03,057 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-04 11:47:03,266 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-04 11:47:03,472 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-04 11:47:03,677 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-04 11:47:03,881 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-04 11:47:04,079 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-04 11:47:04,290 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-04 11:47:04,495 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-04 11:47:04,699 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-04 11:47:04,906 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-04 11:47:05,103 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-04 11:47:05,313 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-04 11:47:05,521 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-04 11:47:05,724 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-04 11:47:05,929 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-04 11:47:06,126 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-04 11:47:06,340 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-04 11:47:09,717 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-04 11:47:09,924 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-04 11:47:10,122 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-04 11:47:10,504 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-04 11:47:10,640 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-04 11:47:10,843 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-04 11:47:11,049 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-04 11:47:11,253 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-04 11:47:11,459 - utils_portfolio - INFO - Processing symbol - T
+2025-01-04 11:47:11,623 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-04 11:47:11,868 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-04 11:47:12,068 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-04 11:47:12,278 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-04 11:47:12,482 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-04 11:47:12,687 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-04 11:47:12,891 - utils_portfolio - INFO - Processing symbol - V
+2025-01-04 11:47:13,090 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-04 11:47:13,303 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-04 11:47:13,506 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-04 11:47:13,712 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-04 11:47:13,919 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-04 11:47:14,117 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-04 11:47:14,326 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-04 11:47:14,530 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-04 11:47:14,735 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-04 11:47:14,939 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-04 11:47:15,151 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-04 11:47:15,349 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-04 11:47:15,554 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-04 11:47:15,760 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-04 11:47:15,964 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-04 11:47:16,168 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-04 11:47:16,373 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-04 11:47:16,578 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-04 11:47:16,782 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-04 11:47:20,160 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-04 11:47:20,294 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-04 11:47:20,474 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-04 11:47:20,674 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-04 11:47:20,880 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-04 11:47:21,077 - utils_portfolio - INFO - Processing symbol - C
+2025-01-04 11:47:21,288 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-04 11:47:21,495 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-04 11:47:21,697 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-04 11:47:21,904 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-04 11:47:22,101 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-04 11:47:22,313 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-04 11:47:22,517 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-04 11:47:22,722 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-04 11:47:22,927 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-04 11:47:23,132 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-04 11:47:23,336 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-04 11:47:23,541 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-04 11:47:23,745 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-04 11:47:23,951 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-04 11:47:24,158 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-04 11:47:24,361 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-04 11:47:24,566 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-04 11:47:24,769 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-04 11:47:24,976 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-04 11:47:25,180 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-04 11:47:25,385 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-04 11:47:25,583 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-04 11:47:25,793 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-04 11:47:25,952 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-04 11:47:26,070 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-04 11:47:29,378 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-04 11:47:29,582 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-04 11:47:29,788 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-04 11:47:29,992 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-04 11:47:30,200 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-04 11:47:30,404 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-04 11:47:30,600 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-04 11:47:30,811 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-04 11:47:31,020 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-04 11:47:31,222 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-04 11:47:31,426 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-04 11:47:31,632 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-04 11:47:31,835 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-04 11:47:32,040 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-04 11:47:32,244 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-04 11:47:32,449 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-04 11:47:32,657 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-04 11:47:32,860 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-04 11:47:33,062 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-04 11:47:33,269 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-04 11:47:33,474 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-04 11:47:33,678 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-04 11:47:33,886 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-04 11:47:34,082 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-04 11:47:34,294 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-04 11:47:34,498 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-04 11:47:34,707 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-04 11:47:34,908 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-04 11:47:35,105 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-04 11:47:35,317 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-04 11:47:35,525 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-04 11:47:35,726 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-04 11:47:35,937 - utils_portfolio - INFO - Processing symbol - O
+2025-01-04 11:47:39,310 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-04 11:47:39,516 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-04 11:47:39,720 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-04 11:47:39,926 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-04 11:47:40,129 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-04 11:47:40,285 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-04 11:47:40,437 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-04 11:47:40,639 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-04 11:47:40,847 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-04 11:47:41,052 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-04 11:47:41,258 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-04 11:47:41,462 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-04 11:47:41,626 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-04 11:47:41,769 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-04 11:47:42,070 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-04 11:47:42,281 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-04 11:47:42,485 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-04 11:47:42,690 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-04 11:47:42,895 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-04 11:47:43,093 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-04 11:47:43,306 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-04 11:47:43,510 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-04 11:47:43,714 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-04 11:47:43,923 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-04 11:47:44,119 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-04 11:47:44,329 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-04 11:47:44,455 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-04 11:47:44,740 - utils_portfolio - INFO - Processing symbol - UPS
+2025-01-04 11:47:44,943 - utils_portfolio - INFO - Processing symbol - USB
+2025-01-04 11:47:45,147 - utils_portfolio - INFO - Processing symbol - VALE
+2025-01-04 11:47:45,352 - utils_portfolio - INFO - Processing symbol - VFC
+2025-01-04 11:47:45,557 - utils_portfolio - INFO - Processing symbol - VICI
+2025-01-04 11:47:48,935 - utils_portfolio - INFO - Processing symbol - VIXY
+2025-01-04 11:47:49,141 - utils_portfolio - INFO - Processing symbol - VNQ
+2025-01-04 11:47:49,346 - utils_portfolio - INFO - Processing symbol - VOO
+2025-01-04 11:47:49,551 - utils_portfolio - INFO - Processing symbol - WBD
+2025-01-04 11:47:49,755 - utils_portfolio - INFO - Processing symbol - WDC
+2025-01-04 11:47:49,961 - utils_portfolio - INFO - Processing symbol - XBI
+2025-01-04 11:47:50,165 - utils_portfolio - INFO - Processing symbol - XLB
+2025-01-04 11:47:50,371 - utils_portfolio - INFO - Processing symbol - XLE
+2025-01-04 11:47:50,497 - utils_portfolio - INFO - Processing symbol - XLI
+2025-01-04 11:47:50,679 - utils_portfolio - INFO - Processing symbol - XLK
+2025-01-04 11:47:50,882 - utils_portfolio - INFO - Processing symbol - XLP
+2025-01-04 11:47:51,008 - utils_portfolio - INFO - Processing symbol - XLV
+2025-01-04 11:47:51,189 - utils_portfolio - INFO - Processing symbol - XLY
+2025-01-04 11:47:51,394 - utils_portfolio - INFO - Processing symbol - XOP
+2025-01-04 11:47:51,610 - utils_portfolio - INFO - Calculating open trades stats
+2025-01-04 11:47:51,611 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-04 11:47:52,206 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-04 11:47:52,411 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-04 11:47:52,615 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-04 11:47:52,820 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-04 11:47:53,024 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-04 11:47:53,230 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-04 11:47:53,435 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-04 11:47:53,639 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-04 11:47:53,843 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-04 11:47:54,049 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-04 11:47:54,254 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-04 11:47:54,458 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-04 11:47:54,663 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-04 11:47:54,867 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-04 11:47:55,071 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-04 11:47:55,278 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-04 11:47:55,482 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-04 11:47:55,688 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-04 11:47:55,892 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-04 11:47:56,003 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-04 11:47:56,199 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-04 11:47:59,579 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-04 11:47:59,784 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-04 11:47:59,988 - utils_portfolio - INFO - Processing symbol - F
+2025-01-04 11:48:00,193 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-04 11:48:00,398 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-04 11:48:00,600 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-04 11:48:01,027 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-04 11:48:01,433 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-04 11:48:01,626 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-04 11:48:01,780 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-04 11:48:01,934 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-04 11:48:02,138 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-04 11:48:02,343 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-04 11:48:02,548 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-04 11:48:02,752 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-04 11:48:02,958 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-04 11:48:03,163 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-04 11:48:03,367 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-04 11:48:03,572 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-04 11:48:03,776 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-04 11:48:03,983 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-04 11:48:04,187 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-04 11:48:04,391 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-04 11:48:04,596 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-04 11:48:04,801 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-04 11:48:05,006 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-04 11:48:05,210 - utils_portfolio - INFO - Processing symbol - META
+2025-01-04 11:48:05,415 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-04 11:48:05,618 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-04 11:48:08,999 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-04 11:48:09,204 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-04 11:48:09,408 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-04 11:48:09,613 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-04 11:48:09,819 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-04 11:48:10,024 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-04 11:48:10,228 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-04 11:48:10,433 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-04 11:48:10,636 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-04 11:48:10,843 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-04 11:48:11,047 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-04 11:48:11,252 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-04 11:48:11,456 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-04 11:48:11,619 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-04 11:48:11,764 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-04 11:48:11,969 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-04 11:48:12,176 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-04 11:48:12,378 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-04 11:48:12,583 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-04 11:48:12,788 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-04 11:48:12,991 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-04 11:48:13,416 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-04 11:48:13,607 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-04 11:48:13,812 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-04 11:48:14,017 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-04 11:48:14,222 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-04 11:48:14,426 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-04 11:48:14,632 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-04 11:48:14,836 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-04 11:48:15,041 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-04 11:48:18,420 - utils_portfolio - INFO - Processing symbol - T
+2025-01-04 11:48:18,625 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-04 11:48:18,830 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-04 11:48:19,034 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-04 11:48:19,239 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-04 11:48:19,444 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-04 11:48:19,649 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-04 11:48:19,853 - utils_portfolio - INFO - Processing symbol - V
+2025-01-04 11:48:20,057 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-04 11:48:20,263 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-04 11:48:20,468 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-04 11:48:20,673 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-04 11:48:20,877 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-04 11:48:21,081 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-04 11:48:21,237 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-04 11:48:21,389 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-04 11:48:21,595 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-04 11:48:21,800 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-04 11:48:22,004 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-04 11:48:22,209 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-04 11:48:22,414 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-04 11:48:22,618 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-04 11:48:22,823 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-04 11:48:23,028 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-04 11:48:23,233 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-04 11:48:23,438 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-04 11:48:23,643 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-04 11:48:23,848 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-04 11:48:24,052 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-04 11:48:24,257 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-04 11:48:24,461 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-04 11:48:24,667 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-04 11:48:28,256 - utils_portfolio - INFO - Processing symbol - C
+2025-01-04 11:48:28,368 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-04 11:48:28,557 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-04 11:48:28,762 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-04 11:48:28,967 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-04 11:48:29,171 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-04 11:48:29,376 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-04 11:48:29,582 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-04 11:48:29,787 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-04 11:48:29,991 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-04 11:48:30,195 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-04 11:48:30,400 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-04 11:48:30,604 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-04 11:48:30,811 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-04 11:48:31,015 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-04 11:48:31,220 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-04 11:48:31,425 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-04 11:48:31,630 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-04 11:48:31,834 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-04 11:48:32,040 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-04 11:48:32,244 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-04 11:48:32,449 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-04 11:48:32,869 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-04 11:48:33,064 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-04 11:48:33,268 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-04 11:48:33,473 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-04 11:48:33,677 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-04 11:48:33,883 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-04 11:48:34,087 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-04 11:48:34,292 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-04 11:48:34,497 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-04 11:48:37,876 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-04 11:48:38,079 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-04 11:48:38,286 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-04 11:48:38,490 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-04 11:48:38,695 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-04 11:48:38,900 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-04 11:48:39,105 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-04 11:48:39,310 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-04 11:48:39,514 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-04 11:48:39,719 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-04 11:48:39,924 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-04 11:48:40,129 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-04 11:48:40,334 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-04 11:48:40,539 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-04 11:48:40,743 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-04 11:48:40,947 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-04 11:48:41,152 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-04 11:48:41,358 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-04 11:48:41,562 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-04 11:48:41,679 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-04 11:48:41,869 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-04 11:48:42,073 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-04 11:48:42,280 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-04 11:48:42,484 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-04 11:48:42,688 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-04 11:48:42,893 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-04 11:48:43,097 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-04 11:48:43,303 - utils_portfolio - INFO - Processing symbol - O
+2025-01-04 11:48:43,509 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-04 11:48:43,713 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-04 11:48:43,918 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-04 11:48:44,121 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-04 11:48:44,328 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-04 11:48:47,706 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-04 11:48:47,820 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-04 11:48:48,013 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-04 11:48:48,218 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-04 11:48:48,424 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-04 11:48:48,628 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-04 11:48:48,833 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-04 11:48:49,038 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-04 11:48:49,247 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-04 11:48:49,449 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-04 11:48:49,652 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-04 11:48:49,857 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-04 11:48:50,061 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-04 11:48:50,267 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-04 11:48:50,471 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-04 11:48:50,676 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-04 11:48:50,881 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-04 11:48:51,084 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-04 11:48:51,290 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-04 11:48:51,496 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-04 11:48:51,700 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-04 11:48:51,905 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-04 11:48:52,019 - utils_portfolio - INFO - Processing symbol - UPS
+2025-01-04 11:48:52,314 - utils_portfolio - INFO - Processing symbol - USB
+2025-01-04 11:48:52,520 - utils_portfolio - INFO - Processing symbol - VALE
+2025-01-04 11:48:52,724 - utils_portfolio - INFO - Processing symbol - VFC
+2025-01-04 11:48:52,929 - utils_portfolio - INFO - Processing symbol - VICI
+2025-01-04 11:48:53,134 - utils_portfolio - INFO - Processing symbol - VIXY
+2025-01-04 11:48:53,338 - utils_portfolio - INFO - Processing symbol - VNQ
+2025-01-04 11:48:53,543 - utils_portfolio - INFO - Processing symbol - VOO
+2025-01-04 11:48:53,748 - utils_portfolio - INFO - Processing symbol - WBD
+2025-01-04 11:48:53,953 - utils_portfolio - INFO - Processing symbol - WDC
+2025-01-04 11:48:57,333 - utils_portfolio - INFO - Processing symbol - XBI
+2025-01-04 11:48:57,487 - utils_portfolio - INFO - Processing symbol - XLB
+2025-01-04 11:48:57,597 - utils_portfolio - INFO - Processing symbol - XLE
+2025-01-04 11:48:57,707 - utils_portfolio - INFO - Processing symbol - XLI
+2025-01-04 11:48:57,818 - utils_portfolio - INFO - Processing symbol - XLK
+2025-01-04 11:48:57,931 - utils_portfolio - INFO - Processing symbol - XLP
+2025-01-04 11:48:58,054 - utils_portfolio - INFO - Processing symbol - XLV
+2025-01-04 11:48:58,234 - utils_portfolio - INFO - Processing symbol - XLY
+2025-01-04 11:48:58,348 - utils_portfolio - INFO - Processing symbol - XOP
+2025-01-04 11:48:58,570 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Everything DONE --- XXXXXXXXXXXXXXXXXXXX

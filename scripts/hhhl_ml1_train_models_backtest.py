@@ -6,6 +6,7 @@ import yaml
 import yfinance as yf
 from datetime import datetime
 from strategies import HigherHighStrategy
+from utils_strategy import get_yf_data
 import numpy as np
 import vectorbt as vbt
 import pandas_ta as ta
@@ -67,9 +68,9 @@ def main(path_config):
                 os.chmod(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}", 0o777)
                 logger.info(f"Downloading price data for symbol - {symbol} from yfinance")
                 
-                data= yf.download(symbol, start=datetime(2000, 1,1), end=datetime.now())
-                close_price = data.loc[:, 'Adj Close']
-                open_price = data.loc[:, 'Open']
+                data = get_yf_data(symbol, start=datetime(2000, 1,1), end=datetime.now())
+                close_price = data.loc[:, 'close']
+                open_price = data.loc[:, 'open']
                 
                 param_ranges = config['strategy_params']['hhhl']['param_ranges']
                 stop_loss = config['strategy_params']['hhhl']['stop_loss']
@@ -95,7 +96,11 @@ def main(path_config):
                 logger.info(f"Generating dataset with technical data for symbol - {symbol}")
 
                 df_price = data
+                df_price.drop(columns = ['adj close'], inplace = True)
                 df_price.ta.strategy('All')
+                df_price.drop(columns = ['SSF_10_2', 'TOS_STDEVALL_LR', 'TOS_STDEVALL_L_1', 
+                                         'TOS_STDEVALL_U_1', 'TOS_STDEVALL_L_2', 'TOS_STDEVALL_U_2', 
+                                         'TOS_STDEVALL_L_3', 'TOS_STDEVALL_U_3'], inplace = True) # + PSARs_0.02_0.2,
                 df_price.to_csv(f"../outputs_hhhl_ml1/{config['experiment_name']}/{symbol}/df_price.csv", index = True, header = True)        
                 df_trades[['window_entry', 'hh_hl_counts', 'window_exit', 'lh_counts']] = df_trades['Column'].tolist()
                 df = df_trades.loc[:, ['window_entry', 'hh_hl_counts', 'window_exit', 'lh_counts', 'Entry Timestamp']]
@@ -172,7 +177,8 @@ def main(path_config):
                         cv=cv,  
                         scoring='precision',
                         n_jobs=-1, 
-                        verbose=1
+                        verbose=1,
+                        return_train_score= True
                     )
                                     
                     grid_search.fit(x_train, y_train)    

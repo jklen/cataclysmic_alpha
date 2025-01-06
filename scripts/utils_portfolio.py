@@ -179,7 +179,7 @@ def is_trading_day(day):
     # https://www.investopedia.com/ask/answers/06/stockexchangeclosed.asp
     # mozno podla alpacy - ma metodu na calendar
     
-    us_stock_market_holidays = [datetime(2025, 1,1), datetime(2025, 1, 15), datetime(2025, 2, 19),
+    us_stock_market_holidays = [datetime(2025, 1, 9), datetime(2025, 1,1), datetime(2025, 1, 15), datetime(2025, 2, 19),
                             datetime(2024, 3, 29), datetime(2024, 5, 27), datetime(2024, 6, 19),
                             datetime(2024, 7, 4), datetime(2024, 9, 2), datetime(2024, 11, 28),
                             datetime(2024, 12, 25)]

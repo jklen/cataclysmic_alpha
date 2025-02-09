@@ -1,0 +1,768 @@
+2025-01-19 10:05:06,133 - root - INFO - Logger is setup
+2025-01-19 10:05:06,248 - utils_portfolio - INFO - Updating info of portfolio - p1
+2025-01-19 10:05:06,856 - utils_portfolio - INFO - Calculating symbols weights
+2025-01-19 10:05:06,856 - root - INFO - Portfolio p1 symbols weights - {'ACB': 0.01, 'ACN': 0.01, 'ADBE': 0.01, 'ALB': 0.01, 'AMAT': 0.01, 'AMD': 0.01, 'AMT': 0.01, 'AMZN': 0.01, 'ANET': 0.01, 'ARKK': 0.01, 'AVGO': 0.01, 'BA': 0.01, 'BABA': 0.01, 'BMY': 0.01, 'BSX': 0.01, 'CMCSA': 0.01, 'COP': 0.01, 'CSX': 0.01, 'CVNA': 0.01, 'CVX': 0.01, 'DAL': 0.01, 'DELL': 0.01, 'ENPH': 0.01, 'ETN': 0.01, 'F': 0.01, 'FXI': 0.01, 'GBTC': 0.01, 'GDX': 0.01, 'GDXJ': 0.01, 'GE': 0.01, 'GLD': 0.01, 'GM': 0.01, 'GOOG': 0.01, 'HAL': 0.01, 'HBAN': 0.01, 'HPQ': 0.01, 'HYG': 0.01, 'INTC': 0.01, 'IP': 0.01, 'JNJ': 0.01, 'KEY': 0.01, 'KMI': 0.01, 'KMX': 0.01, 'LOW': 0.01, 'LUV': 0.01, 'MCD': 0.01, 'MDLZ': 0.01, 'MDT': 0.01, 'META': 0.01, 'MMM': 0.01, 'MRIN': 0.01, 'MRO': 0.01, 'MRVL': 0.01, 'MSTR': 0.01, 'NCLH': 0.01, 'NEE': 0.01, 'NEM': 0.01, 'NXPL': 0.01, 'ON': 0.01, 'ORCL': 0.01, 'OXY': 0.01, 'PAAS': 0.01, 'PANW': 0.01, 'PARA': 0.01, 'PLD': 0.01, 'PM': 0.01, 'PYPL': 0.01, 'QCOM': 0.01, 'QLD': 0.01, 'QQQ': 0.01, 'RSP': 0.01, 'RUN': 0.01, 'SCHD': 0.01, 'SHEL': 0.01, 'SHOP': 0.01, 'SIRI': 0.01, 'SMCI': 0.01, 'SNAP': 0.01, 'SOXL': 0.01, 'SPY': 0.01, 'SQQQ': 0.01, 'T': 0.01, 'TFC': 0.01, 'TJX': 0.01, 'TLT': 0.01, 'TMUS': 0.01, 'TZA': 0.01, 'UVXY': 0.01, 'V': 0.01, 'VST': 0.01, 'VTI': 0.01, 'VZ': 0.01, 'WBA': 0.01, 'WFC': 0.01, 'WMB': 0.01, 'WMT': 0.01, 'XLF': 0.01, 'XLU': 0.01, 'XOM': 0.01, 'ZTS': 0.01}
+2025-01-19 10:05:06,856 - utils_strategy - INFO - ACB - downloading data from yfinance
+2025-01-19 10:05:11,267 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:05:11,267 - utils_strategy - INFO - ACN - downloading data from yfinance
+2025-01-19 10:05:19,044 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:05:19,044 - utils_strategy - INFO - ADBE - downloading data from yfinance
+2025-01-19 10:05:27,204 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:05:27,204 - utils_strategy - INFO - ALB - downloading data from yfinance
+2025-01-19 10:05:35,197 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:05:35,197 - utils_strategy - INFO - AMAT - downloading data from yfinance
+2025-01-19 10:05:43,922 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:05:43,922 - utils_strategy - INFO - AMD - downloading data from yfinance
+2025-01-19 10:05:52,529 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:05:52,529 - utils_strategy - INFO - AMT - downloading data from yfinance
+2025-01-19 10:06:00,707 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:00,708 - utils_strategy - INFO - AMZN - downloading data from yfinance
+2025-01-19 10:06:09,296 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:09,296 - utils_strategy - INFO - ANET - downloading data from yfinance
+2025-01-19 10:06:13,231 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:13,232 - utils_strategy - INFO - ARKK - downloading data from yfinance
+2025-01-19 10:06:17,164 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:17,164 - utils_strategy - INFO - AVGO - downloading data from yfinance
+2025-01-19 10:06:22,934 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:22,934 - utils_strategy - INFO - BA - downloading data from yfinance
+2025-01-19 10:06:31,284 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:31,285 - utils_strategy - INFO - BABA - downloading data from yfinance
+2025-01-19 10:06:35,250 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:35,251 - utils_strategy - INFO - BMY - downloading data from yfinance
+2025-01-19 10:06:44,063 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:44,064 - utils_strategy - INFO - BSX - downloading data from yfinance
+2025-01-19 10:06:52,710 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:06:52,710 - utils_strategy - INFO - CMCSA - downloading data from yfinance
+2025-01-19 10:07:01,225 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:01,225 - utils_strategy - INFO - COP - downloading data from yfinance
+2025-01-19 10:07:09,815 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:09,816 - utils_strategy - INFO - CSX - downloading data from yfinance
+2025-01-19 10:07:18,467 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:18,468 - utils_strategy - INFO - CVNA - downloading data from yfinance
+2025-01-19 10:07:21,673 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:21,673 - utils_strategy - INFO - CVX - downloading data from yfinance
+2025-01-19 10:07:30,394 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:30,394 - utils_strategy - INFO - DAL - downloading data from yfinance
+2025-01-19 10:07:37,181 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:37,182 - utils_strategy - INFO - DELL - downloading data from yfinance
+2025-01-19 10:07:40,881 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:40,881 - utils_strategy - INFO - ENPH - downloading data from yfinance
+2025-01-19 10:07:45,899 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:45,899 - utils_strategy - INFO - ETN - downloading data from yfinance
+2025-01-19 10:07:54,971 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:07:54,972 - utils_strategy - INFO - F - downloading data from yfinance
+2025-01-19 10:08:03,976 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:03,977 - utils_strategy - INFO - FXI - downloading data from yfinance
+2025-01-19 10:08:11,469 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:11,469 - utils_strategy - INFO - GBTC - downloading data from yfinance
+2025-01-19 10:08:15,298 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:15,298 - utils_strategy - INFO - GDX - downloading data from yfinance
+2025-01-19 10:08:22,106 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:22,106 - utils_strategy - INFO - GDXJ - downloading data from yfinance
+2025-01-19 10:08:27,793 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:27,794 - utils_strategy - INFO - GE - downloading data from yfinance
+2025-01-19 10:08:36,831 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:36,831 - utils_strategy - INFO - GLD - downloading data from yfinance
+2025-01-19 10:08:43,969 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:43,969 - utils_strategy - INFO - GM - downloading data from yfinance
+2025-01-19 10:08:49,277 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:49,278 - utils_strategy - INFO - GOOG - downloading data from yfinance
+2025-01-19 10:08:56,643 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:08:56,643 - utils_strategy - INFO - HAL - downloading data from yfinance
+2025-01-19 10:09:04,563 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:09:04,563 - utils_strategy - INFO - HBAN - downloading data from yfinance
+2025-01-19 10:09:13,082 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:09:13,082 - utils_strategy - INFO - HPQ - downloading data from yfinance
+2025-01-19 10:09:21,358 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:09:21,359 - utils_strategy - INFO - HYG - downloading data from yfinance
+2025-01-19 10:09:27,456 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:09:27,456 - utils_strategy - INFO - INTC - downloading data from yfinance
+2025-01-19 10:09:35,527 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:09:35,527 - utils_strategy - INFO - IP - downloading data from yfinance
+2025-01-19 10:09:43,876 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:09:43,877 - utils_strategy - INFO - JNJ - downloading data from yfinance
+2025-01-19 10:09:51,967 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:09:51,967 - utils_strategy - INFO - KEY - downloading data from yfinance
+2025-01-19 10:09:59,936 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:09:59,936 - utils_strategy - INFO - KMI - downloading data from yfinance
+2025-01-19 10:10:04,721 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:10:04,721 - utils_strategy - INFO - KMX - downloading data from yfinance
+2025-01-19 10:10:12,684 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:10:12,684 - utils_strategy - INFO - LOW - downloading data from yfinance
+2025-01-19 10:10:20,747 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:10:20,747 - utils_strategy - INFO - LUV - downloading data from yfinance
+2025-01-19 10:10:28,889 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:10:28,890 - utils_strategy - INFO - MCD - downloading data from yfinance
+2025-01-19 10:10:36,825 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:10:36,826 - utils_strategy - INFO - MDLZ - downloading data from yfinance
+2025-01-19 10:10:44,454 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:10:44,454 - utils_strategy - INFO - MDT - downloading data from yfinance
+2025-01-19 10:10:52,853 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:10:52,854 - utils_strategy - INFO - META - downloading data from yfinance
+2025-01-19 10:10:57,437 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:10:57,438 - utils_strategy - INFO - MMM - downloading data from yfinance
+2025-01-19 10:11:05,656 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:11:05,656 - utils_strategy - INFO - MRIN - downloading data from yfinance
+2025-01-19 10:11:10,051 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:11:10,052 - utils_strategy - INFO - MRO - downloading data from yfinance
+2025-01-19 10:11:18,239 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:11:18,239 - utils_strategy - INFO - MRVL - downloading data from yfinance
+2025-01-19 10:11:26,209 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:11:26,210 - utils_strategy - INFO - MSTR - downloading data from yfinance
+2025-01-19 10:11:34,216 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:11:34,217 - utils_strategy - INFO - NCLH - downloading data from yfinance
+2025-01-19 10:11:38,713 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:11:38,713 - utils_strategy - INFO - NEE - downloading data from yfinance
+2025-01-19 10:11:46,827 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:11:46,827 - utils_strategy - INFO - NEM - downloading data from yfinance
+2025-01-19 10:11:54,936 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:11:54,937 - utils_strategy - INFO - NXPL - downloading data from yfinance
+2025-01-19 10:12:02,854 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:12:02,855 - utils_strategy - INFO - ON - downloading data from yfinance
+2025-01-19 10:12:10,656 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:12:10,656 - utils_strategy - INFO - ORCL - downloading data from yfinance
+2025-01-19 10:12:18,723 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:12:18,724 - utils_strategy - INFO - OXY - downloading data from yfinance
+2025-01-19 10:12:26,718 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:12:26,718 - utils_strategy - INFO - PAAS - downloading data from yfinance
+2025-01-19 10:12:34,722 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:12:34,722 - utils_strategy - INFO - PANW - downloading data from yfinance
+2025-01-19 10:12:39,275 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:12:39,275 - utils_strategy - INFO - PARA - downloading data from yfinance
+2025-01-19 10:12:45,627 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:12:45,628 - utils_strategy - INFO - PLD - downloading data from yfinance
+2025-01-19 10:12:54,223 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:12:54,224 - utils_strategy - INFO - PM - downloading data from yfinance
+2025-01-19 10:13:00,099 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:00,100 - utils_strategy - INFO - PYPL - downloading data from yfinance
+2025-01-19 10:13:03,804 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:03,804 - utils_strategy - INFO - QCOM - downloading data from yfinance
+2025-01-19 10:13:12,323 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:12,324 - utils_strategy - INFO - QLD - downloading data from yfinance
+2025-01-19 10:13:18,783 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:18,783 - utils_strategy - INFO - QQQ - downloading data from yfinance
+2025-01-19 10:13:27,217 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:27,217 - utils_strategy - INFO - RSP - downloading data from yfinance
+2025-01-19 10:13:34,596 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:34,597 - utils_strategy - INFO - RUN - downloading data from yfinance
+2025-01-19 10:13:38,262 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:38,262 - utils_strategy - INFO - SCHD - downloading data from yfinance
+2025-01-19 10:13:43,218 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:43,218 - utils_strategy - INFO - SHEL - downloading data from yfinance
+2025-01-19 10:13:51,560 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:51,560 - utils_strategy - INFO - SHOP - downloading data from yfinance
+2025-01-19 10:13:55,272 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:13:55,272 - utils_strategy - INFO - SIRI - downloading data from yfinance
+2025-01-19 10:14:03,414 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:03,414 - utils_strategy - INFO - SMCI - downloading data from yfinance
+2025-01-19 10:14:09,725 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:09,725 - utils_strategy - INFO - SNAP - downloading data from yfinance
+2025-01-19 10:14:12,755 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:12,756 - utils_strategy - INFO - SOXL - downloading data from yfinance
+2025-01-19 10:14:17,938 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:17,938 - utils_strategy - INFO - SPY - downloading data from yfinance
+2025-01-19 10:14:26,211 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:26,212 - utils_strategy - INFO - SQQQ - downloading data from yfinance
+2025-01-19 10:14:31,298 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:31,298 - utils_strategy - INFO - T - downloading data from yfinance
+2025-01-19 10:14:39,818 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:39,818 - utils_strategy - INFO - TFC - downloading data from yfinance
+2025-01-19 10:14:48,449 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:48,449 - utils_strategy - INFO - TJX - downloading data from yfinance
+2025-01-19 10:14:57,191 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:14:57,192 - utils_strategy - INFO - TLT - downloading data from yfinance
+2025-01-19 10:15:04,688 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:04,689 - utils_strategy - INFO - TMUS - downloading data from yfinance
+2025-01-19 10:15:10,925 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:10,925 - utils_strategy - INFO - TZA - downloading data from yfinance
+2025-01-19 10:15:16,612 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:16,613 - utils_strategy - INFO - UVXY - downloading data from yfinance
+2025-01-19 10:15:21,467 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:21,467 - utils_strategy - INFO - V - downloading data from yfinance
+2025-01-19 10:15:27,417 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:27,418 - utils_strategy - INFO - VST - downloading data from yfinance
+2025-01-19 10:15:30,912 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:30,913 - utils_strategy - INFO - VTI - downloading data from yfinance
+2025-01-19 10:15:38,805 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:38,805 - utils_strategy - INFO - VZ - downloading data from yfinance
+2025-01-19 10:15:47,256 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:47,257 - utils_strategy - INFO - WBA - downloading data from yfinance
+2025-01-19 10:15:55,588 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:15:55,588 - utils_strategy - INFO - WFC - downloading data from yfinance
+2025-01-19 10:16:03,898 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:16:03,898 - utils_strategy - INFO - WMB - downloading data from yfinance
+2025-01-19 10:16:12,983 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:16:12,983 - utils_strategy - INFO - WMT - downloading data from yfinance
+2025-01-19 10:16:21,489 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:16:21,490 - utils_strategy - INFO - XLF - downloading data from yfinance
+2025-01-19 10:16:29,828 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:16:29,829 - utils_strategy - INFO - XLU - downloading data from yfinance
+2025-01-19 10:16:38,261 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:16:38,262 - utils_strategy - INFO - XOM - downloading data from yfinance
+2025-01-19 10:16:47,252 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:16:47,252 - utils_strategy - INFO - ZTS - downloading data from yfinance
+2025-01-19 10:16:51,759 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:16:51,759 - root - INFO - Portfolio p1 symbols actions - {}
+2025-01-19 10:16:51,759 - utils_portfolio - INFO - Submitting orders to close existing positions
+2025-01-19 10:16:51,759 - utils_portfolio - INFO - Updating state of portfolio - p1
+2025-01-19 10:16:51,760 - utils_portfolio - INFO - Calculating closed trades stats
+2025-01-19 10:16:51,760 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-19 10:16:52,265 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-19 10:16:52,473 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-19 10:16:52,681 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-19 10:16:52,886 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-19 10:16:53,092 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-19 10:16:53,297 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-19 10:16:53,500 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-19 10:16:53,703 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-19 10:16:53,901 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-19 10:16:54,068 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-19 10:16:54,186 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-19 10:16:54,300 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-19 10:16:54,525 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-19 10:16:54,728 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-19 10:16:54,845 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-19 10:16:54,965 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-19 10:16:55,084 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-19 10:16:55,239 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-19 10:16:55,449 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-19 10:16:55,650 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-19 10:16:55,854 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-19 10:16:56,088 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-19 10:16:56,210 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-19 10:16:56,360 - utils_portfolio - INFO - Processing symbol - F
+2025-01-19 10:16:56,566 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-19 10:16:56,775 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-19 10:16:56,981 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-19 10:16:57,132 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-19 10:16:57,298 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-19 10:16:57,519 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-19 10:16:57,698 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-19 10:16:57,903 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-19 10:16:58,113 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-19 10:16:58,305 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-19 10:16:58,543 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-19 10:16:58,721 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-19 10:16:58,933 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-19 10:16:59,128 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-19 10:16:59,329 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-19 10:16:59,539 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-19 10:16:59,746 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-19 10:16:59,950 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-19 10:17:00,154 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-19 10:17:00,353 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-19 10:17:00,529 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-19 10:17:00,661 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-19 10:17:00,872 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-19 10:17:01,105 - utils_portfolio - INFO - Processing symbol - META
+2025-01-19 10:17:01,282 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-19 10:17:01,487 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-19 10:17:01,691 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-19 10:17:01,894 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-19 10:17:02,106 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-19 10:17:02,305 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-19 10:17:02,510 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-19 10:17:02,715 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-19 10:17:02,922 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-19 10:17:03,123 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-19 10:17:03,325 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-19 10:17:03,536 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-19 10:17:03,746 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-19 10:17:03,943 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-19 10:17:04,142 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-19 10:17:04,263 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-19 10:17:04,380 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-19 10:17:04,558 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-19 10:17:04,757 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-19 10:17:04,878 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-19 10:17:05,074 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-19 10:17:05,226 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-19 10:17:05,345 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-19 10:17:05,493 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-19 10:17:05,685 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-19 10:17:05,889 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-19 10:17:06,120 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-19 10:17:06,244 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-19 10:17:06,373 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-19 10:17:06,606 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-19 10:17:06,812 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-19 10:17:07,041 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-19 10:17:07,252 - utils_portfolio - INFO - Processing symbol - T
+2025-01-19 10:17:07,418 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-19 10:17:07,635 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-19 10:17:07,835 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-19 10:17:08,009 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-19 10:17:08,128 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-19 10:17:08,343 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-19 10:17:08,551 - utils_portfolio - INFO - Processing symbol - V
+2025-01-19 10:17:08,759 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-19 10:17:08,956 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-19 10:17:09,071 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-19 10:17:09,192 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-19 10:17:09,318 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-19 10:17:09,444 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-19 10:17:09,561 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-19 10:17:09,780 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-19 10:17:09,988 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-19 10:17:10,186 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-19 10:17:10,389 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-19 10:17:10,611 - utils_portfolio - INFO - Calculating open trades stats
+2025-01-19 10:17:10,612 - utils_portfolio - INFO - Processing symbol - ACB
+2025-01-19 10:17:11,104 - utils_portfolio - INFO - Processing symbol - ACN
+2025-01-19 10:17:11,218 - utils_portfolio - INFO - Processing symbol - ADBE
+2025-01-19 10:17:11,538 - utils_portfolio - INFO - Processing symbol - ALB
+2025-01-19 10:17:11,719 - utils_portfolio - INFO - Processing symbol - AMAT
+2025-01-19 10:17:12,049 - utils_portfolio - INFO - Processing symbol - AMD
+2025-01-19 10:17:12,231 - utils_portfolio - INFO - Processing symbol - AMT
+2025-01-19 10:17:12,652 - utils_portfolio - INFO - Processing symbol - AMZN
+2025-01-19 10:17:12,846 - utils_portfolio - INFO - Processing symbol - ANET
+2025-01-19 10:17:13,050 - utils_portfolio - INFO - Processing symbol - ARKK
+2025-01-19 10:17:13,255 - utils_portfolio - INFO - Processing symbol - AVGO
+2025-01-19 10:17:13,674 - utils_portfolio - INFO - Processing symbol - BA
+2025-01-19 10:17:13,869 - utils_portfolio - INFO - Processing symbol - BABA
+2025-01-19 10:17:14,073 - utils_portfolio - INFO - Processing symbol - BMY
+2025-01-19 10:17:14,278 - utils_portfolio - INFO - Processing symbol - BSX
+2025-01-19 10:17:14,483 - utils_portfolio - INFO - Processing symbol - CMCSA
+2025-01-19 10:17:14,689 - utils_portfolio - INFO - Processing symbol - COP
+2025-01-19 10:17:14,803 - utils_portfolio - INFO - Processing symbol - CSX
+2025-01-19 10:17:14,995 - utils_portfolio - INFO - Processing symbol - CVNA
+2025-01-19 10:17:15,408 - utils_portfolio - INFO - Processing symbol - CVX
+2025-01-19 10:17:15,722 - utils_portfolio - INFO - Processing symbol - DAL
+2025-01-19 10:17:15,916 - utils_portfolio - INFO - Processing symbol - DELL
+2025-01-19 10:17:16,121 - utils_portfolio - INFO - Processing symbol - ENPH
+2025-01-19 10:17:16,328 - utils_portfolio - INFO - Processing symbol - ETN
+2025-01-19 10:17:16,532 - utils_portfolio - INFO - Processing symbol - F
+2025-01-19 10:17:16,735 - utils_portfolio - INFO - Processing symbol - FXI
+2025-01-19 10:17:16,942 - utils_portfolio - INFO - Processing symbol - GBTC
+2025-01-19 10:17:17,145 - utils_portfolio - INFO - Processing symbol - GDX
+2025-01-19 10:17:17,480 - utils_portfolio - INFO - Processing symbol - GDXJ
+2025-01-19 10:17:17,874 - utils_portfolio - INFO - Processing symbol - GE
+2025-01-19 10:17:18,288 - utils_portfolio - INFO - Processing symbol - GLD
+2025-01-19 10:17:18,684 - utils_portfolio - INFO - Processing symbol - GM
+2025-01-19 10:17:19,099 - utils_portfolio - INFO - Processing symbol - GOOG
+2025-01-19 10:17:19,295 - utils_portfolio - INFO - Processing symbol - HAL
+2025-01-19 10:17:19,407 - utils_portfolio - INFO - Processing symbol - HBAN
+2025-01-19 10:17:19,519 - utils_portfolio - INFO - Processing symbol - HPQ
+2025-01-19 10:17:19,635 - utils_portfolio - INFO - Processing symbol - HYG
+2025-01-19 10:17:19,921 - utils_portfolio - INFO - Processing symbol - INTC
+2025-01-19 10:17:20,115 - utils_portfolio - INFO - Processing symbol - IP
+2025-01-19 10:17:20,229 - utils_portfolio - INFO - Processing symbol - JNJ
+2025-01-19 10:17:20,421 - utils_portfolio - INFO - Processing symbol - KEY
+2025-01-19 10:17:20,627 - utils_portfolio - INFO - Processing symbol - KMI
+2025-01-19 10:17:20,740 - utils_portfolio - INFO - Processing symbol - KMX
+2025-01-19 10:17:20,851 - utils_portfolio - INFO - Processing symbol - LOW
+2025-01-19 10:17:21,037 - utils_portfolio - INFO - Processing symbol - LUV
+2025-01-19 10:17:21,241 - utils_portfolio - INFO - Processing symbol - MCD
+2025-01-19 10:17:21,445 - utils_portfolio - INFO - Processing symbol - MDLZ
+2025-01-19 10:17:21,650 - utils_portfolio - INFO - Processing symbol - MDT
+2025-01-19 10:17:21,761 - utils_portfolio - INFO - Processing symbol - META
+2025-01-19 10:17:21,959 - utils_portfolio - INFO - Processing symbol - MMM
+2025-01-19 10:17:22,380 - utils_portfolio - INFO - Processing symbol - MRIN
+2025-01-19 10:17:22,573 - utils_portfolio - INFO - Processing symbol - MRO
+2025-01-19 10:17:22,777 - utils_portfolio - INFO - Processing symbol - MRVL
+2025-01-19 10:17:23,192 - utils_portfolio - INFO - Processing symbol - MSTR
+2025-01-19 10:17:23,305 - utils_portfolio - INFO - Processing symbol - NCLH
+2025-01-19 10:17:23,494 - utils_portfolio - INFO - Processing symbol - NEE
+2025-01-19 10:17:23,698 - utils_portfolio - INFO - Processing symbol - NEM
+2025-01-19 10:17:24,120 - utils_portfolio - INFO - Processing symbol - NXPL
+2025-01-19 10:17:24,314 - utils_portfolio - INFO - Processing symbol - ON
+2025-01-19 10:17:24,426 - utils_portfolio - INFO - Processing symbol - ORCL
+2025-01-19 10:17:24,664 - utils_portfolio - INFO - Processing symbol - OXY
+2025-01-19 10:17:24,900 - utils_portfolio - INFO - Processing symbol - PAAS
+2025-01-19 10:17:25,030 - utils_portfolio - INFO - Processing symbol - PANW
+2025-01-19 10:17:25,236 - utils_portfolio - INFO - Processing symbol - PARA
+2025-01-19 10:17:25,440 - utils_portfolio - INFO - Processing symbol - PLD
+2025-01-19 10:17:25,853 - utils_portfolio - INFO - Processing symbol - PM
+2025-01-19 10:17:25,966 - utils_portfolio - INFO - Processing symbol - PYPL
+2025-01-19 10:17:26,152 - utils_portfolio - INFO - Processing symbol - QCOM
+2025-01-19 10:17:26,264 - utils_portfolio - INFO - Processing symbol - QLD
+2025-01-19 10:17:26,463 - utils_portfolio - INFO - Processing symbol - QQQ
+2025-01-19 10:17:26,671 - utils_portfolio - INFO - Processing symbol - RSP
+2025-01-19 10:17:27,087 - utils_portfolio - INFO - Processing symbol - RUN
+2025-01-19 10:17:27,283 - utils_portfolio - INFO - Processing symbol - SCHD
+2025-01-19 10:17:27,486 - utils_portfolio - INFO - Processing symbol - SHEL
+2025-01-19 10:17:27,693 - utils_portfolio - INFO - Processing symbol - SHOP
+2025-01-19 10:17:27,898 - utils_portfolio - INFO - Processing symbol - SIRI
+2025-01-19 10:17:28,103 - utils_portfolio - INFO - Processing symbol - SMCI
+2025-01-19 10:17:28,308 - utils_portfolio - INFO - Processing symbol - SNAP
+2025-01-19 10:17:28,512 - utils_portfolio - INFO - Processing symbol - SOXL
+2025-01-19 10:17:28,717 - utils_portfolio - INFO - Processing symbol - SPY
+2025-01-19 10:17:28,921 - utils_portfolio - INFO - Processing symbol - SQQQ
+2025-01-19 10:17:29,126 - utils_portfolio - INFO - Processing symbol - T
+2025-01-19 10:17:29,331 - utils_portfolio - INFO - Processing symbol - TFC
+2025-01-19 10:17:29,752 - utils_portfolio - INFO - Processing symbol - TJX
+2025-01-19 10:17:29,873 - utils_portfolio - INFO - Processing symbol - TLT
+2025-01-19 10:17:30,265 - utils_portfolio - INFO - Processing symbol - TMUS
+2025-01-19 10:17:30,456 - utils_portfolio - INFO - Processing symbol - TZA
+2025-01-19 10:17:30,878 - utils_portfolio - INFO - Processing symbol - UVXY
+2025-01-19 10:17:31,072 - utils_portfolio - INFO - Processing symbol - V
+2025-01-19 10:17:31,276 - utils_portfolio - INFO - Processing symbol - VST
+2025-01-19 10:17:31,605 - utils_portfolio - INFO - Processing symbol - VTI
+2025-01-19 10:17:31,789 - utils_portfolio - INFO - Processing symbol - VZ
+2025-01-19 10:17:31,994 - utils_portfolio - INFO - Processing symbol - WBA
+2025-01-19 10:17:32,312 - utils_portfolio - INFO - Processing symbol - WFC
+2025-01-19 10:17:32,504 - utils_portfolio - INFO - Processing symbol - WMB
+2025-01-19 10:17:32,928 - utils_portfolio - INFO - Processing symbol - WMT
+2025-01-19 10:17:33,121 - utils_portfolio - INFO - Processing symbol - XLF
+2025-01-19 10:17:33,532 - utils_portfolio - INFO - Processing symbol - XLU
+2025-01-19 10:17:33,950 - utils_portfolio - INFO - Processing symbol - XOM
+2025-01-19 10:17:34,143 - utils_portfolio - INFO - Processing symbol - ZTS
+2025-01-19 10:17:34,764 - utils_portfolio - INFO - Portfolio p1 - calculating position sizes
+2025-01-19 10:17:34,794 - root - INFO - Portfolio p1 position sizes - symbol
+ACB     99.25
+ACN     99.25
+ADBE    99.35
+ALB     99.25
+AMAT    99.35
+        ...  
+WMT     99.25
+XLF     99.35
+XLU     99.35
+XOM     99.25
+ZTS     99.35
+Name: position, Length: 100, dtype: float64
+2025-01-19 10:17:34,794 - utils_portfolio - INFO - Submitting orders to open positions
+2025-01-19 10:17:34,795 - root - INFO - XXXXXXXXXXXXXXXXXXXX --- Portfolio p1 - DONE --- XXXXXXXXXXXXXXXXXXXX
+2025-01-19 10:17:34,795 - utils_portfolio - INFO - Updating info of portfolio - p2
+2025-01-19 10:17:35,550 - utils_portfolio - INFO - Calculating symbols weights
+2025-01-19 10:17:35,550 - root - INFO - Portfolio p2 symbols weights - {'AAL': 0.00847457627118644, 'AAPL': 0.00847457627118644, 'ABBV': 0.00847457627118644, 'ABT': 0.00847457627118644, 'ADI': 0.00847457627118644, 'AMC': 0.00847457627118644, 'APA': 0.00847457627118644, 'APH': 0.00847457627118644, 'AXP': 0.00847457627118644, 'AZN': 0.00847457627118644, 'BAC': 0.00847457627118644, 'BP': 0.00847457627118644, 'BX': 0.00847457627118644, 'C': 0.00847457627118644, 'CAG': 0.00847457627118644, 'CAT': 0.00847457627118644, 'CCJ': 0.00847457627118644, 'CCL': 0.00847457627118644, 'CGC': 0.00847457627118644, 'CLF': 0.00847457627118644, 'COST': 0.00847457627118644, 'CRM': 0.00847457627118644, 'CSCO': 0.00847457627118644, 'CVS': 0.00847457627118644, 'DIA': 0.00847457627118644, 'DIS': 0.00847457627118644, 'DVN': 0.00847457627118644, 'EBAY': 0.00847457627118644, 'EOG': 0.00847457627118644, 'EQT': 0.00847457627118644, 'EWZ': 0.00847457627118644, 'FAST': 0.00847457627118644, 'FCX': 0.00847457627118644, 'FTNT': 0.00847457627118644, 'GFI': 0.00847457627118644, 'GILD': 0.00847457627118644, 'GL': 0.00847457627118644, 'GOLD': 0.00847457627118644, 'GOOGL': 0.00847457627118644, 'HD': 0.00847457627118644, 'HPE': 0.00847457627118644, 'IBM': 0.00847457627118644, 'IVV': 0.00847457627118644, 'IWM': 0.00847457627118644, 'IYR': 0.00847457627118644, 'JD': 0.00847457627118644, 'JPM': 0.00847457627118644, 'KHC': 0.00847457627118644, 'KO': 0.00847457627118644, 'KR': 0.00847457627118644, 'KRE': 0.00847457627118644, 'KSS': 0.00847457627118644, 'LABU': 0.00847457627118644, 'LLY': 0.00847457627118644, 'LQD': 0.00847457627118644, 'LULU': 0.00847457627118644, 'LW': 0.00847457627118644, 'MA': 0.00847457627118644, 'MARA': 0.00847457627118644, 'MCHP': 0.00847457627118644, 'MNST': 0.00847457627118644, 'MO': 0.00847457627118644, 'MPC': 0.00847457627118644, 'MRK': 0.00847457627118644, 'MS': 0.00847457627118644, 'MSFT': 0.00847457627118644, 'MU': 0.00847457627118644, 'NFLX': 0.00847457627118644, 'NKE': 0.00847457627118644, 'NVDA': 0.00847457627118644, 'NVO': 0.00847457627118644, 'O': 0.00847457627118644, 'PBR': 0.00847457627118644, 'PEP': 0.00847457627118644, 'PFE': 0.00847457627118644, 'PG': 0.00847457627118644, 'PGR': 0.00847457627118644, 'PLUG': 0.00847457627118644, 'PR': 0.00847457627118644, 'RIG': 0.00847457627118644, 'RIOT': 0.00847457627118644, 'RTX': 0.00847457627118644, 'SBUX': 0.00847457627118644, 'SCHW': 0.00847457627118644, 'SLB': 0.00847457627118644, 'SLV': 0.00847457627118644, 'SMH': 0.00847457627118644, 'SOXS': 0.00847457627118644, 'SPXL': 0.00847457627118644, 'SQ': 0.00847457627118644, 'TMF': 0.00847457627118644, 'TNA': 0.00847457627118644, 'TQQQ': 0.00847457627118644, 'TSLA': 0.00847457627118644, 'TSM': 0.00847457627118644, 'TXN': 0.00847457627118644, 'UAL': 0.00847457627118644, 'UNH': 0.00847457627118644, 'UPRO': 0.00847457627118644, 'UPS': 0.00847457627118644, 'USB': 0.00847457627118644, 'VALE': 0.00847457627118644, 'VFC': 0.00847457627118644, 'VICI': 0.00847457627118644, 'VIXY': 0.00847457627118644, 'VNQ': 0.00847457627118644, 'VOO': 0.00847457627118644, 'WBD': 0.00847457627118644, 'WDC': 0.00847457627118644, 'XBI': 0.00847457627118644, 'XLB': 0.00847457627118644, 'XLE': 0.00847457627118644, 'XLI': 0.00847457627118644, 'XLK': 0.00847457627118644, 'XLP': 0.00847457627118644, 'XLV': 0.00847457627118644, 'XLY': 0.00847457627118644, 'XOP': 0.00847457627118644}
+2025-01-19 10:17:35,550 - utils_strategy - INFO - AAL - downloading data from yfinance
+2025-01-19 10:17:41,825 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:17:41,825 - utils_strategy - INFO - AAPL - downloading data from yfinance
+2025-01-19 10:17:49,578 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:17:49,579 - utils_strategy - INFO - ABBV - downloading data from yfinance
+2025-01-19 10:17:53,776 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:17:53,776 - utils_strategy - INFO - ABT - downloading data from yfinance
+2025-01-19 10:18:01,760 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:18:01,761 - utils_strategy - INFO - ADI - downloading data from yfinance
+2025-01-19 10:18:09,593 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:18:09,593 - utils_strategy - INFO - AMC - downloading data from yfinance
+2025-01-19 10:18:13,514 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:18:13,514 - utils_strategy - INFO - APA - downloading data from yfinance
+2025-01-19 10:18:22,227 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:18:22,228 - utils_strategy - INFO - APH - downloading data from yfinance
+2025-01-19 10:18:30,579 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:18:30,580 - utils_strategy - INFO - AXP - downloading data from yfinance
+2025-01-19 10:18:38,896 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:18:38,897 - utils_strategy - INFO - AZN - downloading data from yfinance
+2025-01-19 10:18:47,392 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:18:47,392 - utils_strategy - INFO - BAC - downloading data from yfinance
+2025-01-19 10:18:55,913 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:18:55,914 - utils_strategy - INFO - BP - downloading data from yfinance
+2025-01-19 10:19:04,486 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:19:04,487 - utils_strategy - INFO - BX - downloading data from yfinance
+2025-01-19 10:19:10,463 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:19:10,463 - utils_strategy - INFO - C - downloading data from yfinance
+2025-01-19 10:19:18,667 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:19:18,667 - utils_strategy - INFO - CAG - downloading data from yfinance
+2025-01-19 10:19:26,930 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:19:26,930 - utils_strategy - INFO - CAT - downloading data from yfinance
+2025-01-19 10:19:35,214 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:19:35,214 - utils_strategy - INFO - CCJ - downloading data from yfinance
+2025-01-19 10:19:43,438 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:19:43,439 - utils_strategy - INFO - CCL - downloading data from yfinance
+2025-01-19 10:19:51,362 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:19:51,362 - utils_strategy - INFO - CGC - downloading data from yfinance
+2025-01-19 10:19:55,633 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:19:55,633 - utils_strategy - INFO - CLF - downloading data from yfinance
+2025-01-19 10:20:03,588 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:20:03,588 - utils_strategy - INFO - COST - downloading data from yfinance
+2025-01-19 10:20:11,710 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:20:11,710 - utils_strategy - INFO - CRM - downloading data from yfinance
+2025-01-19 10:20:18,523 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:20:18,524 - utils_strategy - INFO - CSCO - downloading data from yfinance
+2025-01-19 10:20:26,854 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:20:26,854 - utils_strategy - INFO - CVS - downloading data from yfinance
+2025-01-19 10:20:35,095 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:20:35,096 - utils_strategy - INFO - DIA - downloading data from yfinance
+2025-01-19 10:20:43,320 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:20:43,321 - utils_strategy - INFO - DIS - downloading data from yfinance
+2025-01-19 10:20:51,393 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:20:51,393 - utils_strategy - INFO - DVN - downloading data from yfinance
+2025-01-19 10:20:59,587 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:20:59,588 - utils_strategy - INFO - EBAY - downloading data from yfinance
+2025-01-19 10:21:07,732 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:21:07,732 - utils_strategy - INFO - EOG - downloading data from yfinance
+2025-01-19 10:21:15,764 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:21:15,764 - utils_strategy - INFO - EQT - downloading data from yfinance
+2025-01-19 10:21:24,204 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:21:24,205 - utils_strategy - INFO - EWZ - downloading data from yfinance
+2025-01-19 10:21:32,192 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:21:32,192 - utils_strategy - INFO - FAST - downloading data from yfinance
+2025-01-19 10:21:40,438 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:21:40,438 - utils_strategy - INFO - FCX - downloading data from yfinance
+2025-01-19 10:21:49,068 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:21:49,068 - utils_strategy - INFO - FTNT - downloading data from yfinance
+2025-01-19 10:21:54,293 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:21:54,293 - utils_strategy - INFO - GFI - downloading data from yfinance
+2025-01-19 10:22:02,509 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:22:02,510 - utils_strategy - INFO - GILD - downloading data from yfinance
+2025-01-19 10:22:10,798 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:22:10,798 - utils_strategy - INFO - GL - downloading data from yfinance
+2025-01-19 10:22:19,007 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:22:19,008 - utils_strategy - INFO - GOLD - downloading data from yfinance
+2025-01-19 10:22:27,122 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:22:27,122 - utils_strategy - INFO - GOOGL - downloading data from yfinance
+2025-01-19 10:22:33,680 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:22:33,681 - utils_strategy - INFO - HD - downloading data from yfinance
+2025-01-19 10:22:41,575 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:22:41,575 - utils_strategy - INFO - HPE - downloading data from yfinance
+2025-01-19 10:22:45,040 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:22:45,040 - utils_strategy - INFO - IBM - downloading data from yfinance
+2025-01-19 10:22:53,462 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:22:53,462 - utils_strategy - INFO - IVV - downloading data from yfinance
+2025-01-19 10:23:01,794 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:01,795 - utils_strategy - INFO - IWM - downloading data from yfinance
+2025-01-19 10:23:10,024 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:10,024 - utils_strategy - INFO - IYR - downloading data from yfinance
+2025-01-19 10:23:18,133 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:18,133 - utils_strategy - INFO - JD - downloading data from yfinance
+2025-01-19 10:23:22,257 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:22,257 - utils_strategy - INFO - JPM - downloading data from yfinance
+2025-01-19 10:23:30,373 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:30,373 - utils_strategy - INFO - KHC - downloading data from yfinance
+2025-01-19 10:23:34,082 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:34,082 - utils_strategy - INFO - KO - downloading data from yfinance
+2025-01-19 10:23:42,255 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:42,255 - utils_strategy - INFO - KR - downloading data from yfinance
+2025-01-19 10:23:50,737 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:50,737 - utils_strategy - INFO - KRE - downloading data from yfinance
+2025-01-19 10:23:57,083 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:23:57,083 - utils_strategy - INFO - KSS - downloading data from yfinance
+2025-01-19 10:24:05,203 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:05,204 - utils_strategy - INFO - LABU - downloading data from yfinance
+2025-01-19 10:24:08,785 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:08,786 - utils_strategy - INFO - LLY - downloading data from yfinance
+2025-01-19 10:24:16,870 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:16,870 - utils_strategy - INFO - LQD - downloading data from yfinance
+2025-01-19 10:24:24,095 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:24,096 - utils_strategy - INFO - LULU - downloading data from yfinance
+2025-01-19 10:24:30,094 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:30,095 - utils_strategy - INFO - LW - downloading data from yfinance
+2025-01-19 10:24:33,671 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:33,671 - utils_strategy - INFO - MA - downloading data from yfinance
+2025-01-19 10:24:39,969 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:39,970 - utils_strategy - INFO - MARA - downloading data from yfinance
+2025-01-19 10:24:44,928 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:44,928 - utils_strategy - INFO - MCHP - downloading data from yfinance
+2025-01-19 10:24:55,204 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:24:55,204 - utils_strategy - INFO - MNST - downloading data from yfinance
+2025-01-19 10:25:06,142 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:25:06,143 - utils_strategy - INFO - MO - downloading data from yfinance
+2025-01-19 10:25:14,877 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:25:14,877 - utils_strategy - INFO - MPC - downloading data from yfinance
+2025-01-19 10:25:20,077 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:25:20,077 - utils_strategy - INFO - MRK - downloading data from yfinance
+2025-01-19 10:25:28,452 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:25:28,452 - utils_strategy - INFO - MS - downloading data from yfinance
+2025-01-19 10:25:36,903 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:25:36,903 - utils_strategy - INFO - MSFT - downloading data from yfinance
+2025-01-19 10:25:45,599 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:25:45,599 - utils_strategy - INFO - MU - downloading data from yfinance
+2025-01-19 10:25:53,985 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:25:53,986 - utils_strategy - INFO - NFLX - downloading data from yfinance
+2025-01-19 10:26:01,421 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:26:01,421 - utils_strategy - INFO - NKE - downloading data from yfinance
+2025-01-19 10:26:10,264 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:26:10,264 - utils_strategy - INFO - NVDA - downloading data from yfinance
+2025-01-19 10:26:18,941 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:26:18,941 - utils_strategy - INFO - NVO - downloading data from yfinance
+2025-01-19 10:26:27,690 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:26:27,691 - utils_strategy - INFO - O - downloading data from yfinance
+2025-01-19 10:26:36,467 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:26:36,467 - utils_strategy - INFO - PBR - downloading data from yfinance
+2025-01-19 10:26:44,862 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:26:44,862 - utils_strategy - INFO - PEP - downloading data from yfinance
+2025-01-19 10:26:53,369 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:26:53,369 - utils_strategy - INFO - PFE - downloading data from yfinance
+2025-01-19 10:27:01,873 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:27:01,874 - utils_strategy - INFO - PG - downloading data from yfinance
+2025-01-19 10:27:10,261 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:27:10,262 - utils_strategy - INFO - PGR - downloading data from yfinance
+2025-01-19 10:27:18,994 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:27:18,994 - utils_strategy - INFO - PLUG - downloading data from yfinance
+2025-01-19 10:27:27,511 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:27:27,511 - utils_strategy - INFO - PR - downloading data from yfinance
+2025-01-19 10:27:31,187 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:27:31,188 - utils_strategy - INFO - RIG - downloading data from yfinance
+2025-01-19 10:27:39,872 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:27:39,873 - utils_strategy - INFO - RIOT - downloading data from yfinance
+2025-01-19 10:27:43,432 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:27:43,433 - utils_strategy - INFO - RTX - downloading data from yfinance
+2025-01-19 10:27:52,333 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:27:52,333 - utils_strategy - INFO - SBUX - downloading data from yfinance
+2025-01-19 10:28:00,881 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:00,881 - utils_strategy - INFO - SCHW - downloading data from yfinance
+2025-01-19 10:28:09,362 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:09,363 - utils_strategy - INFO - SLB - downloading data from yfinance
+2025-01-19 10:28:17,910 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:17,910 - utils_strategy - INFO - SLV - downloading data from yfinance
+2025-01-19 10:28:24,644 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:24,644 - utils_strategy - INFO - SMH - downloading data from yfinance
+2025-01-19 10:28:33,174 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:33,174 - utils_strategy - INFO - SOXS - downloading data from yfinance
+2025-01-19 10:28:38,650 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:38,651 - utils_strategy - INFO - SPXL - downloading data from yfinance
+2025-01-19 10:28:44,718 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:44,718 - utils_strategy - INFO - SQ - downloading data from yfinance
+2025-01-19 10:28:48,818 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:48,818 - utils_strategy - INFO - TMF - downloading data from yfinance
+2025-01-19 10:28:55,645 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:28:55,645 - utils_strategy - INFO - TNA - downloading data from yfinance
+2025-01-19 10:29:01,956 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:29:01,956 - utils_strategy - INFO - TQQQ - downloading data from yfinance
+2025-01-19 10:29:07,786 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:29:07,787 - utils_strategy - INFO - TSLA - downloading data from yfinance
+2025-01-19 10:29:13,327 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:29:13,328 - utils_strategy - INFO - TSM - downloading data from yfinance
+2025-01-19 10:29:22,327 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:29:22,328 - utils_strategy - INFO - TXN - downloading data from yfinance
+2025-01-19 10:29:31,699 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:29:31,700 - utils_strategy - INFO - UAL - downloading data from yfinance
+2025-01-19 10:29:38,433 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:29:38,434 - utils_strategy - INFO - UNH - downloading data from yfinance
+2025-01-19 10:29:47,107 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:29:47,108 - utils_strategy - INFO - UPRO - downloading data from yfinance
+2025-01-19 10:29:53,013 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:29:53,013 - utils_strategy - INFO - UPS - downloading data from yfinance
+2025-01-19 10:30:01,725 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:01,726 - utils_strategy - INFO - USB - downloading data from yfinance
+2025-01-19 10:30:11,154 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:11,154 - utils_strategy - INFO - VALE - downloading data from yfinance
+2025-01-19 10:30:19,146 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:19,146 - utils_strategy - INFO - VFC - downloading data from yfinance
+2025-01-19 10:30:27,913 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:27,913 - utils_strategy - INFO - VICI - downloading data from yfinance
+2025-01-19 10:30:30,844 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:30,845 - utils_strategy - INFO - VIXY - downloading data from yfinance
+2025-01-19 10:30:35,971 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:35,972 - utils_strategy - INFO - VNQ - downloading data from yfinance
+2025-01-19 10:30:42,980 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:42,980 - utils_strategy - INFO - VOO - downloading data from yfinance
+2025-01-19 10:30:48,146 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:48,146 - utils_strategy - INFO - WBD - downloading data from yfinance
+2025-01-19 10:30:54,877 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:30:54,877 - utils_strategy - INFO - WDC - downloading data from yfinance
+2025-01-19 10:31:03,213 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:31:03,214 - utils_strategy - INFO - XBI - downloading data from yfinance
+2025-01-19 10:31:09,649 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:31:09,650 - utils_strategy - INFO - XLB - downloading data from yfinance
+2025-01-19 10:31:18,072 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:31:18,073 - utils_strategy - INFO - XLE - downloading data from yfinance
+2025-01-19 10:31:27,046 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:31:27,047 - utils_strategy - INFO - XLI - downloading data from yfinance
+2025-01-19 10:31:35,503 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:31:35,503 - utils_strategy - INFO - XLK - downloading data from yfinance
+2025-01-19 10:31:44,075 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:31:44,075 - utils_strategy - INFO - XLP - downloading data from yfinance
+2025-01-19 10:31:52,617 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:31:52,618 - utils_strategy - INFO - XLV - downloading data from yfinance
+2025-01-19 10:32:00,783 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:32:00,783 - utils_strategy - INFO - XLY - downloading data from yfinance
+2025-01-19 10:32:09,205 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:32:09,205 - utils_strategy - INFO - XOP - downloading data from yfinance
+2025-01-19 10:32:15,983 - utils_portfolio - INFO - Checking if we have correct date
+2025-01-19 10:32:15,983 - root - INFO - Portfolio p2 symbols actions - {}
+2025-01-19 10:32:15,983 - utils_portfolio - INFO - Submitting orders to close existing positions
+2025-01-19 10:32:15,984 - utils_portfolio - INFO - Updating state of portfolio - p2
+2025-01-19 10:32:15,984 - utils_portfolio - INFO - Calculating closed trades stats
+2025-01-19 10:32:15,984 - utils_portfolio - INFO - Processing symbol - AAL
+2025-01-19 10:32:16,483 - utils_portfolio - INFO - Processing symbol - AAPL
+2025-01-19 10:32:16,631 - utils_portfolio - INFO - Processing symbol - ABBV
+2025-01-19 10:32:16,841 - utils_portfolio - INFO - Processing symbol - ABT
+2025-01-19 10:32:16,963 - utils_portfolio - INFO - Processing symbol - ADI
+2025-01-19 10:32:17,080 - utils_portfolio - INFO - Processing symbol - AMC
+2025-01-19 10:32:17,211 - utils_portfolio - INFO - Processing symbol - APA
+2025-01-19 10:32:17,328 - utils_portfolio - INFO - Processing symbol - APH
+2025-01-19 10:32:17,450 - utils_portfolio - INFO - Processing symbol - AXP
+2025-01-19 10:32:17,567 - utils_portfolio - INFO - Processing symbol - AZN
+2025-01-19 10:32:17,698 - utils_portfolio - INFO - Processing symbol - BAC
+2025-01-19 10:32:17,815 - utils_portfolio - INFO - Processing symbol - BP
+2025-01-19 10:32:17,928 - utils_portfolio - INFO - Processing symbol - BX
+2025-01-19 10:32:18,058 - utils_portfolio - INFO - Processing symbol - C
+2025-01-19 10:32:18,192 - utils_portfolio - INFO - Processing symbol - CAG
+2025-01-19 10:32:18,317 - utils_portfolio - INFO - Processing symbol - CAT
+2025-01-19 10:32:18,445 - utils_portfolio - INFO - Processing symbol - CCJ
+2025-01-19 10:32:18,566 - utils_portfolio - INFO - Processing symbol - CCL
+2025-01-19 10:32:18,681 - utils_portfolio - INFO - Processing symbol - CGC
+2025-01-19 10:32:18,802 - utils_portfolio - INFO - Processing symbol - CLF
+2025-01-19 10:32:18,927 - utils_portfolio - INFO - Processing symbol - COST
+2025-01-19 10:32:19,060 - utils_portfolio - INFO - Processing symbol - CRM
+2025-01-19 10:32:19,175 - utils_portfolio - INFO - Processing symbol - CSCO
+2025-01-19 10:32:19,290 - utils_portfolio - INFO - Processing symbol - CVS
+2025-01-19 10:32:19,407 - utils_portfolio - INFO - Processing symbol - DIA
+2025-01-19 10:32:19,602 - utils_portfolio - INFO - Processing symbol - DIS
+2025-01-19 10:32:19,807 - utils_portfolio - INFO - Processing symbol - DVN
+2025-01-19 10:32:20,016 - utils_portfolio - INFO - Processing symbol - EBAY
+2025-01-19 10:32:20,167 - utils_portfolio - INFO - Processing symbol - EOG
+2025-01-19 10:32:20,286 - utils_portfolio - INFO - Processing symbol - EQT
+2025-01-19 10:32:20,410 - utils_portfolio - INFO - Processing symbol - EWZ
+2025-01-19 10:32:20,531 - utils_portfolio - INFO - Processing symbol - FAST
+2025-01-19 10:32:20,650 - utils_portfolio - INFO - Processing symbol - FCX
+2025-01-19 10:32:20,767 - utils_portfolio - INFO - Processing symbol - FTNT
+2025-01-19 10:32:20,885 - utils_portfolio - INFO - Processing symbol - GFI
+2025-01-19 10:32:21,014 - utils_portfolio - INFO - Processing symbol - GILD
+2025-01-19 10:32:21,129 - utils_portfolio - INFO - Processing symbol - GL
+2025-01-19 10:32:21,244 - utils_portfolio - INFO - Processing symbol - GOLD
+2025-01-19 10:32:21,359 - utils_portfolio - INFO - Processing symbol - GOOGL
+2025-01-19 10:32:21,473 - utils_portfolio - INFO - Processing symbol - HD
+2025-01-19 10:32:21,648 - utils_portfolio - INFO - Processing symbol - HPE
+2025-01-19 10:32:21,763 - utils_portfolio - INFO - Processing symbol - IBM
+2025-01-19 10:32:21,889 - utils_portfolio - INFO - Processing symbol - IVV
+2025-01-19 10:32:22,002 - utils_portfolio - INFO - Processing symbol - IWM
+2025-01-19 10:32:22,150 - utils_portfolio - INFO - Processing symbol - IYR
+2025-01-19 10:32:22,278 - utils_portfolio - INFO - Processing symbol - JD
+2025-01-19 10:32:22,394 - utils_portfolio - INFO - Processing symbol - JPM
+2025-01-19 10:32:22,509 - utils_portfolio - INFO - Processing symbol - KHC
+2025-01-19 10:32:22,623 - utils_portfolio - INFO - Processing symbol - KO
+2025-01-19 10:32:22,738 - utils_portfolio - INFO - Processing symbol - KR
+2025-01-19 10:32:22,853 - utils_portfolio - INFO - Processing symbol - KRE
+2025-01-19 10:32:22,969 - utils_portfolio - INFO - Processing symbol - KSS
+2025-01-19 10:32:23,192 - utils_portfolio - INFO - Processing symbol - LABU
+2025-01-19 10:32:23,400 - utils_portfolio - INFO - Processing symbol - LLY
+2025-01-19 10:32:23,595 - utils_portfolio - INFO - Processing symbol - LQD
+2025-01-19 10:32:23,719 - utils_portfolio - INFO - Processing symbol - LULU
+2025-01-19 10:32:23,931 - utils_portfolio - INFO - Processing symbol - LW
+2025-01-19 10:32:24,117 - utils_portfolio - INFO - Processing symbol - MA
+2025-01-19 10:32:24,243 - utils_portfolio - INFO - Processing symbol - MARA
+2025-01-19 10:32:24,359 - utils_portfolio - INFO - Processing symbol - MCHP
+2025-01-19 10:32:24,480 - utils_portfolio - INFO - Processing symbol - MNST
+2025-01-19 10:32:24,628 - utils_portfolio - INFO - Processing symbol - MO
+2025-01-19 10:32:24,827 - utils_portfolio - INFO - Processing symbol - MPC
+2025-01-19 10:32:25,049 - utils_portfolio - INFO - Processing symbol - MRK
+2025-01-19 10:32:25,214 - utils_portfolio - INFO - Processing symbol - MS
+2025-01-19 10:32:25,361 - utils_portfolio - INFO - Processing symbol - MSFT
+2025-01-19 10:32:25,477 - utils_portfolio - INFO - Processing symbol - MU
+2025-01-19 10:32:25,652 - utils_portfolio - INFO - Processing symbol - NFLX
+2025-01-19 10:32:25,778 - utils_portfolio - INFO - Processing symbol - NKE
+2025-01-19 10:32:25,950 - utils_portfolio - INFO - Processing symbol - NVDA
+2025-01-19 10:32:26,159 - utils_portfolio - INFO - Processing symbol - NVO
+2025-01-19 10:32:26,350 - utils_portfolio - INFO - Processing symbol - O
+2025-01-19 10:32:26,497 - utils_portfolio - INFO - Processing symbol - PBR
+2025-01-19 10:32:26,672 - utils_portfolio - INFO - Processing symbol - PEP
+2025-01-19 10:32:26,870 - utils_portfolio - INFO - Processing symbol - PFE
+2025-01-19 10:32:26,992 - utils_portfolio - INFO - Processing symbol - PG
+2025-01-19 10:32:27,186 - utils_portfolio - INFO - Processing symbol - PGR
+2025-01-19 10:32:27,305 - utils_portfolio - INFO - Processing symbol - PLUG
+2025-01-19 10:32:27,420 - utils_portfolio - INFO - Processing symbol - PR
+2025-01-19 10:32:27,538 - utils_portfolio - INFO - Processing symbol - RIG
+2025-01-19 10:32:27,652 - utils_portfolio - INFO - Processing symbol - RIOT
+2025-01-19 10:32:27,782 - utils_portfolio - INFO - Processing symbol - RTX
+2025-01-19 10:32:27,898 - utils_portfolio - INFO - Processing symbol - SBUX
+2025-01-19 10:32:28,020 - utils_portfolio - INFO - Processing symbol - SCHW
+2025-01-19 10:32:28,203 - utils_portfolio - INFO - Processing symbol - SLB
+2025-01-19 10:32:28,318 - utils_portfolio - INFO - Processing symbol - SLV
+2025-01-19 10:32:28,431 - utils_portfolio - INFO - Processing symbol - SMH
+2025-01-19 10:32:28,544 - utils_portfolio - INFO - Processing symbol - SOXS
+2025-01-19 10:32:28,672 - utils_portfolio - INFO - Processing symbol - SPXL
+2025-01-19 10:32:28,788 - utils_portfolio - INFO - Processing symbol - SQ
+2025-01-19 10:32:28,914 - utils_portfolio - INFO - Processing symbol - TMF
+2025-01-19 10:32:29,042 - utils_portfolio - INFO - Processing symbol - TNA
+2025-01-19 10:32:29,199 - utils_portfolio - INFO - Processing symbol - TQQQ
+2025-01-19 10:32:29,324 - utils_portfolio - INFO - Processing symbol - TSLA
+2025-01-19 10:32:29,439 - utils_portfolio - INFO - Processing symbol - TSM
+2025-01-19 10:32:29,580 - utils_portfolio - INFO - Processing symbol - TXN
+2025-01-19 10:32:29,696 - utils_portfolio - INFO - Processing symbol - UAL
+2025-01-19 10:32:29,813 - utils_portfolio - INFO - Processing symbol - UNH
+2025-01-19 10:32:29,976 - utils_portfolio - INFO - Processing symbol - UPRO
+2025-01-19 10:32:30,095 - utils_portfolio - INFO - Processing symbol - UPS

@@ -13,7 +13,7 @@ from utils_portfolio import check_weights, run_strategy, position_sizes, \
     open_positions, close_positions, eval_position, strategies_directions, correct_date, \
     update_portfolio_state, update_portfolio_info, generate_id, crypto_map, \
     update_whole_portfolio_state, update_strategy_state, update_symbol_state, \
-    strategy_data_prep, model_strategies
+    strategy_data_prep, model_strategies, save_entries_exits
     
 # Create logger
 logger = logging.getLogger('')
@@ -63,12 +63,16 @@ def main(path_config):
             stoploss = ast.literal_eval(str(config[portfolio]['symbols'][symbol][strategy]['stoploss']))
             take_profit = ast.literal_eval(str(config[portfolio]['symbols'][symbol][strategy]['take_profit']))
             
-            df_symbol, close_price = strategy_data_prep(strategy, 
-                                           symbol,
-                                           config[portfolio]['data_preference'],
-                                           datetime(2000, 1, 1), 
-                                           datetime.today().date()
-                                           ) # close price nebude adj close price
+            try:
+                df_symbol, close_price = strategy_data_prep(strategy, 
+                                            symbol,
+                                            config[portfolio]['data_preference'],
+                                            datetime(2000, 1, 1), 
+                                            datetime.today().date()
+                                            )
+            except Exception as e:
+                logger.warning(f"{symbol} - in data prep or during data download occured an error, skipping symbol: {e}")
+                continue
 
             # po polnoci do rana (rozdiel cas pasma) alpaca vyhodi error - nesmiem kverovat ten isty den ako v us
 
@@ -92,8 +96,10 @@ def main(path_config):
                                             strategy, 
                                             strategy_params,
                                             **kwargs)
+                save_entries_exits(symbol, entries, exits, timestamp)
+                #TODO - maly script na check hist signals consistency
                 #TODO - uprav scripty - train, backtest - pred dalsim treningom a backtestom
-                #TODO - otestuj portfolio kde su 2 strategie
+                #TODO - otestuj portfolio kde su 2 strategie - niekde to pada
                 #TODO - zmena v strategii VSADE - pouzi len close (nie adj close), adj close dropni + 9 premennych (7 + 2)
                 #pdb.set_trace()
                 trades[symbol] = eval_position(close_price,

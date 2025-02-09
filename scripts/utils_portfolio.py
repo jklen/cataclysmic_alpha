@@ -17,6 +17,7 @@ import ast
 import logging
 import quantstats as qs
 import requests
+import os
 
 logger = logging.getLogger(__name__)
 
@@ -179,7 +180,8 @@ def is_trading_day(day):
     # https://www.investopedia.com/ask/answers/06/stockexchangeclosed.asp
     # mozno podla alpacy - ma metodu na calendar
     
-    us_stock_market_holidays = [datetime(2025, 1, 9), datetime(2025, 1,1), datetime(2025, 1, 15), datetime(2025, 2, 19),
+    us_stock_market_holidays = [datetime(2025, 1, 9), datetime(2025, 1,1), datetime(2025, 1, 20), datetime(2025, 1, 20),
+                                datetime(2025, 1, 19),
                             datetime(2024, 3, 29), datetime(2024, 5, 27), datetime(2024, 6, 19),
                             datetime(2024, 7, 4), datetime(2024, 9, 2), datetime(2024, 11, 28),
                             datetime(2024, 12, 25)]
@@ -376,32 +378,60 @@ def calculate_closed_trades_stats(symbols):
         keys_to_keep = ['symbol', 'filled_at', 'filled_qty', 'filled_avg_price', 'side']
         filtered_orders = [{key: value for key, value in d.items() if key in keys_to_keep} for d in orders_dicts]
         df_orders = pd.DataFrame(filtered_orders)
-        
-        if len(df_orders) >= 2: # 2 orders - buy & sell for 1 closed trade
-            df_orders = df_orders.loc[~df_orders['filled_at'].isna(),:]
-            df_orders['filled_qty'] = df_orders['filled_qty'].apply(float)
-            df_orders['filled_avg_price'] = df_orders['filled_avg_price'].apply(float) # converting via astype does not work
+                
+        if len(df_orders) >= 2: # because when no orders, df_orders is empty
             df_orders['side'] = df_orders['side'].apply(str)
-            df_orders['filled_qty'] = df_orders['filled_qty'].round(3)
             
-            df_orders.sort_values(by = 'filled_at', inplace = True)
-            df_orders[['filled_qty_lag', 'side_lag', 'filled_avg_price_lag']] = df_orders[['filled_qty', 'side', 'filled_avg_price']].shift(1)
-            
-            df_trades = df_orders.loc[(df_orders['side'] == 'OrderSide.SELL') &
-                                    (df_orders['side_lag'] == 'OrderSide.BUY') &
-                                    (df_orders['filled_qty'] == df_orders['filled_qty_lag']),:]
-            df_trades['pl'] = (df_trades['filled_qty'] * df_trades['filled_avg_price']) - (df_trades['filled_qty_lag'] * df_trades['filled_avg_price_lag'])
-            
-            last_trade_closed_at = df_trades['filled_at'].max().date()
-            days_since_last_closed_trade = (datetime.now().date() - last_trade_closed_at).days
-            closed_winning_trades_cnt = len(df_trades.loc[df_trades['pl'] > 0, :])
-            
-            stats.append({'closed_trades_pl': df_trades['pl'].sum(), 
-                          'closed_trades_cnt':len(df_trades),
-                          'closed_winning_trades_cnt': closed_winning_trades_cnt,
-                          'last_trade_closed_at':last_trade_closed_at,
-                          'days_since_last_closed_trade':days_since_last_closed_trade,
-                          'win_rate':closed_winning_trades_cnt/len(df_trades)})
+            if ('OrderSide.BUY' in df_orders['side'].tolist()) and \
+                ('OrderSide.SELL' in df_orders['side'].tolist()): # min 1 buy and min 1 sell as 1 trade
+                    
+                df_orders = df_orders.loc[~df_orders['filled_at'].isna(),:]
+                df_orders['filled_qty'] = df_orders['filled_qty'].apply(float)
+                df_orders['filled_avg_price'] = df_orders['filled_avg_price'].apply(float) # converting via astype does not work
+                
+                df_orders.sort_values(by = 'filled_at', inplace = True)            
+                df_orders["group"] = (df_orders["side"] != df_orders["side"].shift()).cumsum()
+
+                def weighted_avg_price(df):
+                    return (df["filled_avg_price"] * df["filled_qty"]).sum() / df["filled_qty"].sum()
+
+                df_agg = (
+                    df_orders.groupby(["group"])
+                    .apply(lambda group: pd.Series({
+                        "filled_at": group["filled_at"].min(),
+                        "filled_qty": group["filled_qty"].sum(),
+                        "filled_avg_price": weighted_avg_price(group),
+                        "side":group["side"].max()
+                    }))
+                    .reset_index()
+                ).drop(columns = ['group'])
+                
+                if len(df_agg) != len(df_orders):
+                    logger.warning(f"symbol {symbol} - has weird combination of orders!!!")
+                
+                df_agg['filled_qty'] = df_agg['filled_qty'].round(3)           
+                df_agg[['filled_qty_lag', 'side_lag', 'filled_avg_price_lag']] = df_agg[['filled_qty', 'side', 'filled_avg_price']].shift(1)
+                
+                df_trades = df_agg.loc[(df_agg['side'] == 'OrderSide.SELL') &
+                                        (df_agg['side_lag'] == 'OrderSide.BUY') &
+                                        (df_agg['filled_qty'] == df_agg['filled_qty_lag']),:]
+                df_trades['pl'] = (df_trades['filled_qty'] * df_trades['filled_avg_price']) - (df_trades['filled_qty_lag'] * df_trades['filled_avg_price_lag'])
+                
+                last_trade_closed_at = df_trades['filled_at'].max().date()
+                days_since_last_closed_trade = (datetime.now().date() - last_trade_closed_at).days # tu to pada lebo last_trade_closed_at... je None
+                closed_winning_trades_cnt = len(df_trades.loc[df_trades['pl'] > 0, :])
+                
+                stats.append({'closed_trades_pl': df_trades['pl'].sum(), 
+                            'closed_trades_cnt':len(df_trades),
+                            'closed_winning_trades_cnt': closed_winning_trades_cnt,
+                            'last_trade_closed_at':last_trade_closed_at,
+                            'days_since_last_closed_trade':days_since_last_closed_trade,
+                            'win_rate':closed_winning_trades_cnt/len(df_trades)})
+            else: 
+                logger.warning(f"symbol {symbol} - has weird combination of orders!!!")
+                stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0, 'closed_winning_trades_cnt': 0,
+                          'last_trade_closed_at':np.nan, 'days_since_last_closed_trade':0,
+                          'win_rate':np.nan})
         else:
             stats.append({'closed_trades_pl': 0, 'closed_trades_cnt': 0, 'closed_winning_trades_cnt': 0,
                           'last_trade_closed_at':np.nan, 'days_since_last_closed_trade':0,
@@ -1133,4 +1163,19 @@ def strategy_data_prep(strategy, symbol, data_preference, start, end):
         
     
     return df_symbol, close_price
+
+def save_entries_exits(symbol, entries, exits, timestamp):
+    logger.info(f"Saving run files - entries & exits")
+    
+    date_str = timestamp.strftime("%Y-%m-%d")
+    folder_path = f"../run_data/{date_str}"
+    
+    os.makedirs(folder_path, exist_ok=True)
+    
+    entries_file = f"{folder_path}/{symbol}_entries_{date_str}.csv"
+    exits_file = f"{folder_path}/{symbol}_exits_{date_str}.csv"
+    
+    entries.to_frame(name="entry").to_csv(entries_file, index=True)
+    exits.to_frame(name="exit").to_csv(exits_file, index=True)
+    
         

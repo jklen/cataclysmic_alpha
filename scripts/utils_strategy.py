@@ -27,6 +27,7 @@ import pickle
 import ast
 import gc
 from strategies import HigherHighStrategy
+from requests.exceptions import RequestException
 
 logger = logging.getLogger(__name__)
 
@@ -71,10 +72,12 @@ def get_yf_data(symbol, start, end, attempts = 10):
     for attempt in range(1, attempts + 1):
         try:
             df = yf.download(symbol, start=start, end=end, timeout=100)
-            break
-        except:
-            logger.warning(f"{symbol} - attempt {attempt} to download data from YF failed, retrying")
-        
+            break  # Exit loop if successful
+        except (RequestException, ConnectionError, OSError) as e:
+            logger.warning(f"{symbol} - attempt {attempt} to download data from YF failed, retrying. Error: {e}")
+            if attempt == attempts:
+                raise
+
     df = df[['Open', 'High', 'Low', 'Close', 'Adj Close', 'Volume']]
     df.columns = df.columns.str.lower()
     df.index.name = 'timestamp' 

@@ -44,10 +44,10 @@ eval_params:
       - Total Return [%]_min
       - Total Trades_min
     filters:
-      trades_in_year_mean: 20 # minimalny priemer poctu obchodov za rok
-      sharpe_ratio_mean: 0.6 # problem bude pri roznych periodach, lebo vacsie SR koreluje s dlhsou periodou (daj ako % z max SR)   
-      items_from_cluster_nr: 5 # kolko vyberem z kazdeho clustra
+      trades_in_year_mean: 20 # minimum average trades per year
+      sharpe_ratio_mean: 0.6 # note: higher SR correlates with longer periods — consider normalising as % of max SR
+      items_from_cluster_nr: 5 # number of candidates selected per cluster
   final_params:
     final_params_nr: 5
-    force: false # ak true, tak v pripade ked "filters" bude mat menej ako 5 - uvolni filter aby ich bolo aspon 5. Ak 5 - min_items_to_cluster, tak uvolni filtre.
-    # ked teda dosiahnem 100, tak oklastruj, ale ked filter po klusteringu bude mat < 5, tak uvolni cluster filtre aby ich bolo aspon 5, potom sortni podla stdev a zober top 5
+    force: false # if true, relax filters when fewer than final_params_nr survive; if 5–min_items_to_cluster, relax cluster filters
+    # when count hits 100: cluster; if post-cluster filter yields < 5, relax cluster filters to get at least 5, then sort by std and take top 5

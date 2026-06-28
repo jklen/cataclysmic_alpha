@@ -76,10 +76,10 @@ p2:
     running: win_rate
     running_params:
         min_trades: 5
-        min_weight: 0.05 # eg max 20 symbolov na portfolio
-        min_symbols: 2 # kolko symbolov je mat min na kalkulaciu running weight. Ak nejaky symbol nebude mat dostatocny min trades, bude mat min vahu   
+        min_weight: 0.05 # e.g. max 20 symbols per portfolio
+        min_symbols: 2 # minimum symbols required to calculate running weights; symbols without enough trades receive minimum weight
   portfolio_size: 1000
   data_preference: yf
   min_available_cash: 100
 
-#TODO sprav p3 kde budu manualne vahy
+# TODO: add p3 with manually assigned weights

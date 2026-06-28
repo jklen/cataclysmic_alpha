@@ -1,7 +1,7 @@
 symbols: '../data/top500_symbols.pickle'
 rewrite_existing_symbols: true
 data:
-  data_preference: yf # 'yf' - yfinance, 'alpaca' - tahaj z alpacy, 'longer_period' - tahaj odkial je dlhsia perioda
+  data_preference: yf # 'yf' - yfinance, 'alpaca' - fetch from alpaca, 'longer_period' - use whichever source has more data
   start_date: 2000-01-01
   end_date: 2024-04-17
   min_days: 360
@@ -30,7 +30,7 @@ eval_params:
     explore: false
     max_clusters: 40
     dataset_size_for_max_clusters: 700
-    scaling_factor: 20 # 1 cluster pre kazdych 20 parameter kombinacii
+    scaling_factor: 20 # 1 cluster per 20 parameter combinations
     min_items_to_cluster: 100
     cluster_cols:
       - Total Return [%]_mean
@@ -43,10 +43,10 @@ eval_params:
       - Total Return [%]_min
       - Total Trades_min
     filters:
-      trades_in_year_mean: 20 # minimalny priemer poctu obchodov za rok
-      sharpe_ratio_mean: 0.2 # problem bude pri roznych periodach, lebo vacsie SR koreluje s dlhsou periodou (daj ako % z max SR)   
-      items_from_cluster_nr: 5 # kolko vyberem z kazdeho clustra
+      trades_in_year_mean: 20 # minimum average trades per year
+      sharpe_ratio_mean: 0.2 # note: higher SR correlates with longer periods — consider normalising as % of max SR
+      items_from_cluster_nr: 5 # number of candidates selected per cluster
   final_params:
     final_params_nr: 5
-    force: false # ak true, tak v pripade ked "filters" bude mat menej ako 5 - uvolni filter aby ich bolo aspon 5. Ak 5 - min_items_to_cluster, tak uvolni filtre.
-    # ked teda dosiahnem 100, tak oklastruj, ale ked filter po klusteringu bude mat < 5, tak uvolni cluster filtre aby ich bolo aspon 5, potom sortni podla stdev a zober top 5
+    force: false # if true, relax filters when fewer than final_params_nr survive; if 5–min_items_to_cluster, relax cluster filters
+    # when count hits 100: cluster; if post-cluster filter yields < 5, relax cluster filters to get at least 5, then sort by std and take top 5

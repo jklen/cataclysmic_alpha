@@ -5,7 +5,7 @@ symbols:
   - BCH/USD
   - AAPL
   - DELL
-data_preference: yf # 'yf' - yfinance, 'alpaca' - tahaj z alpacy, 'longer_period' - tahaj odkial je dlhsia perioda
+data_preference: yf # 'yf' - yfinance, 'alpaca' - fetch from alpaca, 'longer_period' - use whichever source has more data
 rolling_split_params: 
   n_periods: 15
   period_ratio: 0.35
@@ -31,7 +31,7 @@ eval_params:
     explore: true
     max_clusters: 40
     dataset_size_for_max_clusters: 700
-    scaling_factor: 20 # 1 cluster pre kazdych 20 parameter kombinacii
+    scaling_factor: 20 # 1 cluster per 20 parameter combinations
     min_items_to_cluster: 100
     cluster_cols:
       - Total Return [%]_mean

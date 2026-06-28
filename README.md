@@ -169,19 +169,64 @@ python app.py
 
 ## Portfolio config format
 
+A single config file can define **multiple independent sub-portfolios**, each run in the same execution pass. Each sub-portfolio has its own dollar allocation, symbol set, strategy, position sizing method, and ML model path. This lets you run and compare different portfolio constructions (e.g. different symbol universes, equal vs. win-rate weighting, different position sizes) side by side under one cron job.
+
 ```yaml
-portfolio_name:
-  portfolio_size: 10000
-  min_available_cash: 100
-  weights: equal           # or: win_rate
-  data_preference: yf      # or: alpaca
+# Multiple sub-portfolios in one file — each runs independently
+p1:
+  portfolio_size: 10000        # dollar allocation for this sub-portfolio
+  min_available_cash: 100      # minimum cash to keep uninvested
+  weights:
+    initial: equal             # starting weight method: equal | win_rate
+    running: win_rate          # rebalancing method: equal | win_rate
+    running_params:
+      min_trades: 10           # minimum closed trades before win_rate weighting kicks in
+      min_weight: 0.02         # floor weight for symbols with insufficient trade history
+      min_symbols: 5           # minimum symbols meeting min_trades before switching from initial weights
+  data_preference: yf          # data source: yf | alpaca | longer_period
+  model_folder:
+    hhhl_ml1: 'outputs_hhhl_ml1_train_prod/experiment_name'
+  ml_strategies_setup:
+    hhhl_ml1:
+      param_ranges:
+        window_entry: [2, 9]
+        hh_hl_counts: [1, 5]
+        window_exit: [2, 9]
+        lh_counts: [1, 5]
   symbols:
     AAPL:
       hhhl_ml1:
-        params: {window_entry: 3, hh_hl_counts: 1, window_exit: 6, lh_counts: 4}
+        params: {probability_threshold: 0.5}
         stoploss: 0.1
         take_profit: None
-        model_folder: 'outputs_hhhl_ml1_train_prod/experiment_name'
+    BTC/USD:
+      hhhl_ml1:
+        params: {probability_threshold: 0.5}
+        stoploss: 0.1
+        take_profit: None
+
+p2:
+  portfolio_size: 5000         # separate allocation, independent of p1
+  min_available_cash: 100
+  weights:
+    initial: equal
+    running: equal
+  data_preference: yf
+  model_folder:
+    hhhl_ml1: 'outputs_hhhl_ml1_train_prod/experiment_name'
+  ml_strategies_setup:
+    hhhl_ml1:
+      param_ranges:
+        window_entry: [2, 9]
+        hh_hl_counts: [1, 5]
+        window_exit: [2, 9]
+        lh_counts: [1, 5]
+  symbols:
+    NVDA:
+      hhhl_ml1:
+        params: {probability_threshold: 0.5}
+        stoploss: 0.1
+        take_profit: None
 ```
 
 ---
